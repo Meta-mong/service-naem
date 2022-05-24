@@ -31,6 +31,7 @@ hs_err_pid*
 *.iml
 out
 gen
+HELP.md
 ### Gradle template
 .gradle
 **/build/
