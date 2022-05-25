@@ -1,4 +1,4 @@
-package com.metaticket.metaticket.domain;
+package com.metamong.metaticket.domain;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
