@@ -28,7 +28,7 @@ class DrawRepositoryTest {
     @BeforeEach
     void setUp() {
         user = User.builder().email("metamong@naver.com").passwd("7852").name("person1").age(27)
-                .number("01012345678").loser_cnt(3).cancel_cnt(3).mod_date(LocalDateTime.now()).build();
+                .number("01012345678").loserCnt(3).cancelCnt(3).build();
         userRepository.save(user);
         draw = Draw.builder().user(user).build();
     }
