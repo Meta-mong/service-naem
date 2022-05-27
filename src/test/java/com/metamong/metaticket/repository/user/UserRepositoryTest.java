@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.time.LocalDateTime;
@@ -21,14 +22,13 @@ class UserRepositoryTest {
     @DisplayName("회원 삽입 테스트")
     public void insertUser(){
         User user = User.builder()
-                .email("metamong@naver.com")
+                .email("metamong5@naver.com")
                 .passwd("3241")
-                .name("person2")
+                .name("person5")
                 .age(27)
-                .number("01012345679")
-                .loser_cnt(3)
-                .cancel_cnt(3)
-                .mod_date(LocalDateTime.now())
+                .number("01012345675")
+                .loserCnt(3)
+                .cancelCnt(3)
                 .build();
         user.passwordEncode(user.getPasswd());
         User temp = userRepository.save(user);
@@ -39,7 +39,7 @@ class UserRepositoryTest {
     @DisplayName("회원 조회 테스트")
     public void selectUser(){
         System.out.println("<아이디로 회원 조회>");
-        User user = userRepository.findById(3L).get();
+        User user = userRepository.findById(5L).get();
         System.out.println(user.toString());
 
         //패스워드 일치 테스트
@@ -59,7 +59,6 @@ class UserRepositoryTest {
         Optional<User> user = userRepository.findById(3L);
         User updateUser = user.get();
         updateUser.setAge(17);
-        updateUser.setMod_date(LocalDateTime.now());
 
         try{
             User temp = userRepository.save(updateUser);
