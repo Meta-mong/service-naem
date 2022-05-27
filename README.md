@@ -57,3 +57,32 @@ https://ovenapp.io/project/9ke1DcKtgQjhFHKBUcqQ8RW39taDwhVR#1CVRg
 
 # ERD 설계
 https://www.erdcloud.com/d/TjXC5msmtJwNw5WRm
+<br><br>
+<hr>
+
+# Git Convention
+git 용어
+- git branch : 현재 브랜치 목록 확인
+- git branch feature/9 : "feature/9"라는 이름을 가진 브랜치 생성
+- git checkout feature/9 : 현재 브랜치에서 "feature/9"브랜치로 이동
+- git add -A : 현재까지 작업한 변경 사항 모두 추가(커밋 준비)
+- git commit -m "메시지 내용" : 커밋
+- git push : 원격 저장소로 push
+
+순서
+1. 오늘 할 작업 생각 후 issue 생성 -> project 현황판에 card를 in progress로(issue는 약속된 형식으로 작성)
+2. "git branch" 명령어 수행(작업 하기전 터미널에서 branch 확인하기 위해)<br>
+2.1 현재 branch가 "develop"이 아니면<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> "git branch develop" 명령어로 develop 브랜치로 이동한다. 그리고 "git pull"(원격 저장소에서 모든 것 다 내려받기)<br>
+2.2 현재 branch가 "develop"이면<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> 바로 "git pull"
+4. "git branch feature/이슈번호"로 본인에 이슈번호에 맞게끔 branch 생성 
+5. "git checkout feature/이슈번호"로 본인이 생성한 branch로 이동(이동한 후 git branch 명령어로 잘 이동했나 확인)
+6. 오늘 할 작업 코딩
+7. 모든 작업이 다 끝나면 "git add -A"로 현재 작업한 것들 모두 추가
+8. git commit -m "메시지 내용" 명령어로 커밋
+9. git push 명령어로 원격 저장소로 이동
+10. 그러면 github 프로젝트 메인 페이지에 초록색 버튼으로 "compare & pull request" 이 생성되는데 이걸 클릭
+11. 팀원들에게 카톡 등으로 "~~작업 했어요 코드 리뷰 해요" 알리기
+12. 다같이 변경 사항 확인 후 오류가 없으면 merge 버튼 클릭(대장 branch인 develop에 변경사항 합치는 작업)
+13. 프로젝트 현황판에서 card를 "Done"에 옮기기
