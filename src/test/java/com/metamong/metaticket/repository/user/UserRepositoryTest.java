@@ -22,11 +22,11 @@ class UserRepositoryTest {
     @DisplayName("회원 삽입 테스트")
     public void insertUser(){
         User user = User.builder()
-                .email("metamong4@naver.com")
+                .email("metamong5@naver.com")
                 .passwd("3241")
-                .name("person4")
+                .name("person5")
                 .age(27)
-                .number("01012345674")
+                .number("01012345675")
                 .loserCnt(3)
                 .cancelCnt(3)
                 .build();
@@ -39,7 +39,7 @@ class UserRepositoryTest {
     @DisplayName("회원 조회 테스트")
     public void selectUser(){
         System.out.println("<아이디로 회원 조회>");
-        User user = userRepository.findById(3L).get();
+        User user = userRepository.findById(5L).get();
         System.out.println(user.toString());
 
         //패스워드 일치 테스트
