@@ -57,11 +57,11 @@ https://ovenapp.io/project/9ke1DcKtgQjhFHKBUcqQ8RW39taDwhVR#1CVRg
 
 # ERD 설계
 https://www.erdcloud.com/d/TjXC5msmtJwNw5WRm
-<br><br>
+<br><br><br><br>
 <hr>
 
-# Git Convention
-git 용어
+## - Git Convention
+### git 용어
 - git branch : 현재 브랜치 목록 확인
 - git branch feature/9 : "feature/9"라는 이름을 가진 브랜치 생성
 - git checkout feature/9 : 현재 브랜치에서 "feature/9"브랜치로 이동
@@ -69,7 +69,7 @@ git 용어
 - git commit -m "메시지 내용" : 커밋
 - git push : 원격 저장소로 push
 
-순서
+### 순서
 1. 오늘 할 작업 생각 후 issue 생성 -> project 현황판에 card를 in progress로(issue는 약속된 형식으로 작성)
 2. "git branch" 명령어 수행(작업 하기전 터미널에서 branch 확인하기 위해)<br>
 2.1 현재 branch가 "develop"이 아니면<br>
