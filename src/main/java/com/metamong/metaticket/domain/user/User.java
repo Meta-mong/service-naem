@@ -1,15 +1,20 @@
 package com.metamong.metaticket.domain.user;
 
 import com.metamong.metaticket.domain.BaseEntity;
+import com.metamong.metaticket.domain.log.Log;
+import com.metamong.metaticket.domain.user.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -44,11 +49,35 @@ public class User extends BaseEntity {
     @Column(columnDefinition = "integer default 0")
     private int cancelCnt;
 
-    //패스워드 해시 -> 추후 springsecurity의 패스워드 암호화를 사용해도 됨
-    public void passwordEncode(String passwd){
-        this.passwd = BCrypt.hashpw(passwd, BCrypt.gensalt());
+    //회원 객체 생성
+    public static User createUser(UserDTO userDTO, PasswordEncoder passwordEncoder){
+        String passwd = passwordEncoder.encode(userDTO.getPasswd());
+        User user = User.builder().
+                email(userDTO.getEmail()).
+                passwd(passwd).
+                name(userDTO.getName()).
+                age(userDTO.getAge()).
+                number(userDTO.getNumber()).
+                build();
+        return user;
+    }
+
+    //UserDTO 객체 생성
+    public static UserDTO createUserDTO(User user){
+        UserDTO userDTO = UserDTO.builder()
+                .id(user.getId())
+                .email(user.getEmail())
+                .passwd(user.getPasswd())
+                .name(user.getName())
+                .age(user.getAge())
+                .number(user.getNumber())
+                .loser_cnt(user.getLoserCnt())
+                .cancel_cnt(user.getCancelCnt())
+                .build();
+        return userDTO;
     }
 
     //Log 테이블과 매핑
-
+    //@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    //private List<Log> logs = new ArrayList<>();
 }
