@@ -1,5 +1,6 @@
 package com.metamong.metaticket.domain.log;
 
+import com.metamong.metaticket.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,4 +23,13 @@ public class Log {
 
     private LocalDateTime visitDate;
     //유저와 관계 매핑 필요(user_id)
+
+    public static Log createLog(Long id){
+        Log log = Log.builder().visitDate(LocalDateTime.now()).build();
+        return log;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY) //지연로딩
+    @JoinColumn(name="user_id")
+    private User user;
 }

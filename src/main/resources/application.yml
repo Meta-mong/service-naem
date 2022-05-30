@@ -7,6 +7,8 @@ spring:
     url: jdbc:mysql://localhost:3306/metadb?serverTimezone=UTC
     username: metamong
     password: metamong
+  config:
+    import: application-sms.yml
 
   jpa:
     open-in-view: true
