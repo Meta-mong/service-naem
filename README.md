@@ -78,7 +78,7 @@ https://www.erdcloud.com/d/TjXC5msmtJwNw5WRm
 1. 오늘 할 작업 생각 후 issue 생성 -> project 현황판에 card를 in progress로(issue는 약속된 형식으로 작성)
 2. "git branch" 명령어 수행(작업 하기전 터미널에서 branch 확인하기 위해)<br>
 2.1 현재 branch가 "develop"이 아니면<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> "git branch develop" 명령어로 develop 브랜치로 이동한다. 그리고 "git pull"(원격 저장소에서 모든 것 다 내려받기)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> "git checkout develop" 명령어로 develop 브랜치로 이동한다. 그리고 "git pull"(원격 저장소에서 모든 것 다 내려받기)<br>
 2.2 현재 branch가 "develop"이면<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> 바로 "git pull"
 4. "git branch feature/이슈번호"로 본인에 이슈번호에 맞게끔 branch 생성 
