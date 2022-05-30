@@ -52,6 +52,11 @@
   - 당첨자에게 결제 페이지 링크를 이메일로 보낸다.
   - 결제 내역을 이메일로 전송한다.
 
+<hr>
+
+# Frontend 시안
+https://meta-mong.github.io/Meta-Ticket-front-end/
+
 # UX/UI 설계
 https://ovenapp.io/project/9ke1DcKtgQjhFHKBUcqQ8RW39taDwhVR#1CVRg
 
