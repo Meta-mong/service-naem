@@ -1,6 +1,7 @@
 package com.metamong.metaticket.domain.concert;
 
 import com.metamong.metaticket.domain.BaseEntity;
+import com.metamong.metaticket.dto.concert.ConcertDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,8 +30,7 @@ public class Concert extends BaseEntity { //BaseEntity -> 공통으로 사용하
 
     private String phamplet;
 
-    @Column(name = "concert_date")
-    private LocalDateTime c_date;
+    private LocalDateTime concertDate;
 
     @Enumerated(EnumType.STRING)
     private Genre genre;
@@ -44,18 +44,27 @@ public class Concert extends BaseEntity { //BaseEntity -> 공통으로 사용하
 
     private int seat_num;
 
-    @Column(name = "draw_start_date")
-    private LocalDateTime s_date;
+    private LocalDateTime drawStartDate;
 
-    @Column(name = "draw_end_date")
-    private LocalDateTime e_date;
+    private LocalDateTime drawEndDate;
 
     private int price;
 
     private int visit_cnt;
 
-//    public void update(바꿀 타입, 변수명){
-//        this.price = 변수명
-//    }
+    public void update(ConcertDto dto){
+        title = dto.getTitle();
+        description = dto.getDescription();
+        phamplet = dto.getPhamplet();
+        concertDate = dto.getConcertDate();
+        genre = dto.getGenre();
+        ratings = dto.getRatings();
+        address = dto.getAddress();
+        host = dto.getHost();
+        seat_num = dto.getSeat_num();
+        drawStartDate = dto.getDrawStartDate();
+        drawEndDate = dto.getDrawEndDate();
+        price = dto.getPrice();
+    }
 
 }
