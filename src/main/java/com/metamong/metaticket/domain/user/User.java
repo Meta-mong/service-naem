@@ -50,7 +50,19 @@ public class User extends BaseEntity {
     private int cancelCnt;
 
     //회원 객체 생성
-    public static User createUser(UserDTO userDTO, PasswordEncoder passwordEncoder){
+    public static User createUser(UserDTO.SESSION_USER_DATA userDTO, PasswordEncoder passwordEncoder){
+        String passwd = passwordEncoder.encode(userDTO.getPasswd());
+        User user = User.builder().
+                email(userDTO.getEmail()).
+                passwd(passwd).
+                name(userDTO.getName()).
+                age(userDTO.getAge()).
+                number(userDTO.getNumber()).
+                build();
+        return user;
+    }
+    //다형성
+    public static User createUser(UserDTO.SIGN_UP userDTO, PasswordEncoder passwordEncoder){
         String passwd = passwordEncoder.encode(userDTO.getPasswd());
         User user = User.builder().
                 email(userDTO.getEmail()).
@@ -63,16 +75,16 @@ public class User extends BaseEntity {
     }
 
     //UserDTO 객체 생성
-    public static UserDTO createUserDTO(User user){
-        UserDTO userDTO = UserDTO.builder()
+    public static UserDTO.SESSION_USER_DATA createUserDTO(User user){
+        UserDTO.SESSION_USER_DATA userDTO = UserDTO.SESSION_USER_DATA.builder()
                 .id(user.getId())
                 .email(user.getEmail())
                 .passwd(user.getPasswd())
                 .name(user.getName())
                 .age(user.getAge())
                 .number(user.getNumber())
-                .loser_cnt(user.getLoserCnt())
-                .cancel_cnt(user.getCancelCnt())
+                .loserCnt(user.getLoserCnt())
+                .cancelCnt(user.getCancelCnt())
                 .build();
         return userDTO;
     }

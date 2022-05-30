@@ -78,10 +78,12 @@ class UserServiceTest {
     @Test
     @DisplayName("이메일 찾아오기")
     void inquireEmail() {
-        String name = "person1";
-        String number = "01012345671";
+        UserDTO.FIND_EMAIL dto = UserDTO.FIND_EMAIL
+                .builder()
+                .name("person1")
+                .number("01012345671").build();
         try{
-            System.out.println("이메일 : "+service.inquireEmail(name, number));
+            System.out.println("이메일 : "+service.inquireEmail(dto));
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -91,15 +93,15 @@ class UserServiceTest {
     @DisplayName("비밀번호 변경")
     void modifyPasswd() {
         User user = userRepository.findById(1L).get();
-        UserDTO userDTO = UserDTO.builder().
+        UserDTO.SESSION_USER_DATA userDTO = UserDTO.SESSION_USER_DATA.builder().
                 id(user.getId()).
                 email(user.getEmail()).
                 passwd(user.getPasswd()).
                 name(user.getName()).
                 age(user.getAge()).
                 number(user.getNumber()).
-                loser_cnt(user.getLoserCnt()).
-                cancel_cnt(user.getCancelCnt()).
+                loserCnt(user.getLoserCnt()).
+                cancelCnt(user.getCancelCnt()).
                 build();
         session.setAttribute("user", userDTO);
         String passwd = "1234";
@@ -113,12 +115,12 @@ class UserServiceTest {
     @Test
     @DisplayName("회원가입")
     void signUp() {
-        UserDTO userDTO = UserDTO.builder().
-                email("metamong2@naver.com").
+        UserDTO.SIGN_UP userDTO = UserDTO.SIGN_UP.builder().
+                email("metamong6@naver.com").
                 passwd("1234").
-                name("person2").
+                name("person6").
                 age(24).
-                number("01012345672").
+                number("01012345676").
                 build();
 
         System.out.println("회원가입 결과 : " + service.signUp(userDTO));
@@ -127,22 +129,16 @@ class UserServiceTest {
     @Test
     @DisplayName("로그인")
     void signIn() {
-        /*
-        UserDTO userDTO = UserDTO.builder()
-                .email("metamong4@naver.com")
+        UserDTO.SIGN_IN dto = UserDTO.SIGN_IN.builder()
+                .email("metamong2@naver.com")
                 .passwd("1234")
-                .name("홍길동")
-                .age(20)
-                .number("01012345674")
                 .build();
-        User user = userRepository.save(User.createUser(userDTO, passwordEncoder));
-        */
-        UserDTO result = service.signIn("metamong1@naver.com", "1234", session);
+        UserDTO.SESSION_USER_DATA result = service.signIn(dto, session);
         if(result==null) {
             System.out.println("로그인 실패");
         }else{
             System.out.println("로그인 성공");
-            UserDTO sessionUser = (UserDTO) session.getAttribute("user");
+            UserDTO.SESSION_USER_DATA sessionUser = (UserDTO.SESSION_USER_DATA) session.getAttribute("user");
             System.out.println("user in session : "+sessionUser.toString());
         }
     }

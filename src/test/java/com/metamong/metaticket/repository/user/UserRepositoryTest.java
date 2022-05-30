@@ -28,7 +28,7 @@ class UserRepositoryTest {
     @Test
     @DisplayName("회원 삽입 테스트")
     public void insertUser(){
-        UserDTO userDTO = UserDTO.builder()
+        UserDTO.SESSION_USER_DATA userDTO = UserDTO.SESSION_USER_DATA.builder()
                 .email("metamong1@naver.com")
                 .passwd("3241")
                 .name("person1")
