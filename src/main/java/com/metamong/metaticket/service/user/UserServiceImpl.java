@@ -27,7 +27,7 @@ import java.time.LocalDateTime;
 import java.util.Base64;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
@@ -185,16 +185,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String inquireEmail(String name, String number) throws Exception{
-        User user = userRepository.findByNameAndNumber(name, number);
+    public String inquireEmail(UserDTO.FIND_EMAIL dto) throws Exception{
+        User user = userRepository.findByNameAndNumber(dto.getName(), dto.getNumber());
         if(user == null) throw new Exception("회원 정보가 없습니다.");
         return user.getEmail();
     }
 
     @Override
+    @Transactional
     public boolean modifyPasswd(HttpSession session, String passwd) {
         //인증과정은 생략됨
-        UserDTO userDTO = (UserDTO)session.getAttribute("user");
+        UserDTO.SESSION_USER_DATA userDTO = (UserDTO.SESSION_USER_DATA)session.getAttribute("user");
         userDTO.setPasswd(passwd);
         User user = User.createUser(userDTO, passwordEncoder);
         user.setId(userDTO.getId());
@@ -204,7 +205,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean signUp(UserDTO userDTO) { //return type 변경
+    @Transactional
+    public boolean signUp(UserDTO.SIGN_UP userDTO) { //return type 변경
         //view에서 받은 param들을 Controller에서 UserDTO객체로 받아 넘겨주는 것이 선행되어야 함
         //email이나 passwd 제약은 정규식으로 front단에서 체크
 
@@ -220,13 +222,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO signIn(String email, String passwd, HttpSession session) {
+    @Transactional
+    public UserDTO.SESSION_USER_DATA signIn(UserDTO.SIGN_IN dto, HttpSession session) {
         //Controller 단에서 userDTO가 null인지 확인해서 처리
-        User user = userRepository.findByEmail(email);
-        UserDTO userDTO = null;
+        User user = userRepository.findByEmail(dto.getEmail());
+        UserDTO.SESSION_USER_DATA userDTO = null;
 
         if(user==null) return userDTO;
-        boolean passwdCheck = passwdCheck(passwd, user);
+        boolean passwdCheck = passwdCheck(dto.getPasswd(), user);
         if(passwdCheck==true) {
             userDTO = User.createUserDTO(user);
             System.out.println("패스워드 일치");

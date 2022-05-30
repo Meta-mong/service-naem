@@ -27,16 +27,16 @@ public interface UserService {
     public boolean passwdCheck(String passwd, User user);
 
     //회원의 이메일 조회하기 -> 이름과 번호인증 기반
-    public String inquireEmail(String name, String number) throws Exception;
+    public String inquireEmail(UserDTO.FIND_EMAIL dto) throws Exception;
 
     //비밀번호 변경
     public boolean modifyPasswd(HttpSession sesson, String passwd);
 
     //회원가입
-    public boolean signUp(UserDTO userDTO);
+    public boolean signUp(UserDTO.SIGN_UP userDTO);
 
     //로그인
-    public UserDTO signIn(String email, String passwd, HttpSession session);
+    public UserDTO.SESSION_USER_DATA signIn(UserDTO.SIGN_IN dto, HttpSession session);
 
     //로그아웃
     public void signOut(HttpSession session);

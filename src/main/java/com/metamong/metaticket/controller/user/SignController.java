@@ -34,7 +34,7 @@ public class SignController {
     }
 
     @PostMapping("/signup")
-    public String signUp(@Valid UserDTO userDTO, BindingResult bindingResult, Model model){
+    public String signUp(@Valid UserDTO.SIGN_UP userDTO, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
             return "/sign/signupform";
         }
