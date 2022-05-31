@@ -1,6 +1,7 @@
 package com.metamong.metaticket.domain.notice;
 
 
+import com.metamong.metaticket.domain.BaseEntity;
 import com.metamong.metaticket.domain.admin.Admin;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +18,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Notice {
+public class Notice extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //MySQl 자동으로 키본키 생성
     @Column(name="notice_id")
@@ -27,18 +28,15 @@ public class Notice {
     @JoinColumn(name = "admin_id")
     private Admin admin;
 
-    @Column
+    @Column(nullable = false)
     private String classify;
 
-    @Column
+    @Column(nullable = false)
     private String title;
 
-    @Column
+    @Column(nullable = false)
     private String content;
 
-    @CreationTimestamp
-    @Column
-    private LocalDateTime reg_date;
 
     public void update(String classify, String title, String content) {
         setClassify(classify);

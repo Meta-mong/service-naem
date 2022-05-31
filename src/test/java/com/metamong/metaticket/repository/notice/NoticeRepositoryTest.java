@@ -2,9 +2,11 @@ package com.metamong.metaticket.repository.notice;
 
 import com.metamong.metaticket.domain.admin.Admin;
 import com.metamong.metaticket.domain.notice.Notice;
+import com.metamong.metaticket.domain.notice.dto.NoticeDTO;
 import com.metamong.metaticket.repository.admin.AdminRepository;
 import com.metamong.metaticket.repository.notice.NoticeRepository;
 
+import com.metamong.metaticket.service.notice.NoticeService;
 import org.junit.Assert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.PropertySource;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,6 +29,9 @@ class NoticeRepositoryTest {
 
     @Autowired
     private AdminRepository adminRepository;
+
+    @Autowired
+    private NoticeService noticeService;
 
     @Test
     @DisplayName("공시사항 삽입 테스트1")
@@ -87,6 +94,27 @@ class NoticeRepositoryTest {
 
             System.out.println(notice.toString());
         }
+
+    }
+
+    @Test
+    @DisplayName(value = "공지사항 등록")
+    public void register()throws Exception{
+        NoticeDTO.Notice dto = new NoticeDTO.Notice();
+        dto.setAdminId(1L);
+        dto.setClassify("테스트");
+        dto.setTitle("테스트");
+        dto.setContent("테스트");
+        dto.setModDate(LocalDateTime.now());
+        dto.setRegDate(LocalDateTime.now());
+
+        boolean result = noticeService.register(dto);
+
+        System.out.println(result);
+
+
+
+
 
     }
 
