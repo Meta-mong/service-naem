@@ -1,6 +1,5 @@
 package com.metamong.metaticket.controller.user;
 
-import com.metamong.metaticket.domain.user.User;
 import com.metamong.metaticket.domain.user.dto.UserDTO;
 import com.metamong.metaticket.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +45,11 @@ public class SignController {
         }
         return "redirect:/"; //메인 화면으로 이동
     }
+
+    @GetMapping ("/signin")
+    public String signIp(){
+        return "/user/signin";
+    }
+
 
 }

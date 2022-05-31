@@ -223,28 +223,43 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserDTO.SESSION_USER_DATA signIn(UserDTO.SIGN_IN dto, HttpSession session) {
+    public int signIn(UserDTO.SIGN_IN dto, HttpSession session) {
+        //0 : 로그인 실패
+        //1 : 로그인 성공
+        //2 : 탈퇴한 회원 다시 계정 살릴지 ask
+        //-1 : 탈퇴한 계정입니다.
+
+
         //Controller 단에서 userDTO가 null인지 확인해서 처리
         User user = userRepository.findByEmail(dto.getEmail());
         UserDTO.SESSION_USER_DATA userDTO = null;
 
-        if(user==null) return userDTO;
+        if(user==null) {
+            System.out.println("계정 정보 없음");
+            return 0;
+        }
         boolean passwdCheck = passwdCheck(dto.getPasswd(), user);
         if(passwdCheck==true) {
-            userDTO = User.createUserDTO(user);
-            System.out.println("패스워드 일치");
-            session.setAttribute("user", userDTO);
-            Log log = Log.builder()
-                    .visitDate(LocalDateTime.now())
-                    .user(user)
-                    .build();
-            Log inputLog = logRepository.save(log);
-            System.out.println(inputLog.toString());
+            if(user.isValid()==true){
+                userDTO = User.createUserDTO(user);
+                System.out.println("패스워드 일치");
+                session.setAttribute("user", userDTO);
+                Log log = Log.builder()
+                        .visitDate(LocalDateTime.now())
+                        .user(user)
+                        .build();
+                Log inputLog = logRepository.save(log);
+                System.out.println(inputLog.toString());
+                return 1;
+            }else if(user.getValid_date().isAfter(LocalDateTime.now())) { //접속일이 회원 정보 유지 유효기간 내 일시
+                return 2;
+            }else {
+                return -1; //회원 정보 복구할 수 있는 기간을 지남
+            }
         }else{
             System.out.println("패스워드 불일치");
+            return 0;
         }
-
-        return userDTO;
     }
 
     @Override
