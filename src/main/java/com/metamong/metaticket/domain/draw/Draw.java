@@ -1,15 +1,12 @@
 package com.metamong.metaticket.domain.draw;
 
 import com.metamong.metaticket.domain.BaseEntity;
+import com.metamong.metaticket.domain.concert.Concert;
 import com.metamong.metaticket.domain.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-
-
+import java.time.LocalDateTime;
 
 @Getter
 @Builder
@@ -28,7 +25,15 @@ public class Draw {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "concert_id")
+    private Concert concert;
+
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "concert_id")
-//    private Concert concert;
+//    private Payment payment;
+
+    private int ranking;
+
+    private LocalDateTime emailSendDate;
 }
