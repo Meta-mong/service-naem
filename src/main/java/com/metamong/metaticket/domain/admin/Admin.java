@@ -1,6 +1,7 @@
 package com.metamong.metaticket.domain.admin;
 
 
+import com.metamong.metaticket.domain.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,20 +17,21 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Admin {
+public class Admin extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //MySQl 자동으로 키본키 생성
     @Column(name="admin_id")
     private Long id;
 
-    @Column
+    private String loginId;
+
+    @Column(nullable = false)
     private String password;
 
-    @CreationTimestamp
-    @Column
-    private LocalDateTime mod_date;
 
-    public void update(String password) {
-        setPassword(password);
+
+    public void update(String password ) {
+
+
     }
 }
