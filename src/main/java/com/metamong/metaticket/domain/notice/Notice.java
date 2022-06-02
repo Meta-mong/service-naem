@@ -40,9 +40,9 @@ public class Notice extends BaseEntity {
 
 
     public void update(NoticeDTO.Notice dto) {
-        setClassify(classify);
-        setContent(content);
-        setTitle(title);
+        setClassify(dto.getClassify());
+        setContent(dto.getContent());
+        setTitle(dto.getTitle());
     }
 
 

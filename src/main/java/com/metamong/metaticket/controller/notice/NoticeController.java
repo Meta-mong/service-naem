@@ -61,7 +61,7 @@ public class NoticeController {
 
 
     //공지사항 삭제
-    @DeleteMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public ResponseEntity noticeDelete (@PathVariable Long id) throws Exception {
         noticeService.noticeDelete(id);
         return ResponseEntity.ok(id);
