@@ -3,6 +3,7 @@ package com.metamong.metaticket.domain.notice;
 
 import com.metamong.metaticket.domain.BaseEntity;
 import com.metamong.metaticket.domain.admin.Admin;
+import com.metamong.metaticket.domain.notice.dto.NoticeDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,10 +39,12 @@ public class Notice extends BaseEntity {
     private String content;
 
 
-    public void update(String classify, String title, String content) {
-        setClassify(classify);
-        setContent(content);
-        setTitle(title);
+    public void update(NoticeDTO.Notice dto) {
+        setClassify(dto.getClassify());
+        setContent(dto.getContent());
+        setTitle(dto.getTitle());
     }
+
+
 
 }

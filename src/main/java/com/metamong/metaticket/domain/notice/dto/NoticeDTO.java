@@ -4,8 +4,10 @@ import com.metamong.metaticket.domain.admin.Admin;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class NoticeDTO {
+
 
 
     @Data
@@ -16,10 +18,10 @@ public class NoticeDTO {
     public static class Notice{
 
             private Long id; //공지사항 아이디 기본키
-            private String classify;
+
             private String title;
             private String content;
-
+            private String classify;
 
             //작성자 정보
             private Long adminId; // 관리자

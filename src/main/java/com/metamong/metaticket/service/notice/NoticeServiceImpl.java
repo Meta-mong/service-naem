@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequiredArgsConstructor
+
 @Service
 public class NoticeServiceImpl implements NoticeService{
     @Autowired
-    private final NoticeRepository noticeRepository;
+    private NoticeRepository noticeRepository;
 
     @Autowired
     private AdminRepository adminRepository;
@@ -77,15 +77,20 @@ public class NoticeServiceImpl implements NoticeService{
 
     }
 
-// 공지사항 삭제
-    @Override
-    public void deleteNotice(Long id) {
-
-    }
-
     // 공지사항 수정
     @Override
-    public void modifyNotice(NoticeDTO dto) {
-
+    public Notice updateNotice(NoticeDTO.Notice dto) throws Exception {
+        Notice updateNotice = noticeRepository.findById(dto.getAdminId()).orElse(null);
+        updateNotice.update(dto);
+        return updateNotice;
     }
+
+    // 공지사항 삭제
+    @Override
+    public void noticeDelete(Long id) {
+        noticeRepository.deleteById(id);
+    }
+
+
+
 }
