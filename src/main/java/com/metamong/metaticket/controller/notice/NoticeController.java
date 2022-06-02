@@ -21,7 +21,7 @@ public class NoticeController {
     NoticeService noticeService;
 
     // 공지사항 등록
-    @GetMapping(value = "/noticeupload")
+    @GetMapping(value = "/upload")
     public String noticeupload(@ModelAttribute NoticeDTO.Notice dto, Model model){
 
         try {
@@ -34,7 +34,7 @@ public class NoticeController {
             throw new Exception();
         } catch (Exception e) {
             model.addAttribute("err","등록실패");
-            return "noticrupload"; // jsp
+            return "noticeupload"; // jsp
 
         }
     }

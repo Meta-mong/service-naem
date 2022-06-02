@@ -7,8 +7,8 @@ import javax.servlet.http.HttpSession;
 
 public interface AdminService {
 
-    public boolean adminlogin (String adminId, String password) throws Exception;
-    public void adminlogout (HttpSession session);
+    public boolean adminLogin (String adminId, String password) throws Exception;
+    public void adminLogout (HttpSession session);
 
     public Admin adminInfo (String adminId);
 

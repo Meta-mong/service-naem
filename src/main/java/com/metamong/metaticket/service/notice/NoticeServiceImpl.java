@@ -77,12 +77,13 @@ public class NoticeServiceImpl implements NoticeService{
 
     }
 
-
+// 공지사항 삭제
     @Override
     public void deleteNotice(Long id) {
 
     }
 
+    // 공지사항 수정
     @Override
     public void modifyNotice(NoticeDTO dto) {
 

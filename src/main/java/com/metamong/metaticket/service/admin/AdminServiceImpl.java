@@ -13,7 +13,7 @@ public class AdminServiceImpl implements AdminService{
     private AdminRepository adminRepository;
 
     @Override
-    public boolean adminlogin(String adminId, String password) throws Exception {
+    public boolean adminLogin(String adminId, String password) throws Exception {
         boolean result = false;
         try {
             Admin admin = adminRepository.findByLoginId(adminId);
@@ -34,7 +34,7 @@ public class AdminServiceImpl implements AdminService{
 
 
     @Override
-    public void adminlogout(HttpSession session) {
+    public void adminLogout(HttpSession session) {
     session.invalidate(); //세션 자름
 
 

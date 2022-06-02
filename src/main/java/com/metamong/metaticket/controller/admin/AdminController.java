@@ -21,7 +21,8 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
-    @PostMapping (value = "/adminlogin")
+    //로그인 /로그아웃
+    @PostMapping (value = "/login")
     public String adminlogin(@RequestParam ("admin") String adminloginId,
                              @RequestParam("admin123") String password, Model model){
         try {
@@ -43,7 +44,7 @@ public class AdminController {
 
 
 
-    @GetMapping(value = "/adminlogout")
+    @GetMapping(value = "/logout")
     public String adminlogout(HttpSession session){
         adminService.adminlogout(session);
 
