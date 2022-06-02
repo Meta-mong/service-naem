@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -19,52 +21,86 @@ import java.util.Map;
 @RequestMapping("/sign")
 public class SignController {
     @Autowired
-    private UserService userService;
+    UserService userService;
 
-    @GetMapping("/")
-    public String sign(){
-        return "sign";
+    @Autowired
+    HttpSession session;
+
+    @PostMapping("/emailcheck")
+    @ResponseBody
+    public void emailCheck(@RequestParam("email") String email, Model model){
+        System.out.println("email :" +email);
+        boolean result = userService.emailCheck(email);
+        //true : 중복 , false : 중복X
+        model.addAttribute("result", result);
     }
 
-    @GetMapping("/main")
-    public String main(){
-        return "main";
+    /*
+    @PostMapping("/numbercheck")
+    @ResponseBody
+    public void numberCheck(@RequestParam("number") String number, Model model){
+        boolean result = userService.phoneNumberCheck(number);
+        //true : 중복 , false : 중복X
+        if(result==true){
+            model.addAttribute("result", result);
+            return;
+        }else{
+
+        }
     }
+*/
 
     @ResponseBody
-    @GetMapping("/sendsms")
-    public String sendSms(@RequestParam("userNumber") String userNumber){
-        boolean result = userService.phoneNumberCheck(userNumber);
-        if(result==true) return "이미 존재하는 전화번호입니다.";
+    @PostMapping("/numbercheck")
+    public void numberCheck(@RequestParam("number") String number, Model model){
+        boolean result = userService.phoneNumberCheck(number.trim());
+        if(result==true) {
+            model.addAttribute("result", result);
+            model.addAttribute("message", "이미 사용 중인 전화번호입니다.");
+            return;
+        }
         //전송할 인증번호
         int random = 0;
         while(random==0){
             random = (int)(Math.random()*10000); //4자리 인증키
         }
-        result = userService.sendSms(userNumber, random);
-        if(result==true) return "인증번호를 확인해주세요";
-        //5분 동안 버튼 안 보이도록 세션에 값 저장
-        return "인증번호 전송이 실패하였습니다. 다시 시도해주세요";
+        result = userService.sendSms(number.trim(), random);
+        if(result==true) {
+            model.addAttribute("result", result);
+            model.addAttribute("message", "인증번호가 발송되었습니다.");
+            model.addAttribute("random", random);
+            session.setAttribute("random", random);
+            return;
+        }else{
+            //5분 동안 버튼 안 보이도록 세션에 값 저장
+            model.addAttribute("result", result);
+            model.addAttribute("message", "인증번호 전송이 실패하였습니다. 다시 시도해주세요");
+            return;
+        }
     }
 
     @PostMapping("/signup")
-    public String signUp(@Valid UserDTO.SIGN_UP userDTO, BindingResult bindingResult, Model model){
+    @ResponseBody
+    public void signUp(@Valid UserDTO.SIGN_UP userDTO, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
-            return "/sign/signupform";
+            model.addAttribute("result", -1);
+            model.addAttribute("msg", "회원가입에 실패하였습니다. 다시 시도해주세요.");
+        }else {
+            boolean result = userService.signUp(userDTO);
+            if (result == false) {
+                model.addAttribute("msg", "회원가입에 실패하였습니다. 다시 시도해주세요.");
+                model.addAttribute("result", -1);
+            } else {
+                model.addAttribute("msg", "회원가입에 성공하였습니다. 로그인해주세요");
+                model.addAttribute("result", 1);
+            }
         }
-
-        boolean result = userService.signUp(userDTO);
-        if(result == false) {
-            model.addAttribute("error", "회원가입에 실패하였습니다. 다시 시도해주세요.");
-            return "/sign/signupform";
-        }
-        return "redirect:/"; //메인 화면으로 이동
     }
 
     @PostMapping("/signin")
     @ResponseBody
-    public Map<String, Object> signIn(UserDTO.SIGN_IN dto, HttpSession session){
-        System.out.println("확인");
+    public Map<String, Object> signIn(@ModelAttribute UserDTO.SIGN_IN dto){
+        System.out.println(dto.toString());
         Map<String, Object> map = new HashMap<>();
         String message = null;
         int result = userService.signIn(dto, session);
@@ -82,6 +118,7 @@ public class SignController {
         map.put("result", result);
         return map;
     }
+
 
 
 }

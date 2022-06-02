@@ -38,6 +38,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    HttpSession session;
+
     @Value("${serviceId}")
     private String serviceId;
 
@@ -52,8 +55,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean emailCheck(String email) {
+        String parsedEmail = email.trim();
         boolean result = false; //중복된 이메일 없음
-        User user = userRepository.findByEmail(email);
+        User user = userRepository.findByEmail(parsedEmail);
         if(user!= null) result = true; //중복된 이메일 있음
 
         return result;
@@ -61,8 +65,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean phoneNumberCheck(String number) {
+        String parsedNumber = number.trim();
         boolean result = false; //중복된 전화번호 없음
-        User user = userRepository.findByNumber(number);
+        User user = userRepository.findByNumber(parsedNumber);
         if(user!=null) result = true; //중복된 전화번호 있음
 
         return result;
@@ -239,8 +244,9 @@ public class UserServiceImpl implements UserService {
             return 0;
         }
         boolean passwdCheck = passwdCheck(dto.getPasswd(), user);
+        System.out.println("valid 확인 : "+ user.isValid());
         if(passwdCheck==true) {
-            if(user.isValid()==true){
+            if(user.isValid()==false){ //추후 수정 -> user
                 userDTO = User.createUserDTO(user);
                 System.out.println("패스워드 일치");
                 session.setAttribute("user", userDTO);

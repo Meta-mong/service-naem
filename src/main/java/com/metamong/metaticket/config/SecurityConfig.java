@@ -22,11 +22,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // /main은 로그인 여부와 상관없이 접근 가능
         // /user/mu~는 USER 권한이 있어야만 접근 가능
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/sign/mypage").hasRole("USER");
+                .antMatchers("/sign/**").permitAll();
+                //.antMatchers("/sign/mypage").hasRole("USER");
 
+        http.cors().and(); //403에러
+        http.csrf().disable();
+
+        /*
         http.formLogin()
-                .loginPage("/sign/signin")
+                .loginPage("/sign/")
                 .defaultSuccessUrl("/")
                 .usernameParameter("email")
                 .failureUrl("/sign/signin")
@@ -34,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/sign/signout"))
                 .logoutSuccessUrl("/");
+         */
     }
 
     @Bean

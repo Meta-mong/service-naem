@@ -50,26 +50,27 @@ window.addEventListener("load", function(event){
             return;
         }
 
-        var signinfo = {email: $("#email").val(), passwd: $("#passwd").val()}
-        alert(signinfo.email);
-        console.log($("#login").serialize().val());
+        var formdata = $("#login").serialize();
+
         $.ajax({
             type: "POST",
             url: "/sign/signin",
-            contentType: "application/json; charset=utf-8",
-            data: $("#login").serialize(),
-            success: function (data) {
-                alert(data);
-                var map = JSON.parse(data);
+            //contentType: "application/json; charset=utf-8",
+            data: formdata,
+            dataType: "json",
+            success: function (data, statusText) {
+                var temp = JSON.stringify(data);
+                var map = JSON.parse(temp);
                 alert(map.msg);
                 if (map.result == 1) {
-                    $(location).attr('href', '/sign/main');
+                    //$(location).attr('href', 'redirect:/');
+                    location.replace("/");
                 }
             },
             error: function (data, statusText) {
                 alert("에러 발생");
-                var map = JSON.parse(data);
-                alert(statusText);
+                var temp = JSON.stringify(data);
+                var map = JSON.parse(temp);
             }
         });
     });
