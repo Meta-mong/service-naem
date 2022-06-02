@@ -23,10 +23,10 @@ public class AdminController {
 
     //로그인 /로그아웃
     @PostMapping (value = "/login")
-    public String adminlogin(@RequestParam ("admin") String adminloginId,
+    public String adminLogin(@RequestParam ("admin") String adminloginId,
                              @RequestParam("admin123") String password, Model model){
         try {
-            boolean result = adminService.adminlogin(adminloginId,password);
+            boolean result = adminService.adminLogin(adminloginId,password);
             if(result ==true){
                 model.addAttribute("adminlogin",adminService.adminInfo(adminloginId));
                 return "main"; //view
@@ -45,8 +45,8 @@ public class AdminController {
 
 
     @GetMapping(value = "/logout")
-    public String adminlogout(HttpSession session){
-        adminService.adminlogout(session);
+    public String adminLogout(HttpSession session){
+        adminService.adminLogout(session);
 
         return "redirect:/admin/adminloginform";
     }
