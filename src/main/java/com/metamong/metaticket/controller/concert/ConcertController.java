@@ -5,17 +5,18 @@ import com.metamong.metaticket.domain.concert.Genre;
 import com.metamong.metaticket.dto.concert.ConcertDto;
 import com.metamong.metaticket.service.concert.ConcertService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.net.URI;
-import java.util.List;
 
 
-//@Controller
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("/concert")
 public class ConcertController {
@@ -23,52 +24,51 @@ public class ConcertController {
     private final ConcertService concertService;
 
     // 공연 생성
-
-    @PostMapping("/admin/create")
-    public ResponseEntity<Void> addConcert(@Valid ConcertDto dto){
+    @PostMapping("/adminConcert/upload")
+    public void addConcert(@Valid ConcertDto dto, HttpServletRequest request, HttpServletResponse response) throws Exception {
         Concert concert = ConcertDto.createConcert(dto);
         concertService.addConcert(concert);
-//        ConcertDto concertDto = concertService.concertInfo(concert.getId());
-        return ResponseEntity.created(URI.create("/concert/"+concert.getId())).build();
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/concert/adminConcert");
+        dispatcher.forward(request,response);
     }
-
 
     // 공연 상세내역 조회
-
     @GetMapping("/{id}")
-    public ConcertDto concertInfo(@PathVariable Long id){
-        return concertService.concertInfo(id);
+    public String concertInfo(@PathVariable Long id , Model model){
+        ConcertDto concertDto = concertService.concertInfo(id);
+        model.addAttribute("concert",concertDto);
+        return "concertDetail"; // view 이름
     }
 
-
     // 공연 수정
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> updateConcert(@PathVariable Long id, @Valid ConcertDto dto ){
+    @PostMapping("/update/{id}")
+    public void updateConcert(@PathVariable Long id, @ModelAttribute ConcertDto dto,HttpServletRequest request, HttpServletResponse response ) throws Exception {
         concertService.updateConcert(dto,id);
-        return new ResponseEntity(HttpStatus.OK);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/concert/adminConcert");
+        dispatcher.forward(request,response);
     }
 
     // 공연 삭제
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteConcert(@PathVariable Long id){
+    @PostMapping("/delete/{id}")
+    public void deleteConcert(@PathVariable Long id,HttpServletRequest request, HttpServletResponse response) throws Exception {
         concertService.deleteConcert(id);
-        return new ResponseEntity(HttpStatus.OK);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/concert/adminConcert");
+        dispatcher.forward(request,response);
     }
 
 
     // 공연 전체 조회
-    @GetMapping("/admin")
-    public List<Concert> concertList(){
-        List<Concert> concert = concertService.concertAllInfo();
-        return concert;
+    @GetMapping("/adminConcert")
+    public String concertList(Model model){
+        model.addAttribute("concert",concertService.concertAllInfo());
+        return "adminConcert";
     }
 
     // 장르별 공연 조회
     @GetMapping("/{genre}")
-    public List<Concert> concertList_Genre(@PathVariable Genre genre){
-        List<Concert> concert = concertService.concertGenreInfo(genre);
-        return concert;
+    public String concertList_Genre(@PathVariable Genre genre, Model model){
+        model.addAttribute("concert",concertService.concertGenreInfo(genre));
+        return "concert";
     }
 
 }
