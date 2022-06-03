@@ -9,7 +9,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +37,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    HttpSession session;
+
     @Value("${serviceId}")
     private String serviceId;
 
@@ -52,17 +54,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean emailCheck(String email) {
+        String parsedEmail = email.trim();
         boolean result = false; //중복된 이메일 없음
-        User user = userRepository.findByEmail(email);
+        User user = userRepository.findByEmail(parsedEmail);
         if(user!= null) result = true; //중복된 이메일 있음
-
         return result;
     }
 
     @Override
     public boolean phoneNumberCheck(String number) {
+        String parsedNumber = number.trim();
         boolean result = false; //중복된 전화번호 없음
-        User user = userRepository.findByNumber(number);
+        User user = userRepository.findByNumber(parsedNumber);
         if(user!=null) result = true; //중복된 전화번호 있음
 
         return result;
@@ -223,34 +226,48 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserDTO.SESSION_USER_DATA signIn(UserDTO.SIGN_IN dto, HttpSession session) {
+    public int signIn(UserDTO.SIGN_IN dto, HttpSession session) {
+        //0 : 로그인 실패
+        //1 : 로그인 성공
+        //2 : 탈퇴한 회원 다시 계정 살릴지 ask
+        //-1 : 탈퇴한 계정입니다.
+
         //Controller 단에서 userDTO가 null인지 확인해서 처리
         User user = userRepository.findByEmail(dto.getEmail());
         UserDTO.SESSION_USER_DATA userDTO = null;
 
-        if(user==null) return userDTO;
+        if(user==null) {
+            System.out.println("계정 정보 없음");
+            return 0;
+        }
         boolean passwdCheck = passwdCheck(dto.getPasswd(), user);
+        System.out.println("valid 확인 : "+ user.isValid());
         if(passwdCheck==true) {
-            userDTO = User.createUserDTO(user);
-            System.out.println("패스워드 일치");
-            session.setAttribute("user", userDTO);
-            Log log = Log.builder()
-                    .visitDate(LocalDateTime.now())
-                    .user(user)
-                    .build();
-            Log inputLog = logRepository.save(log);
-            System.out.println(inputLog.toString());
+            if(user.isValid()==false){ //추후 수정 -> user
+                userDTO = User.createUserDTO(user);
+                System.out.println("패스워드 일치");
+                session.setAttribute("user", userDTO);
+                Log log = Log.builder()
+                        .visitDate(LocalDateTime.now())
+                        .user(user)
+                        .build();
+                Log inputLog = logRepository.save(log);
+                System.out.println(inputLog.toString());
+                return 1;
+            }else if(user.getValid_date().isAfter(LocalDateTime.now())) { //접속일이 회원 정보 유지 유효기간 내 일시
+                return 2;
+            }else {
+                return -1; //회원 정보 복구할 수 있는 기간을 지남
+            }
         }else{
             System.out.println("패스워드 불일치");
+            return 0;
         }
-
-        return userDTO;
     }
 
     @Override
     public void signOut(HttpSession session) {
         session.invalidate();
     }
-
 
 }
