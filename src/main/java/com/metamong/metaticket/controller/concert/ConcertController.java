@@ -1,6 +1,7 @@
 package com.metamong.metaticket.controller.concert;
 
 import com.metamong.metaticket.domain.concert.Concert;
+import com.metamong.metaticket.domain.concert.Genre;
 import com.metamong.metaticket.dto.concert.ConcertDto;
 import com.metamong.metaticket.service.concert.ConcertService;
 import lombok.RequiredArgsConstructor;
@@ -60,6 +61,13 @@ public class ConcertController {
     @GetMapping("/admin")
     public List<Concert> concertList(){
         List<Concert> concert = concertService.concertAllInfo();
+        return concert;
+    }
+
+    // 장르별 공연 조회
+    @GetMapping("/{genre}")
+    public List<Concert> concertList_Genre(@PathVariable Genre genre){
+        List<Concert> concert = concertService.concertGenreInfo(genre);
         return concert;
     }
 

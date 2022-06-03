@@ -1,6 +1,7 @@
 package com.metamong.metaticket.controller.concert;
 
 import com.metamong.metaticket.domain.concert.Concert;
+import com.metamong.metaticket.domain.concert.Genre;
 import com.metamong.metaticket.dto.concert.ConcertDto;
 import com.metamong.metaticket.repository.concert.ConcertRepository;
 import org.junit.jupiter.api.Test;
@@ -50,6 +51,14 @@ public class ConcertControllerTest {
     @Test
     public void 공연조회(){
         List<Concert> concertList = concertController.concertList();
+        for(Concert c : concertList){
+            System.out.println(c);
+        }
+    }
+
+    @Test
+    public void 장르별_공연조회(){
+        List<Concert> concertList = concertController.concertList_Genre(Genre.MUSICAL_DRAMA);
         for(Concert c : concertList){
             System.out.println(c);
         }
