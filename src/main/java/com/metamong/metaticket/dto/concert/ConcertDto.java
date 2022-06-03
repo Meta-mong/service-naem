@@ -34,7 +34,7 @@ public class ConcertDto {
 
     private String host;
 
-    private int seat_num;
+    private int seatNum;
 
     private LocalDateTime drawStartDate;
 
@@ -42,7 +42,7 @@ public class ConcertDto {
 
     private int price;
 
-    private int visit_cnt;
+    private int visitCnt;
 
     // ConcertDto 생성
     public static ConcertDto createDto(Concert concert){
@@ -56,11 +56,11 @@ public class ConcertDto {
                 .ratings(concert.getRatings())
                 .address(concert.getAddress())
                 .host(concert.getHost())
-                .seat_num(concert.getSeat_num())
+                .seatNum(concert.getSeatNum())
                 .drawStartDate(concert.getDrawStartDate())
                 .drawEndDate(concert.getDrawEndDate())
                 .price(concert.getPrice())
-                .visit_cnt(concert.getVisit_cnt())
+                .visitCnt(concert.getVisitCnt())
                 .build();
 
         return concertDto;
@@ -77,11 +77,11 @@ public class ConcertDto {
                 .ratings(concertDto.getRatings())
                 .address(concertDto.getAddress())
                 .host(concertDto.getHost())
-                .seat_num(concertDto.getSeat_num())
+                .seatNum(concertDto.getSeatNum())
                 .drawStartDate(concertDto.getDrawStartDate())
                 .drawEndDate(concertDto.getDrawEndDate())
                 .price(concertDto.getPrice())
-                .visit_cnt(concertDto.getVisit_cnt())
+                .visitCnt(concertDto.getVisitCnt())
                 .build();
 
         return concert;

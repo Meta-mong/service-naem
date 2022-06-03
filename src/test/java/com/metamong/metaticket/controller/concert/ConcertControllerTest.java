@@ -38,7 +38,7 @@ public class ConcertControllerTest {
     public void 공연수정(){
         Concert concert = concertRepository.findAll().get(0);
         ConcertDto concertDto = ConcertDto.createDto(concert);
-        concertDto.setSeat_num(150);
+        concertDto.setSeatNum(150);
         concertController.updateConcert(concertDto.getId(), concertDto);
     }
 

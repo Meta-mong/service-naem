@@ -37,7 +37,7 @@ public class ConcertServiceTest {
     @Test
     public void 공연수정(){
         ConcertDto concertDto = concertService.concertInfo(2L);
-        concertDto.setSeat_num(300);
+        concertDto.setSeatNum(300);
         concertService.updateConcert(concertDto,2L);
         System.out.println(concertService.concertInfo(2L).toString());
     }
