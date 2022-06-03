@@ -1,6 +1,7 @@
 package com.metamong.metaticket.service.concert;
 
 import com.metamong.metaticket.domain.concert.Concert;
+import com.metamong.metaticket.domain.concert.Genre;
 import com.metamong.metaticket.dto.concert.ConcertDto;
 
 import java.util.List;
@@ -21,4 +22,7 @@ public interface ConcertService {
 
     // 공연 전체 조회
     List<Concert> concertAllInfo();
+
+    // 장르별 공연 조회
+    List<Concert> concertGenreInfo(Genre genre);
 }
