@@ -66,4 +66,25 @@ public class ConcertDto {
         return concertDto;
     }
 
+    public static Concert createConcert(ConcertDto concertDto){
+        Concert concert = Concert.builder()
+                .id(concertDto.getId())
+                .title(concertDto.getTitle())
+                .description(concertDto.getDescription())
+                .phamplet(concertDto.getPhamplet())
+                .concertDate(concertDto.getConcertDate())
+                .genre(concertDto.getGenre())
+                .ratings(concertDto.getRatings())
+                .address(concertDto.getAddress())
+                .host(concertDto.getHost())
+                .seat_num(concertDto.getSeat_num())
+                .drawStartDate(concertDto.getDrawStartDate())
+                .drawEndDate(concertDto.getDrawEndDate())
+                .price(concertDto.getPrice())
+                .visit_cnt(concertDto.getVisit_cnt())
+                .build();
+
+        return concert;
+    }
+
 }
