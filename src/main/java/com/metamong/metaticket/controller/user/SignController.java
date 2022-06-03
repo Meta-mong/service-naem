@@ -2,6 +2,7 @@ package com.metamong.metaticket.controller.user;
 
 import com.metamong.metaticket.domain.user.dto.UserDTO;
 import com.metamong.metaticket.service.user.UserService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,11 +29,12 @@ public class SignController {
 
     @PostMapping("/emailcheck")
     @ResponseBody
-    public void emailCheck(@RequestParam("email") String email, Model model){
+    public String emailCheck(@RequestParam("email") String email){
         System.out.println("email :" +email);
         boolean result = userService.emailCheck(email);
         //true : 중복 , false : 중복X
-        model.addAttribute("result", result);
+
+        return String.valueOf(result);
     }
 
     /*
@@ -52,12 +54,13 @@ public class SignController {
 
     @ResponseBody
     @PostMapping("/numbercheck")
-    public void numberCheck(@RequestParam("number") String number, Model model){
+    public Map<String, Object> numberCheck(@RequestParam("number") String number){
         boolean result = userService.phoneNumberCheck(number.trim());
+        Map<String, Object> map = new HashMap<>();
         if(result==true) {
-            model.addAttribute("result", result);
-            model.addAttribute("message", "이미 사용 중인 전화번호입니다.");
-            return;
+            //model.addAttribute("result", result);
+            //model.addAttribute("message", "이미 사용 중인 전화번호입니다.");
+            //return;
         }
         //전송할 인증번호
         int random = 0;
@@ -66,17 +69,18 @@ public class SignController {
         }
         result = userService.sendSms(number.trim(), random);
         if(result==true) {
-            model.addAttribute("result", result);
-            model.addAttribute("message", "인증번호가 발송되었습니다.");
-            model.addAttribute("random", random);
-            session.setAttribute("random", random);
-            return;
+//            model.addAttribute("result", result);
+//            model.addAttribute("message", "인증번호가 발송되었습니다.");
+//            model.addAttribute("random", random);
+//            session.setAttribute("random", random);
+//            return;
         }else{
             //5분 동안 버튼 안 보이도록 세션에 값 저장
-            model.addAttribute("result", result);
-            model.addAttribute("message", "인증번호 전송이 실패하였습니다. 다시 시도해주세요");
-            return;
+//            model.addAttribute("result", result);
+//            model.addAttribute("message", "인증번호 전송이 실패하였습니다. 다시 시도해주세요");
+//            return;
         }
+        return map;
     }
 
     @PostMapping("/signup")

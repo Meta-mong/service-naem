@@ -59,7 +59,6 @@ public class UserServiceImpl implements UserService {
         boolean result = false; //중복된 이메일 없음
         User user = userRepository.findByEmail(parsedEmail);
         if(user!= null) result = true; //중복된 이메일 있음
-
         return result;
     }
 
