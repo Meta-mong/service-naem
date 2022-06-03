@@ -1,6 +1,8 @@
 package com.metamong.metaticket.domain.question;
 
 
+import com.metamong.metaticket.domain.question.dto.QuestionDTO;
+import com.metamong.metaticket.domain.user.User;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -19,9 +21,9 @@ public class Question {
     @Column(name="ques_id")
     private Long id;
 
-//    @ManyToOne(targetEntity = User.class , fetch = FetchType.LAZY) // user 테이블의 user_id의  fk설정
-//    @JoinColumn(name = "user_id")
-//    private User user;
+    @ManyToOne(targetEntity = User.class , fetch = FetchType.LAZY) // user 테이블의 user_id의  fk설정
+    @JoinColumn(name = "user_id")
+    private User user_id;
 
     @Column
     private String classify;
@@ -30,10 +32,13 @@ public class Question {
     private String title;
 
     @Column
-    private String content;
+    private String ques_content;
 
     @Column
     private boolean answer;
+
+    @Column
+    private String reply_content;
 
     @CreationTimestamp
     @Column
@@ -44,10 +49,12 @@ public class Question {
     private LocalDateTime ans_date;
 
 
-    public void update(String classify, String title, String content) {
-        setClassify(classify);
-        setContent(content);
-        setTitle(title);
+    public void update(QuestionDTO.Quest dto) {
+        setTitle(dto.getTitle());
+        setQues_content(dto.getQues_content());
+        setAnswer(dto.isAnswer());
+        setReply_content(dto.getReply_content());
+
     }
 
 }
