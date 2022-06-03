@@ -9,7 +9,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -233,7 +232,6 @@ public class UserServiceImpl implements UserService {
         //2 : 탈퇴한 회원 다시 계정 살릴지 ask
         //-1 : 탈퇴한 계정입니다.
 
-
         //Controller 단에서 userDTO가 null인지 확인해서 처리
         User user = userRepository.findByEmail(dto.getEmail());
         UserDTO.SESSION_USER_DATA userDTO = null;
@@ -271,6 +269,5 @@ public class UserServiceImpl implements UserService {
     public void signOut(HttpSession session) {
         session.invalidate();
     }
-
 
 }

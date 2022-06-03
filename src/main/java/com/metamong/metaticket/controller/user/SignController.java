@@ -27,6 +27,7 @@ public class SignController {
     @Autowired
     HttpSession session;
 
+    //이메일 중복 체크
     @PostMapping("/emailcheck")
     @ResponseBody
     public String emailCheck(@RequestParam("email") String email){
@@ -37,30 +38,16 @@ public class SignController {
         return String.valueOf(result);
     }
 
-    /*
-    @PostMapping("/numbercheck")
-    @ResponseBody
-    public void numberCheck(@RequestParam("number") String number, Model model){
-        boolean result = userService.phoneNumberCheck(number);
-        //true : 중복 , false : 중복X
-        if(result==true){
-            model.addAttribute("result", result);
-            return;
-        }else{
-
-        }
-    }
-*/
-
+    //전화번호 중복 체크 및 인증번호 전송
     @ResponseBody
     @PostMapping("/numbercheck")
     public Map<String, Object> numberCheck(@RequestParam("number") String number){
         boolean result = userService.phoneNumberCheck(number.trim());
         Map<String, Object> map = new HashMap<>();
         if(result==true) {
-            //model.addAttribute("result", result);
-            //model.addAttribute("message", "이미 사용 중인 전화번호입니다.");
-            //return;
+            map.put("result", -1);
+            map.put("message", "이미 사용 중인 전화번호입니다.");
+            return map;
         }
         //전송할 인증번호
         int random = 0;
@@ -69,38 +56,45 @@ public class SignController {
         }
         result = userService.sendSms(number.trim(), random);
         if(result==true) {
-//            model.addAttribute("result", result);
-//            model.addAttribute("message", "인증번호가 발송되었습니다.");
-//            model.addAttribute("random", random);
-//            session.setAttribute("random", random);
-//            return;
+            //5분 동안 버튼 안 보이도록 세션에 값 저장 -> 추후 추가
+            map.put("result", 1);
+            map.put("message", "인증번호가 발송되었습니다.");
+            map.put("random", random);
+            session.setAttribute("random", random);
+            return map;
         }else{
-            //5분 동안 버튼 안 보이도록 세션에 값 저장
-//            model.addAttribute("result", result);
-//            model.addAttribute("message", "인증번호 전송이 실패하였습니다. 다시 시도해주세요");
-//            return;
+            map.put("result", -1);
+            map.put("message", "인증번호가 발송되었습니다.");
+            return map;
         }
-        return map;
     }
 
+    //회원가입
     @PostMapping("/signup")
     @ResponseBody
-    public void signUp(@Valid UserDTO.SIGN_UP userDTO, BindingResult bindingResult, Model model){
+    public Map<String, Object> signUp(@Valid UserDTO.SIGN_UP userDTO, BindingResult bindingResult, Model model){
+        System.out.println(userDTO.toString());
+        System.out.println("회원가입 확인");
+        Map<String, Object> map = new HashMap<>();
         if(bindingResult.hasErrors()){
-            model.addAttribute("result", -1);
-            model.addAttribute("msg", "회원가입에 실패하였습니다. 다시 시도해주세요.");
+            map.put("result", -1);
+            map.put("msg", "회원가입에 실패하였습니다. 다시 시도해주세요.");
+            return map;
         }else {
             boolean result = userService.signUp(userDTO);
             if (result == false) {
-                model.addAttribute("msg", "회원가입에 실패하였습니다. 다시 시도해주세요.");
-                model.addAttribute("result", -1);
+                map.put("result", -1);
+                map.put("msg", "회원가입에 실패하였습니다. 다시 시도해주세요.");
+                return map;
             } else {
-                model.addAttribute("msg", "회원가입에 성공하였습니다. 로그인해주세요");
-                model.addAttribute("result", 1);
+                map.put("result", 1);
+                map.put("msg", "회원가입에 성공하였습니다. 로그인해주세요");
+                return map;
             }
         }
     }
 
+    //로그인
     @PostMapping("/signin")
     @ResponseBody
     public Map<String, Object> signIn(@ModelAttribute UserDTO.SIGN_IN dto){

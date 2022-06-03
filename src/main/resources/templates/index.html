@@ -15,6 +15,7 @@
                         <li th:if="${session.user==null}"><span><a href="/sign">로그인</a></span></li>
                         <li th:if="${session.user==null}"><span><a href="/signup">회원가입</a></span></li>
                         <li th:unless="${session.user==null}"><span><a href="#">마이페이지</a></span></li>
+                        <li th:unless="${session.user==null}"><span><a href="/signout">로그아웃</a></span></li>
                         <!-- <li><span><a href="/sign">로그인</a></span></li>
                         <li><span><a href="#">회원가입</a></span></li>
                         <li><span><a href="#">마이페이지</a></span></li> -->
