@@ -42,7 +42,7 @@ public class Concert extends BaseEntity { //BaseEntity -> 공통으로 사용하
 
     private String host;
 
-    private int seat_num;
+    private int seatNum;
 
     private LocalDateTime drawStartDate;
 
@@ -50,7 +50,7 @@ public class Concert extends BaseEntity { //BaseEntity -> 공통으로 사용하
 
     private int price;
 
-    private int visit_cnt;
+    private int visitCnt;
 
     public void update(ConcertDto dto){
         title = dto.getTitle();
@@ -61,7 +61,7 @@ public class Concert extends BaseEntity { //BaseEntity -> 공통으로 사용하
         ratings = dto.getRatings();
         address = dto.getAddress();
         host = dto.getHost();
-        seat_num = dto.getSeat_num();
+        seatNum = dto.getSeatNum();
         drawStartDate = dto.getDrawStartDate();
         drawEndDate = dto.getDrawEndDate();
         price = dto.getPrice();

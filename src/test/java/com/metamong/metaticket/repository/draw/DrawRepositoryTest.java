@@ -40,9 +40,9 @@ class DrawRepositoryTest {
                 .number("01012345678").loserCnt(3).cancelCnt(3).build();
 
         concert = Concert.builder().title("웃는남자").description("부자들의 낙원은 가난한 자들의 지옥으로 세워진 것이다.").phamplet("웃는남자.jpg")
-                .c_date(LocalDateTime.now()).genre(Genre.MUSICAL_DRAMA).ratings(Ratings.FIFTEEN).address("세종문화회관 대극장")
-                .host("(주)EMK뮤지컬컴퍼니").seat_num(250).s_date(LocalDateTime.now()).e_date(LocalDateTime.now()).price(150000)
-                .visit_cnt(5).build();
+                .concertDate(LocalDateTime.now()).genre(Genre.MUSICAL_DRAMA).ratings(Ratings.FIFTEEN).address("세종문화회관 대극장")
+                .host("(주)EMK뮤지컬컴퍼니").seatNum(250).drawStartDate(LocalDateTime.now()).drawEndDate(LocalDateTime.now()).price(150000)
+                .visitCnt(5).build();
 
         userRepository.save(user);
         concertRepository.save(concert);

@@ -31,11 +31,11 @@ class ConcertRepositoryTest {
                 .ratings(Ratings.FIFTEEN)
                 .address("세종문화회관 대극장")
                 .host("(주)EMK뮤지컬컴퍼니")
-                .seat_num(500)
+                .seatNum(500)
                 .drawStartDate(LocalDateTime.now())
                 .drawEndDate(LocalDateTime.now())
                 .price(150000)
-                .visit_cnt(5)
+                .visitCnt(5)
                 .build();
 
         Concert test = concertRepository.save(concert); // 디비에 저장..
@@ -79,20 +79,20 @@ class ConcertRepositoryTest {
                 .ratings(Ratings.FIFTEEN)
                 .address("세종문화회관 대극장")
                 .host("(주)EMK뮤지컬컴퍼니")
-                .seat_num(500)
+                .seatNum(500)
                 .drawStartDate(LocalDateTime.now())
                 .drawEndDate(LocalDateTime.now())
                 .price(150000)
-                .visit_cnt(130)
+                .visitCnt(130)
                 .build();
 
         Concert test = concertRepository.save(concert); // 디비에 저장..
         Concert concert2 = concert;
-        concert2.setSeat_num(120);
+        concert2.setSeatNum(120);
         Concert test2 = concertRepository.save(concert2);
         System.out.println(test2);
 
-        assertThat(concert.getSeat_num()).isEqualTo(120);
+        assertThat(concert.getSeatNum()).isEqualTo(120);
     }
 
     @Test

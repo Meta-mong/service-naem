@@ -1,6 +1,7 @@
 package com.metamong.metaticket.service.concert;
 
 import com.metamong.metaticket.domain.concert.Concert;
+import com.metamong.metaticket.domain.concert.Genre;
 import com.metamong.metaticket.dto.concert.ConcertDto;
 import com.metamong.metaticket.repository.concert.ConcertRepository;
 import lombok.RequiredArgsConstructor;
@@ -51,5 +52,10 @@ public class ConcertServiceImpl implements ConcertService {
         return concertRepository.findAll();
     }
 
+    // 장르별 공연 조회
+    @Override
+    public List<Concert> concertGenreInfo(Genre genre){
+        return concertRepository.findByGenre(genre);
+    }
 
 }
