@@ -1,0 +1,58 @@
+<html>
+<head>
+  <title>Sign</title>
+  <link rel="stylesheet" href="/css/user/signin.css">
+</head>
+<script src="/js/user/signin.js"></script>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<body>
+<div class="wrap">
+  <div class="form-wrap">
+    <div class="button-wrap">
+      <div id="btn"></div>
+      <button type="button" class="togglebtn" onclick="login()">Sign In </button>
+      <button type="button" class="togglebtn" onclick="register()">Sign Up</button>
+    </div>
+    <div class="social-icons">
+      <img src="/img/face.png" alt="facebook">
+      <img src="/img/twitter.png" alt="twitter">
+      <img src="/img/google.png" alt="google">
+    </div>
+    <form id="login" class="input-group">
+      <input type="text" id="email" name="email" class="input-field" placeholder="Email" required>
+      <div id="emailmsg" class="form-text"></div>
+      <input type="password" id="passwd" name="passwd" class="input-field" placeholder="Enter Password" required>
+      <div id="passwdmsg" class="form-text"></div>
+      <!-- <input type="checkbox" class="checkbox"><span>Remember Password</span> -->
+      <button type="button" id="loginbtn" class="submit">SignIn</button>
+      <!-- <input type="submit" id="loginbtn" class="submit" value="SignIn" /> -->
+    </form>
+    <form id="register" class="input-group">
+      <input type="text" class="input-field" placeholder="User name or Email" required>
+      <input type="email" class="input-field" placeholder="Your Email" required>
+      <input type="password" class="input-field" placeholder="Enter Password" required>
+      <input type="checkbox" class="checkbox"><span>Terms and conditions</span>
+      <button type="button" id="registerbtn" class="submit">SignUp</button>
+    </form>
+  </div>
+</div>
+<script>
+  var x = document.getElementById("login");
+  var y = document.getElementById("register");
+  var z = document.getElementById("btn");
+
+
+  function login(){
+    x.style.left = "50px";
+    y.style.left = "450px";
+    z.style.left = "0";
+  }
+
+  function register(){
+    x.style.left = "-400px";
+    y.style.left = "50px";
+    z.style.left = "110px";
+  }
+</script>
+</body>
+</html>

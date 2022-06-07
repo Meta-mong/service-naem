@@ -36,7 +36,7 @@ public interface UserService {
     public boolean signUp(UserDTO.SIGN_UP userDTO);
 
     //로그인
-    public UserDTO.SESSION_USER_DATA signIn(UserDTO.SIGN_IN dto, HttpSession session);
+    public int signIn(UserDTO.SIGN_IN dto, HttpSession session);
 
     //로그아웃
     public void signOut(HttpSession session);

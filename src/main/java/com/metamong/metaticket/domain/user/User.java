@@ -49,6 +49,11 @@ public class User extends BaseEntity {
     @Column(columnDefinition = "integer default 0")
     private int cancelCnt;
 
+    @Column(columnDefinition = "boolean default true")
+    private boolean valid;
+
+    private LocalDateTime valid_date;
+
     //회원 객체 생성
     public static User createUser(UserDTO.SESSION_USER_DATA userDTO, PasswordEncoder passwordEncoder){
         String passwd = passwordEncoder.encode(userDTO.getPasswd());

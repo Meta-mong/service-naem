@@ -133,13 +133,17 @@ class UserServiceTest {
                 .email("metamong2@naver.com")
                 .passwd("1234")
                 .build();
-        UserDTO.SESSION_USER_DATA result = service.signIn(dto, session);
-        if(result==null) {
+        int result = service.signIn(dto, session);
+        if(result==0) {
             System.out.println("로그인 실패");
-        }else{
+        }else if(result==1){
             System.out.println("로그인 성공");
             UserDTO.SESSION_USER_DATA sessionUser = (UserDTO.SESSION_USER_DATA) session.getAttribute("user");
             System.out.println("user in session : "+sessionUser.toString());
+        } else if (result==2) {
+            System.out.println("탈퇴하신 회원 정보를 복구하시겠습니까?");
+        } else{
+            System.out.println("이미 탈퇴한 계정입니다.");
         }
     }
 
