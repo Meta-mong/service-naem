@@ -1,5 +1,5 @@
 window.addEventListener("load", function(event){
-    var loginbtn = document.getElementById("loginbtn");
+    var signinbtn = document.getElementById("signinbtn");
 
     var email = document.getElementById("email");
     var emailmsg = document.getElementById("emailmsg");
@@ -27,7 +27,7 @@ window.addEventListener("load", function(event){
         }
     });
 
-    loginbtn.addEventListener("click", function(event) {
+    signinbtn.addEventListener("click", function(event) {
         var flag = true;
 
         if (email.value.trim().length < 1) {

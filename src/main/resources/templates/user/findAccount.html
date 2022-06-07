@@ -9,14 +9,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- css -->
-    <link rel="stylesheet" href="/css/user/signup.css">
+    <link rel="stylesheet" href="/css/user/findAccount.css">
 
-    <title>SignUp</title>
+    <title>SignIn</title>
 </head>
-<script src="/js/user/signup.js"></script>
+<!-- javascript-->
+<script src="/js/user/findAccount.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-
-
 <body>
 <div class="main">
     <div class="header">
@@ -69,7 +68,7 @@
         </div>
         <div class="header-bottom">
             <ul class="header-bottom-ul">
-                <li><span><a href="/">홈</a></span></li>
+                <li><span><a href="#">홈</a></span></li>
                 <li><span><a href="#">콘서트</a></span></li>
                 <li><span><a href="#">뮤지컬/연극</a></span></li>
                 <li><span><a href="#">클래식</a></span></li>
@@ -80,63 +79,48 @@
         </div>
     </div>
 
-    <form id="signup">
-        <div class="container" style="min-height: 100vh;">
-            <section>
-                <div class="inner">
 
-                    <div class="title">
-                        <h2>SignUp</h2>
-                    </div>
-
-                    <div class="userInfo">
-                        <span class="instruction">이메일</span>
-                        <input class="userId" id="email" name="email" type="text" placeholder="이메일을 입력해주세요">
-                        <input class="btn" id="emailck" type="button" value="중복확인">
-                    </div>
-                    <div id="emailmsg"></div>
-
-                    <div class="userInfo">
-                        <span class="instruction">비밀번호</span>
-                        <input class="userPw" id="passwd" name="passwd" type="password" placeholder="8~12자의 영문,숫자,특수문자로 이루어진 비밀번호를 입력해주세요">
-                    </div>
-                    <div id="passwdmsg"></div>
-
-                    <div class="userInfo">
-                        <span class="instruction">비밀번호 확인</span>
-                        <input class="userPwChk" id="passwdck" type="password" placeholder="비밀번호를 확인해주세요">
-                    </div>
-                    <div id="passwdckmsg"></div>
-
-                    <div class="userInfo">
-                        <span class="instruction">이름</span>
-                        <input class="userName" id="name" name="name" type="text" placeholder="이름을 입력해주세요">
-                    </div>
-                    <div id="namemsg"></div>
-
-                    <div class="userInfo">
-                        <span class="instruction">생년월일</span>
-                        <input class="userBirth" id="age" name="age" type="text" placeholder="6자로 이루어진 생년월일을 입력해주세요">
-                    </div>
-                    <div id="agemsg"></div>
-
-                    <div class="userInfo">
-                        <span class="instruction">휴대전화</span>
-                        <input class="userPhone" id="number" name="number" type="text" placeholder="휴대전화를 인증해주세요">
-                        <input class="btn" id="numberck" type="button" value="인증번호">
-                        <input class="userPhone" id="authnumber" type="hidden" placeholder="인증번호를 입력해주세요.">
-                        <input class="btn" id="smsck" type="hidden" value="인증">
-                    </div>
-                    <div id="numbermsg"></div>
-
-                    <div class="joinBt">
-                        <button type="button" id="signupbtn">회원가입</button>
-                    </div>
-
+    <div class="container" style="min-height: 90vh;">
+        <section>
+            <div class="inner">
+                <div class="title">
+                    <h3>이메일 / 비밀번호 찾기</h3>
                 </div>
-            </section>
-        </div>
-    </form>
+                <div class="wrap">
+                    <div class="form-wrap">
+                        <div class="button-wrap">
+                            <div id="btn"></div>
+                            <button type="button" class="togglebtn" onclick="email()">이메일 찾기</button>
+                            <button type="button" class="togglebtn" onclick="passwd()">비밀번호 찾기</button>
+                        </div>
+
+                        <form id="find_email" class="input-group">
+                            <input type="text" id="phone_number1" name="number" class="input-field"
+                                   placeholder="휴대전화번호 입력('-'제외)" required>
+                            <input class="custom_btn" id="send_auth" type="button" value="인증번호 전송">
+                            <div id="phone_number1_msg" class="form-text"></div>
+                            <input type="text" id="auth_number" name="auth_number" class="input-field" placeholder="인증번호 입력"
+                                   required>
+                            <input class="custom_btn" id="verify_auth" type="button" value="인증">
+                            <div id="auth_number1_msg" class="form-text"></div>
+                            <button type="button" id="email_btn" class="submit">이메일 찾기</button>
+                        </form>
+
+                        <form id="find_passwd" class="input-group">
+                            <input type="text" id="email" name="email" class="input-field" placeholder="이메일 입력"
+                                   style="width: 90%;" required>
+                            <div id="email_msg" class="form-text"></div>
+                            <input type="text" id="phone_number2" name="number" class="input-field"
+                                   placeholder="휴대전화번호 입력('-'제외)" required>
+                            <input class="custom_btn" id="send_passwd" type="button" value="전송">
+                            <button type="button" id="passwd_btn" class="submit">비밀번호 찾기</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
 
     <!-- footer -->
     <div class="footer">
@@ -160,4 +144,22 @@
     </div>
 </div>
 </body>
+<script>
+    var x = document.getElementById("find_email");
+    var y = document.getElementById("find_passwd");
+    var z = document.getElementById("btn");
+
+
+    function email() {
+        x.style.left = "50px";
+        y.style.left = "450px";
+        z.style.left = "0";
+    }
+
+    function passwd() {
+        x.style.left = "-400px";
+        y.style.left = "50px";
+        z.style.left = "175px";
+    }
+</script>
 </html>

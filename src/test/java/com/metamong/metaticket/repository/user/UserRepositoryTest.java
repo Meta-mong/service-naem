@@ -46,6 +46,7 @@ class UserRepositoryTest {
         System.out.println("<아이디로 회원 조회>");
         User user = userRepository.findById(1L).get();
         System.out.println(user.toString());
+        System.out.println("valid : "+ user.isValid());
         //userRepository.findById(5L).ifPresent(System.out::println);
 
         //패스워드 일치 테스트

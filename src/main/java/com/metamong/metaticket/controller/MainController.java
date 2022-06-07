@@ -20,16 +20,16 @@ public class MainController {
         return "index";
     }
 
-    //로그인
-    @GetMapping("/sign")
-    public String signForm(){
-        return "/user/sign";
-    }
-
     //회원가입
     @GetMapping("/signup")
     public String signUp(){
         return "/user/signup";
+    }
+
+    //로그인
+    @GetMapping("/signin")
+    public String SignIn(){
+        return "/user/signin";
     }
 
     //로그아웃
@@ -37,5 +37,11 @@ public class MainController {
     public String signOut(){
         userService.signOut(session);
         return "redirect:/";
+    }
+
+    //email&pw 찾기
+    @GetMapping("/findaccount")
+    public String findAccount(){
+        return "/user/findAccount";
     }
 }

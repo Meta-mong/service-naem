@@ -196,6 +196,7 @@ window.addEventListener("load", function(event){
                 }
             });
         }else{
+            alert("입력란을 모두 채워주세요.");
             return;
         }
     });

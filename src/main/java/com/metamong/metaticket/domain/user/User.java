@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -49,7 +50,7 @@ public class User extends BaseEntity {
     @Column(columnDefinition = "integer default 0")
     private int cancelCnt;
 
-    @Column(columnDefinition = "boolean default true")
+    @Column(columnDefinition = "boolean default true") //0:false, 1:true
     private boolean valid;
 
     private LocalDateTime valid_date;
@@ -63,6 +64,7 @@ public class User extends BaseEntity {
                 name(userDTO.getName()).
                 age(userDTO.getAge()).
                 number(userDTO.getNumber()).
+                valid(true).
                 build();
         return user;
     }
@@ -75,6 +77,7 @@ public class User extends BaseEntity {
                 name(userDTO.getName()).
                 age(userDTO.getAge()).
                 number(userDTO.getNumber()).
+                valid(true).
                 build();
         return user;
     }
