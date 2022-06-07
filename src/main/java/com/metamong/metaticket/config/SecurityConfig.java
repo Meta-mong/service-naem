@@ -34,7 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and(); //403에러
         http.csrf().disable();
 
-
         /*
         http.formLogin()
                 .loginPage("/sign/signin")

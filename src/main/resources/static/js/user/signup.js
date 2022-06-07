@@ -204,7 +204,6 @@ window.addEventListener("load", function(event){
 
     //함수 정의
     function emailcheck(){
-        console.log("함수 되나요?");
         if (email.value.trim().length < 1) {
             $("#emailmsg").innerHTML = 'email은 필수 입력입니다.<br/>';
             flag = false

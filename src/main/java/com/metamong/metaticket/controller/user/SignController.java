@@ -118,7 +118,6 @@ public class SignController {
     @PostMapping("/sendauth")
     public Map<String, Object> sendAuth(@RequestParam("phone_number") String number){
         UserDTO.FIND_EMAIL dto = UserDTO.FIND_EMAIL.builder().number(number).build();
-        System.out.println(dto.toString());
         Map<String, Object> map = new HashMap<>();
 
         //true:존재, false:존재 X
