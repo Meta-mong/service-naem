@@ -24,12 +24,18 @@ public class NoticeController {
 
     @Autowired
     NoticeService noticeService;
-    
+
+    @GetMapping("/")
+    public String admin(){
+     return "/admin/addnotice";
+    }
+
+
     // 공지사항 전체 리스트 불러오기
     @GetMapping("/list")
     public String noticeList(Model model) throws Exception {
         model.addAttribute("Allnoticelist",noticeService.allNoticeInfo());
-        return "noticelist";
+        return "admin_notice";
     }
 
     // 공지사항 등록
