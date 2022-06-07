@@ -38,8 +38,7 @@ class QuestionRepositoryTest {
                 .id(1L)
                 .title("제목")
                 .classify("분류")
-                .ques_content("내용")
-                .answer(true)
+                .answer("내용")
                 .build();
 
         // 객체를 DTO 클래스로 변환
@@ -47,8 +46,7 @@ class QuestionRepositoryTest {
                 .id(1L)
                 .title("제목")
                 .classify("분류")
-                .ques_content("s내용")
-                .answer(true)
+                .anwser("s내용")
                 .build();
 
     }
@@ -59,8 +57,7 @@ class QuestionRepositoryTest {
         Question question = Question.builder().
                 classify("테스트").
                 title("테스트").
-                ques_content("테스트").
-                answer(true).
+                answer("테스트").
                 build();
         Question temp = questionRepository.save(question);
         System.out.println(temp.toString());
@@ -76,7 +73,7 @@ class QuestionRepositoryTest {
 
         assertAll(
                 () -> assertEquals(updateNotice.getTitle(), "테스트2"),
-                () -> assertEquals(updateNotice.getQues_content(), "테스트3"),
+                () -> assertEquals(updateNotice.getQuesContent(), "테스트3"),
                 () -> assertEquals(updateNotice.getClassify(), "테스트1")
         );
     }
@@ -167,8 +164,8 @@ class QuestionRepositoryTest {
     @DisplayName("댓글 등록")
     public void replyContent() throws Exception {
         Long id = 2L;
-        String reply_content = "댓글222";
-        Question ques = questionService.replyContent(id, reply_content);
+        String answer = "댓글222";
+        Question ques = questionService.answer(id, answer);
         System.out.println("결과 : "+ques.toString());
     }
 

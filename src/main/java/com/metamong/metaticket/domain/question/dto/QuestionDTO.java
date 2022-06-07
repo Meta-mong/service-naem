@@ -19,17 +19,16 @@ public class QuestionDTO {
 
         private Long id;
 
-        private User user_id;
+        private User user;
 
         private String title;
-        private String ques_content;
+        private String quesContent;
         private String classify;
 
-        private boolean answer;
-        private String reply_content;
+        private String anwser;
 
-        private LocalDateTime ques_date;
-        private LocalDateTime ans_date;
+        private LocalDateTime quesDate;
+        private LocalDateTime ansDate;
     }
 
 

@@ -23,7 +23,7 @@ public class Question {
 
     @ManyToOne(targetEntity = User.class , fetch = FetchType.LAZY) // user 테이블의 user_id의  fk설정
     @JoinColumn(name = "user_id")
-    private User user_id;
+    private User user;
 
     @Column
     private String classify;
@@ -32,28 +32,24 @@ public class Question {
     private String title;
 
     @Column
-    private String ques_content;
+    private String quesContent;
 
     @Column
-    private boolean answer;
-
-    @Column
-    private String reply_content;
+    private String answer;
 
     @CreationTimestamp
     @Column
-    private LocalDateTime ques_date;
+    private LocalDateTime quesDate;
 
     @CreationTimestamp
     @Column
-    private LocalDateTime ans_date;
+    private LocalDateTime ansDate;
 
 
     public void update(QuestionDTO.Quest dto) {
         setTitle(dto.getTitle());
-        setQues_content(dto.getQues_content());
-        setAnswer(dto.isAnswer());
-        setReply_content(dto.getReply_content());
+        setQuesContent(dto.getQuesContent());
+        setAnswer(dto.getAnwser());
 
     }
 

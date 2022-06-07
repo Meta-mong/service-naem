@@ -1,6 +1,5 @@
 package com.metamong.metaticket.service.question;
 
-import com.metamong.metaticket.domain.admin.Admin;
 import com.metamong.metaticket.domain.question.Question;
 import com.metamong.metaticket.domain.question.dto.QuestionDTO;
 import com.metamong.metaticket.repository.admin.AdminRepository;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -26,12 +24,11 @@ public class QuestionServiceImpl implements QuestionService{
     public Question dtoToEntity (QuestionDTO.Quest dto){
         Question question = Question.builder()
                 .id(dto.getId())
-                .user_id(dto.getUser_id())
+                .user(dto.getUser())
                 .classify(dto.getClassify())
                 .title(dto.getTitle())
-                .ques_content(dto.getQues_content())
-                .answer(dto.isAnswer())
-                .reply_content(dto.getReply_content())
+                .quesContent(dto.getQuesContent())
+                .answer(dto.getAnwser())
                 .build();
 
         return question;
@@ -41,12 +38,11 @@ public class QuestionServiceImpl implements QuestionService{
     public QuestionDTO.Quest entityToDto (Question question){
         QuestionDTO.Quest dto =QuestionDTO.Quest.builder()
                 .id(question.getId())
-                .user_id(question.getUser_id())
+                .user(question.getUser())
                 .title(question.getTitle())
                 .classify(question.getClassify())
-                .ques_content(question.getQues_content())
-                .answer(question.isAnswer())
-                .reply_content(question.getReply_content())
+                .quesContent(question.getQuesContent())
+                .anwser(question.getAnswer())
                 .build();
         return dto;
     }
@@ -91,35 +87,26 @@ public class QuestionServiceImpl implements QuestionService{
         return updateQuestion;
     }
 
+
     //댓글 추가
     @Override
-    public Question replyContent(Long ques_id, String reply_content) throws Exception {
-        Question replyContent = questionRepository.findById(ques_id).orElse(null);
-        replyContent.setAnswer(true);
-        replyContent.setReply_content(reply_content);
-        questionRepository.save(replyContent);
+    public Question answer(Long ques_id, String answer) throws Exception {
+        Question question = questionRepository.findById(ques_id).orElse(null);
 
-        return replyContent;
+        question.setAnswer(answer);
+        Question quest = questionRepository.save(question);
+
+        return  quest;
     }
 
     //댓글 삭제
     public Question replyDelete(Long ques_id) throws Exception {
         Question replyDelete =questionRepository.findById(ques_id).orElse(null);
-        replyDelete.setAnswer(false);
-        replyDelete.setReply_content(null);
+        replyDelete.setAnswer(null);
 
         return replyDelete ;
     }
-    // 댓글 여부 (유/무)
-    @Override
-    public boolean answer(QuestionDTO.Quest dto) throws Exception {
-        try {
-            Question answer = dtoToEntity(dto);
-            questionRepository.save(answer);
-            return true;
-        } catch (Exception e) {
-            throw e;
-        }
 
-    }
+
+
 }

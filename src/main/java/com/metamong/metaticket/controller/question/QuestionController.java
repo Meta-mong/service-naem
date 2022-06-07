@@ -75,10 +75,10 @@ public class QuestionController {
 
     //댓글 추가
     @PostMapping("/replycontent")
-    public String replyContent (@RequestAttribute("id") Long ques_id,
-                                @RequestAttribute("reply") String reply_content)throws Exception{
-        System.out.println("ddd : "+reply_content);
-        questionService.replyContent(ques_id,reply_content);
+    public String answer (@RequestAttribute("id") Long ques_id,
+                                @RequestAttribute("reply") String answer)throws Exception{
+        System.out.println("ddd : "+answer);
+        questionService.answer(ques_id,answer);
         return "re";
     }
 

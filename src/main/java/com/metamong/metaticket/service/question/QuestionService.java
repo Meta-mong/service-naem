@@ -22,15 +22,14 @@ public interface QuestionService {
     //문의사항 수정 -> 유저 내용 수정
     public Question updateQuestion (QuestionDTO.Quest dto) throws Exception;
 
-    //문의사항 - 관리자 답변 추가
-    public Question replyContent ( Long ques_id, String reply_content) throws Exception;
+    //문의사항 - 관리자 답변 추가(댓글)
+    public Question answer ( Long ques_id, String Answer) throws Exception;
 
 
     //문의사항 - 관리자 답변 삭제
     public Question replyDelete(Long ques_id) throws Exception;
 
-    //문의사항 수정 -> 댓글 여부 (boolean)
-    public boolean answer (QuestionDTO.Quest dto) throws Exception;
+    //문의사항 수정 -> 댓글 여부 -> 댓글이 있으면 Y / 없으면 N (answer)
 
     public QuestionDTO.Quest entityToDto (Question question) throws Exception;
 
