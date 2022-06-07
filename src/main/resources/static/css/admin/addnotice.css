@@ -1,0 +1,87 @@
+/* button */
+.container .list {
+  display: block;
+  justify-content: left;
+  margin-top: 60px;
+  margin-left: 125px;
+  margin-bottom: -48px;
+}
+
+.container .list .btn {
+  font-size: 23px;
+  /* background-color: rgba(221, 184, 229, 0.964); */
+  margin-left: -6px;
+  background-color: black;
+  color: whitesmoke;
+  border: 0;
+  height: 60px;
+}
+
+.container .list .btn:last-child {
+  background-color: rgb(211, 133, 228);
+}
+
+.container .list .btn:hover {
+  background-color: rgb(215, 158, 228);
+  color: whitesmoke;
+}
+
+/*main*/
+.container .main .form-group{
+margin: 30px;
+}
+
+.container .main .form-group label{
+  float: left;
+  margin-right: 30px;
+  margin-top: 7px;
+}
+
+.container .main .form-group input{
+  width: 830px;
+}
+
+.container .main .btn-group {
+ width: 230px;
+float: right;
+margin: 10px;
+margin-right: 30px;
+background-color: rgb(215, 158, 228);
+}
+
+.container .main .btn-group .classify{
+  width: 180px;
+  background-color: rgba(221,184,229,0.964);
+}
+
+.container .main .form-group .writer{
+margin-top: 17px;
+margin-left: -3px;
+}
+
+.container .main .form-group .admin{
+  width: 170px;
+  height: 35px;
+  float: left;
+  margin-left: -11px;
+  border: 1px solid lightgrey;
+background-color: whitesmoke;
+margin-top: 14px;
+}
+
+.container .main .cont{
+  margin-top: 117px;
+
+}
+.container .main .form-group textarea{
+width: 830px;
+height: 600px;
+resize: none;
+}
+
+.container .main .cancle{
+  background-color: rgb(207, 61, 119);
+}
+.container .main .addbtn{
+  background-color: rgb(215, 158, 228);
+}
