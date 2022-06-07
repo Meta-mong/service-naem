@@ -25,6 +25,10 @@ public class QuestionController {
     @Autowired
     QuestionService questionService;
 
+    @GetMapping("/reply")
+    public String reply(){
+        return "reply";
+    }
     //문의사항 리스트 조회
     @GetMapping("/list")
     public String questionList(Model model) throws Exception{
@@ -60,12 +64,49 @@ public class QuestionController {
 
     //문의사항 수정
     @PostMapping("/update/{id}")
-    public void questionUpdate(@PathVariable Long id, @ModelAttribute QuestionDTO.Quest dto, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void questionUpdate(@PathVariable Long id,
+                               @ModelAttribute QuestionDTO.Quest dto,
+                               HttpServletRequest request, HttpServletResponse response) throws Exception {
         Question questionUpdate = questionService.updateQuestion(dto);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/question/questionlist");
         dispatcher.forward(request, response);
     }
 
+
+    //댓글 추가
+    @PostMapping("/replycontent")
+    public String replyContent (@RequestAttribute("id") Long ques_id,
+                                @RequestAttribute("reply") String reply_content)throws Exception{
+        System.out.println("ddd : "+reply_content);
+        questionService.replyContent(ques_id,reply_content);
+        return "re";
+    }
+
+    //댓글 삭제
+    @PostMapping("/replydelete/{gues_id}")
+    public ResponseEntity replyDelete(@PathVariable Long ques_id) throws Exception{
+        questionService.replyDelete(ques_id);
+        return  ResponseEntity.ok(ques_id);
+    }
+
+    //댓글 여부
+    @PostMapping(value = "/answer")
+    public String answer (@ModelAttribute QuestionDTO.Quest dto, Model model){
+
+        try {
+            boolean result = questionService.register(dto);
+            if(result == true){
+                List<QuestionDTO.Quest> replyanswer  = questionService.allQuestionList();
+                model.addAttribute("answer",replyanswer);
+                return "questionlist";
+            }
+            throw new Exception();
+        } catch (Exception e) {
+            model.addAttribute("err","등록실패");
+            return "replyupload"; // jsp
+
+        }
+    }
 
 
 }

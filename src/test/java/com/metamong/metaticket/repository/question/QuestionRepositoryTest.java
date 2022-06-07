@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,6 @@ class QuestionRepositoryTest {
                 .classify("분류")
                 .ques_content("내용")
                 .answer(true)
-                .reply_content("댓글")
                 .build();
 
         // 객체를 DTO 클래스로 변환
@@ -48,14 +49,13 @@ class QuestionRepositoryTest {
                 .classify("분류")
                 .ques_content("s내용")
                 .answer(true)
-                .reply_content("댓글")
                 .build();
 
     }
 
     @Test
     @DisplayName("문의사항 삽입 테스트1")
-    public void InsertTest(){
+    public void InsertTest() {
         Question question = Question.builder().
                 classify("테스트").
                 title("테스트").
@@ -68,27 +68,27 @@ class QuestionRepositoryTest {
 
     @Test
     @DisplayName("문의사항 수정 테스트")
-    public void updateTest() throws Exception{
+    public void updateTest() throws Exception {
 
         Question findQuestion = questionRepository.findById(1L).get();
         //findQuestion.update("테스트1","테스트2","테스트3");
         Question updateNotice = questionRepository.save(findQuestion);
 
         assertAll(
-                () -> assertEquals(updateNotice.getTitle(),"테스트2"),
+                () -> assertEquals(updateNotice.getTitle(), "테스트2"),
                 () -> assertEquals(updateNotice.getQues_content(), "테스트3"),
-                () -> assertEquals(updateNotice.getClassify(),"테스트1")
+                () -> assertEquals(updateNotice.getClassify(), "테스트1")
         );
     }
 
     @Test
     @DisplayName("문의사항 삭제 테스트")
-    public void deleteTest(){
+    public void deleteTest() {
         Optional<Question> question = questionRepository.findById(1L);
         Assert.assertTrue(question.isPresent());
 
 
-        question.ifPresent(selectNotice ->{
+        question.ifPresent(selectNotice -> {
             questionRepository.delete(selectNotice);
         });
 
@@ -101,13 +101,13 @@ class QuestionRepositoryTest {
 
     @Test
     @DisplayName("문의사항 조회 테스트")
-    public void selectTest(){
+    public void selectTest() {
         Long id = 1L;
         Optional<Question> result = questionRepository.findById(id);
 
-        if(result.isPresent()){
+        if (result.isPresent()) {
             Question question = result.get();
-            assertEquals(question.getId(),1L);
+            assertEquals(question.getId(), 1L);
 
             System.out.println(question.toString());
         }
@@ -127,10 +127,9 @@ class QuestionRepositoryTest {
     }
 
 
-
     @Test
     @DisplayName("수정")
-    void  updateQuestion() throws Exception {
+    void updateQuestion() throws Exception {
         Question updateQuestion = questionRepository.findById(dto.getId()).orElse(null);
         updateQuestion.update(dto);
 
@@ -138,7 +137,6 @@ class QuestionRepositoryTest {
 
     @Test
     @DisplayName("삭제")
-
     void questionDelete() throws Exception {
         questionRepository.deleteById(1L);
     }
@@ -146,11 +144,48 @@ class QuestionRepositoryTest {
 
     @Test
     @DisplayName("리스트 조회")
-    void list() throws Exception{
+    void list() throws Exception {
         List<QuestionDTO.Quest> list = questionService.allQuestionList();
-        for(QuestionDTO.Quest temp : list){
+        for (QuestionDTO.Quest temp : list) {
             System.out.println(temp);
         }
 
     }
+
+    @Test
+    @DisplayName("댓글 등록 여부")
+    void answer() throws Exception {
+
+        Question question = questionService.dtoToEntity(dto);
+        Question savedQuestion = questionRepository.save(question);
+
+        assertNotNull(savedQuestion);
+    }
+
+
+    @Test
+    @DisplayName("댓글 등록")
+    public void replyContent() throws Exception {
+        Long id = 2L;
+        String reply_content = "댓글222";
+        Question ques = questionService.replyContent(id, reply_content);
+        System.out.println("결과 : "+ques.toString());
+    }
+
+
+    @Test
+    @DisplayName("삭제")
+    void replyDelete() throws Exception {
+        questionRepository.deleteById(3L);
+    }
+
+
+
+
+
+
+
+
+
+
 }

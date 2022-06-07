@@ -22,7 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // /main은 로그인 여부와 상관없이 접근 가능
         // /user/mu~는 USER 권한이 있어야만 접근 가능
         http.authorizeRequests()
-                .antMatchers("/sign/**").permitAll();
+                .antMatchers("/").permitAll();
                 //.antMatchers("/sign/mypage").hasRole("USER");
 
         http.cors().and(); //403에러
