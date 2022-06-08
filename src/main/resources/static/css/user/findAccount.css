@@ -478,6 +478,12 @@ body,.main,.header-top-ul {
     background: rgb(218, 169, 228);
     cursor: pointer;
 }
+.form-text2 {
+    font-size: 20px;
+    font-weight: bolder;
+    text-align: center;
+    padding-right: 60px;
+}
 
 
 /* login */

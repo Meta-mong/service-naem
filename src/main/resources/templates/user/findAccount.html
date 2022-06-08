@@ -102,8 +102,10 @@
                             <input type="text" id="auth_number" name="auth_number" class="input-field" placeholder="인증번호 입력"
                                    required>
                             <input class="custom_btn" id="verify_auth" type="button" value="인증">
-                            <div id="auth_number1_msg" class="form-text"></div>
+                            <div id="auth_number_msg" class="form-text"></div>
                             <button type="button" id="email_btn" class="submit">이메일 찾기</button>
+                            <br /><br />
+                            <div id="member_email" class="form-text2"></div>
                         </form>
 
                         <form id="find_passwd" class="input-group">
@@ -111,8 +113,8 @@
                                    style="width: 90%;" required>
                             <div id="email_msg" class="form-text"></div>
                             <input type="text" id="phone_number2" name="number" class="input-field"
-                                   placeholder="휴대전화번호 입력('-'제외)" required>
-                            <input class="custom_btn" id="send_passwd" type="button" value="전송">
+                                   placeholder="휴대전화번호 입력('-'제외)" style="width: 90%;" required>
+                            <div id="phone_number2_msg" class="form-text"></div>
                             <button type="button" id="passwd_btn" class="submit">비밀번호 찾기</button>
                         </form>
                     </div>
@@ -160,6 +162,7 @@
         x.style.left = "-400px";
         y.style.left = "50px";
         z.style.left = "175px";
+        $("#member_email").html("");
     }
 </script>
 </html>
