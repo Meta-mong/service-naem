@@ -43,9 +43,9 @@ public class KakaoPay {
         params.add("quantity", "1"); // 상품 수량
         params.add("total_amount", "2100"); // 상품 총액
         params.add("tax_free_amount", "100"); // 상품 비과세 금액
-        params.add("approval_url", "http://localhost:8080/pay/kakao/success"); // 결제 성공 시 redirect url
-        params.add("cancel_url", "http://localhost:8080/pay/kakao/cancel"); // 결제 취소 시 redirect url
-        params.add("fail_url", "http://localhost:8080/pay/kakao/fail");  // 결제 성공 시 redirect url
+        params.add("approval_url", "http://localhost/pay/kakao/success"); // 결제 성공 시 redirect url
+        params.add("cancel_url", "http://localhost/pay/kakao/cancel"); // 결제 취소 시 redirect url
+        params.add("fail_url", "http://localhost/pay/kakao/fail");  // 결제 성공 시 redirect url
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
