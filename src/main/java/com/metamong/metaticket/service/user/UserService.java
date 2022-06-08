@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 //회원가입, 로그인/로그아웃 -> SpringSecurity 사용 방법도 익히기
 public interface UserService {
@@ -55,4 +56,13 @@ public interface UserService {
 
     //임시 비밀번호 발송
     public boolean sendSms(String userNumber, String generatedPasswd);
+
+    //회원 정보 조회
+    public User userInfo(Long id);
+
+    //전체 회원 조회
+    public List<UserDTO.SESSION_USER_DATA> allUserInfo();
+
+    //회원 탈퇴
+    public boolean unregister(HttpSession session);
 }

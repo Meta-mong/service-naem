@@ -23,11 +23,13 @@ import java.net.URL;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import java.util.Random;
 
 @Service
-@Transactional(readOnly = true)
+//@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
@@ -224,12 +226,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
+    //@Transactional
     public void modifyPasswd(Long id, String passwd){
         User user = userRepository.findById(id).get();
         String encryptedPasswd = passwordEncoder.encode(passwd);
         user.setPasswd(encryptedPasswd);
-        User modifiedUser = userRepository.save(user);
+        User modifiedser = userRepository.save(user);
     }
 
     @Override
@@ -279,7 +281,7 @@ public class UserServiceImpl implements UserService {
                 //System.out.println(inputLog.toString());
                 return 1;
             }else if(user.getValid_date().isAfter(LocalDateTime.now())) { //접속일이 회원 정보 유지 유효기간 내 일시
-                return 2;
+                return 2; //js 추가해야 함
             }else {
                 return -1; //회원 정보 복구할 수 있는 기간을 지남
             }
@@ -346,7 +348,7 @@ public class UserServiceImpl implements UserService {
         JSONArray toArr = new JSONArray();
 
         toJson.put("to", to);
-        toJson.put("content", "임시 비밀번호는 ("+generatedPasswd+") 입니다./n 로그인 후 변경해주세요.");
+        toJson.put("content", "임시 비밀번호는 ("+generatedPasswd+") 입니다. 로그인 후 변경해주세요.");
         toArr.add(toJson);
 
         bodyJson.put("type", "SMS");
@@ -407,6 +409,39 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException(e);
         }
         return result;
+    }
+
+    @Override
+    public User userInfo(Long id) {
+        return userRepository.findById(id).get();
+    }
+
+    @Override
+    public List<UserDTO.SESSION_USER_DATA> allUserInfo() {
+        List<User> users = userRepository.findAll();
+        List<UserDTO.SESSION_USER_DATA> usersDTO = new ArrayList<>();
+        for(User user:users){
+            UserDTO.SESSION_USER_DATA dto = User.createUserDTO(user);
+            usersDTO.add(dto);
+        }
+        return usersDTO;
+    }
+
+    @Override
+    public boolean unregister(HttpSession session) {
+        try {
+            UserDTO.SESSION_USER_DATA dto = (UserDTO.SESSION_USER_DATA) session.getAttribute("user");
+            //추후 연쇄 삭제될 사항 있는지 확인
+            User user = userRepository.findById(dto.getId()).get();
+            user.setValid(false);
+            //탈퇴 시 계정 복구 기간을 90일로 지정
+            user.setValid_date(LocalDateTime.now().plusDays(90));
+            userRepository.save(user);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }
