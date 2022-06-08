@@ -114,6 +114,7 @@ public class SignController {
         return map;
     }
 
+    //휴대전화번호로 인증번호 전송
     @ResponseBody
     @PostMapping("/sendauth")
     public Map<String, Object> sendAuth(@RequestParam("phone_number") String number){
@@ -121,7 +122,7 @@ public class SignController {
         Map<String, Object> map = new HashMap<>();
 
         //true:존재, false:존재 X
-        boolean result = userService.inquireEmail(dto);
+        boolean result = userService.existEmail(dto);
         if(result==false){
             map.put("result", result);
             return map;
@@ -141,8 +142,42 @@ public class SignController {
                 return map;
             }
         }
-
-
     }
 
+    @PostMapping("/findemail")
+    @ResponseBody
+    public Map<String, Object> findEmail(@RequestParam("phone_number") String number){
+        Map<String, Object> map = new HashMap<>();
+        String email = userService.inquireEmail(number);
+        map.put("email", email);
+        return map;
+    }
+
+    @PostMapping("/findpasswd")
+    @ResponseBody
+    public Map<String, Object> findPasswd(@RequestParam("email") String email, @RequestParam("phone_number") String number){
+        //실패 : -1, 성공 : 1
+        Map<String, Object> map = new HashMap<>();
+        int result = userService.accountCheck(email, number);
+        if(result!=1){
+            map.put("result", -1);
+            map.put("msg", "계정 정보가 일치하지 않습니다.");
+        }else{
+            String generatedPasswd = userService.passwdGenerator(email);
+            if(generatedPasswd==null){
+                map.put("result", -1);
+                map.put("msg", "처리가 실패되었습니다. 다시 시도해주세요.");
+            }else{
+                boolean result2 = userService.sendSms(number.trim(), generatedPasswd);
+                if(result2==true){
+                    map.put("result", 1);
+                    map.put("msg", "임시 비밀번호가 발송되었습니다. 문자를 확인해주세요");
+                }else {
+                    map.put("result", -1);
+                    map.put("msg", "임시 비밀번호 발송이 실패되었습니다. 다시 시도해주세요.");
+                }
+            }
+        }
+        return map;
+    }
 }

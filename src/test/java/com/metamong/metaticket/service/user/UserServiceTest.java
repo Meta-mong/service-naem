@@ -83,7 +83,7 @@ class UserServiceTest {
                 .name("person1")
                 .number("01012345671").build();
         try{
-            System.out.println("이메일 : "+service.inquireEmail(dto));
+            System.out.println("이메일 : "+service.existEmail(dto));
         }catch (Exception e){
             System.out.println(e.getMessage());
         }

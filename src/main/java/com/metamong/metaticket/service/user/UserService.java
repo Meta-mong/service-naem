@@ -26,11 +26,17 @@ public interface UserService {
     //해시된 비밀번호 일치 체크
     public boolean passwdCheck(String passwd, User user);
 
-    //회원의 이메일 조회하기 -> 이름과 번호인증 기반
-    public boolean inquireEmail(UserDTO.FIND_EMAIL dto);
+    //회원의 정보 유무 확인 -> 번호 인증 기반
+    public boolean existEmail(UserDTO.FIND_EMAIL dto);
+
+    //이메일 조회 by 전화번호
+    public String inquireEmail(String number);
 
     //비밀번호 변경
     public boolean modifyPasswd(HttpSession sesson, String passwd);
+
+    //비밀번호 변경(다형성)
+    public void modifyPasswd(Long id, String passwd);
 
     //회원가입
     public boolean signUp(UserDTO.SIGN_UP userDTO);
@@ -41,6 +47,12 @@ public interface UserService {
     //로그아웃
     public void signOut(HttpSession session);
 
+    //계정 확인
+    public int accountCheck(String email, String number);
 
+    //임시 비밀번호 생성 및 변경
+    public String passwdGenerator(String email);
 
+    //임시 비밀번호 발송
+    public boolean sendSms(String userNumber, String generatedPasswd);
 }

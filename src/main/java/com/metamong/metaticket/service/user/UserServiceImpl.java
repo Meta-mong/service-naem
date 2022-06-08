@@ -24,6 +24,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.Base64;
+import java.util.Random;
 
 @Service
 @Transactional(readOnly = true)
@@ -188,13 +189,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean inquireEmail(UserDTO.FIND_EMAIL dto){
+    public boolean existEmail(UserDTO.FIND_EMAIL dto){
         //User user = userRepository.findByNameAndNumber(dto.getName(), dto.getNumber());
         User user = userRepository.findByNumber(dto.getNumber().trim());
         if(user == null) {
             return false;
         }else{
             return true;
+        }
+    }
+
+    @Override
+    public String inquireEmail(String number) {
+        User user = userRepository.findByNumber(number.trim());
+        try{
+            return user.getEmail();
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -209,6 +221,15 @@ public class UserServiceImpl implements UserService {
         User modifiedUser = userRepository.save(user);
         if(userDTO.getId()==modifiedUser.getId())return true;
         return false;
+    }
+
+    @Override
+    @Transactional
+    public void modifyPasswd(Long id, String passwd){
+        User user = userRepository.findById(id).get();
+        String encryptedPasswd = passwordEncoder.encode(passwd);
+        user.setPasswd(encryptedPasswd);
+        User modifiedUser = userRepository.save(user);
     }
 
     @Override
@@ -247,7 +268,7 @@ public class UserServiceImpl implements UserService {
         boolean passwdCheck = passwdCheck(dto.getPasswd(), user);
         System.out.println("valid 확인 : "+ user.isValid());
         if(passwdCheck==true) {
-            if(user.isValid()==false){ //추후 수정 -> user
+            if(user.isValid()==true){
                 userDTO = User.createUserDTO(user);
                 session.setAttribute("user", userDTO);
                 Log log = Log.builder()
@@ -272,6 +293,120 @@ public class UserServiceImpl implements UserService {
         session.invalidate();
     }
 
+    @Override
+    public int accountCheck(String email, String number){
+        // -1 : 이메일 없음, -2 : 이메일과 전화번호가 맞지 않음, 1 : 이메일과 전화번호가 일치
+        User user = userRepository.findByEmail(email.trim());
+        if(user==null){
+            return -1;
+        }else{
+            if(!user.getNumber().equals(number.trim())){
+                return -2;
+            }else{
+                return 1;
+            }
+        }
+    }
 
+    @Override
+    public String passwdGenerator(String email){
+        try {
+            User user = userRepository.findByEmail(email.trim());
+            int leftLimit = 97; // letter 'a'
+            int rightLimit = 122; // letter 'z'
+            int targetStringLength = 10;
+            Random random = new Random();
+            String generatedPasswd = random.ints(leftLimit, rightLimit + 1)
+                    .limit(targetStringLength) //생성할 글자 수
+                    .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append) //결과 처리
+                    .toString();
+            System.out.println(generatedPasswd);
+            modifyPasswd(user.getId(), generatedPasswd);
+            return generatedPasswd;
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public boolean sendSms(String userNumber, String generatedPasswd){
+        boolean result = false; //default = 실패
+        String time = String.valueOf(System.currentTimeMillis());
+        String accessKey = this.accessKey;
+
+        String serviceId = this.serviceId;
+        String from = this.from; //등록한 번호만 사용 가능
+        String to = userNumber;
+        String subject = "[meta_ticket 인증]"; //기본 메시지 제목
+        String apiUrl = "https://sens.apigw.ntruss.com/sms/v2/services/"+serviceId+"/messages";
+
+        JSONObject bodyJson = new JSONObject();
+        JSONObject toJson = new JSONObject();
+        JSONArray toArr = new JSONArray();
+
+        toJson.put("to", to);
+        toJson.put("content", "임시 비밀번호는 ("+generatedPasswd+") 입니다./n 로그인 후 변경해주세요.");
+        toArr.add(toJson);
+
+        bodyJson.put("type", "SMS");
+        bodyJson.put("contentType", "COMM");
+        bodyJson.put("countryCode", "82");
+        bodyJson.put("from", from);
+        bodyJson.put("subject", subject);
+        bodyJson.put("content", "인증번호 전송"); //to가 우선순위가 높음
+        bodyJson.put("messages", toArr);
+
+        String body = bodyJson.toJSONString();
+
+        try {
+            URL url = new URL(apiUrl);
+            HttpURLConnection conn =  (HttpURLConnection)url.openConnection();
+            conn.setUseCaches(false);
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("content-type", "application/json; charset=utf-8");
+            conn.setRequestProperty("x-ncp-apigw-timestamp", time);
+            conn.setRequestProperty("x-ncp-iam-access-key", accessKey);
+            conn.setRequestProperty("x-ncp-apigw-signature-v2", getSignature(time));
+
+            DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
+
+            dos.write(body.getBytes());
+            dos.flush();
+            dos.close();
+
+            int responseCode = conn.getResponseCode();
+            System.out.println("responseCode : " + responseCode);
+            BufferedReader br;
+            if(responseCode==202){
+                br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                result = true; //성공
+            } else{
+                br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+                result = false; //실패
+            }
+
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+            while((inputLine = br.readLine()) != null){
+                response.append(inputLine);
+            }
+            br.close();
+
+            System.out.println(response.toString());
+
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException ie){
+
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidKeyException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
 
 }
