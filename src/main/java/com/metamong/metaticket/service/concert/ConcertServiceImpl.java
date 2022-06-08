@@ -2,7 +2,7 @@ package com.metamong.metaticket.service.concert;
 
 import com.metamong.metaticket.domain.concert.Concert;
 import com.metamong.metaticket.domain.concert.Genre;
-import com.metamong.metaticket.dto.concert.ConcertDto;
+import com.metamong.metaticket.domain.concert.dto.ConcertDto;
 import com.metamong.metaticket.repository.concert.ConcertRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

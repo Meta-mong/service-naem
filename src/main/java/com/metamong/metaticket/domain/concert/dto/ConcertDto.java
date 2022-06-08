@@ -1,4 +1,4 @@
-package com.metamong.metaticket.dto.concert;
+package com.metamong.metaticket.domain.concert.dto;
 
 import com.metamong.metaticket.domain.concert.Concert;
 import com.metamong.metaticket.domain.concert.Genre;

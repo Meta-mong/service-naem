@@ -2,10 +2,9 @@ package com.metamong.metaticket.controller.concert;
 
 import com.metamong.metaticket.domain.concert.Concert;
 import com.metamong.metaticket.domain.concert.Genre;
-import com.metamong.metaticket.dto.concert.ConcertDto;
+import com.metamong.metaticket.domain.concert.dto.ConcertDto;
 import com.metamong.metaticket.service.concert.ConcertService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,7 @@
 package com.metamong.metaticket.domain.concert;
 
 import com.metamong.metaticket.domain.BaseEntity;
-import com.metamong.metaticket.dto.concert.ConcertDto;
+import com.metamong.metaticket.domain.concert.dto.ConcertDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
