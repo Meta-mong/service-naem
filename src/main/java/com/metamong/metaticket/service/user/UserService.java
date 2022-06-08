@@ -27,7 +27,7 @@ public interface UserService {
     public boolean passwdCheck(String passwd, User user);
 
     //회원의 이메일 조회하기 -> 이름과 번호인증 기반
-    public String inquireEmail(UserDTO.FIND_EMAIL dto) throws Exception;
+    public boolean inquireEmail(UserDTO.FIND_EMAIL dto);
 
     //비밀번호 변경
     public boolean modifyPasswd(HttpSession sesson, String passwd);
@@ -40,5 +40,7 @@ public interface UserService {
 
     //로그아웃
     public void signOut(HttpSession session);
+
+
 
 }

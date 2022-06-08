@@ -188,10 +188,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String inquireEmail(UserDTO.FIND_EMAIL dto) throws Exception{
-        User user = userRepository.findByNameAndNumber(dto.getName(), dto.getNumber());
-        if(user == null) throw new Exception("회원 정보가 없습니다.");
-        return user.getEmail();
+    public boolean inquireEmail(UserDTO.FIND_EMAIL dto){
+        //User user = userRepository.findByNameAndNumber(dto.getName(), dto.getNumber());
+        User user = userRepository.findByNumber(dto.getNumber().trim());
+        if(user == null) {
+            return false;
+        }else{
+            return true;
+        }
     }
 
     @Override
@@ -219,7 +223,7 @@ public class UserServiceImpl implements UserService {
         if(phoneNumberCheck(userDTO.getNumber())==true) return false;
 
         User inputUser = userRepository.save(User.createUser(userDTO ,passwordEncoder));
-        System.out.println(inputUser.toString());
+        //System.out.println(inputUser.toString());
 
         return true;
     }
@@ -245,14 +249,13 @@ public class UserServiceImpl implements UserService {
         if(passwdCheck==true) {
             if(user.isValid()==false){ //추후 수정 -> user
                 userDTO = User.createUserDTO(user);
-                System.out.println("패스워드 일치");
                 session.setAttribute("user", userDTO);
                 Log log = Log.builder()
                         .visitDate(LocalDateTime.now())
                         .user(user)
                         .build();
                 Log inputLog = logRepository.save(log);
-                System.out.println(inputLog.toString());
+                //System.out.println(inputLog.toString());
                 return 1;
             }else if(user.getValid_date().isAfter(LocalDateTime.now())) { //접속일이 회원 정보 유지 유효기간 내 일시
                 return 2;
@@ -260,7 +263,6 @@ public class UserServiceImpl implements UserService {
                 return -1; //회원 정보 복구할 수 있는 기간을 지남
             }
         }else{
-            System.out.println("패스워드 불일치");
             return 0;
         }
     }
@@ -269,5 +271,7 @@ public class UserServiceImpl implements UserService {
     public void signOut(HttpSession session) {
         session.invalidate();
     }
+
+
 
 }

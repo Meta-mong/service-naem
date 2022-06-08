@@ -51,6 +51,9 @@ public class AdminController {
         return "redirect:/admin/adminloginform";
     }
 
+    //전체 사용자 조회
+    //@GetMapping("/allusers")
+    //public String
 
 
 }

@@ -31,7 +31,6 @@ public class SignController {
     @PostMapping("/emailcheck")
     @ResponseBody
     public String emailCheck(@RequestParam("email") String email){
-        System.out.println("email :" +email);
         boolean result = userService.emailCheck(email);
         //true : 중복 , false : 중복X
 
@@ -73,8 +72,7 @@ public class SignController {
     @PostMapping("/signup")
     @ResponseBody
     public Map<String, Object> signUp(@Valid UserDTO.SIGN_UP userDTO, BindingResult bindingResult, Model model){
-        System.out.println(userDTO.toString());
-        System.out.println("회원가입 확인");
+        //System.out.println(userDTO.toString());
         Map<String, Object> map = new HashMap<>();
         if(bindingResult.hasErrors()){
             map.put("result", -1);
@@ -98,7 +96,6 @@ public class SignController {
     @PostMapping("/signin")
     @ResponseBody
     public Map<String, Object> signIn(@ModelAttribute UserDTO.SIGN_IN dto){
-        System.out.println(dto.toString());
         Map<String, Object> map = new HashMap<>();
         String message = null;
         int result = userService.signIn(dto, session);
@@ -117,6 +114,35 @@ public class SignController {
         return map;
     }
 
+    @ResponseBody
+    @PostMapping("/sendauth")
+    public Map<String, Object> sendAuth(@RequestParam("phone_number") String number){
+        UserDTO.FIND_EMAIL dto = UserDTO.FIND_EMAIL.builder().number(number).build();
+        Map<String, Object> map = new HashMap<>();
 
+        //true:존재, false:존재 X
+        boolean result = userService.inquireEmail(dto);
+        if(result==false){
+            map.put("result", result);
+            return map;
+        }else{
+            //전송할 인증번호
+            int random = 0;
+            while(random==0){
+                random = (int)(Math.random()*10000); //4자리 인증키
+            }
+            result = userService.sendSms(dto.getNumber().trim(), random);
+            if(result==true) {
+                map.put("result", result);
+                map.put("random", random);
+                return map;
+            }else{
+                map.put("result", result);
+                return map;
+            }
+        }
+
+
+    }
 
 }

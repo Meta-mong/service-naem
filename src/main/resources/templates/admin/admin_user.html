@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/admin/admin.css">
+  <link rel="stylesheet" href="/css/admin/admin_user.css">
+
+  <!-- js -->
+  <script defer src="/js/admin/admin.js"></script>
+
+  <title>admin</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="list">
+      <button type="button" class="btn" onclick="move_ticket()">티켓관리</button>
+      <button type="button" class="btn" onclick="move_user()">회원관리</button>
+      <button type="button" class="btn" onclick="move_notice()">게시판관리</button>
+    </div>
+    <section>
+      <div class="main">
+        <div class="search">
+          <input type="text" placeholder="">
+          <button type="button" class="material-icons">search</button>
+        </div>
+        <table class="user_list">
+          <tr>
+            <th>번호</th>
+            <th>회원아이디</th>
+            <th>회원이름</th>
+            <th>이메일</th>
+            <th>블랙리스트여부</th>
+          </tr>
+          <tr onclick="move_userDetail()">
+            <td>1</td>
+            <td>metamong1</td>
+            <td>메타몽1</td>
+            <td>metamong1@naver.com</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>metamong2</td>
+            <td>메타몽2</td>
+            <td>metamong2@naver.com</td>
+            <td>💣</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+  </div>
+</body>
+
+</html>

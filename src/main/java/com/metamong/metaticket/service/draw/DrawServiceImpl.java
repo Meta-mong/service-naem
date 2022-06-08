@@ -28,7 +28,7 @@ public class DrawServiceImpl implements DrawService {
     @Override
     @Transactional
     public Draw applyDraw(Long userId, Long concertId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new NoSuchElementException());
+       User user = userRepository.findById(userId).orElseThrow(() -> new NoSuchElementException());
         Concert concert = concertRepository.findById(concertId).orElseThrow(() -> new NoSuchElementException());
         Draw draw = Draw.builder().user(user).concert(concert).build();
         return drawRepository.save(draw);
