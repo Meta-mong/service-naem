@@ -1,7 +1,6 @@
 package com.metamong.metaticket.domain.concert;
 
 import com.metamong.metaticket.domain.BaseEntity;
-import com.metamong.metaticket.dto.concert.ConcertDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,7 +27,9 @@ public class Concert extends BaseEntity { //BaseEntity -> 공통으로 사용하
 
     private String description;
 
-    private String phamplet;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "file_id")
+    private Phamplet_File phamplet;
 
     private LocalDateTime concertDate;
 
@@ -51,20 +52,5 @@ public class Concert extends BaseEntity { //BaseEntity -> 공통으로 사용하
     private int price;
 
     private int visitCnt;
-
-    public void update(ConcertDto dto){
-        title = dto.getTitle();
-        description = dto.getDescription();
-        phamplet = dto.getPhamplet();
-        concertDate = dto.getConcertDate();
-        genre = dto.getGenre();
-        ratings = dto.getRatings();
-        address = dto.getAddress();
-        host = dto.getHost();
-        seatNum = dto.getSeatNum();
-        drawStartDate = dto.getDrawStartDate();
-        drawEndDate = dto.getDrawEndDate();
-        price = dto.getPrice();
-    }
 
 }

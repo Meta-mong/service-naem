@@ -1,7 +1,8 @@
-package com.metamong.metaticket.dto.concert;
+package com.metamong.metaticket.domain.concert.dto;
 
 import com.metamong.metaticket.domain.concert.Concert;
 import com.metamong.metaticket.domain.concert.Genre;
+import com.metamong.metaticket.domain.concert.Phamplet_File;
 import com.metamong.metaticket.domain.concert.Ratings;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +23,7 @@ public class ConcertDto {
 
     private String description;
 
-    private String phamplet;
+    private Long phamplet;
 
     private LocalDateTime concertDate;
 
@@ -50,7 +51,7 @@ public class ConcertDto {
                 .id(concert.getId())
                 .title(concert.getTitle())
                 .description(concert.getDescription())
-                .phamplet(concert.getPhamplet())
+                .phamplet(concert.getPhamplet().getId())
                 .concertDate(concert.getConcertDate())
                 .genre(concert.getGenre())
                 .ratings(concert.getRatings())
@@ -66,12 +67,12 @@ public class ConcertDto {
         return concertDto;
     }
 
-    public static Concert createConcert(ConcertDto concertDto){
+    public static Concert createConcert(ConcertDto concertDto, Phamplet_File files){
         Concert concert = Concert.builder()
                 .id(concertDto.getId())
                 .title(concertDto.getTitle())
                 .description(concertDto.getDescription())
-                .phamplet(concertDto.getPhamplet())
+                .phamplet(files)
                 .concertDate(concertDto.getConcertDate())
                 .genre(concertDto.getGenre())
                 .ratings(concertDto.getRatings())

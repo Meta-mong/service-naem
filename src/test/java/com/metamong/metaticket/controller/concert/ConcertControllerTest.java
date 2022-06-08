@@ -1,14 +1,9 @@
 package com.metamong.metaticket.controller.concert;
 
-import com.metamong.metaticket.domain.concert.Concert;
-import com.metamong.metaticket.domain.concert.Genre;
-import com.metamong.metaticket.dto.concert.ConcertDto;
 import com.metamong.metaticket.repository.concert.ConcertRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
 
 @SpringBootTest
 public class ConcertControllerTest {
