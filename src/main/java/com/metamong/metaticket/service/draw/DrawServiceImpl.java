@@ -2,14 +2,12 @@ package com.metamong.metaticket.service.draw;
 
 import com.metamong.metaticket.domain.concert.Concert;
 import com.metamong.metaticket.domain.draw.Draw;
+import com.metamong.metaticket.domain.draw.DrawState;
 import com.metamong.metaticket.domain.user.User;
 import com.metamong.metaticket.repository.concert.ConcertRepository;
 import com.metamong.metaticket.repository.draw.DrawRepository;
 import com.metamong.metaticket.repository.user.UserRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,9 +46,14 @@ public class DrawServiceImpl implements DrawService {
 
     @Override
     @Transactional
-    public void cancelDraw(Long userId, Long concertId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new NoSuchElementException());
-        Concert concert = concertRepository.findById(concertId).orElseThrow(() -> new NoSuchElementException());
-        drawRepository.findByUserAndAndConcert(user, concert);
+    public void cancelDraw(Long drawId) {
+        Draw findDraw = drawRepository.findById(drawId).orElseThrow(() -> new NoSuchElementException());
+
+        if (findDraw.getState() == DrawState.WIN) {
+            User findUser = userRepository.findById(findDraw.getUser().getId()).orElseThrow(() -> new NoSuchElementException());
+            findUser.setCancelCnt(findUser.getCancelCnt() + 1);
+        }
+
+        findDraw.setState(DrawState.CANCEL);
     }
 }
