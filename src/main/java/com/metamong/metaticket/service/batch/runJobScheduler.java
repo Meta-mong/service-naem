@@ -66,10 +66,10 @@ public class runJobScheduler {
     }
 
     public void setEndDateConcerts() {
-        String findEndDateConcertQuery = "select new com.metamong.metaticket.service.batch.draw.EndDateConcertDTO(c.id, c.seat_num, count(d.id)) " +
+        String findEndDateConcertQuery = "select new com.metamong.metaticket.service.batch.draw.EndDateConcertDTO(c.id, c.seatNum, count(d.id)) " +
                         "from Draw d " +
                         "join d.concert c " +
-                        "group by c.id, c.seat_num, c.drawEndDate " +
+                        "group by c.id, c.seatNum, c.drawEndDate " +
                         "having c.drawEndDate between :startDate and :endDate";
         this.endDateConcerts = em.createQuery(findEndDateConcertQuery, EndDateConcertDTO.class)
                 .setParameter("startDate", LocalDateTime.parse(LocalDate.now() + "T00:00:00"))
