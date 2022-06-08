@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller
+@Controller //추후 restcontroller로 수정
 @RequestMapping("/sign")
 public class SignController {
     @Autowired
@@ -144,6 +144,7 @@ public class SignController {
         }
     }
 
+    //이메일 찾기
     @PostMapping("/findemail")
     @ResponseBody
     public Map<String, Object> findEmail(@RequestParam("phone_number") String number){
@@ -153,6 +154,7 @@ public class SignController {
         return map;
     }
 
+    //패스워드 찾기(임시 비밀번호 발급)
     @PostMapping("/findpasswd")
     @ResponseBody
     public Map<String, Object> findPasswd(@RequestParam("email") String email, @RequestParam("phone_number") String number){

@@ -60,25 +60,40 @@ window.addEventListener("load", function(event){
             $("#auth_number_msg").html("인증번호를 입력해주세요.<br/>");
             return;
         }else{
-            //추후 back에서 비교하도록 수정
             if($("#auth_number").val()==correct_number){
-                $.ajax({
-                    type : "POST",
-                    url : "/sign/findemail",
-                    data : {"phone_number": $("#phone_number1").val()},
-                    dataType: "json",
-                    success: function (data){
-                        var temp = JSON.stringify(data);
-                        var map = JSON.parse(temp);
-                        $("#member_email").html("회원가입시 사용한 이메일은<br/>"+map.email+" 입니다.");
-                    },error : function (data){
-                        alert("다시 시도해주세요.");
-                    }
-                });
+                auth_number_flag==true;
+                $("#auth_number_msg").html("인증되었습니다.<br/>");
             }else{
+                auth_number_flag==false;
                 $("#auth_number_msg").html("인증번호가 일치하지 않습니다.<br/>");
             }
         }
+    });
+
+    $("#email_btn").on("click", function (){
+       if(auth_number_flag==false){
+           $("#auth_number_msg").html("인증번호를 확인해주세요.<br/>");
+           return;
+       }else{
+           //추후 back에서 비교하도록 수정
+           if($("#auth_number").val()==correct_number){
+               $.ajax({
+                   type : "POST",
+                   url : "/sign/findemail",
+                   data : {"phone_number": $("#phone_number1").val()},
+                   dataType: "json",
+                   success: function (data){
+                       var temp = JSON.stringify(data);
+                       var map = JSON.parse(temp);
+                       $("#member_email").html("회원가입시 사용한 이메일은<br/>"+map.email+" 입니다.");
+                   },error : function (data){
+                       alert("다시 시도해주세요.");
+                   }
+               });
+           }else{
+               $("#auth_number_msg").html("인증번호가 일치하지 않습니다.<br/>");
+           }
+       }
     });
 
     //비밀번호 찾기
