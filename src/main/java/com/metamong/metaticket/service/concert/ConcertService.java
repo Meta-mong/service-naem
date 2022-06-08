@@ -1,7 +1,9 @@
 package com.metamong.metaticket.service.concert;
 
 import com.metamong.metaticket.domain.concert.Concert;
-import com.metamong.metaticket.dto.concert.ConcertDto;
+import com.metamong.metaticket.domain.concert.Genre;
+import com.metamong.metaticket.domain.concert.Phamplet_File;
+import com.metamong.metaticket.domain.concert.dto.ConcertDto;
 
 import java.util.List;
 
@@ -14,11 +16,17 @@ public interface ConcertService {
     ConcertDto concertInfo(Long id);
 
     // 공연 수정
-    void updateConcert(ConcertDto concertDto,Long id);
+    void updateConcert(ConcertDto concertDto, Phamplet_File files);
 
     // 공연 삭제
     void deleteConcert(Long id);
 
     // 공연 전체 조회
-    List<Concert> concertAllInfo();
+    List<ConcertDto> concertAllInfo();
+
+    // 장르별 공연 조회
+    List<ConcertDto> concertGenreInfo(Genre genre);
+
+
+
 }

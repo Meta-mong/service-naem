@@ -1,7 +1,8 @@
-package com.metamong.metaticket.dto.concert;
+package com.metamong.metaticket.domain.concert.dto;
 
 import com.metamong.metaticket.domain.concert.Concert;
 import com.metamong.metaticket.domain.concert.Genre;
+import com.metamong.metaticket.domain.concert.Phamplet_File;
 import com.metamong.metaticket.domain.concert.Ratings;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +23,7 @@ public class ConcertDto {
 
     private String description;
 
-    private String phamplet;
+    private Long phamplet;
 
     private LocalDateTime concertDate;
 
@@ -34,7 +35,7 @@ public class ConcertDto {
 
     private String host;
 
-    private int seat_num;
+    private int seatNum;
 
     private LocalDateTime drawStartDate;
 
@@ -42,7 +43,7 @@ public class ConcertDto {
 
     private int price;
 
-    private int visit_cnt;
+    private int visitCnt;
 
     // ConcertDto 생성
     public static ConcertDto createDto(Concert concert){
@@ -50,20 +51,41 @@ public class ConcertDto {
                 .id(concert.getId())
                 .title(concert.getTitle())
                 .description(concert.getDescription())
-                .phamplet(concert.getPhamplet())
+                .phamplet(concert.getPhamplet().getId())
                 .concertDate(concert.getConcertDate())
                 .genre(concert.getGenre())
                 .ratings(concert.getRatings())
                 .address(concert.getAddress())
                 .host(concert.getHost())
-                .seat_num(concert.getSeat_num())
+                .seatNum(concert.getSeatNum())
                 .drawStartDate(concert.getDrawStartDate())
                 .drawEndDate(concert.getDrawEndDate())
                 .price(concert.getPrice())
-                .visit_cnt(concert.getVisit_cnt())
+                .visitCnt(concert.getVisitCnt())
                 .build();
 
         return concertDto;
+    }
+
+    public static Concert createConcert(ConcertDto concertDto, Phamplet_File files){
+        Concert concert = Concert.builder()
+                .id(concertDto.getId())
+                .title(concertDto.getTitle())
+                .description(concertDto.getDescription())
+                .phamplet(files)
+                .concertDate(concertDto.getConcertDate())
+                .genre(concertDto.getGenre())
+                .ratings(concertDto.getRatings())
+                .address(concertDto.getAddress())
+                .host(concertDto.getHost())
+                .seatNum(concertDto.getSeatNum())
+                .drawStartDate(concertDto.getDrawStartDate())
+                .drawEndDate(concertDto.getDrawEndDate())
+                .price(concertDto.getPrice())
+                .visitCnt(concertDto.getVisitCnt())
+                .build();
+
+        return concert;
     }
 
 }

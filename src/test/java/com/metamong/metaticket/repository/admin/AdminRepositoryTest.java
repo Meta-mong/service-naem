@@ -2,24 +2,36 @@ package com.metamong.metaticket.repository.admin;
 
 
 import com.metamong.metaticket.domain.admin.Admin;
+import com.metamong.metaticket.service.admin.AdminService;
 import org.junit.Assert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers;
+import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 
 @SpringBootTest
 @PropertySource("classpath:application.yml")
+@AutoConfigureMockMvc
 class AdminRepositoryTest {
 
     @Autowired
     AdminRepository adminRepository;
+
+    @Autowired
+    AdminService adminService;
+
 
     @Test
     @DisplayName("관리자 삽입 테스트1")
@@ -78,4 +90,20 @@ class AdminRepositoryTest {
 
     }
 
+    @Test
+    @DisplayName("관리자 로그인 테스트")
+    public void adminLogin() throws Exception{
+        String loginId = "admin";
+        String password = "admin123";
+
+     Admin admin = adminRepository.findByLoginId(loginId);
+            if(admin.getPassword().equals(password)){
+                System.out.println("집에가자");
+
+      }
+
+    }
 }
+
+
+

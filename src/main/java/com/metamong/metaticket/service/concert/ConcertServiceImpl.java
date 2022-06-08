@@ -1,12 +1,15 @@
 package com.metamong.metaticket.service.concert;
 
 import com.metamong.metaticket.domain.concert.Concert;
-import com.metamong.metaticket.dto.concert.ConcertDto;
+import com.metamong.metaticket.domain.concert.Genre;
+import com.metamong.metaticket.domain.concert.Phamplet_File;
+import com.metamong.metaticket.domain.concert.dto.ConcertDto;
 import com.metamong.metaticket.repository.concert.ConcertRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,6 +19,7 @@ import java.util.List;
 public class ConcertServiceImpl implements ConcertService {
 
     private final ConcertRepository concertRepository;
+
 
     // 공연 생성
     @Override
@@ -28,15 +32,30 @@ public class ConcertServiceImpl implements ConcertService {
     @Override
     public ConcertDto concertInfo(Long id) {
         Concert findConcert = concertRepository.findById(id).orElse(null);
+        findConcert.setVisitCnt(findConcert.getVisitCnt()+1);
         ConcertDto concertDto = ConcertDto.createDto(findConcert);
         return concertDto;
     }
 
     // 공연 수정
     @Override
-    public void updateConcert(ConcertDto concertDto,Long id) {
-        Concert findConcert = concertRepository.findById(id).orElse(null);
-        findConcert.update(concertDto);
+    public void updateConcert(ConcertDto concertDto, Phamplet_File files) {
+        Concert findConcert = concertRepository.findById(concertDto.getId()).orElse(null);
+
+        findConcert.setTitle(concertDto.getTitle());
+        findConcert.setDescription(concertDto.getDescription());
+        findConcert.setPhamplet(files);
+        findConcert.setConcertDate(concertDto.getConcertDate());
+        findConcert.setGenre(concertDto.getGenre());
+        findConcert.setRatings(concertDto.getRatings());
+        findConcert.setAddress(concertDto.getAddress());
+        findConcert.setHost(concertDto.getHost());
+        findConcert.setSeatNum(concertDto.getSeatNum());
+        findConcert.setDrawStartDate(concertDto.getDrawStartDate());
+        findConcert.setDrawEndDate(concertDto.getDrawEndDate());
+        findConcert.setPrice(concertDto.getPrice());
+
+        concertRepository.save(findConcert);
     }
 
     // 공연 삭제
@@ -47,9 +66,29 @@ public class ConcertServiceImpl implements ConcertService {
 
     // 공연 전체 조회
     @Override
-    public List<Concert> concertAllInfo() {
-        return concertRepository.findAll();
+    public List<ConcertDto> concertAllInfo() {
+        List<ConcertDto> concertList = new ArrayList<>();
+        List<Concert> concerts = concertRepository.findAll();
+        for(Concert tmp : concerts){
+            ConcertDto dto = ConcertDto.createDto(tmp);
+            concertList.add(dto);
+        }
+        return concertList;
     }
+
+    // 장르별 공연 조회
+    @Override
+    public List<ConcertDto> concertGenreInfo(Genre genre){
+        List<ConcertDto> concertList = new ArrayList<>();
+        List<Concert> concerts = concertRepository.findByGenre(genre);
+        for(Concert tmp : concerts){
+            ConcertDto dto = ConcertDto.createDto(tmp);
+            concertList.add(dto);
+        }
+        return concertList;
+    }
+
+
 
 
 }
