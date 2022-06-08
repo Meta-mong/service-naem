@@ -1,6 +1,8 @@
 package com.metamong.metaticket.pay.kakao;
 
 import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -14,11 +16,15 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 @Service
-@Log
+@Slf4j
 public class KakaoPay {
     private static final String HOST = "https://kapi.kakao.com";
 
     private KakaoPayReadyVO kakaoPayReadyVO;
+    private KakaoPayApprovalVO kakaoPayApprovalVO;
+
+    @Value("${KAKAO_ADMIN_ID_LSH}")
+    private String ADMIN_KEY;
 
     public String kakaoPayReady() {
 
@@ -26,10 +32,7 @@ public class KakaoPay {
         RestTemplate restTemplate = new RestTemplate();
 
         // 서버로 요청할 Header
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "KakaoAK " + "9cc037f0bc9bdcc3ea2493cf1c20ff17");
-        headers.add("Accept", MediaType.APPLICATION_JSON_UTF8_VALUE);
-        headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
+        HttpHeaders headers = getHeaders();
 
         // 서버로 요청할 Body
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
@@ -61,5 +64,52 @@ public class KakaoPay {
 
         return "/pay";
 
+    }
+
+
+    public KakaoPayApprovalVO kakaoPayInfo(String pg_token) {
+
+        log.info("KakaoPayInfoVO............................................");
+        log.info("-----------------------------");
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        // 서버로 요청할 Header
+        HttpHeaders headers = getHeaders();
+
+        // 서버로 요청할 Body
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+        params.add("cid", "TC0ONETIME"); // 가맹점 코드(테스트:"TC0ONETIME")
+        params.add("tid", kakaoPayReadyVO.getTid()); // 결제 고유번호, 결제 준비 API 응답에 포함
+        params.add("partner_order_id", "1001"); // 가맹점 주문번호, 결제 준비 API 요청과 일치해야 함
+        params.add("partner_user_id", "gorany"); // 가맹점 회원 id, 결제 준비 API 요청과 일치해야 함
+        params.add("pg_token", pg_token);  // 결제승인 요청을 인증하는 토큰
+        params.add("total_amount", "2100"); // 상품 총액, 결제 준비 API 요청과 일치해야 함
+
+        HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
+
+        try {
+            kakaoPayApprovalVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), body, KakaoPayApprovalVO.class);
+            log.info("" + kakaoPayApprovalVO);
+
+            return kakaoPayApprovalVO;
+
+        } catch (RestClientException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    // header() 셋팅
+    private HttpHeaders getHeaders() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "KakaoAK " + ADMIN_KEY);
+        headers.add("Accept", MediaType.APPLICATION_JSON_UTF8_VALUE);
+        headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
+
+        return headers;
     }
 }

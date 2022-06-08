@@ -16,12 +16,15 @@ public class KakaoPayController {
 
     private final KakaoPay kakaoPay;
 
-    @PostMapping("/kakaoPay")
+    @GetMapping("/kakaoPay")
     public String kakaoPay() {
+        return "/pay/kakao/kakaoPay";
+    }
+
+    @PostMapping("/kakaoPay")
+    public String kakaoPayPost() {
         log.info("kakaoPay post............................................");
-
         return "redirect:" + kakaoPay.kakaoPayReady();
-
     }
 
     @GetMapping("/pay/kakao/success")
@@ -29,5 +32,6 @@ public class KakaoPayController {
         log.info("kakaoPaySuccess get............................................");
         log.info("kakaoPaySuccess pg_token : " + pg_token);
 
+        model.addAttribute("info", kakaoPay.kakaoPayInfo(pg_token));
     }
 }
