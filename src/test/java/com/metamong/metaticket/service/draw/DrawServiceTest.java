@@ -4,6 +4,7 @@ import com.metamong.metaticket.domain.concert.Concert;
 import com.metamong.metaticket.domain.concert.Genre;
 import com.metamong.metaticket.domain.concert.Ratings;
 import com.metamong.metaticket.domain.draw.Draw;
+import com.metamong.metaticket.domain.draw.DrawState;
 import com.metamong.metaticket.domain.user.User;
 import com.metamong.metaticket.repository.concert.ConcertRepository;
 import com.metamong.metaticket.repository.draw.DrawRepository;
@@ -51,11 +52,11 @@ public class DrawServiceTest {
                 .number("01012345678").loserCnt(3).cancelCnt(3).build();
 
         concert = Concert.builder().id(1L).title("웃는남자").description("부자들의 낙원은 가난한 자들의 지옥으로 세워진 것이다.").phamplet("웃는남자.jpg")
-                .c_date(LocalDateTime.now()).genre(Genre.MUSICAL_DRAMA).ratings(Ratings.FIFTEEN).address("세종문화회관 대극장")
-                .host("(주)EMK뮤지컬컴퍼니").seat_num(250).s_date(LocalDateTime.now()).e_date(LocalDateTime.now()).price(150000)
+                .concertDate(LocalDateTime.now()).genre(Genre.MUSICAL_DRAMA).ratings(Ratings.FIFTEEN).address("세종문화회관 대극장")
+                .host("(주)EMK뮤지컬컴퍼니").seat_num(250).drawStartDate(LocalDateTime.now()).drawEndDate(LocalDateTime.now()).price(150000)
                 .visit_cnt(5).build();
 
-        draw = Draw.builder().user(user).concert(concert).build();
+        draw = Draw.builder().user(user).concert(concert).state(DrawState.STANDBY).build();
     }
 
     @Test
@@ -72,8 +73,7 @@ public class DrawServiceTest {
 
         //then
         assertThat(findDraw.getUser().getEmail()).isEqualTo("metamong@naver.com");
-        assertThat(draw.getUser().getEmail()).isEqualTo("metamong@naver.com");
-        assertThat(draw.getConcert().getTitle()).isEqualTo("웃는남자");
+        assertThat(findDraw.getConcert().getTitle()).isEqualTo("웃는남자");
 
         verify(userRepository, times(1)).findById(any(Long.class));
         verify(concertRepository, times(1)).findById(any(Long.class));
@@ -121,16 +121,13 @@ public class DrawServiceTest {
     @DisplayName("응모 취소")
     void cancelDraw() {
         //given
-        given(userRepository.findById(any(Long.class))).willReturn(Optional.ofNullable(user));
-        given(concertRepository.findById(any(Long.class))).willReturn(Optional.ofNullable(concert));
-        given(drawRepository.findByUserAndAndConcert(any(User.class), any(Concert.class))).willReturn(draw);
+        given(drawRepository.findById(any(Long.class))).willReturn(Optional.ofNullable(draw));
 
         //when
-        drawService.cancelDraw(1L, 1L);
+        drawService.cancelDraw(1L);
 
         //then
-        verify(userRepository, times(1)).findById(any(Long.class));
-        verify(concertRepository, times(1)).findById(any(Long.class));
-        verify(drawRepository, times(1)).findByUserAndAndConcert(any(User.class), any(Concert.class));
+        assertThat(draw.getState()).isEqualTo(DrawState.CANCEL);
+        verify(drawRepository, times(1)).findById(any(Long.class));
     }
 }

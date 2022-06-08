@@ -1,14 +1,16 @@
 package com.metamong.metaticket.domain.draw;
 
-import com.metamong.metaticket.domain.BaseEntity;
 import com.metamong.metaticket.domain.concert.Concert;
 import com.metamong.metaticket.domain.user.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@ToString
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,6 +36,9 @@ public class Draw {
 //    private Payment payment;
 
     private int ranking;
+
+    @Enumerated(EnumType.STRING)
+    private DrawState state;
 
     private LocalDateTime emailSendDate;
 }
