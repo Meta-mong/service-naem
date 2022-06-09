@@ -10,12 +10,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!-- css -->
-  <link rel="stylesheet" href="/css/userqna/userqnaadd.css">
-
-  
+  <link rel="stylesheet" href="/css/usernotice/usernoticetail.css">
 
 
-  <title>사용자 QnA수정 </title>
+
+
+  <title>사용자 공지사항 상세페이지</title>
 </head>
 
 <body>
@@ -84,71 +84,78 @@
       </div>
     </div>
 
-    <div class="container" style="min-height: 100vh;">
+  <div class="container" style="min-height: 100vh;">
 
 
-      <div class="innertitle">QnA수정</div>
+    <div class="innertitle">공지사항 상세페이지</div>
       <section>
         <div class="inner">
           <form>
-            <div class="form-group">
-              <label for="title">제목</label>
-              <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
-            </div>
+            <div class="userQnA">
+              <table class="QnA">
+                <tr>
+                  <th scope="row">분류</th>
+                  <td>공연/예매</td>
+                </tr>
+                <tr>
+                  <th scope="row">제목</th>
+                  <td>문의드립니다</td>
+                </tr>
+                <tr>
+                  <th scope="row">작성일</th>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row">작성자</th>
+                  <td>아이디</td>
+                </tr>
+                <tr>
+                  <th>내용</th>
+                  <td>언제 응모가 열리나요..??</br>
+                    언제 응모가 열리나요..??</br>
+                    언제 응모가 열리나요..??</br>
+                    언제 응모가 열리나요..??</br>
+                    언제 응모가 열리나요..??
+                  </td>
+                </tr>
 
-            <div class="writer-group">
-              <label for="content" class="writer">작성자</label>
-              <div class="userid">메타몽</div>
-            </div>
-
-            <div class="classify-group">
-              <label for="classify" class="choice">분류</label>
-              <select name="classify" id="classify" class="classify" required="required">
-                <option value="">=== 선택 ===</option>
-                <option value="공연 소식">공연/티켓</option>
-                <option value="공연 종료">취소/환불</option>
-                <option value="공연 오픈">이벤트</option>
-                <option value="서비스 점검">회원</option>
-                <option value="기타">기타</option>
-              </select>
-            </div>
-  
-            <div class="form-group cont">
-              <label for="content">내용</label>
-              <textarea class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
+              </table>
             </div>
           </form>
+
+
           <div class="btn">
-            <button type="button" class="delete" id="btn-save">취소</button>
-            <button type="button" class="update" id="btn-save">등록</button>
+            <button type="button" class="update" id="btn-save">목록</button>
           </div>
-          
-         
+
         </div>
 
+   
+
       </section>
+    </div>  
+  </div>
+
+  <!-- footer -->
+  <div class="footer">
+    <div class="footer-div">
+      <ul class="social-icons">
+        <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+        <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+        <li><a class="linkedin" href="#"><i class="fa fa-github"></i></a></li>
+      </ul>
     </div>
 
-    <!-- footer -->
-    <div class="footer">
-      <div class="footer-div">
-        <ul class="social-icons">
-          <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-          <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-          <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-          <li><a class="linkedin" href="#"><i class="fa fa-github"></i></a></li>
-        </ul>
-      </div>
-
-      <!-- Copyright -->
-      <div class="footer-copyright">
-        <img src="../img/metamong.png" alt="Meta" style="width: 50px; height:50px;">
-        <span>㈜ Meta-Mong 서울특별시 종로구 종로33길 15</span>
-        <span>사업자등록번호 : 123-54-4245 전화 : 02-134-5123 팩스 : 02-895-2940</span>
-        <span>© 2022 Copyright: Meta-Mong ALL RIGHTS RESERVED.</span>
-      </div>
-      <!-- Copyright -->
+    <!-- Copyright -->
+    <div class="footer-copyright">
+      <img src="../img/metamong.png" alt="Meta" style="width: 50px; height:50px;">
+      <span>㈜ Meta-Mong 서울특별시 종로구 종로33길 15</span>
+      <span>사업자등록번호 : 123-54-4245 전화 : 02-134-5123 팩스 : 02-895-2940</span>
+      <span>© 2022 Copyright: Meta-Mong ALL RIGHTS RESERVED.</span>
     </div>
+    <!-- Copyright -->
+  </div>
   </div>
 
 </body>

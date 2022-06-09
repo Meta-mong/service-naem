@@ -384,7 +384,7 @@ span {
 margin: auto;
 margin-top: 40px;
 margin-bottom: 100px;
-  border: 1px solid hsla(255, 94%, 86%, 0.957);
+  
 }
 
 .container .inner .userQnA .QnA{
@@ -424,35 +424,30 @@ table.QnA td {
   resize: none;
 }
 
-.container .inner .btn{
-  margin-left: 250px;
-  margin-right: -240px;
-  width: 100px;
-  height: 30px;
-
-/* 상자 디자인 큰틀*/
-margin-bottom: 20px;
-border: 0px;
-background-color: #e6b6f4;
-  
-/* 그림자 */
-border-radius: 10px;
-box-shadow:.8rem .5rem 1.4rem  #e2c0f1, -.3rem -.4rem .8rem #FBFBFB;
-/* box-shadow:-.2rem -.2rem 1.8rem white, .8rem .8rem 1.4rem  #AAB7CB; */
-
-/* 글씨 */
-color: #333333;
-font-size: 15px;
-font-weight: bold;
-
-animation-name: keybtn-language;
-animation-duration: .2s;
-
+.container .inner .btn .delete{
+  background-color: rgb(207, 61, 119);
+  width: 200px;
+  padding: 5px 50px;
+  font-size: 23px;
+  font-weight: bold;
+  font-style: italic;
+  border: none;
+  border-radius: 30px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(218, 186, 248);
+  margin-top: 30px;
+}
+.container .inner .btn .update{
+  background-color: rgb(215, 158, 228);
+  width: 200px;
+  padding: 5px 50px;
+  font-size: 23px;
+  font-weight: bold;
+  font-style: italic;
+  border: none;
+  border-radius: 30px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(218, 186, 248);
+  margin-top: 30px;
 }
 
-/*버튼 눌리는 효과*/
-.container .inner .btn:active {
-  box-shadow: inset -.3rem -.1rem 1.4rem  #dcb2f2, inset .3rem .4rem .8rem #f0cefe; 
-  cursor: pointer;
-
-}
