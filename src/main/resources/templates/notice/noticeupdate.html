@@ -42,10 +42,10 @@
           </div>
 
           <div class="classify-group">
-          <div class="writer-group">
-            <label for="content" class="writer">작성자</label>
-            <input type="text" class="admin" name="admin" value="관리자" readonly>
-          </div>
+            <div class="writer-group">
+              <label for="content" class="writer">작성자</label>
+              <input type="text" class="admin" name="admin" value="관리자" readonly>
+            </div>
 
             <select name="classify" id="classify" class="classify" required="required">
               <option value="">=== 선택 ===</option>
@@ -62,10 +62,11 @@
             <textarea class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
           </div>
         </form>
-
-        <a href="/" role="button" class="btn cancle">취소</a>
-        <button type="button" class="btn addbtn" id="btn-save">수정 완료</button>
-
+        <div class="btn">
+          <button type="button" class="delete" id="btn-save">삭제</button>
+          <button type="button" class="update" id="btn-save">수정</button>
+          <button type="button" class="return" id="btn-save">돌아가기</button>
+        </div>
       </div>
     </section>
   </div>
