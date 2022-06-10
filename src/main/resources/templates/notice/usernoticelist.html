@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/css/usernotice/noticelist.css">
 
   <!-- js -->
-  <script defer src="../public/js/concert.js"></script>
+  <script defer src="/js/notice/usernoticelist.js"></script>
 
   <!-- 부트스트랩-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -25,6 +25,7 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
   <title>고객센터 공지사항</title>
 </head>
@@ -116,6 +117,7 @@
 
       <section>
         <table class="table table-hover">>
+
           <thead style="height: 40px">
             <tr>
               <th>No.</th>
@@ -124,72 +126,62 @@
               <th>등록일</th>
             </tr>
           </thead>
+
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>기타</td>
-              <td>문의 드립니다.</td>
-              <td>2022-06-09</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>기타</td>
-              <td>문의 드립니다.</td>
-              <td>2022-06-09</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>기타</td>
-              <td>문의 드립니다.</td>
-              <td>2022-06-09</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>기타</td>
-              <td>문의 드립니다.</td>
-              <td>2022-06-09</td>
-            </tr>
+          <tr th:each="notice : ${allNoticeList}">
+
+            <td scope="row" th:text="${notice.id}">1</td>
+            <td th:text="${notice.classify}"></td>
+            <td><a href="/notice/noticedetail/"
+                   th:attrappend="href=${notice.id}"
+                   th:text="${notice.title}"></a></td>
+            <td th:text="${notice.createDate}"><td/>
+
+          </tr>
 
           </tbody>
 
-          <!-- <tbody>
-            <tr th:each="board : ${boardList}">
-              <td th:text="${board.idx}"></td>
-              <td th:text="${board.boardType.value}"></td>
-              <td><a th:href="'/board?idx='+${board.idx}" th:text="${board.title}">
-                </a>
-              </td>
-              <td
-                th:text="${board.createdDate} ?                    ${#temporals.format(board.createdDate,'yyyy-MM-dd HH:mm')} : ${board.createdDate}">
-              </td>
-              <td
-                th:text="${board.updatedDate} ?                    ${#temporals.format(board.updatedDate,'yyyy-MM-dd HH:mm')} : ${board.updatedDate}">
-              </td>
 
-            </tr>
-          </tbody> -->
         </table>
 
-        <nav>
-          <ul class="pagination d-flex justify-content-center flex-wrap pagination-rounded-flat pagination-success">
-            <li class="page-item"><a class="page-link" href="#" data-abc="true"><i class="fa fa-angle-left"></i></a>
+
+
+        <nav style="text-align: center;">
+          <ul class="pagination"
+              th:with="start=${T(java.lang.Math).floor(allNoticeList.number/10)*10 + 1}, last=(${start + 9 < allNoticeList.totalPages ? start + 9 : allNoticeList.totalPages})">
+            <li>
+              <a th:href="@{/notice/nlist(page=1)}" aria-label="First">
+                <span aria-hidden="true">First</span>
+              </a>
             </li>
-            <li class="page-item active"><a class="page-link" href="#" data-abc="true">1</a></li>
-            <li class="page-item"><a class="page-link" href="#" data-abc="true">2</a></li>
-            <li class="page-item"><a class="page-link" href="#" data-abc="true">3</a></li>
-            <li class="page-item"><a class="page-link" href="#" data-abc="true">4</a></li>
-            <li class="page-item"><a class="page-link" href="#" data-abc="true">5</a></li>
-            <li class="page-item"><a class="page-link" href="#" data-abc="true"><i class="fa fa-angle-right"></i></a>
+
+            <li th:class="${allNoticeList.first} ? 'disabled'">
+              <a th:href="${allNoticeList.first} ? '#' :@{/notice/nlist(page=${allNoticeList.number})}" aria-label="Previous">
+                <span aria-hidden="true">&lt;</span>
+              </a>
+            </li>
+
+            <li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == allNoticeList.number + 1} ? 'active'">
+              <a th:text="${page}" th:href="@{/notice/nlist(page=${page})}"></a>
+            </li>
+
+            <li th:class="${allNoticeList.last} ? 'disabled'">
+              <a th:href="${allNoticeList.last} ? '#' : @{/notice/nlist(page=${allNoticeList.number + 2})}" aria-label="Next">
+                <span aria-hidden="true">&gt;</span>
+              </a>
+            </li>
+
+            <li>
+              <a th:href="@{/notice/nlist(page=${allNoticeList.totalPages})}" aria-label="Last">
+                <span aria-hidden="true">Last</span>
+              </a>
             </li>
           </ul>
         </nav>
-    
 
 
   </section>
     </div>
-
-
 
   <!-- footer -->
   <div class="footer">
