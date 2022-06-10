@@ -1,13 +1,14 @@
 package com.metamong.metaticket.domain.notice.dto;
 
 import com.metamong.metaticket.domain.admin.Admin;
+import com.metamong.metaticket.domain.notice.Notice;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 public class NoticeDTO {
-
 
 
     @Data
@@ -27,10 +28,11 @@ public class NoticeDTO {
             private Long adminId; // 관리자
 
             //작성된 날짜와
-            private LocalDateTime regDate;
-            private LocalDateTime modDate;
+            private LocalDate createDate;
+            private LocalDate updateDate;
 
-        }
+
+    }
 
 
 

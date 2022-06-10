@@ -5,10 +5,14 @@ import com.metamong.metaticket.domain.notice.Notice;
 import com.metamong.metaticket.domain.notice.dto.NoticeDTO;
 import com.metamong.metaticket.repository.admin.AdminRepository;
 import com.metamong.metaticket.repository.notice.NoticeRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +29,7 @@ public class NoticeServiceImpl implements NoticeService{
     public Notice dtoToEntity(NoticeDTO.Notice dto){
         Admin admin= adminRepository.findById(dto.getAdminId()).get();
         Notice notice = Notice.builder()
+                .id(dto.getId())
                 .admin(admin)
                 .classify(dto.getClassify())
                 .title(dto.getTitle())
@@ -35,32 +40,44 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     //Board Entity를 Board DTO 클래스로 변환하는 메서드
-    public NoticeDTO.Notice entityToDTO(Notice notice){
+    public static NoticeDTO.Notice entityToDTO(Notice notice){
         NoticeDTO.Notice dto= NoticeDTO.Notice.builder()
+                .id(notice.getId())
                 .adminId(notice.getAdmin().getId())
                 .classify(notice.getClassify())
                 .title(notice.getTitle())
                 .content(notice.getContent())
-                .regDate(notice.getCreatedDate())
-                .modDate(notice.getUpdatedDate())
+                .createDate(LocalDate.from(notice.getCreatedDate()))
+                .updateDate(LocalDate.from(notice.getUpdatedDate()))
                 .build();
 
         return dto;
     }
 
+//공지사항 상세페이지 조회
+    @Override
+    public NoticeDTO.Notice noticedetail(Long noticeId) throws Exception {
 
+        Notice notice = noticeRepository.findById(noticeId).orElse(null);
+        NoticeDTO.Notice noticeDTO = entityToDTO(notice);
+        return noticeDTO;
+    }
 
     //공지사항 전체조회
     @Override
-    public List<NoticeDTO.Notice> allNoticeInfo() {
-         List<NoticeDTO.Notice> noticeList = new ArrayList<>();
-        List<Notice> nl = noticeRepository.findAll();
-        for(Notice temp: nl){
-            NoticeDTO.Notice ndto = entityToDTO(temp);
-            noticeList.add(ndto);
+    public Page<NoticeDTO.Notice> allNoticeInfo(Pageable pageable) {
+
+            int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // page는 index 처럼 0부터 시작
+            pageable = PageRequest.of(page, 10);
+            Page<Notice> listpage = noticeRepository.findAll(pageable);
+            Page<NoticeDTO.Notice> dto = listpage.map(NoticeServiceImpl::entityToDTO);
+
+            return dto;
         }
-        return noticeList;
-    }
+
+
+
+
 
     //공지사항 등록
     @Override

@@ -12,7 +12,8 @@
   <!-- css -->
   <link rel="stylesheet" href="/css/usernotice/usernoticetail.css">
 
-
+  <!-- js -->
+<!--  <script defer src="/js/notice/usernoticelist.js"></script>-->
 
 
   <title>사용자 공지사항 상세페이지</title>
@@ -124,8 +125,10 @@
           </form>
 
 
-          <div class="btn">
-            <button type="button" class="update" id="btn-save">목록</button>
+          <div class="btn" >
+            <button type="button" class="update" id="btn-save" onclick="noticeList()">목록</button>
+
+
           </div>
 
         </div>
@@ -159,5 +162,11 @@
   </div>
 
 </body>
+<!-- javascript -->
+<script type="text/javascript">
+  function noticeList() {
+    location.href = "/notice/nlist";
+  }
+</script>
 
 </html>
