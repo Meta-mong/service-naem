@@ -5,13 +5,20 @@ import com.metamong.metaticket.domain.concert.Genre;
 import com.metamong.metaticket.domain.concert.Phamplet_File;
 import com.metamong.metaticket.domain.concert.Ratings;
 import com.metamong.metaticket.domain.draw.Draw;
+import com.metamong.metaticket.domain.draw.DrawState;
 import com.metamong.metaticket.domain.user.User;
 import com.metamong.metaticket.repository.concert.ConcertRepository;
 import com.metamong.metaticket.repository.concert.FilesRepository;
 import com.metamong.metaticket.repository.user.UserRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.time.LocalDateTime;
@@ -20,7 +27,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DataJpaTest(properties = {"spring.config.location=classpath:application-test.yml"})
+@Transactional
+@SpringBootTest
 class DrawRepositoryTest {
 
     @Autowired
@@ -38,13 +46,16 @@ class DrawRepositoryTest {
     Draw draw;
     User user;
     Concert concert;
+    Phamplet_File file;
 
     @BeforeEach
     void setUp() {
         user = User.builder().email("metamong@naver.com").passwd("7852").name("person1").age(27)
                 .number("01012345678").loserCnt(3).cancelCnt(3).build();
 
-        Phamplet_File file = new Phamplet_File(1L,"웃는남자.jpg","/uploadImg/");
+        userRepository.save(user);
+
+        file = Phamplet_File.builder().filePath("/uploadImg/").fileOriname("웃는남자.jpg").build();
         filesRepository.save(file);
 
         concert = Concert.builder().title("웃는남자").description("부자들의 낙원은 가난한 자들의 지옥으로 세워진 것이다.").phamplet(file)
@@ -52,9 +63,8 @@ class DrawRepositoryTest {
                 .host("(주)EMK뮤지컬컴퍼니").seatNum(250).drawStartDate(LocalDateTime.now()).drawEndDate(LocalDateTime.now()).price(150000)
                 .visitCnt(5).build();
 
-        userRepository.save(user);
         concertRepository.save(concert);
-        draw = Draw.builder().user(user).concert(concert).build();
+        draw = Draw.builder().user(user).concert(concert).state(DrawState.STANDBY).build();
     }
 
     @AfterEach
@@ -62,6 +72,7 @@ class DrawRepositoryTest {
         drawRepository.deleteAll();
         userRepository.deleteAll();
         concertRepository.deleteAll();
+        filesRepository.deleteAll();
     }
 
     @Test
