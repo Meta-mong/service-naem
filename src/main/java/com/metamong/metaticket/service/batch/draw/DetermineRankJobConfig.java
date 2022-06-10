@@ -2,6 +2,7 @@ package com.metamong.metaticket.service.batch.draw;
 
 import com.metamong.metaticket.domain.draw.Draw;
 import com.metamong.metaticket.domain.draw.DrawState;
+import com.metamong.metaticket.service.payment.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -29,6 +30,7 @@ public class DetermineRankJobConfig {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
     private final EntityManagerFactory entityManagerFactory;
+    private final PaymentService paymentService;
 
     private int chunkSize = 10;
     private HashSet<Integer> checkDupleRank;
@@ -73,7 +75,7 @@ public class DetermineRankJobConfig {
             int rank = determineRank(requireRankDraw, drawCnt);
 
             if (rank <= seatNum) {
-                //paymentService.sendEmail(requireRankDraw);
+                paymentService.sendPaymentEmail(requireRankDraw);
             }
 
             return requireRankDraw;
