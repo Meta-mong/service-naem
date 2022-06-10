@@ -1,0 +1,161 @@
+/* button */
+.container .list {
+    display: block;
+    justify-content: left;
+    margin-top: 60px;
+    margin-left: 125px;
+    margin-bottom: -48px;
+  }
+  
+  .container .list .btn {
+    font-size: 23px;
+    /* background-color: rgba(221, 184, 229, 0.964); */
+    margin-left: -6px;
+    background-color: black;
+    color: whitesmoke;
+    border: 0;
+    height: 60px;
+  }
+  
+  .container .list .btn:nth-child(2) {
+    background-color: rgb(211, 133, 228);
+  }
+  
+  .container .list .btn:hover {
+    background-color: rgb(215, 158, 228);
+    color: whitesmoke;
+  }
+
+
+/* user detail */
+/* .main {
+    margin-left: 50px;
+} */
+
+ul >li {
+    margin-left: 30px;
+    padding: 5px;
+    font-size: 20px;
+    display: flex;
+    /* background-color: aqua; */
+}
+
+article {
+    /* display: flex; */
+}
+
+.user_info {
+    display: flex;
+    margin-left:40px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.attr_sub {
+    margin-bottom: 10px;
+}
+
+.attr_key {
+    width:190px;
+    height: 100%;
+    padding: 10px 0px;
+    font-weight: bolder;
+    text-align: center;
+    border-radius: 20px;
+    background-color: rgb(220, 220, 220);
+}
+
+.attr_value {
+    border: 0px;
+    width:650px;
+    margin-left: 60px;
+    border-bottom: 1px solid #999;;
+    font-size: 21px;
+    text-align: center;
+    background-color:whitesmoke;
+}
+
+.apply_info {
+    margin-left: 40px;
+}
+
+.apply_list {
+    display: flex;
+    width: 930px;
+    height: 280px;
+    margin-top: 10px;
+    margin-left: 30px;
+    font-size: 20px;
+    overflow: scroll;
+}
+
+table {
+    border-collapse: collapse;
+    width : 900px;
+    /*border-top: 1px solid rgb(183, 182, 182);*/
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+    margin-left : 70px;
+    margin-bottom: 5px;
+}
+
+table > thead {
+    background-color : rgba(230, 164, 245, 0.964);
+    position: sticky;
+    top: 0;
+}
+
+th, td {
+    padding : 10px;
+    border-bottom: 1px solid rgb(183, 182, 182);
+}
+
+/* th {
+    position: sticky;
+    top: 0;
+} */
+
+
+.black_list {
+    margin-top: 20px;
+    margin-left: 100px;
+    font-size: 23px;
+    font-weight: bold;
+    font-style: italic;
+    color: rgb(236, 20, 20);
+}
+
+.ret_btn,
+.modify_btn {
+    width: 200px;
+    padding: 10px 30px;
+    margin-top: 30px;
+    font-size: 23px;
+    font-weight: bold;
+    font-style: italic;
+    border: none;
+    border-radius: 30px;
+    color: rgb(255, 255, 255);
+}
+
+.ret_btn {
+    background-color: rgb(218, 186, 248);
+}
+
+.modify_btn {
+    margin-left: 20px;
+    background-color: rgb(186, 133, 236);
+}
+
+.ret_btn:hover{
+    background-color: blueviolet;
+}
+
+.modify_btn:hover{
+    background-color: blueviolet;
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+        <!-- css -->
+        <link rel="stylesheet" href="/css/admin/admin.css">
+        <link rel="stylesheet" href="/css/admin/admin_user_detail.css">
+        <!--<script defer="defer" src="/js/admin/admin.js"></script>-->
+
+        <title>admin</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="list">
+                <button type="button" class="btn" onclick="move_ticket()">티켓관리</button>
+                <button type="button" class="btn" onclick="move_user()">회원관리</button>
+                <button type="button" class="btn" onclick="move_notice()">게시판관리</button>
+            </div>
+            <section>
+                <div class="main">
+                    <article>
+                        <div class="user_info">
+                            <ul class="attr">
+                                <li class="attr_sub">
+                                    <div class="attr_key">이메일</div>
+                                    <input class="attr_value" type="text" value="metamong1@naver.com" readonly>
+                                </li>
+                                <li class="attr_sub">
+                                    <div class="attr_key">이름</div>
+                                    <input class="attr_value" type="text" value="메타몽">
+                                </li>
+                                <li class="attr_sub">
+                                    <div class="attr_key">생년월일</div>
+                                    <input class="attr_value" type="text" value="1996/11/19" readonly>
+                                </li>
+                                <li class="attr_sub">
+                                    <div class="attr_key">휴대폰</div>
+                                    <input class="attr_value" type="text" value="010-1111-1111" readonly>
+                                </li>
+                                <li class="attr_sub">
+                                    <div class="attr_key">응모 탈락 횟수</div>
+                                    <input class="attr_value" type="text" value="5">
+                                </li>
+                                <li class="attr_sub">
+                                    <div class="attr_key">응모 취소 횟수</div>
+                                    <input class="attr_value" type="text" value="3">
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- <div class="black_list">블랙리스트💣</div> -->
+                    </article>
+
+                    <h2>응모내역</h2>
+                    <div class="apply_info">
+                        <div class="apply_list">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>공연번호</th>
+                                        <th>공연명</th>
+                                        <th>당첨여부</th>
+                                        <th>결제여부</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>레베카</td>
+                                        <td>Y</td>
+                                        <td>Y</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>루나</td>
+                                        <td>Y</td>
+                                        <td>N</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>광화문 연가</td>
+                                        <td>N</td>
+                                        <td>N</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>캣츠</td>
+                                        <td>Y</td>
+                                        <td>Y</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>캣츠</td>
+                                        <td>Y</td>
+                                        <td>Y</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>캣츠</td>
+                                        <td>Y</td>
+                                        <td>Y</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="ret_btn">돌아가기</button>
+                        <button type="button" class="modify_btn">수정</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </body>
+</html>
