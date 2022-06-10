@@ -4,6 +4,9 @@ import com.metamong.metaticket.domain.concert.Concert;
 import com.metamong.metaticket.domain.concert.Genre;
 import com.metamong.metaticket.domain.concert.Phamplet_File;
 import com.metamong.metaticket.domain.concert.dto.ConcertDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 
 import java.util.List;
 
@@ -22,11 +25,12 @@ public interface ConcertService {
     void deleteConcert(Long id);
 
     // 공연 전체 조회
-    List<ConcertDto> concertAllInfo();
+//    List<ConcertDto> concertAllInfo();
+    Page<ConcertDto> concertAllInfo(@PageableDefault(size = 10) Pageable pageable);
 
     // 장르별 공연 조회
-    List<ConcertDto> concertGenreInfo(Genre genre);
-
+//    List<ConcertDto> concertGenreInfo(Genre genre);
+    Page<ConcertDto> concertGenreInfo(@PageableDefault(size = 16) Pageable pageable,Genre genre);
 
 
 }
