@@ -1,7 +1,11 @@
 package com.metamong.metaticket.service.payment;
 
+import com.metamong.metaticket.domain.concert.Concert;
 import com.metamong.metaticket.domain.draw.Draw;
 import com.metamong.metaticket.domain.draw.DrawState;
+import com.metamong.metaticket.domain.payment.Payment;
+import com.metamong.metaticket.domain.payment.PaymentStatus;
+import com.metamong.metaticket.domain.user.User;
 import com.metamong.metaticket.repository.draw.DrawRepository;
 import com.metamong.metaticket.repository.payment.PaymentRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,12 +27,22 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     @Transactional
+    public void paymentSuccess(Payment payment, User user, Concert concert) {
+        Long userId = user.getId();
+        Long concertId = concert.getId();
+        Payment paymentInfo = paymentRepository.findByUserId(userId, concertId);
+        paymentInfo.setPaymentStatus(PaymentStatus.COMPLETE);
+    }
+
+    @Override
+    @Transactional
     public void sendPaymentEmail(Draw draw) {
         SimpleMailMessage message = getSimpleMailMessage(draw);
         javaMailSender.send(message);
         draw.setState(DrawState.WIN);
         draw.setEmailSendDate(LocalDateTime.now());
     }
+
 
     private SimpleMailMessage getSimpleMailMessage(Draw draw) {
         String paymentURL = "http://localhost/payment?concert=" + draw.getConcert().getId();

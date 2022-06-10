@@ -35,5 +35,15 @@ public class Payment {
 
     private int amount;
 
+    //==생성 메서드==//
+    public static Payment createPayment(User user, Concert concert){
+        Payment payment = new Payment();
+        payment.setUser(user);
+        payment.setConcert(concert);
+        payment.setPaymentStatus(PaymentStatus.IN_PROGRESS);
+        payment.setAmount(concert.getPrice());
+
+        return payment;
+    }
 
 }
