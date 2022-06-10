@@ -32,16 +32,17 @@ public class User extends BaseEntity {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String passwd;
 
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private int age;
 
-    @Column(name="phone_num", unique = true, nullable = false)
+    //@Column(name="phone_num", unique = true, nullable = false)
+    @Column(name="phone_num", unique = true)
     private String number;
 
     @Column(columnDefinition = "integer default 0")
