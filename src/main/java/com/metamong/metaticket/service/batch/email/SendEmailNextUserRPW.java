@@ -1,6 +1,7 @@
 package com.metamong.metaticket.service.batch.email;
 
 import com.metamong.metaticket.domain.draw.Draw;
+import com.metamong.metaticket.service.payment.PaymentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.configuration.annotation.StepScope;
@@ -23,6 +24,7 @@ import java.util.Map;
 @Configuration
 public class SendEmailNextUserRPW {
 
+    private final PaymentService paymentService;
     private final EntityManagerFactory entityManagerFactory;
     private final ShareData shareData;
 
@@ -54,7 +56,7 @@ public class SendEmailNextUserRPW {
     @Bean
     public ItemProcessor<Draw, Draw> sendEmailNextUsersProcessor() {
         return nextQueueingDraw -> {
-            //paymentService.sendEmail(draw);
+            paymentService.sendPaymentEmail(nextQueueingDraw);
             return nextQueueingDraw;
         };
     }
