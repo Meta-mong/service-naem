@@ -55,5 +55,12 @@ public class AdminController {
     //@GetMapping("/allusers")
     //public String
 
+    //회원 정보 상세 조회 페이지
+    @GetMapping("userdetail")
+    public String userDetail(){
+        return "/admin/admin_user_detail";
+    }
+
+
 
 }

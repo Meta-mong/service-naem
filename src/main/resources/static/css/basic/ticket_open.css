@@ -1,0 +1,136 @@
+.ticket-open-issue {
+  /* position: relative; */
+  width: 1008px;
+  margin: 20px auto;
+  font-size: 30px;
+  font-weight: bold;
+  /* overflow: hidden; */
+}
+
+.ticket-open {
+  margin-top: 20px;
+  height: 330px;
+  border-radius: 15px;
+  background-color: rgb(243, 233, 242);
+  /* background-color: rgb(236, 219, 234); */
+}
+
+.ticket-open-1, .ticket-open-2 {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.ticket-open-query {
+  width: 1008px;
+  margin: auto;
+  margin-bottom: 20px;
+  height: 50px;
+}
+
+select, input, button{
+  height: 50px;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+select {
+  width: 150px;
+}
+
+input {
+  margin-left: 10px;
+  width: 650px;
+}
+
+button {
+  margin-left: 5px;
+  width: 180px;
+  border: none;
+  font-weight: bold;
+  color: white;
+  background-color: rgb(197, 76, 197);
+}
+
+.ticket-open-list {
+  width: 1008px;
+  margin: auto;
+  margin-top: 50px;
+  /* margin-bottom: 100px; */
+  font-size: 20px;
+}
+
+.open-list-ul {
+  list-style: none;
+  rgb(243, 233, 242);
+  border-top: 4px solid rgb(243, 233, 242);
+  border-bottom: 4px solid rgb(243, 233, 242);
+  /* border-top: 4px solid beige;
+  border-bottom: 4px solid beige; */
+  border-collapse: collapse;
+}
+
+.open-list-ul li{
+  display: flex;
+  height: 100px;
+  border-bottom: 4px solid rgb(243, 233, 242);
+  /* border-bottom: 4px solid beige; */
+}
+
+li:last-child{
+  border-bottom: none;
+}
+
+.open-date {
+  text-align: center;
+  line-height: 40px;
+}
+
+.open-info {
+  margin-left: 100px;
+  line-height: 80px;
+}
+
+.open-img {
+  margin-left: 50px;
+  vertical-align: middle;
+}
+
+.open-img > img {
+  margin-top: 10px;
+  width: 100px;
+  height: 80%;
+  object-fit: cover;
+}
+
+/* paging */
+.paging {
+  width: 1008px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 80px;
+}
+
+.pagination {
+  justify-content : center;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  color: #84848b;
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: none;
+  background-color: #fff;
+  border: none;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.page-link:hover { /* 수정 필요 */
+  z-index: 2;
+  color: #0a58ca;
+  /* background-color: #e9ecef;
+  border-color: #dee2e6; */
+}
+
