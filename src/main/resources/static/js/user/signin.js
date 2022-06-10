@@ -1,4 +1,6 @@
 window.addEventListener("load", function(event){
+
+
     var signinbtn = document.getElementById("signinbtn");
 
     var email = document.getElementById("email");
@@ -74,4 +76,17 @@ window.addEventListener("load", function(event){
             }
         });
     });
+
+
+    //Kakao.init('d9d2bdcf0867cf97434d1dd0d86fbd02');
+    Kakao.init($("#rest-api").text());
+    Kakao.isInitialized();
+
+    $("#kakao").on("click", function(){
+        Kakao.Auth.authorize({
+            redirectUri : $("#redirect-uri").text()
+        });
+    });
+
+
 });

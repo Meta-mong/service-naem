@@ -4,7 +4,9 @@ import com.metamong.metaticket.domain.user.User;
 import com.metamong.metaticket.domain.user.dto.UserDTO;
 import com.metamong.metaticket.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -17,6 +19,12 @@ public class UserController {
     @Autowired
     HttpSession session;
 
+    @Value("${kakao.rest-api-key}")
+    public String apiKey;
+
+    @Value("${kakao.redirect-uri}")
+    public String redirectUri;
+
     //회원가입
     @GetMapping("/signup")
     public String signUp(){
@@ -25,7 +33,11 @@ public class UserController {
 
     //로그인
     @GetMapping("/signin")
-    public String SignIn(){
+    public String SignIn(Model model){
+        //카카오 로그인 시 사용할 정보
+        session.setAttribute("kakaoApiKey", apiKey);
+        session.setAttribute("kakaoRedirectUri", redirectUri);
+
         return "/user/signin";
     }
 
