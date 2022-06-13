@@ -27,8 +27,12 @@ public class OauthController {
     public void kakaoCallback(@RequestParam String code,
                                 HttpServletResponse response) throws Exception {
         String accessToken = oauthService.getAccessToken(code);
-        oauthService.kakaoUserAccess(accessToken);
-        response.sendRedirect("/findaccount");
+        try {
+            oauthService.kakaoUserAccess(accessToken);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        response.sendRedirect("/");
     }
 
 

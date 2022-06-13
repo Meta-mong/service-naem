@@ -29,6 +29,8 @@
 
         <!-- js -->
         <script defer="defer" src=""></script>
+        <script src="/js/mypage/myPage_userInfo.js"></script>
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
         <title>MyPage</title>
     </head>
@@ -145,13 +147,13 @@
                                             <div class="attr_key">이메일</div>
                                             <input
                                                 class="attr_value"
-                                                type="text"
-                                                value="metamong1@naver.com"
+                                                type="text" id="email"
+                                                th:value="${session.user.email}"
                                                 disabled>
                                         </li>
                                         <li class="attr_sub">
                                             <div class="attr_key">비밀번호</div>
-                                            <input class="attr_value" type="password">
+                                            <input class="attr_value" type="password" id="passwd">
                                         </li>
                                         <li class="attr_sub">
                                             <div class="attr_key">비밀번호 확인</div>
@@ -159,22 +161,22 @@
                                         </li>
                                         <li class="attr_sub">
                                             <div class="attr_key">이름</div>
-                                            <input class="attr_value" type="text" value="메타몽" disabled>
+                                            <input class="attr_value" type="text" th:value="${session.user.name}" disabled>
                                         </li>
                                         <li class="attr_sub">
                                             <div class="attr_key">생년월일</div>
-                                            <input class="attr_value" type="text" value="1996/11/19">
+                                            <input class="attr_value" type="text" th:value="${session.user.age}">
                                         </li>
                                         <li class="attr_sub">
                                             <div class="attr_key">휴대폰</div>
-                                            <input class="attr_value" type="text" value="010-1111-1111" disabled>
+                                            <input class="attr_value" type="text" th:value="${session.user.number}" disabled>
                                         </li>                                  
                                     </ul>
                                 </div>
                             </article>
 
-                            <button type="button" class="modify_btn">수정하기</button>
-                            <button type="button" class="resign_btn">탈퇴하기</button>
+                            <button type="button" class="modify_btn" id="modify_btn">수정하기</button>
+                            <button type="button" class="resign_btn" id="resign_btn">탈퇴하기</button>
 
                         </div>
 

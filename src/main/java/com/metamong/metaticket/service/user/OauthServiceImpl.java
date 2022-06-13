@@ -39,6 +39,9 @@ public class OauthServiceImpl implements OauthService{
     @Autowired
     HttpSession session;
 
+    @Autowired
+    UserService userService;
+
     @Override
     public String getAccessToken(String code){
         String accessToken = "";
@@ -95,7 +98,7 @@ public class OauthServiceImpl implements OauthService{
         return accessToken;
     }
 
-    public void kakaoUserAccess(String token){
+    public void kakaoUserAccess(String token) throws Exception{
         String requestURL = "https://kapi.kakao.com/v2/user/me";
 
         //access token을 이용한 사용자 정보 조회
@@ -134,9 +137,6 @@ public class OauthServiceImpl implements OauthService{
                 email = kakaoAccount.get("email").toString();
             }
 
-            System.out.println("id : " + id);
-            System.out.println("email : "+email);
-
             User user = userRepository.findByEmail(email);
             if(user==null){
                 UserDTO.SIGN_UP dto = UserDTO.SIGN_UP.builder()
@@ -149,13 +149,18 @@ public class OauthServiceImpl implements OauthService{
                 user = User.createUser(dto, passwordEncoder);
                 userRepository.save(user);
             }
-            UserDTO.SESSION_USER_DATA sessionDto = User.createUserDTO(user);
-            session.setAttribute("user", sessionDto);
-            System.out.println(sessionDto.toString());
+            UserDTO.SIGN_IN signInDto = UserDTO.SIGN_IN.builder()
+                    .email(user.getEmail())
+                    .passwd(String.valueOf(id))
+                    .build();
+
+            int signInResult = userService.signIn(signInDto, session);
+            if(signInResult!=1) throw new Exception("kakao login 실패");
 
             br.close();
         } catch(Exception e){
             e.printStackTrace();
+            throw e;
         }
     }
 }
