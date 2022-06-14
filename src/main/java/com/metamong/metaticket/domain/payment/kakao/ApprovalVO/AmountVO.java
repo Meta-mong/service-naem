@@ -1,4 +1,4 @@
-package com.metamong.metaticket.pay.kakao.ApprovalVO;
+package com.metamong.metaticket.domain.payment.kakao.ApprovalVO;
 
 import lombok.Data;
 
