@@ -8,6 +8,9 @@ import com.metamong.metaticket.service.concert.ConcertService;
 import com.metamong.metaticket.service.concert.FilesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -51,6 +54,14 @@ public class ConcertController {
         ConcertDto concertDto = concertService.concertInfo(id);
         model.addAttribute("concert",concertDto);
         return "concertDetail"; // view 이름
+    }
+
+    // 관리자 페이지 공연 상세내역 조회
+    @GetMapping("/admin/{id}")
+    public String adminConcertInfo(@PathVariable Long id , Model model){
+        ConcertDto concertDto = concertService.concertInfo(id);
+        model.addAttribute("concert",concertDto);
+        return "/admin/admin_ticket_detail"; // view 이름
     }
 
     @GetMapping("/readImg/{id}")
@@ -97,17 +108,23 @@ public class ConcertController {
 
 
     // 공연 전체 조회
+//    @GetMapping("/adminConcert")
+//    public String concertList(Model model, Pageable pageable){
+//        model.addAttribute("concert",concertService.concertAllInfo());
+//        return "adminConcert";
+//    }
+
     @GetMapping("/adminConcert")
-    public String concertList(Model model){
-        model.addAttribute("concert",concertService.concertAllInfo());
-        return "adminConcert";
+    public String concertList(@PageableDefault(size = 10) Pageable pageable,Model model){
+        model.addAttribute("concert",concertService.concertAllInfo(pageable));
+        return "/admin/admin_ticket";
     }
 
     // 장르별 공연 조회
-    @GetMapping("/{genre}")
-    public String concertList_Genre(@PathVariable Genre genre, Model model){
-        model.addAttribute("concert",concertService.concertGenreInfo(genre));
-        return "concert";
+    @GetMapping("/Contents/{genre}")
+    public String concertList_Genre(@PageableDefault(size = 16) Pageable pageable ,@PathVariable Genre genre, Model model){
+        model.addAttribute("concert",concertService.concertGenreInfo(pageable,genre));
+        return "/concert/concert";
     }
 
 }

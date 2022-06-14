@@ -34,7 +34,7 @@ public interface UserService {
     public String inquireEmail(String number);
 
     //비밀번호 변경
-    public boolean modifyPasswd(HttpSession sesson, String passwd);
+    public boolean modifyPasswd(HttpSession session, String passwd);
 
     //비밀번호 변경(다형성)
     public void modifyPasswd(Long id, String passwd);
@@ -64,5 +64,8 @@ public interface UserService {
     public List<UserDTO.SESSION_USER_DATA> allUserInfo();
 
     //회원 탈퇴
-    public boolean unregister(HttpSession session);
+    public boolean unregister(HttpSession session, String passwd);
+
+    //계정 복구
+    public boolean resign(String email);
 }

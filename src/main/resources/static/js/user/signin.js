@@ -1,4 +1,6 @@
 window.addEventListener("load", function(event){
+
+
     var signinbtn = document.getElementById("signinbtn");
 
     var email = document.getElementById("email");
@@ -63,8 +65,32 @@ window.addEventListener("load", function(event){
                 var map = JSON.parse(temp);
                 alert(map.msg);
                 if (map.result == 1) {
-                    //$(location).attr('href', 'redirect:/');
                     location.replace("/");
+                }else if(map.result == -1){
+                    alert("이미 탈퇴한 계정입니다. 다시 회원가입해주세요.");
+                }else if(map.result == 2){
+                    var resign = confirm("이미 탈퇴한 계정입니다. 계정을 복구하시겠습니까?");
+                    if(resign==true){
+                        $.ajax({
+                            url : "/resign",
+                            type: "POST",
+                            data : {"email": $("#email").val()},
+                            dataType: "json",
+                            success : function (data){
+                                if (data.result == true){
+                                    alert("계정이 복구되었습니다. 다시 로그인해주세요.");
+                                    location.replace("/signin");
+                                }else{
+                                    alert("계정 복구가 실패되었습니다. 다시 시도해주세요.");
+                                }
+                            },
+                            error : function (data) {
+                                alert("에러 발생");
+                            }
+                        });
+                    }else{
+                        location.replace("/");
+                    }
                 }
             },
             error: function (data, statusText) {
@@ -74,4 +100,15 @@ window.addEventListener("load", function(event){
             }
         });
     });
+
+    Kakao.init($("#rest-api").text());
+    Kakao.isInitialized();
+
+    $("#kakao").on("click", function(){
+        Kakao.Auth.authorize({
+            redirectUri : $("#redirect-uri").text()
+        });
+    });
+
+
 });

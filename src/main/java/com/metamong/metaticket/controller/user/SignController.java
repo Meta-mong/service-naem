@@ -4,6 +4,7 @@ import com.metamong.metaticket.domain.user.dto.UserDTO;
 import com.metamong.metaticket.service.user.UserService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

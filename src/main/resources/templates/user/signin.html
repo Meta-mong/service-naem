@@ -16,6 +16,8 @@
 <!-- javascript-->
 <script src="/js/user/signin.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
 <body>
 <div class="main">
     <div class="header">
@@ -113,17 +115,21 @@
                         <p>|</p>
 
                         <div class="tofindInfo">
-                            <a href=""> EMAIL/PW 찾기 </a>
+                            <a href="/findaccount"> EMAIL/PW 찾기 </a>
                         </div>
                     </div>
 
                     <div class="kakaoLogin">
-                        <button>카카오 로그인</button>
+                        <button id="kakao">카카오 로그인</button>
                     </div>
 
                     <div class="naverLogin">
-                        <button>네이버 로그인</button>
+                        <button id="naver">네이버 로그인</button>
                     </div>
+
+                    <!-- kakao config -->
+                    <div id="rest-api" th:text="${session.kakaoApiKey}" hidden></div>
+                    <div id="redirect-uri" th:text="${session.kakaoRedirectUri}" hidden></div>
 
                 </div>
             </section>

@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -45,6 +46,10 @@ public class ConcertDto {
 
     private int visitCnt;
 
+    private LocalDateTime createDate;
+    private LocalDateTime updateDate;
+
+
     // ConcertDto 생성
     public static ConcertDto createDto(Concert concert){
         ConcertDto concertDto = ConcertDto.builder()
@@ -62,6 +67,8 @@ public class ConcertDto {
                 .drawEndDate(concert.getDrawEndDate())
                 .price(concert.getPrice())
                 .visitCnt(concert.getVisitCnt())
+                .createDate(concert.getCreatedDate())
+                .updateDate(concert.getUpdatedDate())
                 .build();
 
         return concertDto;

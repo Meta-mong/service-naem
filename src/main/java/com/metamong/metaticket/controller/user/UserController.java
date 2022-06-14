@@ -4,10 +4,14 @@ import com.metamong.metaticket.domain.user.User;
 import com.metamong.metaticket.domain.user.dto.UserDTO;
 import com.metamong.metaticket.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -17,6 +21,12 @@ public class UserController {
     @Autowired
     HttpSession session;
 
+    @Value("${kakao.rest-api-key}")
+    public String apiKey;
+
+    @Value("${kakao.redirect-uri}")
+    public String redirectUri;
+
     //회원가입
     @GetMapping("/signup")
     public String signUp(){
@@ -25,7 +35,11 @@ public class UserController {
 
     //로그인
     @GetMapping("/signin")
-    public String SignIn(){
+    public String SignIn(Model model){
+        //카카오 로그인 시 사용할 정보
+        session.setAttribute("kakaoApiKey", apiKey);
+        session.setAttribute("kakaoRedirectUri", redirectUri);
+
         return "/user/signin";
     }
 
@@ -42,43 +56,23 @@ public class UserController {
         return "/user/findAccount";
     }
 
+    //마이페이지 첫 화면(회원 상세 정보 페이지)
+    @GetMapping("/mypage")
+    public String myPage(){
+        return "/mypage/myPage_userInfo";
+    }
+
+    //계정 복구
+    @PostMapping("/resign")
+    @ResponseBody
+    public Map<String ,Object> resign(@RequestParam("email") String email){
+        Map<String, Object> map = new HashMap<>();
+        boolean result = userService.resign(email);
+        map.put("result", result);
+        return map;
+    }
+
     ////To do
-    //회원 정보 수정
-    @GetMapping("/user/modifyInfo")
-    public String modifyInfo(){
-        return "/user/modifyInfo";
-    }
-
-    @PostMapping("/user/modifyInfo")
-    @ResponseBody
-    public boolean modifyInfo(@ModelAttribute UserDTO.SESSION_USER_DATA dto){
-        return false;
-    }
-
-    //회원 탈퇴 -> 페이지 만들고 해당 페이지에서 비밀번호 입력하고 탈퇴 버튼 누르도록 구현
-    //내 정보 수정 페이지에 포함,,? 버튼으로
-    @GetMapping("/user/unregister")
-    public String unregister(){
-        return "/user/unregister"; //비밀번호 체크하는 view
-    }
-
-    @PostMapping("/user/unregister")
-    @ResponseBody
-    public boolean unregisterConfirm(){
-        return userService.unregister(session);
-        //뷰에서 /signout url로 리다이렉트
-    }
-
-    //회원 탈퇴 시 패스워드 체크(ajax) -> view: 정말 탈퇴하시겠습니까?
-    @PostMapping("/user/passwdck")
-    @ResponseBody
-    public boolean passwdCheck(@RequestParam("passwd") String passwd){
-        UserDTO.SESSION_USER_DATA dto = (UserDTO.SESSION_USER_DATA)session.getAttribute("user");
-        User user = userService.userInfo(dto.getId());
-        boolean result = userService.passwdCheck(passwd.trim(), user);
-        return result;
-    }
-
     //전체 회원 정보 조회 -> adminController 로 이전
     
 }

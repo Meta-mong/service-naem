@@ -14,11 +14,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import java.util.Collection;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -97,8 +102,8 @@ class NoticeRepositoryTest {
         dto.setClassify("테스트");
         dto.setTitle("테스트");
         dto.setContent("테스트");
-        dto.setModDate(LocalDateTime.now());
-        dto.setRegDate(LocalDateTime.now());
+        dto.setCreateDate(LocalDate.now());
+        dto.setUpdateDate(LocalDate.now());
 
         boolean result = noticeService.register(dto);
 
@@ -115,25 +120,7 @@ class NoticeRepositoryTest {
     @Test
     @DisplayName("공지사항 수정 테스트")
     public void updateNotice() throws Exception{
-        /*
-        Notice findNotice = noticeRepository.findById(1L).get();
-        NoticeDTO.Notice dto = new NoticeDTO.Notice();
-        dto.setId(1L);
-        dto.setTitle("수정1");
-        dto.setContent("수정2");
-        dto.setClassify("수정3");
-        dto.setAdminId(1L);
 
-        noticeController.noticeUpdate(dto, request, response);
-
-        Notice updateNotice = noticeRepository.findById(1L).get();
-
-        assertAll(
-                () -> assertEquals(updateNotice.getTitle(),"수정"),
-                () -> assertEquals(updateNotice.getContent(), "수정"),
-                () -> assertEquals(updateNotice.getClassify(),"수정")
-        );
-        */
         Notice findNotice = noticeRepository.findById(1L).get();
         NoticeDTO.Notice dto = new NoticeDTO.Notice();
         dto.setId(1L);
@@ -169,6 +156,14 @@ class NoticeRepositoryTest {
 
         Assert.assertFalse(deletedNotice.isPresent());
 
+    }
+    @Test
+    public void pageTest() throws Exception {
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<NoticeDTO.Notice> notice = noticeService.allNoticeInfo(pageable);
+        for(NoticeDTO.Notice notice1: notice ){
+            System.out.println(notice1);
+        }
     }
 
 

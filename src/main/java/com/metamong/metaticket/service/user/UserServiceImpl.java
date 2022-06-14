@@ -123,7 +123,7 @@ public class UserServiceImpl implements UserService {
             dos.close();
 
             int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
+            //System.out.println("responseCode : " + responseCode);
             BufferedReader br;
             if(responseCode==202){
                 br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -140,7 +140,7 @@ public class UserServiceImpl implements UserService {
             }
             br.close();
 
-            System.out.println(response.toString());
+            //System.out.println(response.toString());
 
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
@@ -264,11 +264,11 @@ public class UserServiceImpl implements UserService {
         UserDTO.SESSION_USER_DATA userDTO = null;
 
         if(user==null) {
-            System.out.println("계정 정보 없음");
+            //System.out.println("계정 정보 없음");
             return 0;
         }
         boolean passwdCheck = passwdCheck(dto.getPasswd(), user);
-        System.out.println("valid 확인 : "+ user.isValid());
+        //System.out.println("valid 확인 : "+ user.isValid());
         if(passwdCheck==true) {
             if(user.isValid()==true){
                 userDTO = User.createUserDTO(user);
@@ -380,7 +380,6 @@ public class UserServiceImpl implements UserService {
             dos.close();
 
             int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
             BufferedReader br;
             if(responseCode==202){
                 br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -396,9 +395,6 @@ public class UserServiceImpl implements UserService {
                 response.append(inputLine);
             }
             br.close();
-
-            System.out.println(response.toString());
-
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         } catch (IOException ie){
@@ -428,13 +424,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean unregister(HttpSession session) {
+    public boolean unregister(HttpSession session, String passwd) {
         try {
             UserDTO.SESSION_USER_DATA dto = (UserDTO.SESSION_USER_DATA) session.getAttribute("user");
             //추후 연쇄 삭제될 사항 있는지 확인
             User user = userRepository.findById(dto.getId()).get();
-            user.setValid(false);
+            boolean passwdCheck = passwdCheck(passwd, user);
+            if(passwdCheck==false) return false;
+
             //탈퇴 시 계정 복구 기간을 90일로 지정
+            user.setValid(false);
             user.setValid_date(LocalDateTime.now().plusDays(90));
             userRepository.save(user);
             return true;
@@ -444,4 +443,17 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public boolean resign(String email){
+        User user = userRepository.findByEmail(email.trim());
+        user.setValid(true);
+        user.setValid_date(null);
+        try{
+            userRepository.save(user);
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
