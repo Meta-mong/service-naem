@@ -9,4 +9,10 @@ public class MainController {
     public String main(){
         return "index";
     }
+
+    @GetMapping("/ticketopen")
+    public String ticketopen(){
+        return "/ticketopen/ticket_open";
+    }
+
 }

@@ -2,26 +2,17 @@ package com.metamong.metaticket.controller.user;
 
 import com.metamong.metaticket.domain.user.dto.UserDTO;
 import com.metamong.metaticket.service.user.UserService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller //추후 restcontroller로 수정
+@RestController
 @RequestMapping("/sign")
 public class SignController {
     @Autowired
@@ -32,7 +23,6 @@ public class SignController {
 
     //이메일 중복 체크
     @PostMapping("/emailcheck")
-    @ResponseBody
     public String emailCheck(@RequestParam("email") String email){
         boolean result = userService.emailCheck(email);
         //true : 중복 , false : 중복X
@@ -41,7 +31,6 @@ public class SignController {
     }
 
     //전화번호 중복 체크 및 인증번호 전송
-    @ResponseBody
     @PostMapping("/numbercheck")
     public Map<String, Object> numberCheck(@RequestParam("number") String number){
         boolean result = userService.phoneNumberCheck(number.trim());
@@ -73,7 +62,6 @@ public class SignController {
 
     //회원가입
     @PostMapping("/signup")
-    @ResponseBody
     public Map<String, Object> signUp(@Valid UserDTO.SIGN_UP userDTO, BindingResult bindingResult, Model model){
         //System.out.println(userDTO.toString());
         Map<String, Object> map = new HashMap<>();
@@ -97,7 +85,6 @@ public class SignController {
 
     //로그인
     @PostMapping("/signin")
-    @ResponseBody
     public Map<String, Object> signIn(@ModelAttribute UserDTO.SIGN_IN dto){
         Map<String, Object> map = new HashMap<>();
         String message = null;
@@ -118,7 +105,6 @@ public class SignController {
     }
 
     //휴대전화번호로 인증번호 전송
-    @ResponseBody
     @PostMapping("/sendauth")
     public Map<String, Object> sendAuth(@RequestParam("phone_number") String number){
         UserDTO.FIND_EMAIL dto = UserDTO.FIND_EMAIL.builder().number(number).build();
@@ -149,7 +135,6 @@ public class SignController {
 
     //이메일 찾기
     @PostMapping("/findemail")
-    @ResponseBody
     public Map<String, Object> findEmail(@RequestParam("phone_number") String number){
         Map<String, Object> map = new HashMap<>();
         String email = userService.inquireEmail(number);
@@ -159,7 +144,6 @@ public class SignController {
 
     //패스워드 찾기(임시 비밀번호 발급)
     @PostMapping("/findpasswd")
-    @ResponseBody
     public Map<String, Object> findPasswd(@RequestParam("email") String email, @RequestParam("phone_number") String number){
         //실패 : -1, 성공 : 1
         Map<String, Object> map = new HashMap<>();
