@@ -1,6 +1,7 @@
 package com.metamong.metaticket.controller.draw;
 
 import com.metamong.metaticket.domain.draw.Draw;
+import com.metamong.metaticket.domain.draw.dto.DrawDTO;
 import com.metamong.metaticket.domain.user.dto.UserDTO;
 import com.metamong.metaticket.service.draw.DrawService;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class DrawController {
     @GetMapping("/")
     public String selectMyDraws(Model model) {
         UserDTO.SESSION_USER_DATA currentUser = (UserDTO.SESSION_USER_DATA) session.getAttribute("user");
-        List<Draw> myDraws = drawService.findByUserId(currentUser.getId());
+        List<DrawDTO.HISTORY> myDraws = drawService.findByUserId(currentUser.getId());
         model.addAttribute("myDraws", myDraws);
         return "mypage/draws";
     }

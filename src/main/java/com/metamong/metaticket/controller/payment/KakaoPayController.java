@@ -1,10 +1,13 @@
 package com.metamong.metaticket.controller.payment;
 
+import com.metamong.metaticket.domain.concert.dto.ConcertDto;
 import com.metamong.metaticket.domain.payment.Payment;
+import com.metamong.metaticket.service.concert.ConcertService;
 import com.metamong.metaticket.service.payment.KakaoPayService;
 import com.metamong.metaticket.service.payment.PaymentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.h2.engine.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +22,12 @@ public class KakaoPayController {
 
     private final KakaoPayService kakaoPayService;
     private final PaymentService paymentService;
+    private final ConcertService concertService;
 
-    @GetMapping("/kakaoPay")
-    public String kakaoPay() {
-        return "/pay/kakao/kakaoPay";
+    @GetMapping("/payment")
+    public String PaymentPage(@RequestParam("concert") Long concertId, Model model) {
+        model.addAttribute( "concertInfo", concertService.concertInfo(concertId));
+        return "/payment/kakao/pay";
     }
 
     @PostMapping("/kakaoPay/{concertId}")
@@ -39,7 +44,7 @@ public class KakaoPayController {
         log.info("kakaoPaySuccess pg_token : " + pg_token);
 
         model.addAttribute("info", kakaoPayService.kakaoPayInfo(pg_token, paymentId));
-        return "pay/kakao/success";
+        return "payment/kakao/success";
     }
 
 }
