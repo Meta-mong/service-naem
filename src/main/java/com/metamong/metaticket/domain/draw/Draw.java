@@ -30,10 +30,6 @@ public class Draw {
     @JoinColumn(name = "concert_id")
     private Concert concert;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "concert_id")
-//    private Payment payment;
-
     private int ranking;
 
     @Enumerated(EnumType.STRING)

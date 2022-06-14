@@ -40,7 +40,7 @@ public class CancelNotPaidDrawRPW {
     public JpaCursorItemReader<Draw> cancelNotPaidDrawsReader(@Value("#{jobParameters[concertId]}") Long concertId) {
         String findNotPaidDraw = "select d from Draw d " +
                 "join d.concert c " +
-                "where c.id=:concertId and d.emailSendDate<:threeDaysAgo";
+                "where c.id=:concertId and d.emailSendDate<:threeDaysAgo and d.state='WIN'";
 
         Map<String, Object> params = new HashMap<>();
         params.put("concertId", concertId);
