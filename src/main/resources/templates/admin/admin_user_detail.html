@@ -16,8 +16,10 @@
         <!-- css -->
         <link rel="stylesheet" href="/css/admin/admin.css">
         <link rel="stylesheet" href="/css/admin/admin_user_detail.css">
-        <!--<script defer="defer" src="/js/admin/admin.js"></script>-->
 
+        <!-- js -->
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="/js/admin/admin_user_detail.js"></script>
         <title>admin</title>
     </head>
 
@@ -35,27 +37,27 @@
                             <ul class="attr">
                                 <li class="attr_sub">
                                     <div class="attr_key">이메일</div>
-                                    <input class="attr_value" type="text" value="metamong1@naver.com" readonly>
+                                    <input class="attr_value" type="text" th:value="${user.email}" readonly id="email">
                                 </li>
                                 <li class="attr_sub">
                                     <div class="attr_key">이름</div>
-                                    <input class="attr_value" type="text" value="메타몽">
+                                    <input class="attr_value" type="text" th:value="${user.name}" id="name">
                                 </li>
                                 <li class="attr_sub">
                                     <div class="attr_key">생년월일</div>
-                                    <input class="attr_value" type="text" value="1996/11/19" readonly>
+                                    <input class="attr_value" type="text" th:value="${user.age}" readonly>
                                 </li>
                                 <li class="attr_sub">
                                     <div class="attr_key">휴대폰</div>
-                                    <input class="attr_value" type="text" value="010-1111-1111" readonly>
+                                    <input class="attr_value" type="text" th:value="${user.number}" readonly>
                                 </li>
                                 <li class="attr_sub">
                                     <div class="attr_key">응모 탈락 횟수</div>
-                                    <input class="attr_value" type="text" value="5">
+                                    <input class="attr_value" type="text" th:value="${user.loserCnt}" id="loserCnt">
                                 </li>
                                 <li class="attr_sub">
                                     <div class="attr_key">응모 취소 횟수</div>
-                                    <input class="attr_value" type="text" value="3">
+                                    <input class="attr_value" type="text" th:value="${user.cancelCnt}" id="cancelCnt">
                                 </li>
                             </ul>
                         </div>
@@ -70,53 +72,23 @@
                                     <tr>
                                         <th>공연번호</th>
                                         <th>공연명</th>
+                                        <th>대기번호</th>
                                         <th>당첨여부</th>
                                         <th>결제여부</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>레베카</td>
-                                        <td>Y</td>
-                                        <td>Y</td>
+                                    <tr th:each="draw : ${draws}">
+                                        <td th:text="${draw.id}"></td>
+                                        <td th:text="${draw.id}"></td>
+                                        <td th:text="${draw.id}"></td>
+                                        <td th:text="${draw.id}"></td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>루나</td>
-                                        <td>Y</td>
-                                        <td>N</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>광화문 연가</td>
-                                        <td>N</td>
-                                        <td>N</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>캣츠</td>
-                                        <td>Y</td>
-                                        <td>Y</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>캣츠</td>
-                                        <td>Y</td>
-                                        <td>Y</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>캣츠</td>
-                                        <td>Y</td>
-                                        <td>Y</td>
-                                    </tr>
-
                                 </tbody>
                             </table>
                         </div>
-                        <button type="button" class="ret_btn">돌아가기</button>
-                        <button type="button" class="modify_btn">수정</button>
+                        <button type="button" class="ret_btn" id="ret_btn">돌아가기</button>
+                        <button type="button" class="modify_btn" id="modify_btn">수정</button>
                     </div>
                 </div>
             </section>
