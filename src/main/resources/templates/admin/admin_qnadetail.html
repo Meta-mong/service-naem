@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/userqna/userqnadetail.css">
+
+  <!-- js -->
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="/js/question/userqnadetail.js"></script>
+
+
+
+  <title>사용자 QnA 상세페이지</title>
+</head>
+
+<body>
+
+    <div class="container" style="min-height: 100vh;">
+
+      <div class="innertitle">QnA상세페이지</div>
+      <section>
+        <div class="inner">
+          <form action='<c:url value="/admin/admin_aqlist"/>' method="post">
+            <div class="userQnA"> 
+              <table class ="QnA">
+                <tr>
+                  <th scope="row">글번호 </th>
+                  <td th:text="${question.id}" id="ques_id"></td>
+                </tr>
+                <tr>
+                  <th scope="row">분류</th>
+                  <td th:text="${question.classify}"></td>
+                </tr>
+                <tr>
+                  <th scope="row">제목</th>
+                  <td th:text="${question.title}" id="title"></td>
+                </tr>
+                 <tr>
+                  <th scope="row">작성일</th>
+                   <td scope="row" th:text="${question.createDate}"></td>
+                </tr>
+                <tr>
+                  <th scope="row">작성자</th>
+                  <td scope="row" th:text="${question.userName}"></td>
+                </tr>
+                <tr>
+                  <th>내용</th>
+                  <td th:text="${question.quesContent}" id="content"></td>
+                </tr>
+              
+              </table>
+            </div>
+          </form>
+        
+          <div class="btn">
+            <button type="button" class="qnalist" onclick="questionList()">목록</button>
+            <button type="button" class="update" th:onclick="|javascript:qnaupdate('${question.id}')|" >답변 등록</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+</body>
+
+<!--목록으로 가기-->
+<script type="text/javascript">
+  function questionList() {
+    location.href = "/admin/aqlist";
+  }
+</script>
+
+<!--문의사항 답변 등록 페이지로 가기-->
+<script type="text/javascript">
+  function qnaupdate(id) {
+    var id = id;
+    window.location.href = "/admin/qnareply/"+id
+  }
+</script>
+
+<!--function qnadelete(id) {-->
+<!--var id = id;-->
+<!--window.location.href = "/admin/qnadelete/" +id-->
+<!--}-->
+</html>

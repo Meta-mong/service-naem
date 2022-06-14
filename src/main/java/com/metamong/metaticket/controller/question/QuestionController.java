@@ -72,7 +72,7 @@ public class QuestionController {
     @GetMapping("/userqnaadd")
     public String questionadd(Model model){
         UserDTO.SESSION_USER_DATA dto = (UserDTO.SESSION_USER_DATA)session.getAttribute("user");
-        model.addAttribute("UserId", dto.getName());
+        model.addAttribute("userId", dto.getName());
         return "/question/userqnaadd";
     }
 
@@ -128,7 +128,6 @@ public class QuestionController {
         Map<String,Object> map = new HashMap<>();
 
         QuestionDTO.Quest dto = questionService.questiondetail(questionId);
-        System.out.println("출력 : "+dto.toString());
         dto.setTitle(title);
         dto.setQuesContent(content);
         dto.setClassify(classify);
