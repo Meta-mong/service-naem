@@ -12,7 +12,9 @@
   <!-- css -->
   <link rel="stylesheet" href="/css/userqna/userqnaadd.css">
 
-  
+  <!-- js -->
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="/js/question/userqnaupdate.js"></script>
 
 
   <title>사용자 QnA수정 </title>
@@ -92,38 +94,41 @@
         <div class="inner">
           <form>
             <div class="form-group">
+              <div id="questionId" hidden th:text="${question.id}"></div>
               <label for="title">제목</label>
-              <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
+              <input type="text" class="form-control" id="title" th:value="${question.title}" >
             </div>
 
             <div class="writer-group">
               <label for="content" class="writer">작성자</label>
-              <div class="userid">메타몽</div>
+              <div class="userid" th:text="${question.userName}"></div>
             </div>
 
             <div class="classify-group">
               <label for="classify" class="choice">분류</label>
-              <select name="classify" id="classify" class="classify" required="required">
+              <select name="classify" id="classify" class="classify" th:value="${question.classify}"required="required">
                 <option value="">=== 선택 ===</option>
-                <option value="공연 소식">공연/티켓</option>
-                <option value="공연 종료">취소/환불</option>
-                <option value="공연 오픈">이벤트</option>
-                <option value="서비스 점검">회원</option>
+                <option value="공연/티켓">공연/티켓</option>
+                <option value="취소/환불">취소/환불</option>
+                <option value="이벤트">이벤트</option>
+                <option value="회원">회원</option>
                 <option value="기타">기타</option>
               </select>
             </div>
   
             <div class="form-group cont">
               <label for="content">내용</label>
-              <textarea class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
+              <textarea class="form-control" id="content" th:text="${question.quesContent}" placeholder="내용을 입력하세요"></textarea>
             </div>
           </form>
+
+
           <div class="btn">
-            <button type="button" class="delete" id="btn-save">취소</button>
-            <button type="button" class="update" id="btn-save">등록</button>
+            <button type="button" class="delete" th:onclick="|javascript:cancel('${question.id}')|">취소</button>
+            <button type="button" class="update" id="userqnaupdate-btn" >등록</button>
           </div>
-          
-         
+
+
         </div>
 
       </section>
@@ -152,5 +157,14 @@
   </div>
 
 </body>
+<!--수정 취소 후 목록으로 가기-->
+<script type="text/javascript">
+  function cancel(id) {
+    var id = id;
+    window.location.href = "/question/qlist"
+  }
+</script>
+
+
 
 </html>
