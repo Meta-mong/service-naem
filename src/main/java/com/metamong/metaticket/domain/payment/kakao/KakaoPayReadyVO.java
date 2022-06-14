@@ -1,4 +1,4 @@
-package com.metamong.metaticket.pay.kakao;
+package com.metamong.metaticket.domain.payment.kakao;
 
 import lombok.Data;
 

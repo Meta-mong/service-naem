@@ -1,7 +1,7 @@
-package com.metamong.metaticket.pay.kakao;
+package com.metamong.metaticket.domain.payment.kakao;
 
-import com.metamong.metaticket.pay.kakao.ApprovalVO.AmountVO;
-import com.metamong.metaticket.pay.kakao.ApprovalVO.CardVO;
+import com.metamong.metaticket.domain.payment.kakao.ApprovalVO.AmountVO;
+import com.metamong.metaticket.domain.payment.kakao.ApprovalVO.CardVO;
 import lombok.Data;
 
 import java.util.Date;
