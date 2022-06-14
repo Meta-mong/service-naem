@@ -14,7 +14,8 @@
   <link rel="stylesheet" href="/css/admin/admin_user.css">
 
   <!-- js -->
-  <script defer src="/js/admin/admin.js"></script>
+  <script src="/js/admin/admin_user.js"></script>
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
   <title>admin</title>
 </head>
@@ -34,27 +35,47 @@
         </div>
         <table class="user_list">
           <tr>
-            <th>번호</th>
-            <th>회원아이디</th>
-            <th>회원이름</th>
-            <th>이메일</th>
-            <th>블랙리스트여부</th>
+            <th>id</th>
+            <th>회원 이메일</th>
+            <th>회원 이름</th>
+            <th>회원 전화번호</th>
+<!--            <th>블랙리스트여부</th>-->
           </tr>
-          <tr onclick="move_userDetail()">
-            <td>1</td>
-            <td>metamong1</td>
-            <td>메타몽1</td>
-            <td>metamong1@naver.com</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>metamong2</td>
-            <td>메타몽2</td>
-            <td>metamong2@naver.com</td>
-            <td>💣</td>
+          <tr th:each="user : ${users}" class="user-detail">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.number}"></td>
           </tr>
         </table>
+
+        <!-- pagination-->
+        <nav>
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" th:if="${pageInfo.presentPage}<=1" href="#">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+              <a class="page-link" th:if="${pageInfo.presentPage}>1" href="/admin/allusers/" th:attrappend="href=${pageInfo.presentPage}-1" >
+                <span aria-hidden="true">&laquo;</span>
+
+              </a>
+            </li>
+
+            <li class="page-item" th:each="num : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
+              <a class="page-link" href="/admin/allusers/" th:attrappend="href=${num}" th:text="${num}"></a>
+            </li>
+
+            <li class="page-item">
+              <a class="page-link" th:if="${pageInfo.presentPage} >= ${pageInfo.totalPage}" href="#">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+              <a class="page-link" th:if="${pageInfo.presentPage} < ${pageInfo.totalPage}" href="/admin/allusers/" th:attrappend="href=${pageInfo.presentPage}+1" >
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </section>
   </div>

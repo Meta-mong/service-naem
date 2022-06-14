@@ -385,18 +385,18 @@ body,.main,.header-top-ul {
 	font-size: 15px;
 }
 
-.container .inner .checkInfo{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    height : 30px;
-    margin-top: 30px;
-}
+/*.container .inner .checkInfo{*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    font-size: 18px;*/
+/*    height : 30px;*/
+/*    margin-top: 30px;*/
+/*}*/
 
-.container .inner .checkInfo .checkAuto{
-    margin-left: 20px;
-}
+/*.container .inner .checkInfo .checkAuto{*/
+/*    margin-left: 20px;*/
+/*}*/
 
 .container .inner .loginBt button,
 .container .inner .kakaoLogin button,

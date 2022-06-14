@@ -9,6 +9,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -413,6 +417,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User userInfo(String email) {
+        return userRepository.findByEmail(email.trim());
+    }
+
+    @Override
     public List<UserDTO.SESSION_USER_DATA> allUserInfo() {
         List<User> users = userRepository.findAll();
         List<UserDTO.SESSION_USER_DATA> usersDTO = new ArrayList<>();
@@ -456,4 +465,26 @@ public class UserServiceImpl implements UserService {
             return false;
         }
     }
+
+    @Override
+    public boolean saveUser(User user){
+        try {
+            userRepository.save(user);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public long allUserCnt() {
+        return userRepository.count();
+    }
+
+    @Override
+    public Page<User> createPage(Pageable pageable){
+        Page<User> users = userRepository.findAll(pageable);
+        return users;
+    }
+
 }
