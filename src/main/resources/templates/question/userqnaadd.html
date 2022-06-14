@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <!-- css -->
+<!--   css -->
   <link rel="stylesheet" href="/css/userqna/userqnaadd.css">
 
   
@@ -90,41 +90,41 @@
       <div class="innertitle">QnA등록</div>
       <section>
         <div class="inner">
-          <form>
+          <form action="/question/userqnaadd" method="post">
             <div class="form-group">
               <label for="title">제목</label>
-              <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
+              <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요">
             </div>
 
             <div class="writer-group">
               <label for="content" class="writer">작성자</label>
-              <div class="userid">메타몽</div>
+              <div class="userid" th:text="${question.userName}"></div>
             </div>
 
             <div class="classify-group">
               <label for="classify" class="choice">분류</label>
               <select name="classify" id="classify" class="classify" required="required">
                 <option value="">=== 선택 ===</option>
-                <option value="공연 소식">공연/티켓</option>
-                <option value="공연 종료">취소/환불</option>
-                <option value="공연 오픈">이벤트</option>
-                <option value="서비스 점검">회원</option>
+                <option value="공연/티켓">공연/티켓</option>
+                <option value="취소/환불">취소/환불</option>
+                <option value="이벤트">이벤트</option>
+                <option value="회원">회원</option>
                 <option value="기타">기타</option>
               </select>
             </div>
   
             <div class="form-group cont">
               <label for="content">내용</label>
-              <textarea class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
+              <textarea class="form-control" id="content" name="quesContent" placeholder="내용을 입력하세요"></textarea>
+            </div>
+
+            <div class="btn">
+              <button type="submit" class="update" id="btn-save">등록</button>
             </div>
           </form>
 
 
-           <div class="btn">
-          <button type="button" class="delete" id="btn-save">삭제</button>
-          <button type="button" class="update" id="btn-save">수정</button>
-        </div>
-
+          </div>
       </section>
     </div>
 
@@ -151,5 +151,6 @@
   </div>
 
 </body>
+
 
 </html>

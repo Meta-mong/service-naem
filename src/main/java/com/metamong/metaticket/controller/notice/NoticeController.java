@@ -44,6 +44,7 @@ public class NoticeController {
     }
 
 
+// 공지사할 상세페이지 조회
     @GetMapping("/noticedetail/{noticeId}")
     public String noticedetail (@PathVariable Long noticeId,Model model) throws Exception {
         NoticeDTO.Notice noticeDto = noticeService.noticedetail(noticeId);

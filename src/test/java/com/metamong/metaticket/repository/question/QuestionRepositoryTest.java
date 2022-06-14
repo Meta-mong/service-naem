@@ -113,15 +113,15 @@ class QuestionRepositoryTest {
     //객체로 변환
 
     //문의사항 등록
-    @Test
-    @DisplayName("등록")
-    void register() throws Exception {
-
-        Question question = questionService.dtoToEntity(dto);
-        Question savedQuestion = questionRepository.save(question);
-
-        assertNotNull(savedQuestion);
-    }
+//    @Test
+//    @DisplayName("등록")
+//    void register() throws Exception {
+//
+//        boolean result = questionService.register(dto);
+//        Question savedQuestion = questionRepository.save(question);
+//
+//        assertNotNull(savedQuestion);
+//    }
 
 
     @Test
@@ -139,25 +139,25 @@ class QuestionRepositoryTest {
     }
 
 
-    @Test
-    @DisplayName("리스트 조회")
-    void list() throws Exception {
-        List<QuestionDTO.Quest> list = questionService.allQuestionList();
-        for (QuestionDTO.Quest temp : list) {
-            System.out.println(temp);
-        }
+//    @Test
+//    @DisplayName("리스트 조회")
+//    void list() throws Exception {
+//        List<QuestionDTO.Quest> list = questionService.allQuestionList();
+//        for (QuestionDTO.Quest temp : list) {
+//            System.out.println(temp);
+//        }
+//
+//    }
 
-    }
-
-    @Test
-    @DisplayName("댓글 등록 여부")
-    void answer() throws Exception {
-
-        Question question = questionService.dtoToEntity(dto);
-        Question savedQuestion = questionRepository.save(question);
-
-        assertNotNull(savedQuestion);
-    }
+//    @Test
+//    @DisplayName("댓글 등록 여부")
+//    void answer() throws Exception {
+//
+//        boolean result = questionService.register(dto);
+//        Question savedQuestion = questionRepository.save(question);
+//
+//        assertNotNull(savedQuestion);
+//    }
 
 
     @Test

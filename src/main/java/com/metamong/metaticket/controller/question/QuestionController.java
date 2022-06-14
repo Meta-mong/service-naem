@@ -4,9 +4,15 @@ import com.metamong.metaticket.domain.notice.Notice;
 import com.metamong.metaticket.domain.notice.dto.NoticeDTO;
 import com.metamong.metaticket.domain.question.Question;
 import com.metamong.metaticket.domain.question.dto.QuestionDTO;
+import com.metamong.metaticket.domain.user.User;
+import com.metamong.metaticket.domain.user.dto.UserDTO;
 import com.metamong.metaticket.service.question.QuestionService;
+import com.metamong.metaticket.service.user.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,61 +21,121 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/question")
 @RequiredArgsConstructor
+@Slf4j
 public class QuestionController {
 
     @Autowired
     QuestionService questionService;
 
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    HttpSession session;
     @GetMapping("/reply")
     public String reply(){
         return "reply";
     }
+
     //문의사항 리스트 조회
-    @GetMapping("/list")
-    public String questionList(Model model) throws Exception{
-        model.addAttribute("Allqustionlist", questionService.allQuestionList());
-    return "questionlist";
+    @GetMapping("/qlist")
+    public String questionList( Model model, Pageable pageable) throws Exception{
+        Page<QuestionDTO.Quest> questionList = questionService.allQuestionList(pageable);
+        model.addAttribute("allQuestionList", questionList);
+
+        log.info("총 element 수 : {}, 전체 page 수 : {}, 페이지에 표시할 element 수 : {}, 현재 페이지 index : {}, 현재 페이지의 element 수 : {}",
+                questionList.getTotalElements(), questionList.getTotalPages(), questionList.getSize(),
+                questionList.getNumber(), questionList.getNumberOfElements());
+
+    return "question/userqnalist";
+    }
+
+    //문의사항 상세보기
+    @GetMapping("/questiondetail/{questionId}")
+    public String questiondetail (@PathVariable Long questionId,Model model) throws Exception {
+        QuestionDTO.Quest questionDto = questionService.questiondetail(questionId);
+        User user = userService.userInfo(questionDto.getUserId());
+        model.addAttribute("userName", user.getName());
+        model.addAttribute("question",questionDto);
+        return "/question/userqnadetail";
     }
 
     //문의사항 등록
-    @PostMapping(value = "/upload")
-    public String questionUpload(@ModelAttribute QuestionDTO.Quest dto, Model model){
+    @GetMapping("/userqnaadd")
+    public String questionadd(Model model){
+        UserDTO.SESSION_USER_DATA dto = (UserDTO.SESSION_USER_DATA)session.getAttribute("user");
+        model.addAttribute("UserId", dto.getName());
+        return "/question/userqnaadd";
+    }
+
+
+
+
+    //문의사항 등록 - 처리
+    @PostMapping( "/userqnaadd")
+    public String questionUpload(@ModelAttribute QuestionDTO.AddQuest dto, Model model,Pageable pageable){
 
         try {
-            boolean result = questionService.register(dto);
+            boolean result = questionService.register(dto, session);
             if(result == true){
-                List<QuestionDTO.Quest> qup = questionService.allQuestionList();
+                Page<QuestionDTO.Quest> qup = questionService.allQuestionList(pageable);
                 model.addAttribute("list",qup);
-                return "questionlist";
+                return "redirect:/question/qlist";
             }
             throw new Exception();
         } catch (Exception e) {
+            e.printStackTrace();
             model.addAttribute("err","등록실패");
-            return "questionupload"; // jsp
+            return "redirect:/question/userqnaadd";
 
         }
     }
 
     //문의사항 삭제
-    @PostMapping("/delete/{id}")
-    public ResponseEntity questionDelete (@PathVariable Long id) throws Exception {
-        questionService.questionDelete(id);
-        return ResponseEntity.ok(id);
+    @GetMapping("/userqnadelete/{questionId}")
+    public void questionDelete (@PathVariable Long questionId, HttpServletRequest request,
+                                HttpServletResponse response) throws Exception {
+        questionService.questionDelete(questionId);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/question/qlist");
+        dispatcher.forward(request,response);
     }
 
+
+    //문의사항 수정 페이지
+    @GetMapping("/userqnaupdate/{questionId}")
+    public String questionUpdate(@PathVariable Long questionId, Model model ) throws Exception {
+        QuestionDTO.Quest questionDto = questionService.questiondetail(questionId);
+        User user = userService.userInfo(questionDto.getUserId());
+        model.addAttribute("userName", user.getName());
+        model.addAttribute("question",questionDto);
+        return "/question/userqnaupdate";
+    }
+
+
     //문의사항 수정
-    @PostMapping("/update/{id}")
-    public void questionUpdate(@PathVariable Long id,
-                               @ModelAttribute QuestionDTO.Quest dto,
-                               HttpServletRequest request, HttpServletResponse response) throws Exception {
+    @PostMapping("/userqnaupdate/{questionId}")
+    @ResponseBody
+    public Map<String,Object> questionUpdate(@PathVariable Long questionId,
+                              @RequestParam("classify") String classify,@RequestParam("title") String title, @RequestParam("content") String content) throws Exception {
+        Map<String,Object> map = new HashMap<>();
+
+        QuestionDTO.Quest dto = questionService.questiondetail(questionId);
+        System.out.println("출력 : "+dto.toString());
+        dto.setTitle(title);
+        dto.setQuesContent(content);
+        dto.setClassify(classify);
+
         Question questionUpdate = questionService.updateQuestion(dto);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/question/questionlist");
-        dispatcher.forward(request, response);
+        map.put("result",true);
+        return map;
     }
 
 
@@ -90,23 +156,23 @@ public class QuestionController {
     }
 
     //댓글 여부
-    @PostMapping(value = "/answer")
-    public String answer (@ModelAttribute QuestionDTO.Quest dto, Model model){
-
-        try {
-            boolean result = questionService.register(dto);
-            if(result == true){
-                List<QuestionDTO.Quest> replyanswer  = questionService.allQuestionList();
-                model.addAttribute("answer",replyanswer);
-                return "questionlist";
-            }
-            throw new Exception();
-        } catch (Exception e) {
-            model.addAttribute("err","등록실패");
-            return "replyupload"; // jsp
-
-        }
-    }
+//    @PostMapping(value = "/answer")
+//    public String answer (@ModelAttribute QuestionDTO.Quest dto, Model model,Pageable pageable){
+//
+//        try {
+//            boolean result = questionService.register(dto,session);
+//            if(result == true){
+//                Page<QuestionDTO.Quest> replyanswer  = questionService.allQuestionList(pageable);
+//                model.addAttribute("answer",replyanswer);
+//                return "questionlist";
+//            }
+//            throw new Exception();
+//        } catch (Exception e) {
+//            model.addAttribute("err","등록실패");
+//            return "replyupload"; // jsp
+//
+//        }
+//    }
 
 
 }

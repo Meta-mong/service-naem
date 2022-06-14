@@ -96,28 +96,23 @@
               <table class="QnA">
                 <tr>
                   <th scope="row">분류</th>
-                  <td>공연/예매</td>
+                  <td th:text="${notice.classify}"></td>
                 </tr>
                 <tr>
                   <th scope="row">제목</th>
-                  <td>문의드립니다</td>
+                  <td th:text="${notice.title}"></td>
                 </tr>
                 <tr>
                   <th scope="row">작성일</th>
-                  <td></td>
+                  <td scope="row" th:text="${notice.createDate}"></td>
                 </tr>
                 <tr>
                   <th scope="row">작성자</th>
-                  <td>아이디</td>
+                  <td scope="row" th:text="${notice.id}"></td>
                 </tr>
                 <tr>
                   <th>내용</th>
-                  <td>언제 응모가 열리나요..??</br>
-                    언제 응모가 열리나요..??</br>
-                    언제 응모가 열리나요..??</br>
-                    언제 응모가 열리나요..??</br>
-                    언제 응모가 열리나요..??
-                  </td>
+                  <td th:text="${notice.content}"></td>
                 </tr>
 
               </table>
