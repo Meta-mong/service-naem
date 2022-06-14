@@ -1,14 +1,23 @@
 package com.metamong.metaticket.controller.admin;
 
 import com.metamong.metaticket.domain.draw.Draw;
+import com.metamong.metaticket.domain.notice.dto.NoticeDTO;
+import com.metamong.metaticket.domain.question.Question;
+import com.metamong.metaticket.domain.question.dto.QuestionDTO;
 import com.metamong.metaticket.domain.user.User;
 import com.metamong.metaticket.domain.user.dto.UserDTO;
 import com.metamong.metaticket.domain.user.dto.UserPage;
+import com.metamong.metaticket.repository.notice.NoticeRepository;
+import com.metamong.metaticket.repository.question.QuestionRepository;
 import com.metamong.metaticket.service.admin.AdminService;
 import com.metamong.metaticket.service.draw.DrawService;
+import com.metamong.metaticket.service.notice.NoticeService;
+import com.metamong.metaticket.service.question.QuestionService;
 import com.metamong.metaticket.service.user.PageService;
 import com.metamong.metaticket.service.user.UserService;
+import groovy.util.logging.Log4j;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +38,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/admin")
 @RequiredArgsConstructor
+@Slf4j
 public class AdminController {
 
     @Autowired
@@ -42,6 +52,15 @@ public class AdminController {
 
     @Autowired
     DrawService drawService;
+
+    @Autowired
+    NoticeService noticeService;
+
+    @Autowired
+    QuestionService questionService;
+
+    @Autowired
+    QuestionRepository questionRepository;
 
     //로그인 /로그아웃
     @PostMapping (value = "/login")
@@ -114,4 +133,72 @@ public class AdminController {
 
         return map;
     }
+
+    //공지사항 전체 조회
+    @GetMapping("/anlist")
+    public String noticeList(Model model, Pageable pageable) throws Exception {
+
+        Page<NoticeDTO.Notice> noticeList = noticeService.allNoticeInfo(pageable);
+        model.addAttribute("allNoticeList", noticeList);
+
+        log.info("총 element 수 : {}, 전체 page 수 : {}, 페이지에 표시할 element 수 : {}, 현재 페이지 index : {}, 현재 페이지의 element 수 : {}",
+                noticeList.getTotalElements(), noticeList.getTotalPages(), noticeList.getSize(),
+                noticeList.getNumber(), noticeList.getNumberOfElements());
+
+        return "admin/admin_noticelist";
+    }
+
+
+    //문의사항 전체 조회
+    @GetMapping("/aqlist")
+    public String questionList( Model model, Pageable pageable) throws Exception{
+        Page<QuestionDTO.Quest> questionList = questionService.allQuestionList(pageable);
+        model.addAttribute("allQuestionList", questionList);
+
+        log.info("총 element 수 : {}, 전체 page 수 : {}, 페이지에 표시할 element 수 : {}, 현재 페이지 index : {}, 현재 페이지의 element 수 : {}",
+                questionList.getTotalElements(), questionList.getTotalPages(), questionList.getSize(),
+                questionList.getNumber(), questionList.getNumberOfElements());
+
+        return "admin/admin_qnalist";
+    }
+    //문의사항 상세조회
+    @GetMapping("/qnadetail/{questionId}")
+    public String questiondetail (@PathVariable Long questionId,Model model) throws Exception {
+        QuestionDTO.Quest questionDto = questionService.questiondetail(questionId);
+        User user = userService.userInfo(questionDto.getUserId());
+        model.addAttribute("userName", user.getName());
+        model.addAttribute("question",questionDto);
+        return "/admin/admin_qnadetail";
+    }
+
+    //문의사항 답글 추가 페이지 이동
+    @GetMapping("/qnareply/{questionId}")
+    public String answer (@PathVariable Long questionId, Model model)throws Exception{
+        QuestionDTO.Quest questionDto = questionService.questiondetail(questionId);
+        User user = userService.userInfo(questionDto.getUserId());
+        model.addAttribute("userName", user.getName());
+        model.addAttribute("question",questionDto);
+        return "/admin/admin_qnareply";
+    }
+
+    // 문의사항 답글 추가 처리
+    @PostMapping("/qnareply/{questionId}")
+    @ResponseBody
+    public Map<String, Object> questionUpdate(@PathVariable Long questionId,
+                                 @RequestParam("admincontent") String admincontent) {
+        System.out.println("확인 : "+admincontent);
+        Map<String,Object> map = new HashMap<>();
+        try {
+            questionService.answer(questionId, admincontent);
+            map.put("result", true);
+        }catch(Exception e){
+            e.getStackTrace();
+            map.put("result", false);
+        }
+        return map;
+
+    }
+
+
+
 }
