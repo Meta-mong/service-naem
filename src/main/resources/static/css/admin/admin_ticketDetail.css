@@ -1,0 +1,289 @@
+/* button */
+.container {
+  min-width: 1300px;
+}
+
+.container .list {
+  display: block;
+  justify-content: left;
+  margin-top: 60px;
+  margin-left: 140px;
+  margin-bottom: -48px;
+}
+
+.container .list .btn {
+  font-size: 23px;
+  /* background-color: rgba(221, 184, 229, 0.964); */
+  margin-left: -6px;
+  background-color: black;
+  color: whitesmoke;
+  border: 0;
+  height: 60px;
+}
+
+.container .list .btn:first-child {
+  background-color: rgb(211, 133, 228);
+}
+
+.container .list .btn:hover {
+  background-color: rgb(215, 158, 228);
+  color: whitesmoke;
+}
+
+/* main */
+.container .main .inner {
+  display: flex;
+}
+
+.container .main .inner .post {
+  justify-content: flex-start;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.container .main .inner .post .preview {
+  border: solid 1px lightgray;
+  width: 300px;
+  height: 300px;
+  margin: 10px;
+  overflow: hidden;
+
+}
+
+.container .main .inner .post .preview img{
+  width: 300px;
+  height: 300px;
+}
+
+.container .main .inner .post input {
+  width: 100%;
+  height: 42px;
+  font-size: 16px;
+  margin-left: 60px;
+}
+
+.container .main .inner .post .selectBt {
+  height: 45px;
+  width: 100px;
+  border: 2px solid rgb(215, 158, 228);
+  background-color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.container .main .inner .text {
+  /* border: 1px solid lightgray; */
+  margin: 18px;
+  width: 100%;
+}
+
+.container .main .inner .list1,
+.container .main .inner .list4 {
+  /* display: flex; */
+  /* height : 50px;    */
+  margin-bottom: 10px;
+  font-size: 16px;
+  border-collapse: collapse;
+}
+
+.container .main .inner .list1 table,
+.container .main .inner .list4 table {
+  table-layout: fixed;
+  width: 700px;
+  padding: 10px;
+}
+
+.container .main .inner .list1 tr,
+.container .main .inner .list4 tr {
+  float: left;
+  border: 1px solid lightgray;
+
+}
+
+.container .main .inner .list1 th,
+.container .main .inner .list4 th {
+  border-right: 1px solid lightgray;
+  padding: 10px;
+  width: 60px;
+  height: 30px;
+  vertical-align: middle;
+}
+
+.container .main .inner .list1 td,
+.container .main .inner .list4 td {
+  width: 138px;
+  height: 30px;
+  vertical-align: middle;
+}
+
+.container .main .title {
+  margin-bottom: 10px;
+  height: 50px;
+  font-size: 16px;
+  border-collapse: collapse;
+}
+
+.container .main .title tr {
+  width: 100%;
+  float: left;
+  border: 1px solid lightgray;
+}
+
+.container .main .title th {
+  border-right: 1px solid lightgray;
+  padding: 10px;
+  width: 60px;
+  height: 30px;
+  vertical-align: middle;
+}
+
+.container .main .title td {
+  width: 580px;
+  height: 30px;
+  vertical-align: middle;
+}
+
+.container .main .title td input {
+  width: 583px;
+  height: 40px;
+  border: 0;
+  background-color: whitesmoke;
+}
+
+.container .main .inner .list2,
+.container .main .inner .list3,
+.container .main .inner .list5 {
+  /* display: flex; */
+  /* height : 50px;    */
+  margin-bottom: 10px;
+  font-size: 16px;
+  border-collapse: collapse;
+}
+
+.container .main .inner .list2 table,
+.container .main .inner .list3 table,
+.container .main .inner .list5 table {
+  table-layout: fixed;
+  width: 700px;
+}
+
+.container .main .inner .list2 tr,
+.container .main .inner .list3 tr,
+.container .main .inner .list5 tr {
+  float: left;
+  border: 1px solid lightgray;
+}
+
+.container .main .inner .list2 th,
+.container .main .inner .list3 th,
+.container .main .inner .list5 th {
+  border-right: 1px solid lightgray;
+  padding: 10px;
+  width: 70px;
+  height: 30px;
+  vertical-align: middle;
+}
+
+.container .main .inner .list2 td,
+.container .main .inner .list3 td,
+.container .main .inner .list5 td {
+  width: 237px;
+  height: 30px;
+  vertical-align: middle;
+}
+
+.container .main .inner .list2 td input,
+.container .main .inner .list3 td input,
+.container .main .inner .list5 td input {
+  height: 40px;
+  width: 237px;
+  border: 0;
+  background-color: whitesmoke;
+}
+
+.container .main .inner .list4 td input{
+  height: 40px;
+  width: 110px;
+  border: 0;
+  background-color: whitesmoke;
+}
+
+.container .main .inner .list4 .genre{
+  width: 130px;
+  height: 40px;
+  border: 0;
+  background-color: whitesmoke;
+}
+
+/* 공연 스크립트 */
+.container .main .script {
+  margin-top: 20px;
+}
+
+.container .main .script p {
+  text-align: left;
+  margin: 10px;
+  margin-left: 70px;
+}
+
+.container .main .script .content {
+  margin: 0 auto;
+  resize: none;
+  width: 924px;
+  height: 248px;
+  background-color: whitesmoke;
+  border: 1px solid lightgray;
+}
+
+/* 등록 버튼 */
+.container .main .btn_submit {
+  height: 45px;
+  width: 100px;
+  margin: 20px;
+  margin-right: -800px;
+  background-color: rgb(186,133,236);
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* 수정 삭제 버튼 */
+.container .main .btn_modify {
+  height: 45px;
+  width: 100px;
+  margin-top: 20px;
+  background-color: rgb(186,133,236);
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.container .main .btn_delete {
+  height: 45px;
+  width: 100px;
+  margin-top: 20px;
+  margin-right: -670px;
+  background-color: rgb(186,133,236);
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* 목록으로 버튼 */
+.container .main .btn_list{
+  height: 45px;
+  width: 100px;
+  background-color: rgb(218,186,248);
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.container .main .btn_submit:hover,
+.container .main .btn_modify:hover,
+.container .main .btn_delete:hover,
+.container .main .btn_list:hover {
+  background-color: blueviolet;
+}

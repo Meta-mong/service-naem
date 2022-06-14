@@ -56,6 +56,14 @@ public class ConcertController {
         return "concertDetail"; // view 이름
     }
 
+    // 관리자 페이지 공연 상세내역 조회
+    @GetMapping("/admin/{id}")
+    public String adminConcertInfo(@PathVariable Long id , Model model){
+        ConcertDto concertDto = concertService.concertInfo(id);
+        model.addAttribute("concert",concertDto);
+        return "/admin/admin_ticket_detail"; // view 이름
+    }
+
     @GetMapping("/readImg/{id}")
     public void concertImg(@PathVariable Long id, HttpServletResponse response){
         Phamplet_File files = filesService.findById(id);
@@ -109,14 +117,14 @@ public class ConcertController {
     @GetMapping("/adminConcert")
     public String concertList(@PageableDefault(size = 10) Pageable pageable,Model model){
         model.addAttribute("concert",concertService.concertAllInfo(pageable));
-        return "adminConcert";
+        return "/admin/admin_ticket";
     }
 
     // 장르별 공연 조회
-    @GetMapping("/{genre}")
+    @GetMapping("/Contents/{genre}")
     public String concertList_Genre(@PageableDefault(size = 16) Pageable pageable ,@PathVariable Genre genre, Model model){
         model.addAttribute("concert",concertService.concertGenreInfo(pageable,genre));
-        return "concert";
+        return "/concert/concert";
     }
 
 }

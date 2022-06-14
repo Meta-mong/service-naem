@@ -1,0 +1,77 @@
+
+  .container {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    color: #999;
+    min-height: 500px;
+    width: 1400px;
+  }
+
+  /* concert swiper  */
+  .concertSwiper {}
+
+  .concertSwiper .swiper-container {
+    height: 300px;
+    margin-top: 30px;
+  }
+
+  /* concert-main */
+  .image img {
+    display: block;
+    height: 300px;
+    width: 100%;
+    /* border-radius: 10px; */
+  }
+
+  .concert-genre {
+    display: flex;
+    justify-content: flex-start;
+    margin: 50px;
+    font-size: 30px;
+    font-weight: 400;
+    /* text-align: left; */
+    margin-top: 50px;
+    margin-left: 100px;
+  }
+
+  .concert {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* flex-wrap -> 한줄에 들어가는 만큼 보여주고, 나머지는 다음줄로 넘겨준다 */
+    column-count: 4;
+    /* margin-left: 80px; */
+    /* background-color: #00aced; */
+  }
+
+  .concert .concert-posting {
+    /* margin-left: 176px; */
+    display: flex;
+    width: 80%;
+    margin-left: 52px;
+    flex-wrap: wrap;
+  }
+
+  .concert .concert-posting .inner {
+    width: 20%;
+    /* background-color : pink ; */
+    border: 2px solid rgba(232, 230, 230, 0.99);
+    margin: 21px;
+    padding: 20px;
+    text-align: center;
+    align-items: center;
+    /* float: left; */
+    box-sizing: border-box;
+    transition-duration: 1s;
+  }
+
+  .concert .concert-posting .inner:hover {
+    transform: scale(1.1);
+  }
+
+  .concert .concert-content {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }

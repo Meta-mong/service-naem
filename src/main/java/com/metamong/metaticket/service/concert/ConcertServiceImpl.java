@@ -7,6 +7,7 @@ import com.metamong.metaticket.domain.concert.dto.ConcertDto;
 import com.metamong.metaticket.repository.concert.ConcertRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
@@ -88,6 +89,8 @@ public class ConcertServiceImpl implements ConcertService {
 //            ConcertDto dto = ConcertDto.createDto(tmp);
 //            concertList.add(dto);
 //        }
+        int pagenum = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // page는 index 처럼 0부터 시작
+        pageable = PageRequest.of(pagenum, 10);
         Page<Concert> page = concertRepository.findAll(pageable);
         Page<ConcertDto> pageDto = page.map(ConcertDto::createDto);
         return pageDto;
@@ -101,6 +104,8 @@ public class ConcertServiceImpl implements ConcertService {
 //            ConcertDto dto = ConcertDto.createDto(tmp);
 //            concertList.add(dto);
 //        }
+        int pagenum = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // page는 index 처럼 0부터 시작
+        pageable = PageRequest.of(pagenum, 16);
         Page<Concert> page = concertRepository.findByGenre(pageable,genre);
         Page<ConcertDto> pageDto = page.map(ConcertDto::createDto);
         return pageDto;
