@@ -14,6 +14,9 @@ public interface DrawRepository extends JpaRepository<Draw, Long> {
     List<Draw> findByUser(User user);
     Draw findByUserAndAndConcert(User user, Concert concert);
 
-    @Query("select max(d.ranking) from Draw d where d.concert.id=:concertId and d.emailSendDate is not null")
+    @Query("select max(d.ranking) from Draw d join d.concert c where c.id=:concertId and d.emailSendDate is not null")
     int findLowRankingGroupByConcert(@Param("concertId") Long concertId);
+
+    @Query("select count(d.id) from Draw d join d.concert c where c.id=:concertId and d.state<>'CANCEL'")
+    int findValidDrawCntByConcert(@Param("concertId") Long concertId);
 }

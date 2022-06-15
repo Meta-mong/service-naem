@@ -73,16 +73,15 @@
                                         <th>공연번호</th>
                                         <th>공연명</th>
                                         <th>대기번호</th>
-                                        <th>당첨여부</th>
-                                        <th>결제여부</th>
+                                        <th>응모상태</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr th:each="draw : ${draws}">
-                                        <td th:text="${draw.id}"></td>
-                                        <td th:text="${draw.id}"></td>
-                                        <td th:text="${draw.id}"></td>
-                                        <td th:text="${draw.id}"></td>
+                                        <td th:text="${draw.concertId}"></td>
+                                        <td th:text="${draw.concertTitle}"></td>
+                                        <td th:text="${draw.ranking}"></td>
+                                        <td th:text="${draw.state}"></td>
                                     </tr>
                                 </tbody>
                             </table>
