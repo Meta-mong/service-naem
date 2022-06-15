@@ -11,11 +11,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Transactional
@@ -98,6 +102,37 @@ public class ConcertServiceImpl implements ConcertService {
     public void checkRemainingSeat(Concert concert) {
         if (concert.getSeatNum() > drawRepository.findValidDrawCntByConcert(concert.getId()))
             concert.changeSalesMethod();
+    }
+
+    @Override
+    public List<ConcertDto> openTickets() {
+        Sort sort = Sort.by("drawStartDate").ascending();
+        Pageable pageable = PageRequest.of(0, 8, sort);
+        List<Concert> concerts = concertRepository.findAllByDrawStartDateAfter(LocalDate.now(), pageable);
+        List<ConcertDto> opentickets = concerts.stream().map(ConcertDto::createDto).collect(Collectors.toList());
+        return  opentickets;
+    }
+
+
+    @Override
+    public List<ConcertDto> openTicketsOptions(Genre genre, String title) {
+        List<Concert> concerts = null;
+        if(title==null || title.trim().length()<=0){
+            concerts = concertRepository.findByGenreAndDrawStartDateAfterOrderByDrawStartDateAsc(genre, LocalDate.now());
+        }else{
+            Concert concert = concertRepository.findByTitleAndDrawStartDateAfterOOrderByDrawStartDateAsc(title.trim(), LocalDate.now());
+            concerts = new ArrayList<>();
+            concerts.add(concert);
+        }
+        List<ConcertDto> opentickets = concerts.stream().map(ConcertDto::createDto).collect(Collectors.toList());
+        return opentickets;
+    }
+
+    @Override
+    public List<ConcertDto> allOpenTickets() {
+        List<Concert> concerts = concertRepository.findAllByDrawStartDateAfterOrderByDrawStartDateAsc(LocalDate.now());
+        List<ConcertDto> opentickets = concerts.stream().map(ConcertDto::createDto).collect(Collectors.toList());
+        return opentickets;
     }
 
 

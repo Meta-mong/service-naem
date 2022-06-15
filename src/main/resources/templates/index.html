@@ -57,60 +57,19 @@
 
         </div>
 
+        <div class="ticket-open-issue" style="width: 1008px; margin: 10px auto; font-size: 30px; font-weight: bold;">티켓 오픈 소식</div>
         <div class="ticket-open">
             <div class="ticket-open-top">
-                <span class="ticket-open-top-span">티켓 오픈 소식</span>
+<!--                <span class="ticket-open-top-span">티켓 오픈 소식</span>-->
                 <span id="ticket-open-page" class="ticket-open-1">1</span>
                 <span class="ticket-open-2"> / 2</span>
             </div>
             <div class="multiple-items">
-                <div>
-                    <img src="img/metamong.png" alt="">
-                    <span>나는 메타몽이다!</span>
-                    <span>2022.06.10 - 2022.06.12</span>
-                    <span>올림픽공원 88 잔디마당</span>
-                </div>
-                <div>
-                    <img src="img/metamong.png" alt="">
-                    <span>나는 메타몽이다!</span>
-                    <span>2022.06.10 - 2022.06.12</span>
-                    <span>올림픽공원 88 잔디마당</span>
-                </div>
-                <div>
-                    <img src="img/metamong.png" alt="">
-                    <span>나는 메타몽이다!</span>
-                    <span>2022.06.10 - 2022.06.12</span>
-                    <span>올림픽공원 88 잔디마당</span>
-                </div>
-                <div>
-                    <img src="img/metamong.png" alt="">
-                    <span>나는 메타몽이다!</span>
-                    <span>2022.06.10 - 2022.06.12</span>
-                    <span>올림픽공원 88 잔디마당</span>
-                </div>
-                <div>
-                    <img src="img/metamong.png" alt="">
-                    <span>나는 메타몽이다!</span>
-                    <span>2022.06.10 - 2022.06.12</span>
-                    <span>올림픽공원 88 잔디마당</span>
-                </div>
-                <div>
-                    <img src="img/metamong.png" alt="">
-                    <span>나는 메타몽이다!</span>
-                    <span>2022.06.10 - 2022.06.12</span>
-                    <span>올림픽공원 88 잔디마당</span>
-                </div>
-                <div>
-                    <img src="img/metamong.png" alt="">
-                    <span>나는 메타몽이다!</span>
-                    <span>2022.06.10 - 2022.06.12</span>
-                    <span>올림픽공원 88 잔디마당</span>
-                </div>
-                <div>
-                    <img src="img/metamong.png" alt="">
-                    <span>나는 메타몽이다!</span>
-                    <span>2022.06.10 - 2022.06.12</span>
-                    <span>올림픽공원 88 잔디마당</span>
+                <div th:each="openticket : ${opentickets}">
+                    <img src="/concert/readImg/" th:attrappend="src=${openticket.phamplet}" alt="">
+                    <span th:text="${openticket.title}"></span>
+                    <span th:text="${openticket.drawStartDate}+' ~ '+${openticket.drawEndDate}"></span>
+                    <span th:text="${openticket.address}"></span>
                 </div>
             </div>
         </div>

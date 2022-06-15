@@ -334,6 +334,7 @@ body,.header-top-ul {
 .ticket-open {
   width: 1008px;
   margin: 60px auto;
+  margin-top: 0px;
   height: 350px;
   overflow: hidden;
   background-color: rgb(235, 235, 235);
