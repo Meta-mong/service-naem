@@ -9,6 +9,7 @@ import com.metamong.metaticket.domain.draw.DrawState;
 import com.metamong.metaticket.domain.draw.dto.DrawDTO;
 import com.metamong.metaticket.domain.user.User;
 import com.metamong.metaticket.repository.concert.ConcertRepository;
+import com.metamong.metaticket.repository.concert.FilesRepository;
 import com.metamong.metaticket.repository.draw.DrawRepository;
 import com.metamong.metaticket.repository.user.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +19,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -32,6 +35,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 @ExtendWith(MockitoExtension.class)
+@SpringBootTest
 public class DrawServiceTest {
 
     @Mock
@@ -40,6 +44,15 @@ public class DrawServiceTest {
     private UserRepository userRepository;
     @Mock
     private ConcertRepository concertRepository;
+
+//    @Autowired
+//    private UserRepository userRepository;
+//    @Autowired
+//    private ConcertRepository concertRepository;
+//    @Autowired
+//    private FilesRepository filesRepository;
+//    @Autowired
+//    private DrawRepository drawRepository;
 
     private DrawService drawService;
 
@@ -134,4 +147,23 @@ public class DrawServiceTest {
         assertThat(draw.getState()).isEqualTo(DrawState.CANCEL);
         verify(drawRepository, times(1)).findById(any(Long.class));
     }
+
+//    @Test
+//    @DisplayName("사용자 응모 데이터 리스트 생성")
+//    void createList() {
+//        Phamplet_File phamplet_file = Phamplet_File.builder().fileOriname("테스트1").fileOriname("테스트2").build();
+//        Phamplet_File savedFile = filesRepository.save(phamplet_file);
+//        Concert concert = Concert.builder().title("응모 데이터 테스트").phamplet(savedFile).genre(Genre.CONCERT).ratings(Ratings.FIFTEEN).build();
+//        Concert savedConcert = concertRepository.save(concert);
+//        User user = userRepository.findById(3L).orElse(null);
+//        for (int i = 0; i < 8; i++) {
+//            Draw draw = Draw.builder().
+//                    emailSendDate(LocalDateTime.now()).
+//                    concert(savedConcert).
+//                    state(DrawState.PAYMENT_FINISH).
+//                    user(user).
+//                    build();
+//            drawRepository.save(draw);
+//        }
+//    }
 }
