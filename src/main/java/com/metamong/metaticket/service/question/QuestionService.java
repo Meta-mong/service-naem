@@ -32,12 +32,12 @@ public interface QuestionService {
     //문의사항 수정 -> 유저 내용 수정
     public Question updateQuestion (QuestionDTO.Quest dto) throws Exception;
 
-    //문의사항 - 관리자 답변 추가(댓글)
+    //문의사항 - 관리자 답변 추가(댓글)/수정
     public Question answer ( Long ques_id, String Answer) throws Exception;
 
 
     //문의사항 - 관리자 답변 삭제
-    public Question replyDelete(Long ques_id) throws Exception;
+    public void replyDelete(Long ques_id) throws Exception;
 
 
 

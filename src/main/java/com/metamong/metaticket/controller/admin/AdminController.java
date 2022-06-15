@@ -1,6 +1,8 @@
 package com.metamong.metaticket.controller.admin;
 
+
 import com.metamong.metaticket.domain.draw.dto.DrawDTO;
+import com.metamong.metaticket.domain.notice.Notice;
 import com.metamong.metaticket.domain.notice.dto.NoticeDTO;
 import com.metamong.metaticket.domain.question.dto.QuestionDTO;
 import com.metamong.metaticket.domain.user.User;
@@ -23,6 +25,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +39,9 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Slf4j
 public class AdminController {
+
+    @Autowired
+    HttpSession session;
 
     @Autowired
     AdminService adminService;
@@ -63,6 +71,7 @@ public class AdminController {
         try {
             boolean result = adminService.adminLogin(adminloginId,password);
             if(result ==true){
+                session.setAttribute("adminId",adminloginId);
                 model.addAttribute("adminlogin",adminService.adminInfo(adminloginId));
                 return "main"; //view
             }else {
@@ -143,6 +152,100 @@ public class AdminController {
         return "admin/admin_noticelist";
     }
 
+// 공지사항  상세페이지 조회
+    @GetMapping("/noticedetail/{noticeId}")
+    public String noticedetail (@PathVariable Long noticeId,Model model) throws Exception {
+        NoticeDTO.Notice noticeDto = noticeService.noticedetail(noticeId);
+        model.addAttribute("notice",noticeDto);
+        return "/admin/admin_noticedetail";
+    }
+
+
+    //관리자 공지사항 등록
+
+    @GetMapping("/noticeadd")
+    public String questionadd(){
+
+        return "/admin/admin_noticeadd";
+    }
+
+    @PostMapping("/noticeadd")
+    @ResponseBody
+    public Map<String,Object> noticeadd(@RequestParam("title") String title, @RequestParam("classify") String classify,
+                            @RequestParam("content")String content) throws Exception {
+        Map<String,Object> map = new HashMap<>();
+        NoticeDTO.Notice dto = NoticeDTO.Notice.builder()
+                .title(title)
+                .classify(classify)
+                .content(content)
+                .build();
+        try {
+            boolean result = noticeService.register(dto);
+            if(result == true){
+                map.put("result", true);
+            }
+            throw new Exception();
+        } catch (Exception e) {
+            map.put("result", false);
+        }
+        return map;
+    }
+
+    //공지사항 수정
+    @GetMapping("/noticeupdate/{noticeId}")
+    public String noticeUpdate(@PathVariable Long noticeId, Model model) throws Exception {
+        NoticeDTO.Notice dto = noticeService.noticedetail(noticeId);
+        model.addAttribute("notice", dto);
+        return "/admin/admin_noticeupdate";
+    }
+
+
+    //공지사항 수정
+    @PostMapping("/noticeupdate/{noticeId}")
+    @ResponseBody
+    public Map<String,Object> noticeUpdate(@PathVariable Long noticeId, @RequestParam("title") String title, @RequestParam("classify") String classify,
+                                        @RequestParam("content")String content) throws Exception {
+        Map<String,Object> map = new HashMap<>();
+        NoticeDTO.Notice dto = NoticeDTO.Notice.builder()
+                .id(noticeId)
+                .title(title)
+                .classify(classify)
+                .content(content)
+                .build();
+        try {
+            Notice notice = noticeService.noticeupdate(dto);
+            System.out.println(notice.toString());
+            if(notice != null){
+                map.put("result", true);
+            }
+//            throw new Exception();
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("result", false);
+        }
+        return map;
+    }
+
+
+    //공지사항 삭제
+
+    @GetMapping("/noticedelete/{noticeId}")
+    public void noticedelete (@PathVariable Long noticeId, HttpServletRequest request,
+                                HttpServletResponse response) throws Exception {
+        noticeService.noticeDelete(noticeId);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/anlist");
+        dispatcher.forward(request,response);
+    }
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////
+
+
+
+
 
     //문의사항 전체 조회
     @GetMapping("/aqlist")
@@ -166,7 +269,7 @@ public class AdminController {
         return "/admin/admin_qnadetail";
     }
 
-    //문의사항 답글 추가 페이지 이동
+    //문의사항 답글 등록 페이지 이동
     @GetMapping("/qnareply/{questionId}")
     public String answer (@PathVariable Long questionId, Model model)throws Exception{
         QuestionDTO.Quest questionDto = questionService.questiondetail(questionId);
@@ -176,7 +279,7 @@ public class AdminController {
         return "/admin/admin_qnareply";
     }
 
-    // 문의사항 답글 추가 처리
+    // 문의사항 답글 등록 처리
     @PostMapping("/qnareply/{questionId}")
     @ResponseBody
     public Map<String, Object> questionUpdate(@PathVariable Long questionId,
@@ -193,6 +296,18 @@ public class AdminController {
         return map;
 
     }
+
+    //관리자 문의 답변 삭제
+    @GetMapping("/replydelete/{questionId}")
+    public void questionDelete (@PathVariable Long questionId, HttpServletRequest request,
+                                HttpServletResponse response) throws Exception {
+        questionService.questionDelete(questionId);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/aqlist");
+        dispatcher.forward(request,response);
+    }
+
+
+
 
 
 

@@ -77,11 +77,9 @@ public class QuestionController {
     }
 
 
-
-
     //문의사항 등록 - 처리
     @PostMapping( "/userqnaadd")
-    public String questionUpload(@ModelAttribute QuestionDTO.AddQuest dto, Model model,Pageable pageable){
+    public String questionadd(@ModelAttribute QuestionDTO.AddQuest dto, Model model,Pageable pageable){
 
         try {
             boolean result = questionService.register(dto, session);

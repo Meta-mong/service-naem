@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,7 +38,7 @@ public class QuestionServiceImpl implements QuestionService{
                 .classify(dto.getClassify())
                 .title(dto.getTitle())
                 .quesContent(dto.getQuesContent())
-                .answer(dto.getAnwser())
+                .answer(dto.getAnswer())
                 .build();
 
         return question;
@@ -47,6 +46,7 @@ public class QuestionServiceImpl implements QuestionService{
 
     // 객체를 DTO 클래스로 변환
     public static QuestionDTO.Quest entityToDTO(Question question){
+        if(question.getAnswer()==null) question.setAnswer("");
         QuestionDTO.Quest dto =QuestionDTO.Quest.builder()
                 .id(question.getId())
                 .userId(question.getUser().getId())
@@ -54,7 +54,7 @@ public class QuestionServiceImpl implements QuestionService{
                 .title(question.getTitle())
                 .classify(question.getClassify())
                 .quesContent(question.getQuesContent())
-                .anwser(question.getAnswer())
+                .answer(question.getAnswer())
                 .createDate(LocalDate.from(question.getCreatedDate()))
                 .updateDate(LocalDate.from(question.getUpdatedDate()))
                 .build();
@@ -125,23 +125,24 @@ public class QuestionServiceImpl implements QuestionService{
     }
 
 
-    //댓글 추가
+    //답글 추가 / 수정
     @Override
     public Question answer(Long ques_id, String answer) throws Exception {
         Question question = questionRepository.findById(ques_id).orElse(null);
-
         question.setAnswer(answer);
         Question quest = questionRepository.save(question);
 
         return  quest;
     }
 
-    //댓글 삭제
-    public Question replyDelete(Long ques_id) throws Exception {
-        Question replyDelete =questionRepository.findById(ques_id).orElse(null);
-        replyDelete.setAnswer(null);
 
-        return replyDelete ;
+    //댓글 삭제
+    @Override
+    @Transactional
+    public void replyDelete(Long id) throws Exception {
+        Question reply = questionRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("해당 답글 존재하지 않습니다. id=" + id));
+        questionRepository.delete(reply);
     }
 
 
