@@ -103,13 +103,14 @@ public class AdminController {
 
     //회원 정보 상세 조회 페이지
     @GetMapping("/userdetail/{id}")
-    public String userDetail(@PathVariable Long id, Model model){
+    public String userDetail(@PathVariable Long id, @RequestParam("page") int page, Model model){
         System.out.println("id : "+ id);
         User user = userService.userInfo(id);
         UserDTO.SESSION_USER_DATA dto = User.createUserDTO(user);
         List<DrawDTO.HISTORY> draws = drawService.findByUserId(user.getId());
         model.addAttribute("user", dto);
         model.addAttribute("draws", draws);
+        model.addAttribute("page", page);
         return "/admin/admin_user_detail";
     }
 
