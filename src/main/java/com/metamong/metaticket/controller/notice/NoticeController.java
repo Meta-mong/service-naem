@@ -91,7 +91,7 @@ public class NoticeController {
     //공지사항 수정
     @PostMapping("/update/{id}")
     public void noticeUpdate(@PathVariable Long id , @ModelAttribute NoticeDTO.Notice dto, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Notice noticeUpdate =noticeService.updateNotice(dto);
+        Notice noticeUpdate =noticeService.noticeupdate(dto);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/notice/noticelist");
         dispatcher.forward(request, response);
     }

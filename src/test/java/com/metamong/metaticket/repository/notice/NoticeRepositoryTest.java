@@ -129,12 +129,12 @@ class NoticeRepositoryTest {
         dto.setClassify("수정3");
         dto.setAdminId(1L);
 
-        Notice updateNotice = noticeService.updateNotice(dto);
+        Notice noticeupdate = noticeService.noticeupdate(dto);
 
         assertAll(
-                () -> assertEquals(updateNotice.getTitle(),"수정"),
-                () -> assertEquals(updateNotice.getContent(), "수정"),
-                () -> assertEquals(updateNotice.getClassify(),"수정")
+                () -> assertEquals(noticeupdate.getTitle(),"수정"),
+                () -> assertEquals(noticeupdate.getContent(), "수정"),
+                () -> assertEquals(noticeupdate.getClassify(),"수정")
         );
     }
 

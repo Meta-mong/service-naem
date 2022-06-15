@@ -9,7 +9,7 @@ window.addEventListener("load", function(){
         success : function (data){
            if(data.result==true){
                 alert("답글 등록 완료");
-                location.replace("/admin/aqlist");
+                location.replace("/admin/qnadetail/"+id);
            }else{
                 alert("답글 등록 실패")
            }

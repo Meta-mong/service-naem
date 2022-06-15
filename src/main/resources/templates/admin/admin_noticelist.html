@@ -24,6 +24,7 @@
 
   <!-- js -->
   <script defer src="/js/admin/admin.js"></script>
+  <script defer src="/js/admin/admin.js"></script>
 
   <title>admin</title>
 </head>
@@ -32,25 +33,23 @@
 <div class="container">
 
   <div class="list">
-    <button type="button" class="btn" onclick="move_ticket()">티켓관리</button>
-    <button type="button" class="btn" onclick="move_user()">회원관리</button>
-    <button type="button" class="btn" onclick="move_notice()">게시판관리</button>
+    <button type="button" class="btn" th:onclick="|javascript:move_ticket()|">티켓관리</button>
+    <button type="button" class="btn" th:onclick="|javascript:move_user()|">회원관리</button>
+    <button type="button" class="btn" th:onclick="|javascript:move_notice()|">게시판관리</button>
   </div>
-
 
   <section>
     <div class="main">
 
       <button type="button" class="btn" onclick="notice_list()" style="background-color: gray;">공지사항</button>
       <button type="button" class="btn" onclick="qna_list()">QnA</button>
-      <button type="button" class="btn_submit" onclick="">등록</button>
 
       <div class="search">
         <input type="text" placeholder="">
         <button type="button" class="material-icons">search</button>
       </div>
-
-      <table class="notice_list">
+<div class="inner">
+      <table class="notice_list" >
 
           <tr>
             <th>No.</th>
@@ -61,7 +60,7 @@
           </thead>
 
           <tbody>
-          <tr th:each="notice : ${allNoticeList}">
+          <tr th:each="notice : ${allNoticeList}" th:onclick="|javascript:adminnoticeClick('${notice.id}')|">
 
             <td scope="row" th:text="${notice.id}">1</td>
             <td th:text="${notice.classify}"></td>
@@ -72,6 +71,8 @@
 
           </tbody>
         </table>
+</div>
+      <button type="button" class="btn" onclick="noticeClick()">등록</button>
 
       <nav style="text-align: center;">
         <ul class="pagination"
@@ -110,6 +111,19 @@
   </section>
 </div>
 </body>
+<!-- javascript -->
+<script type="text/javascript">
+  function adminnoticeClick(id) {
+    var id = id;
+    window.location.href = "/admin/noticedetail/"+id
+  }
+
+
+    function noticeClick(id) {
+    var id = id;
+    window.location.href = "/admin/noticeadd"
+  }
+</script>
 
 
 
