@@ -424,6 +424,21 @@ table.QnA td {
   resize: none;
 }
 
+.container .inner .btn .qnalist{
+  background-color: rgb(215, 158, 228);
+  width: 200px;
+  padding: 5px 50px;
+  font-size: 23px;
+  font-weight: bold;
+  font-style: italic;
+  border: none;
+  border-radius: 30px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(218, 186, 248);
+  margin-top: 30px;
+}
+
+
 .container .inner .btn .delete{
   background-color: rgb(207, 61, 119);
   width: 200px;

@@ -6,6 +6,7 @@ import com.metamong.metaticket.domain.concert.Phamplet_File;
 import com.metamong.metaticket.domain.concert.Ratings;
 import com.metamong.metaticket.domain.draw.Draw;
 import com.metamong.metaticket.domain.draw.DrawState;
+import com.metamong.metaticket.domain.draw.dto.DrawDTO;
 import com.metamong.metaticket.domain.user.User;
 import com.metamong.metaticket.repository.concert.ConcertRepository;
 import com.metamong.metaticket.repository.draw.DrawRepository;
@@ -93,7 +94,7 @@ public class DrawServiceTest {
         given(drawRepository.findByUser(any(User.class))).willReturn(draws);
 
         //when
-        List<Draw> findDraws = drawService.findByUserId(1L);
+        List<DrawDTO.HISTORY> findDraws = drawService.findByUserId(1L);
 
         //then
         assertThat(findDraws.get(0)).isEqualTo(draws.get(0));

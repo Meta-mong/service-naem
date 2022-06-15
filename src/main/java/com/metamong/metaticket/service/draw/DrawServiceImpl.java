@@ -3,6 +3,7 @@ package com.metamong.metaticket.service.draw;
 import com.metamong.metaticket.domain.concert.Concert;
 import com.metamong.metaticket.domain.draw.Draw;
 import com.metamong.metaticket.domain.draw.DrawState;
+import com.metamong.metaticket.domain.draw.dto.DrawDTO;
 import com.metamong.metaticket.domain.user.User;
 import com.metamong.metaticket.repository.concert.ConcertRepository;
 import com.metamong.metaticket.repository.draw.DrawRepository;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -33,9 +35,20 @@ public class DrawServiceImpl implements DrawService {
     }
 
     @Override
-    public List<Draw> findByUserId(Long userId) {
+    public List<DrawDTO.HISTORY> findByUserId(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new NoSuchElementException());
-        return drawRepository.findByUser(user);
+        List<Draw> findDraws = drawRepository.findByUser(user);
+
+        List<DrawDTO.HISTORY> myDraws = findDraws.stream().map(d -> DrawDTO.HISTORY.builder()
+                        .concertId(d.getConcert().getId())
+                        .concertTitle(d.getConcert().getTitle())
+                        .ranking(d.getRanking() - drawRepository.findLowRankingGroupByConcert(d.getConcert().getId()))
+                        .state(getDrawStateForFront(d.getState()))
+                        .build()
+                )
+                .collect(Collectors.toList());
+
+        return myDraws;
     }
 
     @Override
@@ -55,5 +68,16 @@ public class DrawServiceImpl implements DrawService {
         }
 
         findDraw.setState(DrawState.CANCEL);
+    }
+
+    private String getDrawStateForFront(DrawState state) {
+        switch (state){
+            case WIN: return "당첨";
+            case QUEUE: return "대기순번";
+            case CANCEL: return "취소";
+            case STANDBY: return "응모 대기중";
+            case PAYMENT_FINISH: return "결제 완료";
+        }
+        return null;
     }
 }

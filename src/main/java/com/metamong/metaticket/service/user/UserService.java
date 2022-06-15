@@ -2,6 +2,10 @@ package com.metamong.metaticket.service.user;
 
 import com.metamong.metaticket.domain.user.User;
 import com.metamong.metaticket.domain.user.dto.UserDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
@@ -60,6 +64,9 @@ public interface UserService {
     //회원 정보 조회
     public User userInfo(Long id);
 
+    //다형성
+    public User userInfo(String email);
+
     //전체 회원 조회
     public List<UserDTO.SESSION_USER_DATA> allUserInfo();
 
@@ -68,4 +75,13 @@ public interface UserService {
 
     //계정 복구
     public boolean resign(String email);
+
+    //회원 정보 변경 in admin
+    public boolean saveUser(User user);
+
+    //전체 회원 수 조회
+    public long allUserCnt();
+
+    //pageable 객체 생성
+    public Page<User> createPage(Pageable pageable);
 }

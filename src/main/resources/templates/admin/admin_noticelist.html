@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <!-- 부트스트랩-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/admin/admin.css">
+  <link rel="stylesheet" href="/css/admin/admin_noticelist.css">
+
+  <!-- js -->
+  <script defer src="/js/admin/admin.js"></script>
+
+  <title>admin</title>
+</head>
+
+<body>
+<div class="container">
+
+  <div class="list">
+    <button type="button" class="btn" onclick="move_ticket()">티켓관리</button>
+    <button type="button" class="btn" onclick="move_user()">회원관리</button>
+    <button type="button" class="btn" onclick="move_notice()">게시판관리</button>
+  </div>
+
+
+  <section>
+    <div class="main">
+
+      <button type="button" class="btn" onclick="notice_list()" style="background-color: gray;">공지사항</button>
+      <button type="button" class="btn" onclick="qna_list()">QnA</button>
+      <button type="button" class="btn_submit" onclick="">등록</button>
+
+      <div class="search">
+        <input type="text" placeholder="">
+        <button type="button" class="material-icons">search</button>
+      </div>
+
+      <table class="notice_list">
+
+          <tr>
+            <th>No.</th>
+            <th>분류</th>
+            <th>제목</th>
+            <th>등록일</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr th:each="notice : ${allNoticeList}">
+
+            <td scope="row" th:text="${notice.id}">1</td>
+            <td th:text="${notice.classify}"></td>
+            <td th:text="${notice.title}"></td>
+            <td th:text="${notice.createDate}"></td>
+
+          </tr>
+
+          </tbody>
+        </table>
+
+      <nav style="text-align: center;">
+        <ul class="pagination"
+            th:with="start=${T(java.lang.Math).floor(allNoticeList.number/10)*10 + 1}, last=(${start + 9 < allNoticeList.totalPages ? start + 9 : allNoticeList.totalPages})">
+          <li>
+            <a th:href="@{/admin/anlist(page=1)}" aria-label="First">
+              <span aria-hidden="true">First</span>
+            </a>
+          </li>
+
+          <li th:class="${allNoticeList.first} ? 'disabled'">
+            <a th:href="${allNoticeList.first} ? '#' :@{/admin/anlist(page=${allNoticeList.number})}" aria-label="Previous">
+              <span aria-hidden="true">&lt;</span>
+            </a>
+          </li>
+
+          <li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == allNoticeList.number + 1} ? 'active'">
+            <a th:text="${page}" th:href="@{/admin/anlist(page=${page})}"></a>
+          </li>
+
+          <li th:class="${allNoticeList.last} ? 'disabled'">
+            <a th:href="${allNoticeList.last} ? '#' : @{/admin/anlist(page=${allNoticeList.number + 2})}" aria-label="Next">
+              <span aria-hidden="true">&gt;</span>
+            </a>
+          </li>
+
+          <li>
+            <a th:href="@{/admin/anlist(page=${allNoticeList.totalPages})}" aria-label="Last">
+              <span aria-hidden="true">Last</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+  </section>
+</div>
+</body>
+
+
+
+</html>

@@ -103,34 +103,43 @@ li:last-child{
   object-fit: cover;
 }
 
-/* paging */
-.paging {
-  width: 1008px;
-  margin: auto;
-  margin-top: 20px;
-  margin-bottom: 80px;
+/* pagination */
+.pagination {
+  /* display: flex; */
+  margin-top: 30px;
+  text-align: center;
+  padding-left: 0;
+  list-style: none;
 }
 
-.pagination {
-  justify-content : center;
+.page-item {
+  display: inline-block;
+}
+
+.page-item:not(:first-child) .page-link {
+  margin-left: -1px;
+}
+
+.page-link:hover {
+  z-index: 2;
+  color: #000205;
+  background-color: #f3a1e8;
+  border-color: #dee2e6;
+}
+
+.page-link {
+  padding: 0.375rem 0.75rem;
 }
 
 .page-link {
   position: relative;
   display: block;
-  color: #84848b;
-  font-weight: bold;
-  font-size: 20px;
+  font-weight: bolder;
+  font-size: 18px;
+  color: #0a0a0a;
   text-decoration: none;
-  background-color: #fff;
-  border: none;
+  background-color: transparent;
+  /* border: 1px solid #dee2e6; */
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
-
-.page-link:hover { /* 수정 필요 */
-  z-index: 2;
-  color: #0a58ca;
-  /* background-color: #e9ecef;
-  border-color: #dee2e6; */
 }
 

@@ -86,4 +86,24 @@ class UserRepositoryTest {
         }
     }
 
+    @Test
+    @DisplayName("회원 리스트 생성 테스트")
+    public void createUserList(){
+        for(int i=2; i<100; i++) {
+            User user = User.builder()
+                    .email("metamong" + i + "@naver.com")
+                    .passwd("1234")
+                    .name("김메타" + i)
+                    .number("010123456" + String.format("%02d", i))
+                    .age(19961110)
+                    .valid(true)
+                    .build();
+            try {
+                userRepository.save(user);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

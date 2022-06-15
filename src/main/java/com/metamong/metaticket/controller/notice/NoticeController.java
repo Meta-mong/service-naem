@@ -38,12 +38,14 @@ public class NoticeController {
     @Autowired
     NoticeRepository noticeRepository;
 
-    @GetMapping("/")
-    public String admin(){
-     return "/admin/addnotice";
-    }
+//    @GetMapping("/")
+//    public String admin(){
+//
+//        return "/admin/addnotice";
+//    }
 
 
+// 공지사항  상세페이지 조회
     @GetMapping("/noticedetail/{noticeId}")
     public String noticedetail (@PathVariable Long noticeId,Model model) throws Exception {
         NoticeDTO.Notice noticeDto = noticeService.noticedetail(noticeId);

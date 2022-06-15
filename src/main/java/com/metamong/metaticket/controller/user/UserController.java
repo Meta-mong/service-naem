@@ -1,7 +1,6 @@
 package com.metamong.metaticket.controller.user;
 
-import com.metamong.metaticket.domain.user.User;
-import com.metamong.metaticket.domain.user.dto.UserDTO;
+
 import com.metamong.metaticket.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -58,7 +60,8 @@ public class UserController {
 
     //마이페이지 첫 화면(회원 상세 정보 페이지)
     @GetMapping("/mypage")
-    public String myPage(){
+    public String myPage(HttpServletRequest request, HttpServletResponse response){
+        if(session.getAttribute("user")==null) return "/user/signin";
         return "/mypage/myPage_userInfo";
     }
 
@@ -71,8 +74,5 @@ public class UserController {
         map.put("result", result);
         return map;
     }
-
-    ////To do
-    //전체 회원 정보 조회 -> adminController 로 이전
     
 }

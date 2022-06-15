@@ -17,7 +17,8 @@
   <link rel="stylesheet" href="/css/userqna/userqnalist.css">
 
   <!-- js -->
-  <script defer src="../public/js/concert.js"></script>
+  <script defer src="/js/question/userqnaadd.js"></script>
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
   <!-- 부트스트랩-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -114,82 +115,73 @@
       </div>
 
       <div class="button">
-        <button type="button" class="btn" onclick="">글쓰기</button>
+
+        <button type="button" class="btn" id="write">글쓰기</button>
       </div>
 
       <section>
+
         <table class="table table-hover">
           <thead style="height: 40px">
             <tr>
               <th>No.</th>
               <th>분류</th>
               <th>제목</th>
+              <th>작성자</th>
               <th>등록일</th>
             </tr>
           </thead>
+
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>기타</td>
-              <td>문의 드립니다.</td>
-              <td>2022-06-09</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>기타</td>
-              <td>문의 드립니다.</td>
-              <td>2022-06-09</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>기타</td>
-              <td>문의 드립니다.</td>
-              <td>2022-06-09</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>기타</td>
-              <td>문의 드립니다.</td>
-              <td>2022-06-09</td>
-            </tr>
+          <tr  th:each="question : ${allQuestionList}" th:onclick="|javascript:qnaClick('${question.id}')|">
+
+            <td scope="row" th:text="${question.id}">1</td>
+            <td th:text="${question.classify}"></td>
+            <td th:text="${question.title}"></td>
+            <td th:text="${question.userName}"></td>
+            <td th:text="${question.createDate}"></td>
+
+          </tr>
 
           </tbody>
-
-          <!-- <tbody>
-            <tr th:each="board : ${boardList}">
-              <td th:text="${board.idx}"></td>
-              <td th:text="${board.boardType.value}"></td>
-              <td><a th:href="'/board?idx='+${board.idx}" th:text="${board.title}">
-                </a>
-              </td>
-              <td
-                th:text="${board.createdDate} ?                    ${#temporals.format(board.createdDate,'yyyy-MM-dd HH:mm')} : ${board.createdDate}">
-              </td>
-              <td
-                th:text="${board.updatedDate} ?                    ${#temporals.format(board.updatedDate,'yyyy-MM-dd HH:mm')} : ${board.updatedDate}">
-              </td>
-
-            </tr>
-          </tbody> -->
         </table>
 
-        <nav>
-          <ul class="pagination d-flex justify-content-center flex-wrap pagination-rounded-flat pagination-success">
-            <li class="page-item"><a class="page-link" href="#" data-abc="true"><i class="fa fa-angle-left"></i></a>
+        <nav style="text-align: center;">
+          <ul class="pagination"
+              th:with="start=${T(java.lang.Math).floor(allQuestionList.number/10)*10 + 1}, last=(${start + 9 < allQuestionList.totalPages ? start + 9 : allQuestionList.totalPages})">
+            <li>
+              <a th:href="@{/question/qlist(page=1)}" aria-label="First">
+                <span aria-hidden="true">First</span>
+              </a>
             </li>
-            <li class="page-item active"><a class="page-link" href="#" data-abc="true">1</a></li>
-            <li class="page-item"><a class="page-link" href="#" data-abc="true">2</a></li>
-            <li class="page-item"><a class="page-link" href="#" data-abc="true">3</a></li>
-            <li class="page-item"><a class="page-link" href="#" data-abc="true">4</a></li>
-            <li class="page-item"><a class="page-link" href="#" data-abc="true">5</a></li>
-            <li class="page-item"><a class="page-link" href="#" data-abc="true"><i class="fa fa-angle-right"></i></a>
+
+            <li th:class="${allQuestionList.first} ? 'disabled'">
+              <a th:href="${allQuestionList.first} ? '#' :@{/question/qlist(page=${allQuestionList.number})}" aria-label="Previous">
+                <span aria-hidden="true">&lt;</span>
+              </a>
+            </li>
+
+            <li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == allQuestionList.number + 1} ? 'active'">
+              <a th:text="${page}" th:href="@{/question/qlist(page=${page})}"></a>
+            </li>
+
+            <li th:class="${allQuestionList.last} ? 'disabled'">
+              <a th:href="${allQuestionList.last} ? '#' : @{/question/qlist(page=${allQuestionList.number + 2})}" aria-label="Next">
+                <span aria-hidden="true">&gt;</span>
+              </a>
+            </li>
+
+            <li>
+              <a th:href="@{/question/qlist(page=${allQuestionList.totalPages})}" aria-label="Last">
+                <span aria-hidden="true">Last</span>
+              </a>
             </li>
           </ul>
         </nav>
-    
 
 
-  </section>
+
+      </section>
     </div>
 
 
@@ -216,5 +208,13 @@
   </div>
   </div>
 </body>
+
+<!-- javascript -->
+<script type="text/javascript">
+  function qnaClick(id) {
+    var id = id;
+    window.location.href = "/question/questiondetail/"+id
+  }
+</script>
 
 </html>

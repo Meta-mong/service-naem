@@ -63,8 +63,8 @@ window.addEventListener("load", function(event){
             success: function (data, statusText) {
                 var temp = JSON.stringify(data);
                 var map = JSON.parse(temp);
-                alert(map.msg);
                 if (map.result == 1) {
+                    alert(map.msg);
                     location.replace("/");
                 }else if(map.result == -1){
                     alert("이미 탈퇴한 계정입니다. 다시 회원가입해주세요.");
