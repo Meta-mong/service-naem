@@ -63,7 +63,7 @@ public class ConcertController {
     public String concertInfo(@PathVariable Long id , Model model){
         ConcertDto concertDto = concertService.concertInfo(id);
         model.addAttribute("concert",concertDto);
-        return "concertDetail"; // view 이름
+        return "concert/concert_detail"; // view 이름
     }
 
     // 관리자 페이지 공연 상세내역 조회

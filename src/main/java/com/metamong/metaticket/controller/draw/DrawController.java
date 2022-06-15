@@ -29,7 +29,7 @@ public class DrawController {
         UserDTO.SESSION_USER_DATA currentUser = (UserDTO.SESSION_USER_DATA) session.getAttribute("user");
         List<DrawDTO.HISTORY> myDraws = drawService.findByUserId(currentUser.getId());
         model.addAttribute("myDraws", myDraws);
-        return "mypage/draws";
+        return "mypage/draw";
     }
 
     @PostMapping("/{concertId}")
@@ -37,13 +37,13 @@ public class DrawController {
         UserDTO.SESSION_USER_DATA currentUser = (UserDTO.SESSION_USER_DATA) session.getAttribute("user");
         drawService.applyDraw(currentUser.getId(), concertId);
 
-        return "redirect:/";
+        return "/mypage/draw";
     }
 
-    @PostMapping("/{drawId}")
+    @PostMapping("/delete/{drawId}")
     public String cancelDraw(@PathVariable("drawId") Long drawId) {
         //유저 확인해야됨
         drawService.cancelDraw(drawId);
-        return "redirect:/";
+        return "/mypage/draw";
     }
 }
