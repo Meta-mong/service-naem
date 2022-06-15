@@ -55,6 +55,7 @@ public class ConcertController {
     @GetMapping("/{id}")
     public String concertInfo(@PathVariable Long id , Model model){
         ConcertDto concertDto = concertService.concertInfo(id);
+        concertDto.setVisitCnt(concertDto.getVisitCnt()+1);
         model.addAttribute("concert",concertDto);
         return "concertDetail"; // view 이름
     }
