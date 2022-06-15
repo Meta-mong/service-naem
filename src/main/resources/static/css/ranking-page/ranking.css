@@ -1,0 +1,138 @@
+.ranking-page {
+    width: 1008px;
+    margin: 60px auto;
+}
+
+.ranking-page-span {
+    color: black;
+    display: inline;
+}
+
+.ranking-page-div-top {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    border-bottom: 8px solid rgb(216, 216, 216);
+}
+
+.ranking-page-div-top-left {
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 2;
+}
+
+.ranking-page-div-top-right {
+    height: 60px;
+}
+
+.ranking-page-div-top-right > ul {
+    display: flex;
+    margin: 0;
+    height: 60px;
+    align-items: center;
+}
+
+.ranking-page-div-top-right > ul > li {
+    list-style: none;
+    height: 100%;
+    text-align: center;
+}
+
+.ranking-page-div-top-right > ul > li > span {
+    line-height: 4;
+}
+
+.ranking-page-div-top-right > ul > li > a {
+    text-decoration: none;
+    padding: 16.8px 20px;
+    color: black;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 3;
+}
+
+.ranking-page-div-top-right > ul > li > a:focus{  /* 임시로 해놓은거 ! */
+    background-color: rgb(240, 240, 240);
+}
+
+.fa-trophy {
+    color: rgb(243, 189, 52);
+}
+
+.ranking-page-main-top {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid lightgrey;
+}
+
+.ranking-page-main-top > div > span {
+    line-height: 3;
+}
+
+.fst {
+    padding-left: 50px;
+}
+
+.sec{
+    padding: 0 120px;
+}
+
+.last {
+    padding-right: 50px;
+}
+
+.ranking-page-main-div > div {
+    display: flex;
+    border-bottom: 1px solid lightgrey;
+    justify-content: space-between;
+    height: 160px;
+}
+
+.main-div-ranking-page {
+    padding-left: 60px;
+    margin: auto 0;
+    padding-right: 60px;
+}
+
+.concert-name {
+    display: flex;
+    width: 350px;
+    overflow: hidden;
+}
+
+.concert-name > div {
+    margin: auto;
+    margin-left: 30px;
+}
+
+.concert-name > div > span {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.concert-time, .concert-place{
+    margin: auto 0px;
+    margin-right: 25px;
+}
+
+.concert-time {
+    margin-left: 50px;
+    width: 104.5px;
+}
+
+.concert-place {
+    width: 150px;
+}
+
+.reservation {
+    margin: auto 0px;
+    margin-right: 34px;
+}
+
+.concert-time > p {
+    text-align: center;
+    margin: auto;
+}
