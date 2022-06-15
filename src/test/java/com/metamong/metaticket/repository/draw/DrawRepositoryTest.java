@@ -61,30 +61,12 @@ class DrawRepositoryTest {
 //
 //        concert = Concert.builder().title("웃는남자").description("부자들의 낙원은 가난한 자들의 지옥으로 세워진 것이다.").phamplet(file)
 //                .concertDate(LocalDateTime.now()).genre(Genre.MUSICAL_DRAMA).ratings(Ratings.FIFTEEN).address("세종문화회관 대극장")
-//                .host("(주)EMK뮤지컬컴퍼니").seatNum(250).drawStartDate(LocalDateTime.now()).drawEndDate(LocalDateTime.now()).price(150000)
+//                .host("(주)EMK뮤지컬컴퍼니").seatNum(250).drawStartDate(LocalDate.now()).drawEndDate(LocalDate.now()).price(150000)
 //                .visitCnt(5).build();
 //
 //        concertRepository.save(concert);
 //        draw = Draw.builder().user(user).concert(concert).state(DrawState.STANDBY).build();
 //    }
-    @BeforeEach
-    void setUp() {
-        user = User.builder().email("metamong@naver.com").passwd("7852").name("person1").age(27)
-                .number("01012345678").loserCnt(3).cancelCnt(3).build();
-
-        userRepository.save(user);
-
-        file = Phamplet_File.builder().filePath("/uploadImg/").fileOriname("웃는남자.jpg").build();
-        filesRepository.save(file);
-
-        concert = Concert.builder().title("웃는남자").description("부자들의 낙원은 가난한 자들의 지옥으로 세워진 것이다.").phamplet(file)
-                .concertDate(LocalDateTime.now()).genre(Genre.MUSICAL_DRAMA).ratings(Ratings.FIFTEEN).address("세종문화회관 대극장")
-                .host("(주)EMK뮤지컬컴퍼니").seatNum(250).drawStartDate(LocalDate.now()).drawEndDate(LocalDate.now()).price(150000)
-                .visitCnt(5).build();
-
-        concertRepository.save(concert);
-        draw = Draw.builder().user(user).concert(concert).state(DrawState.STANDBY).build();
-    }
 
 //    @AfterEach
 //    void clean() {
@@ -146,5 +128,12 @@ class DrawRepositoryTest {
     void findLowRankingGroupByConcert() {
         int rank = drawRepository.findLowRankingGroupByConcert(1L);
         System.out.println("rank = " + rank);
+    }
+
+    @Test
+    @DisplayName("콘서트별 유효한 응모수")
+    void findValidDrawCntByConcert() {
+        int validDrawCntByConcert = drawRepository.findValidDrawCntByConcert(1L);
+        System.out.println("validDrawCntByConcert = " + validDrawCntByConcert);
     }
 }

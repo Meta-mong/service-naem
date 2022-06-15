@@ -4,7 +4,9 @@ import com.metamong.metaticket.domain.concert.Concert;
 import com.metamong.metaticket.domain.concert.Genre;
 import com.metamong.metaticket.domain.concert.Phamplet_File;
 import com.metamong.metaticket.domain.concert.dto.ConcertDto;
+import com.metamong.metaticket.domain.draw.Draw;
 import com.metamong.metaticket.repository.concert.ConcertRepository;
+import com.metamong.metaticket.repository.draw.DrawRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,6 +15,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Transactional
 @RequiredArgsConstructor
@@ -20,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ConcertServiceImpl implements ConcertService {
 
     private final ConcertRepository concertRepository;
+    private final DrawRepository drawRepository;
 
 
     // 공연 생성
@@ -109,7 +114,12 @@ public class ConcertServiceImpl implements ConcertService {
         return pageDto;
     }
 
-
+    //상시 판매로 변경
+    @Override
+    public void checkRemainingSeat(Concert concert) {
+        if (concert.getSeatNum() > drawRepository.findValidDrawCntByConcert(concert.getId()))
+            concert.changeSalesMethod();
+    }
 
 
 }

@@ -1,6 +1,7 @@
 package com.metamong.metaticket.controller.admin;
 
 import com.metamong.metaticket.domain.draw.Draw;
+import com.metamong.metaticket.domain.draw.dto.DrawDTO;
 import com.metamong.metaticket.domain.notice.dto.NoticeDTO;
 import com.metamong.metaticket.domain.question.Question;
 import com.metamong.metaticket.domain.question.dto.QuestionDTO;
@@ -113,7 +114,7 @@ public class AdminController {
         System.out.println("id : "+ id);
         User user = userService.userInfo(id);
         UserDTO.SESSION_USER_DATA dto = User.createUserDTO(user);
-        List<Draw> draws = drawService.findByUserId(user.getId());
+        List<DrawDTO.HISTORY> draws = drawService.findByUserId(user.getId());
         model.addAttribute("user", dto);
         model.addAttribute("draws", draws);
         return "/admin/admin_user_detail";
