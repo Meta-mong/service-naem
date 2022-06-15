@@ -1,0 +1,235 @@
+/* common */
+a {
+    text-decoration: none;
+}
+
+.main{
+    min-width: 1058px;
+}
+
+body,.main,.header-top-ul {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+}
+
+.container .inner {
+    width: 700px;
+    min-height: 500px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container .inner .title {
+    margin-top: 50px;
+    font-size: 40px;
+    font-weight: 100;
+    color: #333;
+    font-family: sans-serif;
+}
+
+/* find email&passwd */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+.wrap {
+    height: 100%;
+    width: 100%;
+    /* background-image: url(/img/background1.jpg); */
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+}
+.form-wrap {
+    width: 450px;
+    height: 550px;
+    position: relative;
+    margin: 120px auto;
+    /* background: #fff; */
+    background: rgba(244, 232, 247, 0.964);
+    padding: 5px;
+    overflow: hidden;
+}
+.button-wrap {
+    width: 350px;
+    margin: 35px auto;
+    position: relative;
+    background:#ffffff;
+    /*rgba(221, 184, 229, 0.964)*/
+    border-radius: 30px;
+}
+.togglebtn {
+    padding: 0px 38px;
+    height: 50px;
+    font-weight: bolder;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+}
+
+.togglebtn:last-child{
+    padding-left: 63px;
+}
+
+#btn {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 175px;
+    height: 100%;
+    background: rgb(218, 169, 228);
+    border-radius: 30px;
+    transition: .5s;
+}
+.input-group {
+    top: 150px;
+    position: absolute;
+    padding-left: 10px;
+    width: 400px;
+    /* align-content: center; */
+    transition: .5s;
+}
+.input-field {
+    width: 65%;
+    padding: 10px 0;
+    margin: 15px 0;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    border: none;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+}
+
+.submit {
+    width: 80%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    margin-top: 60px;
+    margin-right: 70px;
+    background: rgb(218, 169, 228);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    font-weight: bolder;
+}
+.checkbox {
+    margin: 30px 10px 30px 0;
+}
+
+#find_email {
+    left: 50px;
+}
+#find_passwd {
+    left: 450px;
+}
+.custom_btn{
+    margin:auto;
+    /*margin-left: 100px;*/
+    width : 100px;
+    font-size : 14px;
+    font-weight : bolder;
+    border-radius: 10px;
+    background: rgb(218, 169, 228);
+    cursor: pointer;
+}
+.form-text2 {
+    font-size: 20px;
+    font-weight: bolder;
+    text-align: center;
+    padding-right: 60px;
+}
+
+
+/* login */
+.container .inner .loginInfo {
+    margin-top: 40px;
+}
+
+.container .inner .loginInfo input {
+    width: 350px;
+    padding: 13px;
+    border: 1px solid #a7a7a7;
+    color: #333;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.container .inner .loginInfo input::placeholder{
+    font-size: 15px;
+}
+
+.container .inner .checkInfo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    height : 30px;
+    margin-top: 30px;
+}
+
+.container .inner .checkInfo .checkAuto{
+    margin-left: 20px;
+}
+
+.container .inner .loginBt button,
+.container .inner .kakaoLogin button,
+.container .inner .naverLogin button{
+    display: block;
+    background: rgb(218, 169, 228);
+    color: white;
+    width: 380px;
+    height: 45px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    transition: .4s;
+    margin-top: 20px;
+    border: 0;
+}
+
+.container .inner .loginBt button:hover,
+.container .inner .kakaoLogin button:hover,
+.container .inner .naverLogin button:hover {
+    font-weight: 900;
+    font-size: 17px;
+}
+
+.container .inner .toJoin {
+    float : left;
+    margin-top: 20px;
+}
+
+.container .inner .toJoin a{
+    font-size: 16px;
+    text-decoration: none;
+    color: #656565;
+}
+
+.container .inner .tofindInfo,
+.container .inner .to p {
+    float : left;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.container .inner .tofindInfo a{
+    font-size: 16px;
+    text-decoration: none;
+    color: #656565;
+}

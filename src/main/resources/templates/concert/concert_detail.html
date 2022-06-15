@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>메타 티켓</title>
+    <link rel="stylesheet" href="../css/main/main.css" />
+    <link rel="stylesheet" href="../css/concert/concert_detail.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+<body>
+<!-- header 시작 -->
+<div th:replace="fragments/header :: headerFragment"></div>
+<!-- header 끝 -->
+
+<div class="d-flex justify-content-center container mt-5">
+    <div class="card p-3 bg-white">
+        <div class="about-product text-center mt-2">
+            <img src="/concert/readImg/" th:attrappend="src=${concert.phamplet}" alt="" width="300"/>
+            <div style="margin-top: 50px; margin-bottom: 50px">
+                <h4 style="font-size: 50px;" th:text="${concert.title}">타이틀</h4>
+                <h6 class="mt-0 text-black-50"></h6>
+            </div>
+        </div>
+        <div class="stats mt-2">
+            <div class="d-flex justify-content-between p-price"><span>설명</span><br><span th:text="${concert.description}">설명설명</span><br><br><br></div>
+            <div class="d-flex justify-content-between p-price"><span>가격</span><br><span th:text="|${concert.price}원|">100,000원</span><br><br><br></div>
+            <div class="d-flex justify-content-between p-price"><span>공연일</span><br><span th:text="${concert.concertDate}">2022.07.18</span><br><br><br></div>
+            <div class="d-flex justify-content-between p-price"><span>공연장</span><br><span th:text="${concert.address}">잠실 주경기장</span><br><br><br><hr/></div>
+            <div class="d-flex justify-content-between p-price"><span>장르</span><br><span th:text="${concert.genre}">전시회</span><br><br><br><hr/></div>
+            <div class="d-flex justify-content-between p-price"><span>관람등급</span><br><span th:text="${concert.ratings}">15세</span><br><br><br><hr/></div>
+            <div class="d-flex justify-content-between p-price"><span>주최</span><br><span th:text="${concert.host}">(주)현대미술조합</span><br><br><br><hr/></div>
+            <div class="d-flex justify-content-between p-price"><span>예매방식</span><br><span th:text="${concert.draw ? '응모' : '상시'} ">응모</span></div>
+            <div class="box_apply_button" >
+                <div th:if="${concert.draw}">
+                    <form th:action="|/draws/${concert.id}|" method="post">
+                        <button type="submit">응모하기</button>
+                    </form>
+                </div>
+                <div th:unless="${concert.draw}">
+                    <form action="/payment" method="get">
+                        <input type="hidden" name="concert" th:value="${concert.id}" />
+                        <button type="submit">결제하기</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between total font-weight-bold mt-4"><span></span><span></span></div>
+    </div>
+</div>
+
+<!-- footer 시작 -->
+<div th:replace="fragments/footer :: footerFragment"></div>
+<!-- footer 끝 -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
+</body>
+</html>

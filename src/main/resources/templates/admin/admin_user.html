@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/admin/admin.css">
+  <link rel="stylesheet" href="/css/admin/admin_user.css">
+
+  <!-- js -->
+  <script src="/js/admin/admin_user.js"></script>
+  <script defer src="/js/admin/admin.js"></script>
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+  <title>admin</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="list">
+      <button type="button" class="btn" th:onclick="|javascript:move_ticket()|">티켓관리</button>
+      <button type="button" class="btn" th:onclick="|javascript:move_user()|">회원관리</button>
+      <button type="button" class="btn" th:onclick="|javascript:move_notice()|">게시판관리</button>
+    </div>
+    <section>
+      <div class="main">
+        <div class="search">
+          <input type="text" placeholder="">
+          <button type="button" class="material-icons">search</button>
+        </div>
+        <table class="user_list">
+          <tr>
+            <th>id</th>
+            <th>회원 이메일</th>
+            <th>회원 이름</th>
+            <th>회원 전화번호</th>
+<!--            <th>블랙리스트여부</th>-->
+          </tr>
+          <tr th:each="user : ${users}" class="user-detail">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.number}"></td>
+          </tr>
+        </table>
+
+        <!-- pagination-->
+        <div id="page" hidden th:text="${pageInfo.presentPage}"></div>
+        <nav>
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" th:if="${pageInfo.presentPage}<=1" href="#">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+              <a class="page-link" th:if="${pageInfo.presentPage}>1" href="/admin/allusers/" th:attrappend="href=${pageInfo.presentPage}-1" >
+                <span aria-hidden="true">&laquo;</span>
+
+              </a>
+            </li>
+
+            <li class="page-item" th:each="num : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
+              <a class="page-link present" href="/admin/allusers/" th:attrappend="href=${num}" th:text="${num}" th:style="${num == pageInfo.presentPage? 'background-color: #A390EE;' : ''}"></a>
+            </li>
+
+            <li class="page-item">
+              <a class="page-link" th:if="${pageInfo.presentPage} >= ${pageInfo.totalPage}" href="#">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+              <a class="page-link" th:if="${pageInfo.presentPage} < ${pageInfo.totalPage}" href="/admin/allusers/" th:attrappend="href=${pageInfo.presentPage}+1" >
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+      </div>
+    </section>
+  </div>
+</body>
+
+</html>

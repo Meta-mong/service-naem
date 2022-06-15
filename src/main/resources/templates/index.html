@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>메인 페이지</title>
+    <link rel="stylesheet" href="css/main/main.css">
+    <link rel="stylesheet" href="css/main/slider.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main/slick-theme.css"/>
+<!--    <link th:href="@{/css/bootstrap.min.css}"-->
+<!--          href="css/bootstrap.min.css" rel="stylesheet">-->
+    <script src="https://kit.fontawesome.com/f1962dcf03.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div class="main">
+
+    <!-- header 시작 -->
+    <div th:replace="fragments/header :: headerFragment"></div>
+    <!-- header 끝 -->
+
+    <!-- content 시작 -->
+    <div class="block">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="/concert/readImg/6" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="/concert/readImg/7" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="/concert/readImg/8" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="/concert/readImg/9" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="/concert/readImg/10" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="/concert/readImg/11" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="/concert/readImg/12" alt="">
+                </div>
+
+            </div>
+            <div class="swiper-button-prev"><span class="arrow circle left"></span></div> <!-- 이전 페이지 -->
+            <div class="swiper-button-next"><span class="arrow circle right"></span></div> <!-- 다음 페이지 -->
+            <div class="swiper-pagination"></div>
+
+        </div>
+
+        <div class="ticket-open">
+            <div class="ticket-open-top">
+                <span class="ticket-open-top-span">티켓 오픈 소식</span>
+                <span id="ticket-open-page" class="ticket-open-1">1</span>
+                <span class="ticket-open-2"> / 2</span>
+            </div>
+            <div class="multiple-items">
+                <div>
+                    <img src="img/metamong.png" alt="">
+                    <span>나는 메타몽이다!</span>
+                    <span>2022.06.10 - 2022.06.12</span>
+                    <span>올림픽공원 88 잔디마당</span>
+                </div>
+                <div>
+                    <img src="img/metamong.png" alt="">
+                    <span>나는 메타몽이다!</span>
+                    <span>2022.06.10 - 2022.06.12</span>
+                    <span>올림픽공원 88 잔디마당</span>
+                </div>
+                <div>
+                    <img src="img/metamong.png" alt="">
+                    <span>나는 메타몽이다!</span>
+                    <span>2022.06.10 - 2022.06.12</span>
+                    <span>올림픽공원 88 잔디마당</span>
+                </div>
+                <div>
+                    <img src="img/metamong.png" alt="">
+                    <span>나는 메타몽이다!</span>
+                    <span>2022.06.10 - 2022.06.12</span>
+                    <span>올림픽공원 88 잔디마당</span>
+                </div>
+                <div>
+                    <img src="img/metamong.png" alt="">
+                    <span>나는 메타몽이다!</span>
+                    <span>2022.06.10 - 2022.06.12</span>
+                    <span>올림픽공원 88 잔디마당</span>
+                </div>
+                <div>
+                    <img src="img/metamong.png" alt="">
+                    <span>나는 메타몽이다!</span>
+                    <span>2022.06.10 - 2022.06.12</span>
+                    <span>올림픽공원 88 잔디마당</span>
+                </div>
+                <div>
+                    <img src="img/metamong.png" alt="">
+                    <span>나는 메타몽이다!</span>
+                    <span>2022.06.10 - 2022.06.12</span>
+                    <span>올림픽공원 88 잔디마당</span>
+                </div>
+                <div>
+                    <img src="img/metamong.png" alt="">
+                    <span>나는 메타몽이다!</span>
+                    <span>2022.06.10 - 2022.06.12</span>
+                    <span>올림픽공원 88 잔디마당</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="ranking">
+            <div class="ranking-div-top">
+                <div class="ranking-div-top-left">
+                    <i class="fa-solid fa-trophy"></i>
+                    <span class="ranking-span">Ranking</span>
+                </div>
+                <div class="ranking-div-top-right">
+                    <ul>
+                        <li><a href="#none">콘서트</a></li>
+                        <li><a href="#none">뮤지컬/연극</a></li>
+                        <li><a href="#none">클래식</a></li>
+                        <li><a href="#none">전시/행사</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ranking-div-main">
+                <div class="ranking-div-main-plus">
+                    <a href="#"><i class="fa-solid fa-plus"></i></a>
+                </div>
+
+                <div>
+                    <div class="ranking1">
+                        <svg height="300" width="400">
+                            <polygon points="0,0 40,0 40,40 20,30 0,40" style="fill:rgb(255, 98, 67);stroke:rgb(255, 98, 67);stroke-width:1" />
+                            Sorry, your browser does not support inline SVG.
+                            <text x="15" y="22" font-family="Verdana" font-size="20" fill="white">1</text>
+                        </svg>
+                    </div>
+                    <img src="img/metamong.png" alt="">
+                    <span>나는 메타몽이다!</span>
+                </div>
+                <div>
+                    <div class="ranking1">
+                        <svg height="300" width="400">
+                            <polygon points="0,0 40,0 40,40 20,30 0,40" style="fill:rgb(137, 137, 137);stroke:rgb(137, 137, 137);stroke-width:1" />
+                            Sorry, your browser does not support inline SVG.
+                            <text x="15" y="22" font-family="Verdana" font-size="20" fill="white">2</text>
+                        </svg>
+                    </div>
+                    <img src="img/metamong.png" alt="">
+                    <span>나는 메타몽이다!</span>
+                </div>
+                <div>
+                    <div class="ranking1">
+                        <svg height="300" width="400">
+                            <polygon points="0,0 40,0 40,40 20,30 0,40" style="fill:rgb(137, 137, 137);stroke:rgb(137, 137, 137);stroke-width:1" />
+                            Sorry, your browser does not support inline SVG.
+                            <text x="15" y="22" font-family="Verdana" font-size="20" fill="white">3</text>
+                        </svg>
+                    </div>
+                    <img src="img/metamong.png" alt="">
+                    <span>나는 메타몽이다!</span>
+                </div>
+                <div>
+                    <div class="ranking1">
+                        <svg height="300" width="400">
+                            <polygon points="0,0 40,0 40,40 20,30 0,40" style="fill:rgb(137, 137, 137);stroke:rgb(137, 137, 137);stroke-width:1" />
+                            Sorry, your browser does not support inline SVG.
+                            <text x="15" y="22" font-family="Verdana" font-size="20" fill="white">4</text>
+                        </svg>
+                    </div>
+                    <img src="img/metamong.png" alt="">
+                    <span>나는 메타몽이다!</span>
+                </div>
+                <div>
+                    <div class="ranking1">
+                        <svg height="300" width="400">
+                            <polygon points="0,0 40,0 40,40 20,30 0,40" style="fill:rgb(137, 137, 137);stroke:rgb(137, 137, 137);stroke-width:1" />
+                            Sorry, your browser does not support inline SVG.
+                            <text x="15" y="22" font-family="Verdana" font-size="20" fill="white">5</text>
+                        </svg>
+                    </div>
+                    <img src="img/metamong.png" alt="">
+                    <span>나는 메타몽이다!</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="ticket-pick">
+            <div class="ticket-pick-top">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <span class="ranking-span">Meta 티켓 Pick!</span>
+            </div>
+
+            <div class="ticket-pick-main">
+                <div class="ticket-pick-main-top">
+                    <ul>
+                        <li><a href="#none">콘서트</a></li>
+                        <li><a href="#none">뮤지컬/연극</a></li>
+                        <li><a href="#none">클래식</a></li>
+                        <li><a href="#none">전시/행사</a></li>
+                    </ul>
+                </div>
+
+                <div class="ticket-pick-main-body">
+                    <div class="card" data-tilt>
+                        <img src="img/metamong.png" alt="">
+                        <span>나는 메타모오오옹이다. 이것은 글이 박스를 초과했을 시를 대비하여 작성하는 테스트 문서이다!!</span>
+                        <span>2022.08.19 ~ 2022.08.20</span>
+                        <span>올림픽 공원에서 만날것이야. 이것은 글이 박스를 초과했을 시를 대비하여 작성하는 테스트 문서이다!!</span>
+                    </div>
+                    <div class="card" data-tilt data-tilt-scale="0.95" data-tilt-startY="40">
+                        <img src="img/metamong.png" alt="">
+                        <span>나는 메타모오오옹이다. 이것은 글이 박스를 초과했을 시를 대비하여 작성하는 테스트 문서이다!!</span>
+                        <span>2022.08.19 ~ 2022.08.20</span>
+                        <span>올림픽 공원에서 만날것이야. 이것은 글이 박스를 초과했을 시를 대비하여 작성하는 테스트 문서이다!!</span>
+                    </div>
+                    <div class="card" data-tilt data-tilt-scale="0.95" data-tilt-startY="40">
+                        <img src="img/metamong.png" alt="">
+                        <span>나는 메타모오오옹이다. 이것은 글이 박스를 초과했을 시를 대비하여 작성하는 테스트 문서이다!!</span>
+                        <span>2022.08.19 ~ 2022.08.20</span>
+                        <span>올림픽 공원에서 만날것이야. 이것은 글이 박스를 초과했을 시를 대비하여 작성하는 테스트 문서이다!!</span>
+                    </div>
+                    <div class="card" data-tilt data-tilt-scale="0.95" data-tilt-startY="40">
+                        <img src="img/metamong.png" alt="">
+                        <span>나는 메타모오오옹이다. 이것은 글이 박스를 초과했을 시를 대비하여 작성하는 테스트 문서이다!!</span>
+                        <span>2022.08.19 ~ 2022.08.20</span>
+                        <span>올림픽 공원에서 만날것이야. 이것은 글이 박스를 초과했을 시를 대비하여 작성하는 테스트 문서이다!!</span>
+                    </div>
+                    <div class="card" data-tilt data-tilt-scale="0.95" data-tilt-startY="40">
+                        <img src="img/metamong.png" alt="">
+                        <span>나는 메타모오오옹이다. 이것은 글이 박스를 초과했을 시를 대비하여 작성하는 테스트 문서이다!!</span>
+                        <span>2022.08.19 ~ 2022.08.20</span>
+                        <span>올림픽 공원에서 만날것이야. 이것은 글이 박스를 초과했을 시를 대비하여 작성하는 테스트 문서이다!!</span>
+                    </div>
+                    <div class="card" data-tilt data-tilt-scale="0.95" data-tilt-startY="40">
+                        <img src="img/metamong.png" alt="">
+                        <span>나는 메타모오오옹이다. 이것은 글이 박스를 초과했을 시를 대비하여 작성하는 테스트 문서이다!!</span>
+                        <span>2022.08.19 ~ 2022.08.20</span>
+                        <span>올림픽 공원에서 만날것이야. 이것은 글이 박스를 초과했을 시를 대비하여 작성하는 테스트 문서이다!!</span>
+                    </div>
+                    <div class="card" data-tilt data-tilt-scale="0.95" data-tilt-startY="40">
+                        <img src="img/metamong.png" alt="">
+                        <span>나는 메타모오오옹이다. 이것은 글이 박스를 초과했을 시를 대비하여 작성하는 테스트 문서이다!!</span>
+                        <span>2022.08.19 ~ 2022.08.20</span>
+                        <span>올림픽 공원에서 만날것이야. 이것은 글이 박스를 초과했을 시를 대비하여 작성하는 테스트 문서이다!!</span>
+                    </div>
+                    <div class="card" data-tilt data-tilt-scale="0.95" data-tilt-startY="40">
+                        <img src="img/metamong.png" alt="">
+                        <span>나는 메타모오오옹이다. 이것은 글이 박스를 초과했을 시를 대비하여 작성하는 테스트 문서이다!!</span>
+                        <span>2022.08.19 ~ 2022.08.20</span>
+                        <span>올림픽 공원에서 만날것이야. 이것은 글이 박스를 초과했을 시를 대비하여 작성하는 테스트 문서이다!!</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content 끝 -->
+
+    <!-- footer 시작 -->
+    <div th:replace="fragments/footer :: footerFragment"></div>
+    <!-- footer 끝 -->
+
+
+</div>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="js/main/slick.min.js"></script>
+<script src="js/main/slider.js"></script>
+<script src="js/main/ticketOpenPage.js"></script>
+<script src="js/main/backToTop.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.multiple-items').slick({
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 4
+        });
+    });
+</script>
+
+<script src="js/main/tilt.js"></script>
+
+</body>
+</html>

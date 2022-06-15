@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- css -->
+    <link rel="stylesheet" href="/css/user/signup.css">
+    <link rel="stylesheet" href="/css/main/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/f1962dcf03.js" crossorigin="anonymous"></script>
+
+    <!-- js -->
+    <script src="/js/user/signup.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <title>SignUp</title>
+</head>
+
+<body>
+<div class="main">
+    <!-- header 시작 -->
+    <div th:replace="fragments/header :: headerFragment"></div>
+    <!-- header 끝 -->
+
+    <form id="signup">
+        <div class="container" style="min-height: 100vh;">
+            <section>
+                <div class="inner">
+
+                    <div class="title">
+                        <h2>SignUp</h2>
+                    </div>
+
+                    <div class="userInfo">
+                        <span class="instruction">이메일</span>
+                        <input class="userId" id="email" name="email" type="text" placeholder="이메일을 입력해주세요">
+                        <input class="btn" id="emailck" type="button" value="중복확인">
+                    </div>
+                    <div id="emailmsg"></div>
+
+                    <div class="userInfo">
+                        <span class="instruction">비밀번호</span>
+                        <input class="userPw" id="passwd" name="passwd" type="password" placeholder="8~12자의 영문,숫자,특수문자로 이루어진 비밀번호를 입력해주세요">
+                    </div>
+                    <div id="passwdmsg"></div>
+
+                    <div class="userInfo">
+                        <span class="instruction">비밀번호 확인</span>
+                        <input class="userPwChk" id="passwdck" type="password" placeholder="비밀번호를 확인해주세요">
+                    </div>
+                    <div id="passwdckmsg"></div>
+
+                    <div class="userInfo">
+                        <span class="instruction">이름</span>
+                        <input class="userName" id="name" name="name" type="text" placeholder="이름을 입력해주세요">
+                    </div>
+                    <div id="namemsg"></div>
+
+                    <div class="userInfo">
+                        <span class="instruction">생년월일</span>
+                        <input class="userBirth" id="age" name="age" type="text" placeholder="6자로 이루어진 생년월일을 입력해주세요">
+                    </div>
+                    <div id="agemsg"></div>
+
+                    <div class="userInfo">
+                        <span class="instruction">휴대전화</span>
+                        <input class="userPhone" id="number" name="number" type="text" placeholder="휴대전화를 인증해주세요">
+                        <input class="btn" id="numberck" type="button" value="인증번호">
+                        <input class="userPhone" id="authnumber" type="hidden" placeholder="인증번호를 입력해주세요.">
+                        <input class="btn" id="smsck" type="hidden" value="인증">
+                    </div>
+                    <div id="numbermsg"></div>
+
+                    <div class="joinBt">
+                        <button type="button" id="signupbtn">회원가입</button>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </form>
+
+    <!-- footer 시작 -->
+    <div th:replace="fragments/footer :: footerFragment"></div>
+    <!-- footer 끝 -->
+
+</div>
+</body>
+</html>

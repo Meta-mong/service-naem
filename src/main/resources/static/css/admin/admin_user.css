@@ -1,0 +1,114 @@
+/* button */
+.container .list {
+  display: block;
+  justify-content: left;
+  margin-top: 60px;
+  margin-left: 125px;
+  margin-bottom: -48px;
+}
+
+.container .list .btn {
+  font-size: 23px;
+  /* background-color: rgba(221, 184, 229, 0.964); */
+  margin-left: -6px;
+  background-color: black;
+  color: whitesmoke;
+  border: 0;
+  height: 60px;
+}
+
+.container .list .btn:nth-child(2) {
+  background-color: rgb(211, 133, 228);
+}
+
+.container .list .btn:hover {
+  background-color: rgb(215, 158, 228);
+  color: whitesmoke;
+}
+
+/* main */
+.container .main .search {
+  float: right;
+  margin-top: 30px;
+  margin-bottom: 28px;
+  margin-right: 30px;
+  height: 40px;
+  width: 230px;
+  border: 1px solid lightgray;
+  background-color: #fff;
+}
+
+.container .main .search input {
+  font-size: 16px;
+  width: 160px;
+  padding: 10px;
+  border: 0px;
+  outline: none;
+  float: left;
+}
+
+.container .main .search button {
+  width: 50px;
+  height: 100%;
+  border: 0px;
+  background-color: gray;
+  outline: none;
+  float: right;
+  color: #fff;
+}
+
+/* user_list */
+.container .main .user_list {
+  width: 100%;
+  border: solid 1px lightgray;
+  border-collapse: collapse;
+}
+
+.container .main .user_list th {
+  padding: 10px;
+}
+
+.container .main .user_list td {
+  padding: 10px;
+  border-top: solid 1px lightgray;
+}
+
+/* pagination */
+.pagination {
+  /* display: flex; */
+  margin-top: 30px;
+  text-align: center;
+  padding-left: 0;
+  list-style: none;
+}
+
+.page-item {
+  display: inline-block;
+}
+
+.page-item:not(:first-child) .page-link {
+  margin-left: -1px;
+}
+
+.page-link:hover {
+  z-index: 2;
+  color: #000205;
+  background-color: #f3a1e8;
+  border-color: #dee2e6;
+}
+
+.page-link {
+  padding: 0.375rem 0.75rem;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  font-weight: bolder;
+  font-size: 18px;
+  color: #0a0a0a;
+  text-decoration: none;
+  background-color: transparent;
+  /* border: 1px solid #dee2e6; */
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}

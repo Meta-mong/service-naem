@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- css -->
+    <link rel="stylesheet" href="/css/user/findAccount.css">
+    <link rel="stylesheet" href="css/main/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <script src="https://kit.fontawesome.com/f1962dcf03.js" crossorigin="anonymous"></script>
+
+    <!-- js -->
+    <script src="/js/user/findAccount.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+    <title>SignIn</title>
+</head>
+<body>
+<div class="main">
+
+    <!-- header 시작 -->
+    <div th:replace="fragments/header :: headerFragment"></div>
+    <!-- header 끝 -->
+
+    <div class="container" style="min-height: 90vh;">
+        <section>
+            <div class="inner">
+                <div class="title">
+                    <h3>이메일 / 비밀번호 찾기</h3>
+                </div>
+                <div class="wrap">
+                    <div class="form-wrap">
+                        <div class="button-wrap">
+                            <div id="btn"></div>
+                            <button type="button" class="togglebtn" onclick="email()">이메일 찾기</button>
+                            <button type="button" class="togglebtn" onclick="passwd()">비밀번호 찾기</button>
+                        </div>
+
+                        <form id="find_email" class="input-group">
+                            <input type="text" id="phone_number1" name="number" class="input-field"
+                                   placeholder="휴대전화번호 입력('-'제외)" required>
+                            <input class="custom_btn" id="send_auth" type="button" value="인증번호 전송">
+                            <div id="phone_number1_msg" class="form-text"></div>
+                            <input type="text" id="auth_number" name="auth_number" class="input-field" placeholder="인증번호 입력"
+                                   required>
+                            <input class="custom_btn" id="verify_auth" type="button" value="인증">
+                            <div id="auth_number_msg" class="form-text"></div>
+                            <button type="button" id="email_btn" class="submit">이메일 찾기</button>
+                            <br /><br />
+                            <div id="member_email" class="form-text2"></div>
+                        </form>
+
+                        <form id="find_passwd" class="input-group">
+                            <input type="text" id="email" name="email" class="input-field" placeholder="이메일 입력"
+                                   style="width: 90%;" required>
+                            <div id="email_msg" class="form-text"></div>
+                            <input type="text" id="phone_number2" name="number" class="input-field"
+                                   placeholder="휴대전화번호 입력('-'제외)" style="width: 90%;" required>
+                            <div id="phone_number2_msg" class="form-text"></div>
+                            <button type="button" id="passwd_btn" class="submit">비밀번호 찾기</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- footer 시작 -->
+    <div th:replace="fragments/footer :: footerFragment"></div>
+    <!-- footer 끝 -->
+
+</div>
+</body>
+<script>
+    var x = document.getElementById("find_email");
+    var y = document.getElementById("find_passwd");
+    var z = document.getElementById("btn");
+
+
+    function email() {
+        x.style.left = "50px";
+        y.style.left = "450px";
+        z.style.left = "0";
+
+        $("#email").prop("value", "");
+        $("#email_msg").html("");
+        $("#phone_number2").prop("value", "");
+        $("#phone_number2_msg").html("");
+    }
+
+    function passwd() {
+        x.style.left = "-400px";
+        y.style.left = "50px";
+        z.style.left = "175px";
+
+        $("#phone_number1").prop("value", "");
+        $("#phone_number1_msg").html("");
+        $("#auth_number").prop("value", "");
+        $("#auth_number_msg").html("");
+        $("#member_email").html("");
+    }
+</script>
+</html>

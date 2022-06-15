@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>메인 페이지</title>
+        <link rel="stylesheet" href="/css/main/main.css">
+        <link rel="stylesheet" href="/css/main/slider.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="/css/main/slick.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/main/slick-theme.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/ticketopen/ticket_open.css"/>
+        <script src="https://kit.fontawesome.com/f1962dcf03.js" crossorigin="anonymous"></script>
+
+
+    </head>
+    <body>
+        <div class="main">
+            <!-- header 시작 -->
+            <div th:replace="fragments/header :: headerFragment"></div>
+            <!-- header 끝 -->
+
+            <div class="block">
+                <div class="ticket-open-issue">티켓 오픈 소식</div>
+                <div class="ticket-open">
+                    <div class="ticket-open-top">
+                        <span id="ticket-open-page" class="ticket-open-1">1</span>
+                        <span class="ticket-open-2">
+                            / 2</span>
+                    </div>
+                    <div class="multiple-items">
+                        <div>
+                            <img src="/img/metamong.png" alt="">
+                            <span>나는 메타몽이다!</span>
+                            <span style="color: rgb(15, 228, 15);">[오픈] 22.06.30(목) 14:00</span>
+                        </div>
+                        <div>
+                            <img src="/img/ticket1.png" alt="">
+                            <span>영국 현대 미술의 거장</span>
+                            <span style="color: rgb(15, 228, 15);">[오픈] 22.06.30(목) 14:00</span>
+                        </div>
+                        <div>
+                            <img src="/img/ticket2.png" alt="">
+                            <span>뮤지컬 〈마타하리〉</span>
+                            <span style="color: rgb(15, 228, 15);">[오픈] 22.06.30(목) 14:00</span>
+                        </div>
+                        <div>
+                            <img src="/img/metamong.png" alt="">
+                            <span>나는 메타몽이다!</span>
+                            <span style="color: rgb(15, 228, 15);">[오픈] 22.06.30(목) 14:00</span>
+                        </div>
+                        <div>
+                            <img src="/img/metamong.png" alt="">
+                            <span>나는 메타몽이다!</span>
+                            <span style="color: rgb(15, 228, 15);">[오픈] 22.06.30(목) 14:00</span>
+                        </div>
+                        <div>
+                            <img src="/img/metamong.png" alt="">
+                            <span>나는 메타몽이다!</span>
+                            <span style="color: rgb(15, 228, 15);">[오픈] 22.06.30(목) 14:00</span>
+                        </div>
+                        <div>
+                            <img src="/img/metamong.png" alt="">
+                            <span>나는 메타몽이다!</span>
+                            <span style="color: rgb(15, 228, 15);">[오픈] 22.06.30(목) 14:00</span>
+                        </div>
+                        <div>
+                            <img src="/img/metamong.png" alt="">
+                            <span>나는 메타몽이다!</span>
+                            <span style="color: rgb(15, 228, 15);">[오픈] 22.06.30(목) 14:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 리스트형 티켓 오픈 소식 -->
+                <form class="ticket-open-query" id="open_query">
+                    <select name="ticket_genre" id="genre" required="required">
+                        <option value="total" selected="selected">전체</option>
+                        <option value="concert">콘서트</option>
+                        <option value="musical">뮤지컬/연극</option>
+                        <option value="classic">클래식</option>
+                        <option value="display">전시/행사</option>
+                    </select>
+                    <input type="text"/>
+                    <button type="button">검색</button>
+                </form>
+
+                <div class="ticket-open-list">
+                    <ul class="open-list-ul">
+                        <li>
+                            <!-- display:span;-->
+                            <div class="open-date">티켓오픈일<br/>[오픈] 22.06.30(목) 14:00</div>
+                            <div class="open-info">뮤지컬 〈웃는 남자〉 1층 시야제한석 티켓 오픈 안내</div>
+                            <div class="open-img"><img src="/img/ticket1.PNG" alt=""/></div>
+                        </li>
+                        <li>
+                            <!-- display:span;-->
+                            <div class="open-date">티켓오픈일<br/>[오픈] 22.06.30(목) 14:00</div>
+                            <div class="open-info">뮤지컬 〈웃는 남자〉 1층 시야제한석 티켓 오픈 안내</div>
+                            <div class="open-img"><img src="/img/ticket1.PNG" alt=""/></div>
+                        </li>
+                        <li>
+                            <!-- display:span;-->
+                            <div class="open-date">티켓오픈일<br/>[오픈] 22.06.30(목) 14:00</div>
+                            <div class="open-info">뮤지컬 〈웃는 남자〉 1층 시야제한석 티켓 오픈 안내</div>
+                            <div class="open-img"><img src="/img/ticket1.PNG" alt=""/></div>
+                        </li>
+                        <li>
+                            <!-- display:span;-->
+                            <div class="open-date">티켓오픈일<br/>[오픈] 22.06.30(목) 14:00</div>
+                            <div class="open-info">뮤지컬 〈웃는 남자〉 1층 시야제한석 티켓 오픈 안내</div>
+                            <div class="open-img"><img src="/img/ticket1.PNG" alt=""/></div>
+                        </li>
+                        <li>
+                            <!-- display:span;-->
+                            <div class="open-date">티켓오픈일<br/>[오픈] 22.06.30(목) 14:00</div>
+                            <div class="open-info">뮤지컬 〈웃는 남자〉 1층 시야제한석 티켓 오픈 안내</div>
+                            <div class="open-img"><img src="/img/ticket1.PNG" alt=""/></div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- footer 시작 -->
+            <div th:replace="fragments/footer :: footerFragment"></div>
+            <!-- footer 끝 -->
+
+        </div>
+    </body>
+    <!-- JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="/js/main/slick.min.js"></script>
+    <script src="js/main/slider.js"></script>
+    <script src="/js/main/ticketOpenPage.js"></script>
+    <script src="/js/main/ticketOpenSlider.js"></script>
+    <script src="/js/main/backToTop.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.multiple-items').slick(
+                {infinite: true, slidesToShow: 4, slidesToScroll: 4}
+            );
+        });
+    </script>
+</html>

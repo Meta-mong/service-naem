@@ -1,0 +1,94 @@
+/* menu_btn */
+.inner .btn > button:nth-child(1){
+  background-color: rgb(218, 169, 228);
+}
+
+.inner .btn > button:hover{
+  background-color: rgb(212, 118, 231);
+}
+
+/* pageInfo */
+.inner .pageInfo{
+
+}
+
+/* user info */
+
+article {
+  /* display: flex; */
+}
+
+input:focus {
+  outline: none;
+}
+
+.attr >li {
+  margin-left: 30px;
+  padding: 20px;
+  font-size: 20px;
+  display: flex;
+  /* background-color: aqua; */
+}
+
+.user_info {
+  display: flex;
+  margin-left:40px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.attr_sub {
+  margin-bottom: 10px;
+}
+
+.attr_key {
+  width:190px;
+  height: 100%;
+  padding: 15px 0px;
+  font-weight: bolder;
+  text-align: center;
+  border-radius: 30px;
+  color: black;
+  background-color: rgb(220, 220, 220);
+}
+
+.attr_value {
+  border: 0px;
+  width:650px;
+  margin-left: 60px;
+  border-bottom: 1px solid #999;;
+  font-size: 21px;
+  text-align: center;
+  background-color:whitesmoke;
+}
+
+
+.modify_btn, .resign_btn {
+  width: 200px;
+  padding: 10px 30px;
+  margin-top: 20px;
+  margin-left: 45px;
+  font-size: 23px;
+  font-weight: bold;
+  font-style: italic;
+  border: none;
+  border-radius: 30px;
+  color: rgb(255, 255, 255);
+}
+
+.modify_btn {
+  background-color: rgb(186, 133, 236);
+}
+
+.resign_btn {
+  margin-left: 20px;
+  background-color: rgb(218, 186, 248); 
+}
+
+.modify_btn:hover{
+  background-color: blueviolet;
+}
+
+.resign_btn:hover{
+  background-color: blueviolet;
+}

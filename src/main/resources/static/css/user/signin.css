@@ -1,0 +1,116 @@
+  /* common */
+  a {
+    text-decoration: none;
+  }
+  
+.main{
+    min-width: 1058px;
+}
+  
+body,.main,.header-top-ul {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 80px;
+}
+
+.container .inner {
+	width: 700px;
+	min-height: 500px;
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.container .inner .title {
+	margin-top: 50px;
+	font-size: 40px;
+	font-weight: 100;
+	color: #333;	
+	font-family: sans-serif;
+}
+
+  /* login */
+.container .inner .loginInfo {
+	margin-top: 40px;
+}
+
+.container .inner .loginInfo input {
+	width: 350px;
+	padding: 13px;
+	border: 1px solid #a7a7a7;
+	color: #333;
+	font-size: 16px;
+	margin-top: 20px;	
+}
+
+.container .inner .loginInfo input::placeholder{
+	font-size: 15px;
+}
+
+/*.container .inner .checkInfo{*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    font-size: 18px;*/
+/*    height : 30px;*/
+/*    margin-top: 30px;*/
+/*}*/
+
+/*.container .inner .checkInfo .checkAuto{*/
+/*    margin-left: 20px;*/
+/*}*/
+
+.container .inner .loginBt button,
+.container .inner .kakaoLogin button,
+.container .inner .naverLogin button{
+	display: block;
+	background: rgb(218, 169, 228);
+	color: white;
+	width: 380px;
+	height: 45px;
+	cursor: pointer;
+	font-size: 18px;
+	font-weight: 700;
+	transition: .4s;
+	margin-top: 20px;
+    border: 0;
+}
+
+.container .inner .loginBt button:hover,
+.container .inner .kakaoLogin button:hover,
+.container .inner .naverLogin button:hover {
+	font-weight: 900;
+	font-size: 17px;
+}
+
+.container .inner .toJoin {
+    float : left;
+	margin-top: 20px;
+}
+
+.container .inner .toJoin a{
+    font-size: 16px;
+	text-decoration: none;
+	color: #656565;
+}
+
+.container .inner .tofindInfo,
+.container .inner .to p {
+    float : left;
+	margin-top: 20px;
+    margin-left: 20px;
+}
+
+.container .inner .tofindInfo a{
+    font-size: 16px;
+	text-decoration: none;
+	color: #656565;
+}

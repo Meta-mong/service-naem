@@ -1,0 +1,70 @@
+/* common */
+a {
+    text-decoration: none;
+}
+
+.main{
+    min-width: 1400px;
+    max-width: 2200px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+body,.header-top-ul {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    color: #999;
+    width: 1400px;
+}
+
+/* main */
+
+.container .myPage{
+    display: flex;
+    justify-content: flex-start;
+    margin: 50px;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+    margin-top: 50px;
+    margin-left: 100px;
+}
+
+.container .inner {
+    display: inline-block;
+    width: 90%;
+}
+.container .inner .btn{
+    /* background-color: #999; */
+    min-height: 200px;
+    width: 10%;
+    float: left;
+}
+
+.inner .btn > button {
+    display: block;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    width: 90%;
+    height: 50px;
+    border-radius: 10px;
+    border: 0;
+    background-color: rgb(233, 232, 232);
+    font-size: 20px;
+}
+
+.inner .pageInfo{
+    background-color: whitesmoke;
+    width: 90%;
+    float: right;
+    min-height: 800px;
+    margin : 0 0 100px 0;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+}
