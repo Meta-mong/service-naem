@@ -39,7 +39,6 @@ public class ConcertServiceImpl implements ConcertService {
     @Override
     public ConcertDto concertInfo(Long id) {
         Concert findConcert = concertRepository.findById(id).orElse(null);
-        findConcert.setVisitCnt(findConcert.getVisitCnt()+1);
         ConcertDto concertDto = ConcertDto.createDto(findConcert);
         return concertDto;
     }
