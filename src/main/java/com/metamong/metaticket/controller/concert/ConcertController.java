@@ -7,6 +7,7 @@ import com.metamong.metaticket.domain.concert.dto.ConcertDto;
 import com.metamong.metaticket.service.concert.ConcertService;
 import com.metamong.metaticket.service.concert.FilesService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,10 +26,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Controller
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/concert")
 public class ConcertController {
@@ -39,13 +42,20 @@ public class ConcertController {
     FilesService filesService;
 
     // 공연 생성
+    @GetMapping("/adminConcert/upload")
+    public String addConcert(){
+        return "/admin/admin_addticket";
+    }
+
     @PostMapping("/adminConcert/upload")
-    public void addConcert(@Valid ConcertDto dto, @RequestPart("file")MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Phamplet_File files = filesService.saveFile(file);
+    public String addConcert(@ModelAttribute ConcertDto.FromAdminConcert dto, Model model) throws Exception{
+        Phamplet_File files = filesService.saveFile(dto.getFile());
         Concert concert = ConcertDto.createConcert(dto,files);
-        concertService.addConcert(concert);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/concert/adminConcert");
-        dispatcher.forward(request,response);
+        concert.setDraw(true);
+        long concertId = concertService.addConcert(concert);
+        ConcertDto concertDto = concertService.concertInfo(concertId);
+        model.addAttribute("concert",concertDto);
+        return "/admin/admin_ticket_detail";
     }
 
     // 공연 상세내역 조회
@@ -86,13 +96,15 @@ public class ConcertController {
     }
 
     // 공연 수정
-    @PostMapping("/update/{id}")
-    public void updateConcert(@PathVariable Long id,@RequestPart("file") MultipartFile file,@ModelAttribute ConcertDto dto,HttpServletRequest request, HttpServletResponse response ) throws Exception {
-        Phamplet_File files = filesService.findById(dto.getPhamplet());
-        filesService.updateFile(file, dto.getPhamplet());
-        concertService.updateConcert(dto,files);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/concert/adminConcert");
-        dispatcher.forward(request,response);
+    @PostMapping("/adminConcert/update/{id}")
+    public String updateConcert(@PathVariable Long id,@ModelAttribute ConcertDto.FromAdminConcert dto,Model model) throws Exception {
+        ConcertDto concert = concertService.concertInfo(id);
+        Phamplet_File files = filesService.findById(concert.getPhamplet());
+        filesService.updateFile(dto.getFile(), concert.getPhamplet());
+        ConcertDto concertDto = ConcertDto.createConcertDto(dto,files.getId(),id);
+        concertService.updateConcert(concertDto,files);
+        model.addAttribute("concert",concertDto);
+        return "/admin/admin_ticket_detail";
     }
 
     // 공연 삭제

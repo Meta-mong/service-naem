@@ -13,9 +13,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 @Transactional
 @RequiredArgsConstructor
@@ -27,8 +24,9 @@ public class ConcertServiceImpl implements ConcertService {
 
     // 공연 생성
     @Override
-    public void addConcert(Concert concert) {
+    public Long addConcert(Concert concert) {
         Concert saveConcert = concertRepository.save(concert);
+        return  saveConcert.getId();
 //        return saveConcert;
     }
 
