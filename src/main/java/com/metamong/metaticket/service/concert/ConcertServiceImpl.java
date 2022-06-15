@@ -4,7 +4,9 @@ import com.metamong.metaticket.domain.concert.Concert;
 import com.metamong.metaticket.domain.concert.Genre;
 import com.metamong.metaticket.domain.concert.Phamplet_File;
 import com.metamong.metaticket.domain.concert.dto.ConcertDto;
+import com.metamong.metaticket.domain.draw.Draw;
 import com.metamong.metaticket.repository.concert.ConcertRepository;
+import com.metamong.metaticket.repository.draw.DrawRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,7 +15,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,12 +24,14 @@ import java.util.List;
 public class ConcertServiceImpl implements ConcertService {
 
     private final ConcertRepository concertRepository;
+    private final DrawRepository drawRepository;
 
 
     // 공연 생성
     @Override
-    public void addConcert(Concert concert) {
+    public Long addConcert(Concert concert) {
         Concert saveConcert = concertRepository.save(concert);
+        return  saveConcert.getId();
 //        return saveConcert;
     }
 
@@ -36,7 +39,6 @@ public class ConcertServiceImpl implements ConcertService {
     @Override
     public ConcertDto concertInfo(Long id) {
         Concert findConcert = concertRepository.findById(id).orElse(null);
-        findConcert.setVisitCnt(findConcert.getVisitCnt()+1);
         ConcertDto concertDto = ConcertDto.createDto(findConcert);
         return concertDto;
     }
@@ -71,24 +73,9 @@ public class ConcertServiceImpl implements ConcertService {
 
 
     // 공연 전체 조회
-//    @Override
-//    public List<ConcertDto> concertAllInfo() {
-//        List<ConcertDto> concertList = new ArrayList<>();
-//        List<Concert> concerts = concertRepository.findAll();
-//        for(Concert tmp : concerts){
-//            ConcertDto dto = ConcertDto.createDto(tmp);
-//            concertList.add(dto);
-//        }
-//        return concertList;
-//    }
     @Override
     public Page<ConcertDto> concertAllInfo(@PageableDefault(size = 10) Pageable pageable) {
-//        List<ConcertDto> concertList = new ArrayList<>();
-//        List<Concert> concerts = concertRepository.findAll(pageable).getContent();
-//        for(Concert tmp : concerts){
-//            ConcertDto dto = ConcertDto.createDto(tmp);
-//            concertList.add(dto);
-//        }
+
         int pagenum = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // page는 index 처럼 0부터 시작
         pageable = PageRequest.of(pagenum, 10);
         Page<Concert> page = concertRepository.findAll(pageable);
@@ -98,12 +85,7 @@ public class ConcertServiceImpl implements ConcertService {
     // 장르별 공연 조회
     @Override
     public Page<ConcertDto> concertGenreInfo(@PageableDefault(size = 16) Pageable pageable, Genre genre){
-//        List<ConcertDto> concertList = new ArrayList<>();
-//        List<Concert> concerts = concertRepository.findByGenre(genre);
-//        for(Concert tmp : concerts){
-//            ConcertDto dto = ConcertDto.createDto(tmp);
-//            concertList.add(dto);
-//        }
+
         int pagenum = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // page는 index 처럼 0부터 시작
         pageable = PageRequest.of(pagenum, 16);
         Page<Concert> page = concertRepository.findByGenre(pageable,genre);
@@ -111,7 +93,12 @@ public class ConcertServiceImpl implements ConcertService {
         return pageDto;
     }
 
-
+    //상시 판매로 변경
+    @Override
+    public void checkRemainingSeat(Concert concert) {
+        if (concert.getSeatNum() > drawRepository.findValidDrawCntByConcert(concert.getId()))
+            concert.changeSalesMethod();
+    }
 
 
 }

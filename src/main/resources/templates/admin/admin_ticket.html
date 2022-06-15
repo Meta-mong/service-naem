@@ -23,6 +23,9 @@
 
   <!-- js -->
   <script defer src="/js/admin/admin.js"></script>
+  <script defer src="/js/admin/admin_ticket.js"></script>
+
+
 
   <title>admin</title>
 </head>
@@ -30,20 +33,20 @@
 <body>
 <div class="container">
   <div class="list">
-    <button type="button" class="btn" onclick="move_ticket()">티켓관리</button>
-    <button type="button" class="btn" onclick="move_user()">회원관리</button>
-    <button type="button" class="btn" onclick="move_notice()">게시판관리</button>
+    <button type="button" class="btn" th:onclick="|javascript:move_ticket()|">티켓관리</button>
+    <button type="button" class="btn" th:onclick="|javascript:move_user()|">회원관리</button>
+    <button type="button" class="btn" th:onclick="|javascript:move_notice()|">게시판관리</button>
   </div>
   <section>
     <div class="main">
-      <button type="button" class="btn" onclick="add_ticket()">공연등록</button>
+      <button type="button" class="btn" th:onclick="|javascript:add_ticket()|">공연등록</button>
       <div class="search">
         <input type="text" placeholder="">
         <button type="button" class="material-icons">search</button>
       </div>
       <table class="ticket_list">
         <tr>
-          <th>번호</th>
+          <th>공연번호</th>
           <th>공연명</th>
           <th>공연일자</th>
           <th>장소</th>
@@ -53,12 +56,12 @@
         </tr>
 
         <tr th:each = "ticket : ${concert}" th:onclick="|javascript:move_ticketDetail('${ticket.id}')|">
-          <td th:text="${ticket.id}">1</td>
-          <td th:text="${ticket.title}">웃는남자</td>
-          <td th:text="${#temporals.format(ticket.concertDate, 'yyyy-MM-dd')}">2022.06.10</td>
-          <td th:text="${ticket.address}">세종문화회관 대극장</td>
-          <td th:text="${ticket.host}">(주)EMK뮤지컬컴퍼니</td>
-          <td th:text="${#temporals.format(ticket.createDate, 'yyyy-MM-dd')}">2022.06.04</td>
+          <td th:text="${ticket.id}"></td>
+          <td th:text="${ticket.title}"></td>
+          <td th:text="${#temporals.format(ticket.concertDate, 'yyyy-MM-dd')}"></td>
+          <td th:text="${ticket.address}"></td>
+          <td th:text="${ticket.host}"></td>
+          <td th:text="${#temporals.format(ticket.createDate, 'yyyy-MM-dd')}"></td>
           <td >관리자</td>
         </tr>
       </table>
@@ -103,7 +106,7 @@
 <!-- javascript -->
 <script type="text/javascript">
   function add_ticket() {
-    window.location.href = "./admin_addticket.html";
+    window.location.href = "/concert/adminConcert/upload";
   }
 </script>
 

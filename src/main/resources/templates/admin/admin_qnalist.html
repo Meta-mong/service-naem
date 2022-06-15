@@ -41,7 +41,6 @@
 
       <button type="button" class="btn" onclick="notice_list()" style="background-color: gray;">공지사항</button>
       <button type="button" class="btn" onclick="qna_list()">QnA</button>
-      <button type="button" class="btn_submit" onclick="">등록</button>
 
       <div class="search">
         <input type="text" placeholder="">
@@ -120,6 +119,19 @@
     var id = id;
     window.location.href = "/admin/qnadetail/"+id
   }
+
+    function notice_list(id) {
+    var id = id;
+    window.location.href = "/admin/anlist/"
+  }
+
+    function qna_list(id) {
+    var id = id;
+    window.location.href = "/admin/aqlist/"
+  }
+
+
+
 </script>
 
 </html>

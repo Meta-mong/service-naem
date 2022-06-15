@@ -4,10 +4,9 @@ import com.metamong.metaticket.domain.concert.Concert;
 import com.metamong.metaticket.domain.concert.Genre;
 import com.metamong.metaticket.domain.concert.Phamplet_File;
 import com.metamong.metaticket.domain.concert.Ratings;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -38,9 +37,9 @@ public class ConcertDto {
 
     private int seatNum;
 
-    private LocalDateTime drawStartDate;
+    private LocalDate drawStartDate;
 
-    private LocalDateTime drawEndDate;
+    private LocalDate drawEndDate;
 
     private int price;
 
@@ -48,6 +47,39 @@ public class ConcertDto {
 
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
+    private boolean draw;
+
+    @Data
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class FromAdminConcert{ //공연 생성
+        private String title;
+
+        private String description;
+
+        private MultipartFile file;
+
+        private String concertDate;
+
+        private Genre genre;
+
+        private Ratings ratings;
+
+        private String address;
+
+        private String host;
+
+        private int seatNum;
+
+        private String drawStartDate;
+
+        private String drawEndDate;
+
+        private int price;
+    }
 
 
     // ConcertDto 생성
@@ -69,10 +101,12 @@ public class ConcertDto {
                 .visitCnt(concert.getVisitCnt())
                 .createDate(concert.getCreatedDate())
                 .updateDate(concert.getUpdatedDate())
+                .draw(concert.isDraw())
                 .build();
 
         return concertDto;
     }
+
 
     public static Concert createConcert(ConcertDto concertDto, Phamplet_File files){
         Concert concert = Concert.builder()
@@ -93,6 +127,55 @@ public class ConcertDto {
                 .build();
 
         return concert;
+    }
+
+    public static Concert createConcert(ConcertDto.FromAdminConcert concertDto, Phamplet_File files){
+        LocalDateTime concertDate = LocalDateTime.parse(concertDto.getConcertDate());
+        LocalDate drawStartDate = LocalDate.parse(concertDto.getDrawStartDate());
+        LocalDate drawEndDate = LocalDate.parse(concertDto.getDrawEndDate());
+
+        Concert concert = Concert.builder()
+                .title(concertDto.getTitle())
+                .description(concertDto.getDescription())
+                .phamplet(files)
+                .concertDate(concertDate)
+                .genre(concertDto.getGenre())
+                .ratings(concertDto.getRatings())
+                .address(concertDto.getAddress())
+                .host(concertDto.getHost())
+                .seatNum(concertDto.getSeatNum())
+                .drawStartDate(drawStartDate)
+                .drawEndDate(drawEndDate)
+                .price(concertDto.getPrice())
+                .build();
+
+        return concert;
+    }
+
+    public static ConcertDto createConcertDto(ConcertDto.FromAdminConcert dto, Long fileId, ConcertDto concert){
+        LocalDateTime concertDate = LocalDateTime.parse(dto.getConcertDate());
+        LocalDate drawStartDate = LocalDate.parse(dto.getDrawStartDate());
+        LocalDate drawEndDate = LocalDate.parse(dto.getDrawEndDate());
+
+        ConcertDto concertDto = ConcertDto.builder()
+                .id(concert.getId())
+                .title(dto.getTitle())
+                .description(dto.getDescription())
+                .phamplet(fileId)
+                .concertDate(concertDate)
+                .genre(dto.getGenre())
+                .ratings(dto.getRatings())
+                .address(dto.getAddress())
+                .host(dto.getHost())
+                .seatNum(dto.getSeatNum())
+                .drawStartDate(drawStartDate)
+                .drawEndDate(drawEndDate)
+                .price(dto.getPrice())
+                .createDate(concert.getCreateDate())
+                .build();
+
+        return concertDto;
+
     }
 
 }

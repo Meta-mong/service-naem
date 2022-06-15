@@ -8,12 +8,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 
-import java.util.List;
-
 public interface ConcertService {
 
     // 공연 생성
-    void addConcert(Concert concert);
+    Long addConcert(Concert concert);
 
     // 공연 상세내역 조회
     ConcertDto concertInfo(Long id);
@@ -32,5 +30,7 @@ public interface ConcertService {
 //    List<ConcertDto> concertGenreInfo(Genre genre);
     Page<ConcertDto> concertGenreInfo(@PageableDefault(size = 16) Pageable pageable,Genre genre);
 
+    //상시 판매로 변경
+    void checkRemainingSeat(Concert concert);
 
 }

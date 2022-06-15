@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 // 엔티티
@@ -45,12 +46,17 @@ public class Concert extends BaseEntity { //BaseEntity -> 공통으로 사용하
 
     private int seatNum;
 
-    private LocalDateTime drawStartDate;
+    private LocalDate drawStartDate;
 
-    private LocalDateTime drawEndDate;
+    private LocalDate drawEndDate;
 
     private int price;
 
     private int visitCnt;
 
+    private boolean draw;
+
+    public void changeSalesMethod() {
+        this.draw = false;
+    }
 }

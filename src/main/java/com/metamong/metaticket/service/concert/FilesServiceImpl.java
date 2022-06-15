@@ -22,18 +22,22 @@ public class FilesServiceImpl implements FilesService{
 
     @Override
     public Phamplet_File saveFile(MultipartFile file) throws IOException {
-        UUID uuid = UUID.randomUUID();
-        String fileOriname = file.getOriginalFilename()+uuid;
-        String filePath = servletContext.getRealPath("/uploadImg/");
-
-        Phamplet_File files = Phamplet_File.builder()
-                .fileOriname(fileOriname)
-                .filePath(filePath)
-                .build();
-        File newFile = new File(filePath+fileOriname) ;
-        file.transferTo(newFile);
-        Phamplet_File savedFile = filesRepository.save(files);
-        return savedFile;
+        try {
+            UUID uuid = UUID.randomUUID();
+            String fileOriname = uuid + file.getOriginalFilename();
+            String filePath = servletContext.getRealPath("/uploadImg/");
+            Phamplet_File files = Phamplet_File.builder()
+                    .fileOriname(fileOriname)
+                    .filePath(filePath)
+                    .build();
+            File newFile = new File(filePath+fileOriname) ;
+            file.transferTo(newFile);
+            Phamplet_File savedFile = filesRepository.save(files);
+            return savedFile;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -60,7 +64,7 @@ public class FilesServiceImpl implements FilesService{
                 }
                 UUID uuid = UUID.randomUUID();
                 String fileOriname = file.getOriginalFilename()+uuid;
-                String filePath = servletContext.getRealPath("/uploadImg/");
+                String filePath = servletContext.getRealPath("/webapp/uploadImg/");
 
                 files.setFileOriname(fileOriname);
                 files.setFilePath(filePath);

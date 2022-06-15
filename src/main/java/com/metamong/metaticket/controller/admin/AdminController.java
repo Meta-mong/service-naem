@@ -1,14 +1,13 @@
 package com.metamong.metaticket.controller.admin;
 
-import com.metamong.metaticket.domain.draw.Draw;
+
+import com.metamong.metaticket.domain.draw.dto.DrawDTO;
 import com.metamong.metaticket.domain.notice.Notice;
 import com.metamong.metaticket.domain.notice.dto.NoticeDTO;
-import com.metamong.metaticket.domain.question.Question;
 import com.metamong.metaticket.domain.question.dto.QuestionDTO;
 import com.metamong.metaticket.domain.user.User;
 import com.metamong.metaticket.domain.user.dto.UserDTO;
 import com.metamong.metaticket.domain.user.dto.UserPage;
-import com.metamong.metaticket.repository.notice.NoticeRepository;
 import com.metamong.metaticket.repository.question.QuestionRepository;
 import com.metamong.metaticket.service.admin.AdminService;
 import com.metamong.metaticket.service.draw.DrawService;
@@ -16,15 +15,12 @@ import com.metamong.metaticket.service.notice.NoticeService;
 import com.metamong.metaticket.service.question.QuestionService;
 import com.metamong.metaticket.service.user.PageService;
 import com.metamong.metaticket.service.user.UserService;
-import groovy.util.logging.Log4j;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +29,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.server.PathParam;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,9 +57,6 @@ public class AdminController {
 
     @Autowired
     NoticeService noticeService;
-
-    @Autowired
-    NoticeRepository noticeRepository;
 
     @Autowired
     QuestionService questionService;
@@ -120,13 +112,14 @@ public class AdminController {
 
     //회원 정보 상세 조회 페이지
     @GetMapping("/userdetail/{id}")
-    public String userDetail(@PathVariable Long id, Model model){
+    public String userDetail(@PathVariable Long id, @RequestParam("page") int page, Model model){
         System.out.println("id : "+ id);
         User user = userService.userInfo(id);
         UserDTO.SESSION_USER_DATA dto = User.createUserDTO(user);
-//        List<Draw> draws = drawService.findByUserId(user.getId());
+        List<DrawDTO.HISTORY> draws = drawService.findByUserId(user.getId());
         model.addAttribute("user", dto);
-//        model.addAttribute("draws", draws);
+        model.addAttribute("draws", draws);
+        model.addAttribute("page", page);
         return "/admin/admin_user_detail";
     }
 
