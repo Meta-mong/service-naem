@@ -25,7 +25,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- js -->
-<!--    <script defer src="../public/js/concert.js"></script>-->
+    <script defer src="/js/concert/concert.js"></script>
 
     <title>Concert</title>
 </head>
@@ -90,36 +90,34 @@
 
             <nav style="text-align: center;">
                 <ul class="pagination"
-                    th:with="start=${T(java.lang.Math).floor(concert.number/16)*10 + 1}, last=(${start + 9 < concert.totalPages ? start + 9 : concert.totalPages})">
+                    th:with=" start=${T(java.lang.Math).floor(concert.number/16)*10 + 1}, last=(${start + 9 < concert.totalPages ? start + 9 : concert.totalPages})">
                     <li>
-<!--                        <a th:href="@{/concert/Contents/{genre}(genre = ${concert.genre} ,page=1)}" aria-label="First">-->
-                        <a th:href="@{/concert/Contents/{genre}(genre =MUSICAL_DRAMA ,page=1)}" aria-label="First">
+
+                        <a th:href="@{/concert/Contents/{genre}(genre = ${genre} ,page=1)}" aria-label="First">
                             <span aria-hidden="true">First</span>
                         </a>
 
-<!--                        <a th:href="@{/concert/Contents/(page=1)}" th:attrappend="href=${concert.genre}" aria-label="First">-->
-<!--                            <span aria-hidden="true">First</span>-->
-<!--                        </a>-->
+
                     </li>
 
                     <li th:class="${concert.first} ? 'disabled'">
-                        <a th:href="${concert.first} ? '#' :@{/concert/Contents/${concert.genre}(page=${concert.number})}" aria-label="Previous">
+                        <a th:href="${concert.first} ? '#' :@{/concert/Contents/{genre}(genre = ${genre} ,page=${concert.number})}" aria-label="Previous">
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
 
                     <li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == concert.number + 1} ? 'active'">
-                        <a th:text="${page}" th:href="@{/concert/Contents/${concert.genre}(page=${page})}"></a>
+                        <a th:text="${page}" th:href="@{/concert/Contents/{genre}(genre = ${genre} ,page=${page})}"></a>
                     </li>
 
                     <li th:class="${concert.last} ? 'disabled'">
-                        <a th:href="${concert.last} ? '#' : @{/concert/Contents/${concert.genre}(page=${concert.number + 2})}" aria-label="Next">
+                        <a th:href="${concert.last} ? '#' : @{/concert/Contents/{genre}(genre = ${genre} ,page=${concert.number + 2})}" aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
 
                     <li>
-                        <a th:href="@{/concert/Contents/${concert.genre}(page=${concert.totalPages})}" aria-label="Last">
+                        <a th:href="@{/concert/Contents/{genre}(genre = ${genre} ,page=${concert.totalPages})}" aria-label="Last">
                             <span aria-hidden="true">Last</span>
                         </a>
                     </li>
