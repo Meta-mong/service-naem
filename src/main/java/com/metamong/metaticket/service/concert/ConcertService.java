@@ -30,5 +30,7 @@ public interface ConcertService {
 //    List<ConcertDto> concertGenreInfo(Genre genre);
     Page<ConcertDto> concertGenreInfo(@PageableDefault(size = 16) Pageable pageable,Genre genre);
 
+    //상시 판매로 변경
+    void checkRemainingSeat(Concert concert);
 
 }

@@ -56,4 +56,7 @@ public class Concert extends BaseEntity { //BaseEntity -> 공통으로 사용하
 
     private boolean draw;
 
+    public void changeSalesMethod() {
+        this.draw = false;
+    }
 }
