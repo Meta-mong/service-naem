@@ -10,6 +10,6 @@ public class RankingController {
 
     @GetMapping
     public String ranking(){
-        return "/ranking/ranking";
+        return "/ranking-page/ranking";
     }
 }
