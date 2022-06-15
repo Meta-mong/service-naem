@@ -9,25 +9,18 @@ import com.metamong.metaticket.service.concert.FilesService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 
 @Controller
@@ -101,31 +94,25 @@ public class ConcertController {
         ConcertDto concert = concertService.concertInfo(id);
         Phamplet_File files = filesService.findById(concert.getPhamplet());
         filesService.updateFile(dto.getFile(), concert.getPhamplet());
-        ConcertDto concertDto = ConcertDto.createConcertDto(dto,files.getId(),id);
+        ConcertDto concertDto = ConcertDto.createConcertDto(dto,files.getId(),concert);
         concertService.updateConcert(concertDto,files);
         model.addAttribute("concert",concertDto);
         return "/admin/admin_ticket_detail";
     }
 
     // 공연 삭제
-    @PostMapping("/delete/{id}")
-    public void deleteConcert(@PathVariable Long id,HttpServletRequest request, HttpServletResponse response) throws Exception {
+    @GetMapping("/adminConcert/delete/{id}")
+    public String deleteConcert(@PathVariable Long id,@PageableDefault(size = 10) Pageable pageable,Model model) throws Exception {
         Long fileId = concertService.concertInfo(id).getPhamplet();
         concertService.deleteConcert(id);
         filesService.deleteFile(fileId);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/concert/adminConcert");
-        dispatcher.forward(request,response);
+        model.addAttribute("concert",concertService.concertAllInfo(pageable));
+        return "/admin/admin_ticket";
     }
 
 
     // 공연 전체 조회
-//    @GetMapping("/adminConcert")
-//    public String concertList(Model model, Pageable pageable){
-//        model.addAttribute("concert",concertService.concertAllInfo());
-//        return "adminConcert";
-//    }
-
     @GetMapping("/adminConcert")
     public String concertList(@PageableDefault(size = 10) Pageable pageable,Model model){
         model.addAttribute("concert",concertService.concertAllInfo(pageable));

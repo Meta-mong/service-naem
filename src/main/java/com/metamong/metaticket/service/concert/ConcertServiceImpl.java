@@ -69,24 +69,9 @@ public class ConcertServiceImpl implements ConcertService {
 
 
     // 공연 전체 조회
-//    @Override
-//    public List<ConcertDto> concertAllInfo() {
-//        List<ConcertDto> concertList = new ArrayList<>();
-//        List<Concert> concerts = concertRepository.findAll();
-//        for(Concert tmp : concerts){
-//            ConcertDto dto = ConcertDto.createDto(tmp);
-//            concertList.add(dto);
-//        }
-//        return concertList;
-//    }
     @Override
     public Page<ConcertDto> concertAllInfo(@PageableDefault(size = 10) Pageable pageable) {
-//        List<ConcertDto> concertList = new ArrayList<>();
-//        List<Concert> concerts = concertRepository.findAll(pageable).getContent();
-//        for(Concert tmp : concerts){
-//            ConcertDto dto = ConcertDto.createDto(tmp);
-//            concertList.add(dto);
-//        }
+
         int pagenum = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // page는 index 처럼 0부터 시작
         pageable = PageRequest.of(pagenum, 10);
         Page<Concert> page = concertRepository.findAll(pageable);
@@ -96,12 +81,7 @@ public class ConcertServiceImpl implements ConcertService {
     // 장르별 공연 조회
     @Override
     public Page<ConcertDto> concertGenreInfo(@PageableDefault(size = 16) Pageable pageable, Genre genre){
-//        List<ConcertDto> concertList = new ArrayList<>();
-//        List<Concert> concerts = concertRepository.findByGenre(genre);
-//        for(Concert tmp : concerts){
-//            ConcertDto dto = ConcertDto.createDto(tmp);
-//            concertList.add(dto);
-//        }
+
         int pagenum = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // page는 index 처럼 0부터 시작
         pageable = PageRequest.of(pagenum, 16);
         Page<Concert> page = concertRepository.findByGenre(pageable,genre);

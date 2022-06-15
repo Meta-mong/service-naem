@@ -210,7 +210,8 @@
   background-color: whitesmoke;
 }
 
-.container .main .inner .list4 .genre{
+.container .main .inner .list4 .genre,
+.container .main .inner .list4 .ratings{
   width: 130px;
   height: 40px;
   border: 0;
