@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,7 +28,7 @@ class ConcertRepositoryTest {
     @Test
     //@DisplayName("테스트")
     public void 공연등록(){
-        Phamplet_File file = new Phamplet_File(1L,"웃는남자.jpg","/uploadImg/");
+        Phamplet_File file = new Phamplet_File(1L,"웃는남자.jpg", "/webapp/uploadImg/");
         filesRepository.save(file);
         Concert concert = Concert.builder()
                 .title("웃는남자")
@@ -40,8 +40,8 @@ class ConcertRepositoryTest {
                 .address("세종문화회관 대극장")
                 .host("(주)EMK뮤지컬컴퍼니")
                 .seatNum(500)
-                .drawStartDate(LocalDateTime.now())
-                .drawEndDate(LocalDateTime.now())
+                .drawStartDate(LocalDate.now())
+                .drawEndDate(LocalDate.now())
                 .price(150000)
                 .visitCnt(5)
                 .build();
@@ -79,7 +79,7 @@ class ConcertRepositoryTest {
 //                .price(150000)
 //                .visit_cnt(130)
 //                .build();
-        Phamplet_File file = new Phamplet_File(1L,"웃는남자.jpg","/uploadImg/");
+        Phamplet_File file = new Phamplet_File(1L,"웃는남자.jpg", "/webapp/uploadImg/");
         Concert concert = Concert.builder()
                 .title("웃는남자")
                 .description("부자들의 낙원은 가난한 자들의 지옥으로 세워진 것이다.")
@@ -90,8 +90,8 @@ class ConcertRepositoryTest {
                 .address("세종문화회관 대극장")
                 .host("(주)EMK뮤지컬컴퍼니")
                 .seatNum(500)
-                .drawStartDate(LocalDateTime.now())
-                .drawEndDate(LocalDateTime.now())
+                .drawStartDate(LocalDate.now())
+                .drawEndDate(LocalDate.now())
                 .price(150000)
                 .visitCnt(130)
                 .build();

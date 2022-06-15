@@ -33,8 +33,11 @@ public class ConcertServiceTest {
     @Test
     public void 공연생성(){
         Concert concert = concertRepository.findAll().get(0);
-        concert.setId(2L);
-        concertService.addConcert(concert);
+        for(Long i = 2L; i <19; i++){
+            concert.setId(i);
+            concertService.addConcert(concert);
+        }
+
     }
 
     @Test
@@ -54,7 +57,7 @@ public class ConcertServiceTest {
 
     @Test
     public void 공연삭제(){
-        concertService.deleteConcert(4L);
+        concertService.deleteConcert(7L);
 //        assertThat(concertService.concertAllInfo().size()).isEqualTo(1);
     }
 
