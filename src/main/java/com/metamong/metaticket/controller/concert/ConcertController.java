@@ -57,7 +57,7 @@ public class ConcertController {
         ConcertDto concertDto = concertService.concertInfo(id);
         concertDto.setVisitCnt(concertDto.getVisitCnt()+1);
         model.addAttribute("concert",concertDto);
-        return "concertDetail"; // view 이름
+        return "concert/concert_detail"; // view 이름
     }
 
     // 관리자 페이지 공연 상세내역 조회
