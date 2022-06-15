@@ -153,13 +153,13 @@ public class ConcertDto {
         return concert;
     }
 
-    public static ConcertDto createConcertDto(ConcertDto.FromAdminConcert dto, Long fileId, Long id){
+    public static ConcertDto createConcertDto(ConcertDto.FromAdminConcert dto, Long fileId, ConcertDto concert){
         LocalDateTime concertDate = LocalDateTime.parse(dto.getConcertDate());
         LocalDate drawStartDate = LocalDate.parse(dto.getDrawStartDate());
         LocalDate drawEndDate = LocalDate.parse(dto.getDrawEndDate());
 
         ConcertDto concertDto = ConcertDto.builder()
-                .id(id)
+                .id(concert.getId())
                 .title(dto.getTitle())
                 .description(dto.getDescription())
                 .phamplet(fileId)
@@ -172,6 +172,7 @@ public class ConcertDto {
                 .drawStartDate(drawStartDate)
                 .drawEndDate(drawEndDate)
                 .price(dto.getPrice())
+                .createDate(concert.getCreateDate())
                 .build();
 
         return concertDto;

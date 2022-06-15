@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/css/admin/admin_ticketDetail.css">
 
     <!-- js -->
+    <script defer src="/js/admin/admin.js"></script>
     <script defer src="/js/admin/admin_ticket.js"></script>
 
     <title>admin</title>
@@ -22,13 +23,13 @@
 <body>
 <div class="container">
     <div class="list">
-        <button type="button" class="btn" onclick="move_ticket()">티켓관리</button>
-        <button type="button" class="btn" onclick="move_user()">회원관리</button>
-        <button type="button" class="btn" onclick="move_notice()">게시판관리</button>
+        <button type="button" class="btn" th:onclick="|javascript:move_ticket()|">티켓관리</button>
+        <button type="button" class="btn" th:onclick="|javascript:move_user()|">회원관리</button>
+        <button type="button" class="btn" th:onclick="|javascript:move_notice()|">게시판관리</button>
     </div>
     <section>
         <div class="main">
-            <form action="/concert/adminConcert/update/" th:attrappend="action=${concert.id}" method="post" enctype="multipart/form-data">
+            <form name = "frm" action="/concert/adminConcert/update/" th:attrappend="action=${concert.id}"  method="post" enctype="multipart/form-data">
                 <div class="inner">
                     <div class="post">
                         <div class="preview">
@@ -93,7 +94,7 @@
                                 <tr>
                                     <th>장르</th>
                                     <td>
-                                        <select name="genre" id = "genre" required="required" th:field="${concert.genre}" th:value="${concert.genre}">
+                                        <select name="genre" id = "genre" class="genre" required="required" th:field="${concert.genre}" th:value="${concert.genre}">
                                             <option value="none">=== 선택 ===</option>
                                             <option value="CONCERT">콘서트</option>
                                             <option value="MUSICAL_DRAMA">뮤지컬/연극</option>
@@ -104,7 +105,16 @@
                                 </tr>
                                 <tr>
                                     <th>등급</th>
-                                    <td><input type="text" name="ratings" id="ratings" placeholder="" th:value="${concert.ratings}"></td>
+                                    <td>
+                                        <select name="ratings" id = "ratings"  class = "ratings" required="required" th:field="${concert.ratings}" th:value="${concert.ratings}">
+                                            <option value="none">=== 선택 ===</option>
+                                            <option value="ALL">전체관람가</option>
+                                            <option value="EIGHT">8세이상</option>
+                                            <option value="TWELVE">12세이상</option>
+                                            <option value="FIFTEEN">15세이상</option>
+                                            <option value="EIGHTEEN">18세이상</option>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>좌석수</th>
@@ -130,34 +140,44 @@
                     <p>공연 스크립트</p>
                     <textarea class="content" name = "description" id = "description" required="required" th:text="${concert.description}"></textarea>
                 </div>
-                <button type="button" class="btn_list" onclick="move_ticketList()">목록으로</button>
-                <!--            <button type="button" class="btn_modify">수정</button>-->
-                <button type="submit" class="btn_modify">수정</button>
-                <button type="button" class="btn_delete" onclick="ticket_delete()">삭제</button>
+                <button type="button" class="btn_list" th:onclick="|javascript:move_ticket()|">목록으로</button>
+                <button type="button" class="btn_modify" th:onclick="|javascript:ticket_modify('${concert.id}')|">수정</button>
+                <button type="button" class="btn_delete" th:onclick="|javascript:ticket_delete('${concert.id}')|">삭제</button>
         </div>
     </section>
 </div>
 </body>
+
 <!-- javascript -->
 <script type="text/javascript">
-  function move_ticketList() {
-    window.location.href = "./admin_ticket.html";
+  function ticket_delete(id) {
+    var id = id;
+
+    if(confirm("정말 삭제하시겠습니까?") == true){
+        window.location.href = "/concert/adminConcert/delete/"+id;
+        alert("삭제되었습니다");
+    }else{
+        return false;
+    }
+
   }
 </script>
 
 <!-- javascript -->
 <script type="text/javascript">
   function ticket_modify(id) {
-    var id = id;
-    window.location.href = "/concert/adminConcert/update/"+id;
+
+  var id = id;
+
+    if(confirm("정말 수정하시겠습니까?") == true){
+        document.frm.submit();
+        alert("수정되었습니다");
+    }else{
+        alert("수정이 취소되었습니다.");
+        window.location.href = "/concert/admin/"+id;
+    }
   }
 </script>
 
-<!-- javascript -->
-<script type="text/javascript">
-  function ticket_delete() {
-    window.location.href = "./admin_ticket.html";
-  }
-</script>
 
 </html>

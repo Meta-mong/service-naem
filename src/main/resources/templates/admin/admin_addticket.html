@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/css/admin/admin_ticketDetail.css">
 
     <!-- js -->
+    <script defer src="/js/admin/admin.js"></script>
     <script defer src="/js/admin/admin_ticket.js"></script>
 
     <title>admin</title>
@@ -22,97 +23,106 @@
 <body>
 <div class="container">
     <div class="list">
-        <button type="button" class="btn" onclick="move_ticket()">티켓관리</button>
-        <button type="button" class="btn" onclick="move_user()">회원관리</button>
-        <button type="button" class="btn" onclick="move_notice()">게시판관리</button>
+        <button type="button" class="btn" th:onclick="|javascript:move_ticket()|">티켓관리</button>
+        <button type="button" class="btn" th:onclick="|javascript:move_user()|">회원관리</button>
+        <button type="button" class="btn" th:onclick="|javascript:move_notice()|">게시판관리</button>
     </div>
     <section>
         <div class="main">
 
-            <form action="/concert/adminConcert/upload" method="post" enctype="multipart/form-data">
-            <div class="inner">
-                <div class="post">
-                    <div class="preview">
-                        <img src="" alt="">
+            <form action="/concert/adminConcert/upload" method="post" enctype="multipart/form-data"  onsubmit="return submitCheck()">
+                <div class="inner">
+                    <div class="post">
+                        <div class="preview">
+                            <img src="" alt="">
+                        </div>
+                        <input type="file" id = "file" name = "file" class="postImg" required="required" style="display: none;">
+                        <button type="button" class="selectBt">사진 선택</button>
                     </div>
-                    <input type="file" id = "file" name = "file" class="postImg" style="display: none;">
-                    <button type="button" class="selectBt">사진 선택</button>
+                    <div class="text">
+                        <div class="title" style="margin-top: 20px;">
+                            <table id="vertical-1">
+                                <tr>
+                                    <th>제목</th>
+                                    <td><input type="text"  name="title" id="title" required="required" placeholder=""></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="list2">
+                            <table id="vertical-1">
+                                <tr>
+                                    <th>응모시작날짜</th>
+                                    <td><input type="date" name="drawStartDate" id="drawStartDate" required="required" placeholder=""></td>
+                                </tr>
+                                <tr>
+                                    <th>응모마감날짜</th>
+                                    <td><input type="date" name="drawEndDate" id="drawEndDate" required="required" placeholder=""></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="list3">
+                            <table id="vertical-1">
+                                <tr>
+                                    <th>공연일시</th>
+                                    <td><input type="datetime-local" name="concertDate" id="concertDate" required="required" placeholder=""></td>
+                                </tr>
+                                <tr>
+                                    <th>공연장소</th>
+                                    <td><input type="text" name="address" id="address" required="required" placeholder=""></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="list4">
+                            <table id="vertical-1">
+                                <tr>
+                                    <th>장르</th>
+                                    <td>
+                                        <select name="genre" id = "genre" class = "genre" required="required" >
+                                            <option value="">=== 선택 ===</option>
+                                            <option value="CONCERT">콘서트</option>
+                                            <option value="MUSICAL_DRAMA">뮤지컬/연극</option>
+                                            <option value="CLASSIC">클래식</option>
+                                            <option value="EXHIBITION">전시/행사</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>등급</th>
+                                    <td>
+                                        <select name="ratings" id = "ratings" class = "ratings" required="required">
+                                            <option value="none">=== 선택 ===</option>
+                                            <option value="ALL">전체관람가</option>
+                                            <option value="EIGHT">8세이상</option>
+                                            <option value="TWELVE">12세이상</option>
+                                            <option value="FIFTEEN">15세이상</option>
+                                            <option value="EIGHTEEN">18세이상</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>좌석수</th>
+                                    <td><input type="text" name="seatNum" id="seatNum" required="required"  placeholder=""></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="list5">
+                            <table id="vertical-1">
+                                <tr>
+                                    <th>주최측</th>
+                                    <td><input type="text"  name = "host" id = "host" required="required" placeholder=""></td>
+                                </tr>
+                                <tr>
+                                    <th>가격</th>
+                                    <td><input type="text" name = "price" id = "price" required="required" placeholder=""></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="text">
-                    <div class="title" style="margin-top: 20px;">
-                        <table id="vertical-1">
-                            <tr>
-                                <th>제목</th>
-                                <td><input type="text"  name="title" id="title" placeholder=""></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="list2">
-                        <table id="vertical-1">
-                            <tr>
-                                <th>응모시작날짜</th>
-                                <td><input type="date" name="drawStartDate" id="drawStartDate" placeholder=""></td>
-                            </tr>
-                            <tr>
-                                <th>응모마감날짜</th>
-                                <td><input type="date" name="drawEndDate" id="drawEndDate" placeholder=""></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="list3">
-                        <table id="vertical-1">
-                            <tr>
-                                <th>공연일시</th>
-                                <td><input type="datetime-local" name="concertDate" id="concertDate" placeholder=""></td>
-                            </tr>
-                            <tr>
-                                <th>공연장소</th>
-                                <td><input type="text" name="address" id="address" placeholder=""></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="list4">
-                        <table id="vertical-1">
-                            <tr>
-                                <th>장르</th>
-                                <td>
-                                    <select name="genre" id = "genre" class = "genre" required="required" >
-                                        <option value="">=== 선택 ===</option>
-                                        <option value="CONCERT">콘서트</option>
-                                        <option value="MUSICAL_DRAMA">뮤지컬/연극</option>
-                                        <option value="CLASSIC">클래식</option>
-                                        <option value="EXHIBITION">전시/행사</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>등급</th>
-                                <td><input type="text" name="ratings" id="ratings" placeholder=""></td>
-                            </tr>
-                            <tr>
-                                <th>좌석수</th>
-                                <td><input type="text" name="seatNum" id="seatNum" placeholder=""></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="list5">
-                        <table id="vertical-1">
-                            <tr>
-                                <th>주최측</th>
-                                <td><input type="text"  name = "host" id = "host" placeholder=""></td>
-                            </tr>
-                            <tr>
-                                <th>가격</th>
-                                <td><input type="text" name = "price" id = "price" placeholder=""></td>
-                            </tr>
-                        </table>
-                    </div>
+                <div class="script">
+                    <p>공연 스크립트</p>
+                    <textarea class="content" name = "description" id = "description" required="required"></textarea>
                 </div>
-            </div>
-            <div class="script">
-                <p>공연 스크립트</p>
-                <textarea class="content" name = "description" id = "description" required="required"></textarea>
-            </div>
 
                 <button type="submit" class="btn_submit" >등록</button>
             </form>
@@ -120,5 +130,12 @@
     </section>
 </div>
 </body>
+
+<!-- javascript -->
+<script type="text/javascript">
+  function submitCheck() {
+    alert("등록되었습니다.");
+  }
+</script>
 
 </html>
