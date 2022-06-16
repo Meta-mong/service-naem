@@ -65,31 +65,39 @@ public class AdminController {
     QuestionRepository questionRepository;
 
     //로그인 /로그아웃
-    @PostMapping (value = "/login")
-    public String adminLogin(@RequestParam ("admin") String adminloginId,
-                             @RequestParam("admin123") String password, Model model){
+    @GetMapping
+    public String login ()throws Exception{
+        return "/admin/admin_login";
+    }
+
+
+    @PostMapping
+    public String adminLogin(@RequestParam ("loginId") String loginId,
+                             @RequestParam("password") String password, Model model)throws Exception{
+
+        System.out.println("로그인:" +loginId);
         try {
-            boolean result = adminService.adminLogin(adminloginId,password);
+            boolean result = adminService.adminLogin(loginId,password);
             if(result ==true){
-                session.setAttribute("adminId",adminloginId);
-                model.addAttribute("adminlogin",adminService.adminInfo(adminloginId));
-                return "main"; //view
+                System.out.println("성공");
+                session.setAttribute("adminlogin",adminService.adminInfo(loginId));
+                return "redirect:/concert/adminConcert";
             }else {
                 model.addAttribute("err","로그인에 실패했습니다.");
-                return "loginForm"; //view
+                return "redirect:/admin/login";
             }
 
         }catch (Exception e){
             model.addAttribute("err","계정 정보가 없습니다.");
-            return "loginForm"; //view
+            return "redirect:/admin/login";
          }
     }
 
-    @GetMapping(value = "/logout")
+    @GetMapping("/logout")
     public String adminLogout(HttpSession session){
         adminService.adminLogout(session);
 
-        return "redirect:/admin/adminloginform";
+        return "redirect:/admin/adminlogin";
     }
 
     //전체 사용자 조회

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,7 +67,7 @@ public class QuestionServiceImpl implements QuestionService{
     public Page<QuestionDTO.Quest> allQuestionList(Pageable pageable) throws Exception {
 
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // page는 index 처럼 0부터 시작
-        pageable = PageRequest.of(page, 10);
+        pageable = PageRequest.of(page, 10, Sort.by("id").descending());
         Page<Question> listpage = questionRepository.findAll(pageable);
         Page<QuestionDTO.Quest> dto = listpage.map(QuestionServiceImpl::entityToDTO);
 

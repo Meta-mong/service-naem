@@ -7,9 +7,9 @@ import javax.servlet.http.HttpSession;
 
 public interface AdminService {
 
-    public boolean adminLogin (String adminId, String password) throws Exception;
+    public boolean adminLogin (String loginId, String password) throws Exception;
     public void adminLogout (HttpSession session);
 
-    public Admin adminInfo (String adminId);
+    public Admin adminInfo (String loginId);
 
 }
