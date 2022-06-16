@@ -25,3 +25,42 @@ function ranking(value){
         }
     });
 }
+
+function pick(){
+    for(let i = 0; i < 4; i++){
+        if(i === 0){
+         var genre = 'CONCERT';
+        }else if(i === 1){
+            genre = 'MUSICAL_DRAMA';
+        }else if(i === 2){
+            genre = 'CLASSIC';
+        }else{
+            genre = 'EXHIBITION';
+        }
+
+        let k = i;
+
+        $.ajax({
+            url:"/concert/pick/"+genre,
+            type : "get",
+            dataType: 'json',
+            data:'',
+            success: function(data){
+            console.log(data);
+
+            for(j=0; j<data.content.length; j++){
+             $('.card'+k).empty();
+             $('.card'+k).append("<img src='/concert/readImg/"+data.content[j].phamplet+"' alt=''><span>"+data.content[j].title+"</span> <span>"
+                                        +data.content[j].concertDate+"</span> <span>"+data.content[j].address+"</span>");
+                k = k+4;
+            }
+
+
+            },
+            error: function(data){
+            alert("실패");
+            }
+        });
+    }
+
+}

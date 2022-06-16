@@ -9,7 +9,10 @@ import com.metamong.metaticket.service.concert.FilesService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -131,6 +134,16 @@ public class ConcertController {
     public String concertList_Genre(@PageableDefault(size = 16) Pageable pageable ,@PathVariable Genre genre, Model model){
         model.addAttribute("concert",concertService.concertGenreInfo(pageable,genre));
         return "/concert/concert";
+    }
+
+    // 메타 pick
+    @GetMapping("/pick/{genre}")
+    @ResponseBody
+    public Page<ConcertDto> pick(@PathVariable Genre genre, Model model){
+        Pageable pageable = PageRequest.of(0,2);
+        Page<ConcertDto> concerts = concertService.concertGenreInfo(pageable,genre);
+        model.addAttribute("concert",concerts);
+        return concerts;
     }
 
 }

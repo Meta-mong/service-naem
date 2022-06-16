@@ -82,6 +82,7 @@
    width: 100%;
    border: solid 1px lightgray;
    border-collapse: collapse;
+   table-layout:fixed;
  }
 
  .container .main .ticket_list th {
@@ -92,4 +93,7 @@
  .container .main .ticket_list td {
    padding: 10px;
    border-top: solid 1px lightgray;
+   overflow : hidden;
+   white-space:nowrap;
+   text-overflow : ellipsis;
  }
