@@ -81,7 +81,7 @@ public class ConcertServiceImpl implements ConcertService {
     public Page<ConcertDto> concertAllInfo(@PageableDefault(size = 10) Pageable pageable) {
 
         int pagenum = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // page는 index 처럼 0부터 시작
-        pageable = PageRequest.of(pagenum, 10);
+        pageable = PageRequest.of(pagenum, 10,Sort.by("id").descending());
         Page<Concert> page = concertRepository.findAll(pageable);
         Page<ConcertDto> pageDto = page.map(ConcertDto::createDto);
         return pageDto;
@@ -91,7 +91,7 @@ public class ConcertServiceImpl implements ConcertService {
     public Page<ConcertDto> concertGenreInfo(@PageableDefault(size = 16) Pageable pageable, Genre genre){
 
         int pagenum = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // page는 index 처럼 0부터 시작
-        pageable = PageRequest.of(pagenum, 16);
+        pageable = PageRequest.of(pagenum, 16,Sort.by("id").descending());
         Page<Concert> page = concertRepository.findByGenre(pageable,genre);
         Page<ConcertDto> pageDto = page.map(ConcertDto::createDto);
         return pageDto;
