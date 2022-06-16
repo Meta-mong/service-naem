@@ -62,10 +62,12 @@
                                             <div class="attr_key">비밀번호</div>
                                             <input class="attr_value" type="password" id="passwd">
                                         </li>
+                                        <div class="msg" id="passwdmsg"></div>
                                         <li class="attr_sub">
                                             <div class="attr_key">비밀번호 확인</div>
-                                            <input class="attr_value" type="password">
+                                            <input class="attr_value" type="password" id="passwdck">
                                         </li>
+                                        <div class="msg" id="passwdckmsg"></div>
                                         <li class="attr_sub">
                                             <div class="attr_key">이름</div>
                                             <input class="attr_value" type="text" th:value="${session.user.name}" disabled>

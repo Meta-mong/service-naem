@@ -91,6 +91,9 @@ window.addEventListener("load", function(event){
                     }else{
                         location.replace("/");
                     }
+                }else{
+                    alert("계정정보가 일치하지 않습니다.");
+                    location.replace("/signin");
                 }
             },
             error: function (data, statusText) {

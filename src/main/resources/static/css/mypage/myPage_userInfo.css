@@ -92,3 +92,7 @@ input:focus {
 .resign_btn:hover{
   background-color: blueviolet;
 }
+.msg {
+  width: 70%;
+  margin-left: 285px;
+}
