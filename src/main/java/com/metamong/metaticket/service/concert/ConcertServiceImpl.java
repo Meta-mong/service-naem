@@ -120,7 +120,7 @@ public class ConcertServiceImpl implements ConcertService {
         if(title==null || title.trim().length()<=0){
             concerts = concertRepository.findByGenreAndDrawStartDateAfterOrderByDrawStartDateAsc(genre, LocalDate.now());
         }else{
-            Concert concert = concertRepository.findByTitleAndDrawStartDateAfterOOrderByDrawStartDateAsc(title.trim(), LocalDate.now());
+            Concert concert = concertRepository.findByTitleAndDrawStartDateAfterOrderByDrawStartDateAsc(title.trim(), LocalDate.now());
             concerts = new ArrayList<>();
             concerts.add(concert);
         }

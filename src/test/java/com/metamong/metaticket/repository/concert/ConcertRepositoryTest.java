@@ -124,7 +124,7 @@ class ConcertRepositoryTest {
         LocalDateTime draw_start = LocalDateTime.now().plusDays(15);
         Phamplet_File file = Phamplet_File.builder().
                 fileOriname("queueing_first_concert.jpg").
-                filePath(context.getRealPath("/uploadImg//")). //? \ 확인
+                filePath(context.getRealPath("/uploadImg\\")). //? \ 확인
                 build();
         Phamplet_File saved = filesRepository.save(file);
 

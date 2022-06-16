@@ -24,6 +24,6 @@ public interface ConcertRepository extends JpaRepository<Concert,Long> {
     List<Concert> findByGenreAndDrawStartDateAfterOrderByDrawStartDateAsc(Genre genre, LocalDate now);
 
     //제목별 오픈 티켓ㄴ
-    Concert findByTitleAndDrawStartDateAfterOOrderByDrawStartDateAsc(String title, LocalDate now);
+    Concert findByTitleAndDrawStartDateAfterOrderByDrawStartDateAsc(String title, LocalDate now);
 
 }

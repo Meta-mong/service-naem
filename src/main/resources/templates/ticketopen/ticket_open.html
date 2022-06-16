@@ -58,34 +58,10 @@
                     <ul class="open-list-ul">
                         <li th:each="openticket : ${openticketList}">
                             <!-- display:span;-->
-                            <div class="open-date" th:text="'티켓오픈일<br/>[오픈] '+${openticket.drawStartDate}"></div>
+                            <div class="open-date"><p th:text="티켓오픈일" style="margin: 0px"></p><p th:text="'[오픈] '+${openticket.drawStartDate}" style="margin: 0px"></p></div>
                             <div class="open-info" th:text="${openticket.title}"></div>
-                            <div class="open-img"><img src=/concert/readImg/" th:attrappend="src=${openticket.phamplet}" alt=""/></div>
+                            <div class="open-img"><img src="/concert/readImg/" th:attrappend="src=${openticket.phamplet}" alt=""></div>
                         </li>
-<!--                        <li>-->
-<!--                            &lt;!&ndash; display:span;&ndash;&gt;-->
-<!--                            <div class="open-date">티켓오픈일<br/>[오픈] 22.06.30(목) 14:00</div>-->
-<!--                            <div class="open-info">뮤지컬 〈웃는 남자〉 1층 시야제한석 티켓 오픈 안내</div>-->
-<!--                            <div class="open-img"><img src="/img/ticket1.PNG" alt=""/></div>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            &lt;!&ndash; display:span;&ndash;&gt;-->
-<!--                            <div class="open-date">티켓오픈일<br/>[오픈] 22.06.30(목) 14:00</div>-->
-<!--                            <div class="open-info">뮤지컬 〈웃는 남자〉 1층 시야제한석 티켓 오픈 안내</div>-->
-<!--                            <div class="open-img"><img src="/img/ticket1.PNG" alt=""/></div>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            &lt;!&ndash; display:span;&ndash;&gt;-->
-<!--                            <div class="open-date">티켓오픈일<br/>[오픈] 22.06.30(목) 14:00</div>-->
-<!--                            <div class="open-info">뮤지컬 〈웃는 남자〉 1층 시야제한석 티켓 오픈 안내</div>-->
-<!--                            <div class="open-img"><img src="/img/ticket1.PNG" alt=""/></div>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            &lt;!&ndash; display:span;&ndash;&gt;-->
-<!--                            <div class="open-date">티켓오픈일<br/>[오픈] 22.06.30(목) 14:00</div>-->
-<!--                            <div class="open-info">뮤지컬 〈웃는 남자〉 1층 시야제한석 티켓 오픈 안내</div>-->
-<!--                            <div class="open-img"><img src="/img/ticket1.PNG" alt=""/></div>-->
-<!--                        </li>-->
                     </ul>
                 </div>
 
