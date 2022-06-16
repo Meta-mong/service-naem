@@ -7,7 +7,7 @@
                 <ul class="header-top-ul">
                     <li>
                         <span th:if="${session.user}==null"><a href="/signin">로그인</a></span>
-                        <span th:unless="${session.user}==null"><button type="button" id="signout" style="border: none;">로그아웃</button></span>
+                        <span th:unless="${session.user}==null"><button type="button" id="signout" style="border: none; background-color: transparent; color: white; font-size: inherit;">로그아웃</button></span>
                         <div th:unless="${session.user}==null"><script src="/js/user/signout.js"></script></div>
                     </li>
                     <li><span th:if="${session.user}==null"><a href="/signup">회원가입</a></span></li>
@@ -55,13 +55,13 @@
         </div>
         <div class="header-bottom">
             <ul class="header-bottom-ul">
-                <li><span><a href="/">홈</a></span></li>
-                <li><span><a href="/concert/Contents/CONCERT">콘서트</a></span></li>
-                <li><span><a href="/concert/Contents/MUSICAL_DRAMA">뮤지컬/연극</a></span></li>
-                <li><span><a href="/concert/Contents/CLASSIC">클래식</a></span></li>
-                <li><span><a href="/concert/Contents/EXHIBITION">전시/행사</a></span></li>
-                <li><span><a href="/ticketopen">티켓오픈소식</a></span></li>
-                <li><span><a href="/ranking">랭킹</a></span></li>
+                <li><span><a class="header_click" href="/">홈</a></span></li>
+                <li><span><a class="header_click" href="/concert/Contents/CONCERT">콘서트</a></span></li>
+                <li><span><a class="header_click" href="/concert/Contents/MUSICAL_DRAMA">뮤지컬/연극</a></span></li>
+                <li><span><a class="header_click" href="/concert/Contents/CLASSIC">클래식</a></span></li>
+                <li><span><a class="header_click" href="/concert/Contents/EXHIBITION">전시/행사</a></span></li>
+                <li><span><a class="header_click" href="/ticketopen">티켓오픈소식</a></span></li>
+                <li><span><a class="header_click" href="/ranking">랭킹</a></span></li>
             </ul>
         </div>
 </div>

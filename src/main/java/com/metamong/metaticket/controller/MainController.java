@@ -10,10 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -35,26 +32,18 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/ticketopen")
-    public String ticketOpen(Model model){
+    @GetMapping(value={"/ticketopen", "/ticketopen/{genre}"})
+    public String ticketOpen(@PathVariable(required = false) Genre genre, Model model){
         List<ConcertDto> opentickets = concertService.openTickets();
         model.addAttribute("opentickets", opentickets);
-        List<ConcertDto> openticketList = concertService.allOpenTickets();
+        List<ConcertDto> openticketList = null;
+        if(genre==null) {
+            openticketList = concertService.allOpenTickets();
+        }else{
+            openticketList = concertService.openTicketsByGenre(genre);
+        }
         model.addAttribute("openticketList", openticketList);
         return "/ticketopen/ticket_open";
-    }
-
-    @PostMapping("/ticketopen/searchoption")
-    public Map<String, Object> ticketopenSearchOption(@RequestParam("genre") Genre genre, @RequestParam("title") String title, Model model){
-        Map<String, Object> map = new HashMap<>();
-        try {
-            List<ConcertDto> opentickets = concertService.openTicketsOptions(genre, title);
-            model.addAttribute("openticketList", opentickets);
-            map.put("result", true);
-        }catch (Exception e){
-            map.put("result", false);
-        }
-        return map;
     }
 
 }

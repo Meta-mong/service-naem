@@ -42,7 +42,7 @@ input {
   width: 650px;
 }
 
-button {
+.button {
   margin-left: 5px;
   width: 180px;
   border: none;
@@ -54,7 +54,7 @@ button {
 .ticket-open-list {
   width: 1008px;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 0px;
   margin-bottom: 100px;
   font-size: 20px;
 }
@@ -104,3 +104,7 @@ li:last-child{
   object-fit: cover;
 }
 
+.genre {
+  width: 1008px;
+  margin: 0px auto;
+}
