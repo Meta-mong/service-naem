@@ -71,8 +71,10 @@ public class QuestionController {
     //문의사항 등록
     @GetMapping("/userqnaadd")
     public String questionadd(Model model){
-        UserDTO.SESSION_USER_DATA dto = (UserDTO.SESSION_USER_DATA)session.getAttribute("user");
-        model.addAttribute("userId", dto.getName());
+        UserDTO.SESSION_USER_DATA currentUser = (UserDTO.SESSION_USER_DATA)session.getAttribute("user");
+        if (currentUser == null)
+            return "redirect:/signin";
+        model.addAttribute("userId", currentUser.getName());
         return "/question/userqnaadd";
     }
 
@@ -80,7 +82,6 @@ public class QuestionController {
     //문의사항 등록 - 처리
     @PostMapping( "/userqnaadd")
     public String questionadd(@ModelAttribute QuestionDTO.AddQuest dto, Model model,Pageable pageable){
-
         try {
             boolean result = questionService.register(dto, session);
             if(result == true){
