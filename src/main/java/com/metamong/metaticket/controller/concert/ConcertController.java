@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,6 +35,9 @@ public class ConcertController {
 
     @Autowired
     FilesService filesService;
+
+    @Autowired
+    ServletContext context;
 
     // 공연 생성
     @GetMapping("/adminConcert/upload")
@@ -71,7 +76,8 @@ public class ConcertController {
     @GetMapping("/readImg/{id}")
     public void concertImg(@PathVariable Long id, HttpServletResponse response){
         Phamplet_File files = filesService.findById(id);
-        File file = new File(files.getFilePath()+files.getFileOriname());
+        File file = new File(context.getRealPath(files.getFilePath())+files.getFileOriname());
+        //File file = new File(files.getFilePath()+files.getFileOriname());
         FileInputStream fis = null;
         try{
             OutputStream out = response.getOutputStream();
