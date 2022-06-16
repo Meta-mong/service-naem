@@ -7,7 +7,7 @@
                 <ul class="header-top-ul">
                     <li>
                         <span th:if="${session.user}==null"><a href="/signin">로그인</a></span>
-                        <span th:unless="${session.user}==null"><button type="button" id="signout" style="border: none;">로그아웃</button></span>
+                        <span th:unless="${session.user}==null"><button type="button" id="signout" style="border: none; background-color: transparent; color: white; font-size: inherit;">로그아웃</button></span>
                         <div th:unless="${session.user}==null"><script src="/js/user/signout.js"></script></div>
                     </li>
                     <li><span th:if="${session.user}==null"><a href="/signup">회원가입</a></span></li>
