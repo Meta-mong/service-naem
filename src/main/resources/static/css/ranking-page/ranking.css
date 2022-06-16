@@ -42,16 +42,17 @@
     line-height: 4;
 }
 
-.ranking-page-div-top-right > ul > li > a {
+.ranking-page-div-top-right > ul > li .btn {
     text-decoration: none;
-    padding: 16.8px 20px;
+    padding: 0 20px;
     color: black;
     font-weight: 600;
     font-size: 20px;
     line-height: 3;
+    border:0;
 }
 
-.ranking-page-div-top-right > ul > li > a:focus{  /* 임시로 해놓은거 ! */
+.ranking-page-div-top-right > ul > li .btn:focus{  /* 임시로 해놓은거 ! */
     background-color: rgb(240, 240, 240);
 }
 
