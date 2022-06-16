@@ -5,10 +5,13 @@ import com.metamong.metaticket.domain.user.dto.UserDTO;
 import com.metamong.metaticket.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +51,27 @@ public class MypageController {
         map.put("result", result);
         if(result==true) session.invalidate();
         return map;
+    }
+
+    //마이페이지 응모내역
+    @GetMapping("/mypage/draw")
+    public String myPageDraw(HttpServletRequest request, HttpServletResponse response){
+        if(session.getAttribute("user")==null) return "/user/signin";
+        return "/mypage/myPage_draw";
+    }
+
+    //마이페이지 예매내역
+    @GetMapping("/mypage/reservation")
+    public String myPageReservation(HttpServletRequest request, HttpServletResponse response){
+        if(session.getAttribute("user")==null) return "/user/signin";
+        return "/mypage/myPage_reservation";
+    }
+
+    //마이페이지 찜목록
+    @GetMapping("/mypage/like")
+    public String myPageLike(HttpServletRequest request, HttpServletResponse response){
+        if(session.getAttribute("user")==null) return "/user/signin";
+        return "/mypage/myPage_like";
     }
 
 }

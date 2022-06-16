@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- swiper -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
+
+    <!-- css -->
+    <link rel="stylesheet" href="/css/main/main.css">
+    <link rel="stylesheet" href="/css/mypage/myPage.css">
+    <link rel="stylesheet" href="/css/mypage/myPage_like.css">
+
+    <!-- js -->
+    <script defer src=""></script>
+
+    <title>MyPage</title>
+</head>
+
+<body>
+<div class="main">
+    <!-- header 시작 -->
+    <div th:replace="fragments/header :: headerFragment"></div>
+    <!-- header 끝 -->
+
+    <div class="container" style="min-height: 100vh;">
+        <div class="myPage">
+            마이페이지
+        </div>
+        <section>
+            <div class="inner">
+                <div class="btn">
+                    <button type="button" th:onclick="|window.location.href='/mypage'|">정보수정</button>
+                    <button type="button" th:onclick="|window.location.href='/mypage/draw'|">응모내역</button>
+                    <button type="button" th:onclick="|window.location.href='/mypage/reservation'|">예매내역</button>
+                    <button type="button" th:onclick="">찜목록</button>
+                </div>
+                <div class="pageInfo">
+                    <div class="title">찜한 응모❤️</div>
+
+                    <div class="like_list">
+
+                        <div class="like-content">
+                            <div class="fnConcertDescription" onclick="">
+                                <div class="concert-img">
+                                    <figure class="image"><img
+                                            src="https://cdnticket.melon.co.kr/resource/image/upload/marketing/2022/05/2022051018075993e0eb61-ea50-4079-afc2-e3203ebcf6f9.png"
+                                            alt=""></figure>
+                                </div>
+                                <div class="concert-content">
+                                    <h5 name="title">title</h5>
+                                    <h5 name="period">period</h5>
+                                    <h5 name="location">location</h5>
+                                </div>
+                            </div>
+                            <div class="like_btn">
+                                <button class="btn-secondary like-review">
+                    <span class="material-icons">
+                      favorite_border
+                    </span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="like-content">
+                            <div class="fnConcertDescription" onclick="">
+                                <div class="concert-img">
+                                    <figure class="image"><img
+                                            src="https://cdnticket.melon.co.kr/resource/image/upload/marketing/2022/05/2022051018075993e0eb61-ea50-4079-afc2-e3203ebcf6f9.png"
+                                            alt=""></figure>
+                                </div>
+                                <div class="concert-content">
+                                    <h5 name="title">title</h5>
+                                    <h5 name="period">period</h5>
+                                    <h5 name="location">location</h5>
+                                </div>
+                            </div>
+                            <div class="like_btn">
+                                <button class="btn-secondary like-review">
+                    <span class="material-icons">
+                      favorite_border
+                    </span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="like-content">
+                            <div class="fnConcertDescription" onclick="">
+                                <div class="concert-img">
+                                    <figure class="image"><img
+                                            src="https://cdnticket.melon.co.kr/resource/image/upload/marketing/2022/05/2022051018075993e0eb61-ea50-4079-afc2-e3203ebcf6f9.png"
+                                            alt=""></figure>
+                                </div>
+                                <div class="concert-content">
+                                    <h5 name="title">title</h5>
+                                    <h5 name="period">period</h5>
+                                    <h5 name="location">location</h5>
+                                </div>
+                            </div>
+                            <div class="like_btn">
+                                <button class="btn-secondary like-review">
+                    <span class="material-icons">
+                      favorite_border
+                    </span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="like-content">
+                            <div class="fnConcertDescription" onclick="">
+                                <div class="concert-img">
+                                    <figure class="image"><img
+                                            src="https://cdnticket.melon.co.kr/resource/image/upload/marketing/2022/05/2022051018075993e0eb61-ea50-4079-afc2-e3203ebcf6f9.png"
+                                            alt=""></figure>
+                                </div>
+                                <div class="concert-content">
+                                    <h5 name="title">title</h5>
+                                    <h5 name="period">period</h5>
+                                    <h5 name="location">location</h5>
+                                </div>
+                            </div>
+                            <div class="like_btn">
+                                <button class="btn-secondary like-review">
+                    <span class="material-icons">
+                      favorite_border
+                    </span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- footer 시작 -->
+    <div th:replace="fragments/footer :: footerFragment"></div>
+    <!-- footer 끝 -->
+</div>
+</body>
+
+</html>

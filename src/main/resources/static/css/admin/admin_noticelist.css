@@ -3,7 +3,7 @@
   display: block;
   justify-content: left;
   margin-top: 60px;
-  margin-left: 125px;
+  margin-left: 140px;
   margin-bottom: -48px;
 }
 
@@ -37,11 +37,12 @@
   font-size: 23px;
   background-color: lightgray;
   color: whitesmoke;
-  margin-top: 30px;
+  margin-top: 20px;
   margin-bottom: 30px;
   margin-left: 20px;
   border: 0;
 }
+
 
 .container .main .btn:hover {
   background-color: gray;
@@ -100,11 +101,22 @@
 }
 
 /* ticket_list */
-.container .main .notice_list,
+.container .main .inner {
+  min-height 550px;
+}
+
+.container .main .notice_list{
+  width: 100%;
+  border: solid 1px lightgray;
+  border-collapse: collapse;
+
+}
+
  .container .main .question_list{
   width: 100%;
   border: solid 1px lightgray;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .container .main .notice_list th,
@@ -117,4 +129,10 @@
  .container .main .question_list td{
   padding: 10px;
   border-top: solid 1px lightgray;
+}
+
+.container .main .question_list td:last-child{
+    overflow:hidden;
+    white-space : nowrap;
+    text-overflow: ellipsis;
 }

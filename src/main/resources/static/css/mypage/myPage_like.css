@@ -1,0 +1,48 @@
+/* menu_btn */
+.inner .btn > button:nth-child(4){
+    background-color: rgb(218, 169, 228);
+}
+
+.inner .btn > button:hover{
+    background-color: rgb(212, 118, 231);
+}
+
+/* pageInfo */
+.inner .pageInfo{
+
+}
+
+.inner .pageInfo .title{
+    float: left;
+    font-size: 27px;
+    color: black;
+    margin-left: 40px;
+    margin-top: 30px;
+}
+
+.inner .pageInfo .like_list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 100px;
+}
+
+.inner .pageInfo .like_list .like-content {
+    border: 2px solid black;
+    margin: 20px;
+}
+
+.inner .pageInfo .like_list  .like-content .fnConcertDescription{
+
+}
+
+.inner .pageInfo .like_list .like-content .like_btn {
+    background-color: whitesmoke;
+
+}
+
+.inner .pageInfo .like_list .like-content .like_btn .btn-secondary{
+    border: 0;
+    float: right;
+}

@@ -1,6 +1,6 @@
 window.addEventListener("load", function (){
    $("#ret_btn").on("click", function (){
-      location.replace("/admin/allusers");
+      location.replace("/admin/allusers/"+$("#page").text());
    });
 
    $("#modify_btn").on("click", function (){

@@ -4,10 +4,7 @@ import com.metamong.metaticket.domain.concert.Concert;
 import com.metamong.metaticket.domain.concert.Genre;
 import com.metamong.metaticket.domain.concert.Phamplet_File;
 import com.metamong.metaticket.domain.concert.Ratings;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -54,6 +51,7 @@ public class ConcertDto {
     private boolean draw;
 
     @Data
+    @Getter
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
@@ -103,6 +101,7 @@ public class ConcertDto {
                 .visitCnt(concert.getVisitCnt())
                 .createDate(concert.getCreatedDate())
                 .updateDate(concert.getUpdatedDate())
+                .draw(concert.isDraw())
                 .build();
 
         return concertDto;

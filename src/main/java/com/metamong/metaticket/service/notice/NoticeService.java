@@ -21,7 +21,9 @@ public interface NoticeService {
 
 
     //공지사항 수정하는 메서드
-    public Notice updateNotice (NoticeDTO.Notice dto) throws Exception;
+    public Notice noticeupdate (NoticeDTO.Notice dto) throws Exception;
+
+
 
     //공지사항 삭제하는 메서드
     public void noticeDelete (Long id) throws Exception;

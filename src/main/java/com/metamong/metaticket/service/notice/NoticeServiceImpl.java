@@ -3,18 +3,18 @@ package com.metamong.metaticket.service.notice;
 import com.metamong.metaticket.domain.admin.Admin;
 import com.metamong.metaticket.domain.notice.Notice;
 import com.metamong.metaticket.domain.notice.dto.NoticeDTO;
+import com.metamong.metaticket.domain.question.Question;
 import com.metamong.metaticket.repository.admin.AdminRepository;
 import com.metamong.metaticket.repository.notice.NoticeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Service
@@ -27,7 +27,7 @@ public class NoticeServiceImpl implements NoticeService{
 
 // 객체로 변환
     public Notice dtoToEntity(NoticeDTO.Notice dto){
-        Admin admin= adminRepository.findById(dto.getAdminId()).get();
+        Admin admin= adminRepository.findById(1L).get();
         Notice notice = Notice.builder()
                 .id(dto.getId())
                 .admin(admin)
@@ -68,7 +68,7 @@ public class NoticeServiceImpl implements NoticeService{
     public Page<NoticeDTO.Notice> allNoticeInfo(Pageable pageable) {
 
             int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // page는 index 처럼 0부터 시작
-            pageable = PageRequest.of(page, 10);
+            pageable = PageRequest.of(page, 10, Sort.by("id").descending());
             Page<Notice> listpage = noticeRepository.findAll(pageable);
             Page<NoticeDTO.Notice> dto = listpage.map(NoticeServiceImpl::entityToDTO);
 
@@ -96,17 +96,25 @@ public class NoticeServiceImpl implements NoticeService{
 
     // 공지사항 수정
     @Override
-    public Notice updateNotice(NoticeDTO.Notice dto) throws Exception {
-        Notice updateNotice = noticeRepository.findById(dto.getAdminId()).orElse(null);
-        updateNotice.update(dto);
-        return updateNotice;
+    public Notice noticeupdate(NoticeDTO.Notice dto) throws Exception {
+        Notice updateNotice = noticeRepository.findById(dto.getId()).orElse(null);
+        updateNotice.setTitle(dto.getTitle());
+        updateNotice.setClassify(dto.getClassify());
+        updateNotice.setContent(dto.getContent());
+
+        Notice notice = noticeRepository.save(updateNotice);
+        return notice;
     }
 
     // 공지사항 삭제
     @Override
-    public void noticeDelete(Long id) {
-        noticeRepository.deleteById(id);
+    public void noticeDelete(Long id) throws Exception {
+        Notice noticedelete =  noticeRepository.findById(id).orElseThrow(()->
+            new IllegalArgumentException("해당 공지사항 존재하지 않습니다. id=" + id));
+
+        noticeRepository.delete(noticedelete);
     }
+
 
 
 

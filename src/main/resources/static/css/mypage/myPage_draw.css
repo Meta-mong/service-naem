@@ -14,8 +14,9 @@
 }
 
 .mp-draw-top > span {
-    font-size: 23px;
+    font-size: 25px;
     color: black;
+    font-weight: 600;
 }
 
 .fa-heart {

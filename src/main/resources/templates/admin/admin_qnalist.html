@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="/css/admin/admin_noticelist.css">
 
   <!-- js -->
-<!--  <script defer src="/js/admin/admin.js"></script>-->
+  <script defer src="/js/admin/admin.js"></script>
 
   <title>고객센터 문의사항</title>
 </head>
@@ -30,9 +30,9 @@
 <div class="container">
 
   <div class="list">
-    <button type="button" class="btn" onclick="move_ticket()">티켓관리</button>
-    <button type="button" class="btn" onclick="move_user()">회원관리</button>
-    <button type="button" class="btn" onclick="move_notice()">게시판관리</button>
+    <button type="button" class="btn" th:onclick="|javascript:move_ticket()|">티켓관리</button>
+    <button type="button" class="btn" th:onclick="|javascript:move_user()|">회원관리</button>
+    <button type="button" class="btn" th:onclick="|javascript:move_notice()|">게시판관리</button>
   </div>
 
   <section>
@@ -41,7 +41,6 @@
 
       <button type="button" class="btn" onclick="notice_list()" style="background-color: gray;">공지사항</button>
       <button type="button" class="btn" onclick="qna_list()">QnA</button>
-      <button type="button" class="btn_submit" onclick="">등록</button>
 
       <div class="search">
         <input type="text" placeholder="">
@@ -58,6 +57,7 @@
               <th>제목</th>
               <th>작성자</th>
               <th>등록일</th>
+              <th>답변여부</th>
             </tr>
           </thead>
 
@@ -69,6 +69,7 @@
             <td th:text="${question.title}"></td>
             <td th:text="${question.userName}"></td>
             <td th:text="${question.createDate}"></td>
+            <td th:text="${question.answer}"></td>
 
           </tr>
 
@@ -118,6 +119,19 @@
     var id = id;
     window.location.href = "/admin/qnadetail/"+id
   }
+
+    function notice_list(id) {
+    var id = id;
+    window.location.href = "/admin/anlist/"
+  }
+
+    function qna_list(id) {
+    var id = id;
+    window.location.href = "/admin/aqlist/"
+  }
+
+
+
 </script>
 
 </html>

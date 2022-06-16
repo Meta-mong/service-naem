@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- css -->
+    <link rel="stylesheet" href="/css/user/signin.css">
+    <link rel="stylesheet" href="/css/main/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <script src="https://kit.fontawesome.com/f1962dcf03.js" crossorigin="anonymous"></script>
+
+    <!-- js-->
+
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+    <title>SignIn</title>
+</head>
+
+<body>
+<div class="main">
+
+        <div class="container" style="min-height: 100vh;">
+            <section>
+                <div class="inner">
+                    <div class="title">
+                        <h2>SignIn</h2>
+                    </div>
+                    <form action="/admin" method="POST">
+
+                    <div class="loginInfo">
+                        <input class="Id" type="text" id="loginId" name="loginId" placeholder="loginId" required> <br>
+
+                        <input class="Pw" type="password" id="password" name="password" placeholder="password" required autocomplete="on"><br>
+
+                    </div>
+
+
+                    <div class="loginBt">
+                        <button type="submit" id="signinbtn" onclick="login()">로그인</button>
+                    </div>
+                    </form>
+
+                </div>
+            </section>
+        </div>
+
+</div>
+</body>
+
+</html>

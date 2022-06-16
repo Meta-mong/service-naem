@@ -44,7 +44,7 @@ public class Question extends BaseEntity {
     public void update(QuestionDTO.Quest dto) {
         setTitle(dto.getTitle());
         setQuesContent(dto.getQuesContent());
-        setAnswer(dto.getAnwser());
+        setAnswer(dto.getAnswer());
 
     }
 

@@ -13,8 +13,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 
   <!-- css -->
-  <link rel="stylesheet" href="/css/admin/admin.css">
-  <link rel="stylesheet" href="/css/admin/qnareply.css">
+  <link rel="stylesheet" href="/css/userqna/userqnadetail.css">
 
 
 
@@ -24,65 +23,91 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="/js/question/userqnadetail.js"></script>
+  <script defer src="/js/admin/admin.js"></script>
+
+
   <title>공지사항 등록 </title>
 </head>
 
 <body>
   <div class="container">
     <div class="list">
-      <button type="button" class="btn" onclick="move_ticket()">티켓관리</button>
-      <button type="button" class="btn" onclick="move_user()">회원관리</button>
-      <button type="button" class="btn" onclick="move_notice()">게시판관리</button>
+      <button type="button" class="btn" th:onclick="|javascript:move_ticket()|">티켓관리</button>
+      <button type="button" class="btn" th:onclick="|javascript:move_user()|">회원관리</button>
+      <button type="button" class="btn" th:onclick="|javascript:move_notice()|">게시판관리</button>
     </div>
     <section>
-      <div class="main">
-        <form>
-          <div class="userQnA"> 
+      <div class="inner">
+        <form action='<c:url value="/admin/admin_aqlist"/>' method="post">
+          <div class="userQnA">
             <table class ="QnA">
               <tr>
+                <th scope="row">글번호 </th>
+                <td th:text="${question.id}" id="ques_id"></td>
+              </tr>
+              <tr>
                 <th scope="row">분류</th>
-                <td>예매</td>
+                <td th:text="${question.classify}"></td>
               </tr>
               <tr>
                 <th scope="row">제목</th>
-                <td>문의드립니다</td>
+                <td th:text="${question.title}" id="title"></td>
               </tr>
-               <tr>
+              <tr>
                 <th scope="row">작성일</th>
-                <td></td>
+                <td scope="row" th:text="${question.createDate}"></td>
               </tr>
               <tr>
                 <th scope="row">작성자</th>
-                <td >아이디</td>
+                <td scope="row" th:text="${question.userName}"></td>
               </tr>
               <tr>
                 <th>내용</th>
-                <td>언제 응모가 열리나요..??</br>
-                  언제 응모가 열리나요..??</br>
-                  언제 응모가 열리나요..??</br>
-                  언제 응모가 열리나요..??</br>
-                  언제 응모가 열리나요..??
-                </td>
+                <td th:text="${question.quesContent}" id="content"></td>
               </tr>
+              <tr>
+                <th>관리자 답변 </th>
+                <td th:text="${question.answer}" id="admincontent"></td>
+              </tr>
+
             </table>
-          </div>
-          </br>
-          <div class="form-group cont">
-            <label for="content">관리자 답변</label>
-            <textarea class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
           </div>
         </form>
 
-        <div class="btn">
-          <button type="button" class="delete" id="btn-save">삭제</button>
-          <button type="button" class="update" id="btn-save">수정</button>
-          <button type="button" class="return" id="btn-save">돌아가기</button>
-        </div>
 
+        <div class="btn">
+          <button type="button" class="replylist" onclick="replyList()">목록</button>
+          <button type="button" class="delete" th:onclick="|javascript:replydelete('${question.id}')|" id="del-btn"  >삭제</button>
+          <button type="button" class="update" th:onclick="|javascript:replyupdate('${question.id}')|" >수정</button>
+        </div>
       </div>
     </section>
   </div>
 
 </body>
+
+
+<!--목록으로 가기-->
+<script type="text/javascript">
+  function replyList() {
+    location.href = "/admin/aqlist";
+  }
+</script>
+
+<!--수정페이지로 가기-->
+<script type="text/javascript">
+  function replydelete(id) {
+    var id = id;
+    window.location.href = "/admin/qnareply/"+id
+  }
+
+  <!--삭제 후 목록으로 가기-->
+  function replyupdate(id) {
+    var id = id;
+    window.location.href = "/admin/replydelete/" +id
+  }
+</script>
+
 
 </html>

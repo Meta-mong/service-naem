@@ -33,45 +33,10 @@
                             / 2</span>
                     </div>
                     <div class="multiple-items">
-                        <div>
-                            <img src="/img/metamong.png" alt="">
-                            <span>나는 메타몽이다!</span>
-                            <span style="color: rgb(15, 228, 15);">[오픈] 22.06.30(목) 14:00</span>
-                        </div>
-                        <div>
-                            <img src="/img/ticket1.png" alt="">
-                            <span>영국 현대 미술의 거장</span>
-                            <span style="color: rgb(15, 228, 15);">[오픈] 22.06.30(목) 14:00</span>
-                        </div>
-                        <div>
-                            <img src="/img/ticket2.png" alt="">
-                            <span>뮤지컬 〈마타하리〉</span>
-                            <span style="color: rgb(15, 228, 15);">[오픈] 22.06.30(목) 14:00</span>
-                        </div>
-                        <div>
-                            <img src="/img/metamong.png" alt="">
-                            <span>나는 메타몽이다!</span>
-                            <span style="color: rgb(15, 228, 15);">[오픈] 22.06.30(목) 14:00</span>
-                        </div>
-                        <div>
-                            <img src="/img/metamong.png" alt="">
-                            <span>나는 메타몽이다!</span>
-                            <span style="color: rgb(15, 228, 15);">[오픈] 22.06.30(목) 14:00</span>
-                        </div>
-                        <div>
-                            <img src="/img/metamong.png" alt="">
-                            <span>나는 메타몽이다!</span>
-                            <span style="color: rgb(15, 228, 15);">[오픈] 22.06.30(목) 14:00</span>
-                        </div>
-                        <div>
-                            <img src="/img/metamong.png" alt="">
-                            <span>나는 메타몽이다!</span>
-                            <span style="color: rgb(15, 228, 15);">[오픈] 22.06.30(목) 14:00</span>
-                        </div>
-                        <div>
-                            <img src="/img/metamong.png" alt="">
-                            <span>나는 메타몽이다!</span>
-                            <span style="color: rgb(15, 228, 15);">[오픈] 22.06.30(목) 14:00</span>
+                        <div th:each="openticket : ${opentickets}">
+                            <img src="/concert/readImg/" th:attrappend="src=${openticket.phamplet}" alt="">
+                            <span th:text="${openticket.title}"></span>
+                            <span th:text="'[open] '+${openticket.drawStartDate}" style="color: rgb(15, 228, 15);"></span>
                         </div>
                     </div>
                 </div>
@@ -79,78 +44,26 @@
                 <!-- 리스트형 티켓 오픈 소식 -->
                 <form class="ticket-open-query" id="open_query">
                     <select name="ticket_genre" id="genre" required="required">
-                        <option value="total" selected="selected">전체</option>
-                        <option value="concert">콘서트</option>
-                        <option value="musical">뮤지컬/연극</option>
-                        <option value="classic">클래식</option>
-                        <option value="display">전시/행사</option>
+                        <option value="TOTAL" selected="selected">전체</option>
+                        <option value="CONCERT">콘서트</option>
+                        <option value="MUSICAL_DRAMA">뮤지컬/연극</option>
+                        <option value="CLASSIC">클래식</option>
+                        <option value="EXHIBITION">전시/행사</option>
                     </select>
-                    <input type="text"/>
-                    <button type="button">검색</button>
+                    <input type="text" id="title"/>
+                    <button type="button" id="search_btn">검색</button>
                 </form>
 
                 <div class="ticket-open-list">
                     <ul class="open-list-ul">
-                        <li>
+                        <li th:each="openticket : ${openticketList}">
                             <!-- display:span;-->
-                            <div class="open-date">티켓오픈일<br/>[오픈] 22.06.30(목) 14:00</div>
-                            <div class="open-info">뮤지컬 〈웃는 남자〉 1층 시야제한석 티켓 오픈 안내</div>
-                            <div class="open-img"><img src="/img/ticket1.PNG" alt=""/></div>
-                        </li>
-                        <li>
-                            <!-- display:span;-->
-                            <div class="open-date">티켓오픈일<br/>[오픈] 22.06.30(목) 14:00</div>
-                            <div class="open-info">뮤지컬 〈웃는 남자〉 1층 시야제한석 티켓 오픈 안내</div>
-                            <div class="open-img"><img src="/img/ticket1.PNG" alt=""/></div>
-                        </li>
-                        <li>
-                            <!-- display:span;-->
-                            <div class="open-date">티켓오픈일<br/>[오픈] 22.06.30(목) 14:00</div>
-                            <div class="open-info">뮤지컬 〈웃는 남자〉 1층 시야제한석 티켓 오픈 안내</div>
-                            <div class="open-img"><img src="/img/ticket1.PNG" alt=""/></div>
-                        </li>
-                        <li>
-                            <!-- display:span;-->
-                            <div class="open-date">티켓오픈일<br/>[오픈] 22.06.30(목) 14:00</div>
-                            <div class="open-info">뮤지컬 〈웃는 남자〉 1층 시야제한석 티켓 오픈 안내</div>
-                            <div class="open-img"><img src="/img/ticket1.PNG" alt=""/></div>
-                        </li>
-                        <li>
-                            <!-- display:span;-->
-                            <div class="open-date">티켓오픈일<br/>[오픈] 22.06.30(목) 14:00</div>
-                            <div class="open-info">뮤지컬 〈웃는 남자〉 1층 시야제한석 티켓 오픈 안내</div>
-                            <div class="open-img"><img src="/img/ticket1.PNG" alt=""/></div>
+                            <div class="open-date"><p th:text="티켓오픈일" style="margin: 0px"></p><p th:text="'[오픈] '+${openticket.drawStartDate}" style="margin: 0px"></p></div>
+                            <div class="open-info" th:text="${openticket.title}"></div>
+                            <div class="open-img"><img src="/concert/readImg/" th:attrappend="src=${openticket.phamplet}" alt=""></div>
                         </li>
                     </ul>
                 </div>
-
-                <!-- pagination-->
-<!--                <nav>-->
-<!--                    <ul class="pagination">-->
-<!--                        <li class="page-item">-->
-<!--                            <a class="page-link" th:if="${pageInfo.presentPage}<=1" href="#">-->
-<!--                                <span aria-hidden="true">&laquo;</span>-->
-<!--                            </a>-->
-<!--                            <a class="page-link" th:if="${pageInfo.presentPage}>1" href="/admin/allusers/" th:attrappend="href=${pageInfo.presentPage}-1" >-->
-<!--                                <span aria-hidden="true">&laquo;</span>-->
-
-<!--                            </a>-->
-<!--                        </li>-->
-
-<!--                        <li class="page-item" th:each="num : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">-->
-<!--                            <a class="page-link" href="/admin/allusers/" th:attrappend="href=${num}" th:text="${num}"></a>-->
-<!--                        </li>-->
-
-<!--                        <li class="page-item">-->
-<!--                            <a class="page-link" th:if="${pageInfo.presentPage} >= ${pageInfo.totalPage}" href="#">-->
-<!--                                <span aria-hidden="true">&raquo;</span>-->
-<!--                            </a>-->
-<!--                            <a class="page-link" th:if="${pageInfo.presentPage} < ${pageInfo.totalPage}" href="/admin/allusers/" th:attrappend="href=${pageInfo.presentPage}+1" >-->
-<!--                                <span aria-hidden="true">&raquo;</span>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                </nav>-->
 
             </div>
 
@@ -169,6 +82,7 @@
     <script src="/js/main/ticketOpenPage.js"></script>
     <script src="/js/main/ticketOpenSlider.js"></script>
     <script src="/js/main/backToTop.js"></script>
+    <script src="/js/ticketopen/ticket_open.js"></script>
     <script>
         $(document).ready(function () {
             $('.multiple-items').slick(
