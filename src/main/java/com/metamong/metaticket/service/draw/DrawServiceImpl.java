@@ -30,7 +30,7 @@ public class DrawServiceImpl implements DrawService {
     public Draw applyDraw(Long userId, Long concertId) {
        User user = userRepository.findById(userId).orElseThrow(() -> new NoSuchElementException());
         Concert concert = concertRepository.findById(concertId).orElseThrow(() -> new NoSuchElementException());
-        Draw draw = Draw.builder().user(user).concert(concert).build();
+        Draw draw = Draw.builder().user(user).concert(concert).state(DrawState.STANDBY).build();
         return drawRepository.save(draw);
     }
 
@@ -39,10 +39,11 @@ public class DrawServiceImpl implements DrawService {
         User user = userRepository.findById(userId).orElseThrow(() -> new NoSuchElementException());
         List<Draw> findDraws = drawRepository.findByUser(user);
 
-        List<DrawDTO.HISTORY> myDraws = findDraws.stream().map(d -> DrawDTO.HISTORY.builder()
+        List<DrawDTO.HISTORY> myDraws = findDraws.stream().map(
+                d -> DrawDTO.HISTORY.builder()
                         .concertId(d.getConcert().getId())
                         .concertTitle(d.getConcert().getTitle())
-                        .ranking(d.getRanking() - drawRepository.findLowRankingGroupByConcert(d.getConcert().getId()))
+                        .ranking(d.getRanking() - drawRepository.findLowRankingGroupByConcert(d.getConcert().getId()).orElse(0))
                         .state(getDrawStateForFront(d.getState()))
                         .build()
                 )
