@@ -38,9 +38,9 @@ public interface ConcertService {
     //오픈될 티켓 목록 8개 가져오기
     List<ConcertDto> openTickets();
 
-    //사용자가 정한 옵션들로 concert 불러오기
-    List<ConcertDto> openTicketsOptions(Genre genre, String title);
-
     //모든 오픈 예정 티켓 목록
     List<ConcertDto> allOpenTickets();
+
+    //장르별 오픈 예정 티켓 목록
+    List<ConcertDto> openTicketsByGenre(Genre genre);
 }

@@ -113,24 +113,16 @@ public class ConcertServiceImpl implements ConcertService {
         return  opentickets;
     }
 
-
     @Override
-    public List<ConcertDto> openTicketsOptions(Genre genre, String title) {
-        List<Concert> concerts = null;
-        if(title==null || title.trim().length()<=0){
-            concerts = concertRepository.findByGenreAndDrawStartDateAfterOrderByDrawStartDateAsc(genre, LocalDate.now());
-        }else{
-            Concert concert = concertRepository.findByTitleAndDrawStartDateAfterOrderByDrawStartDateAsc(title.trim(), LocalDate.now());
-            concerts = new ArrayList<>();
-            concerts.add(concert);
-        }
+    public List<ConcertDto> allOpenTickets() {
+        List<Concert> concerts = concertRepository.findAllByDrawStartDateAfterOrderByDrawStartDateAsc(LocalDate.now());
         List<ConcertDto> opentickets = concerts.stream().map(ConcertDto::createDto).collect(Collectors.toList());
         return opentickets;
     }
 
     @Override
-    public List<ConcertDto> allOpenTickets() {
-        List<Concert> concerts = concertRepository.findAllByDrawStartDateAfterOrderByDrawStartDateAsc(LocalDate.now());
+    public List<ConcertDto> openTicketsByGenre(Genre genre) {
+        List<Concert> concerts = concertRepository.findByGenreAndDrawStartDateAfterOrderByDrawStartDateAsc(genre, LocalDate.now());
         List<ConcertDto> opentickets = concerts.stream().map(ConcertDto::createDto).collect(Collectors.toList());
         return opentickets;
     }
