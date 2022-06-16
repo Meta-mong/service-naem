@@ -60,7 +60,7 @@
 
         </div>
 
-        <div class="ticket-open-issue" style="width: 1008px; margin: 10px auto; font-size: 30px; font-weight: bold;">티켓 오픈 소식</div>
+        <div class="ticket-open-issue" style="width: 1008px; margin: 10px auto; font-size: 30px; font-weight: bold;"><i class="fa-solid fa-ticket"></i><span>티켓 오픈 소식</span></div>
         <div class="ticket-open">
             <div class="ticket-open-top">
 <!--                <span class="ticket-open-top-span">티켓 오픈 소식</span>-->
@@ -85,10 +85,10 @@
                 </div>
                 <div class="ranking-div-top-right">
                     <ul>
-                        <li><input type="button"  class = "btn" value = "콘서트"  th:onclick="|javascript:ranking('CONCERT')|"/></li>
-                        <li><input type="button"  class = "btn" value = "뮤지컬/연극" th:onclick="|javascript:ranking('MUSICAL_DRAMA')|"/></li>
-                        <li><input type="button"  class = "btn" value = "클래식"  th:onclick="|javascript:ranking('CLASSIC')|"/></li>
-                        <li><input type="button"  class = "btn" value = "전시/행사"  th:onclick="|javascript:ranking('EXHIBITION')|"/></li>
+                        <li><input type="button"  class = "btn fill ranking-btn" value = "콘서트"  th:onclick="|javascript:ranking('CONCERT')|"/></li>
+                        <li><input type="button"  class = "btn fill ranking-btn" value = "뮤지컬/연극" th:onclick="|javascript:ranking('MUSICAL_DRAMA')|"/></li>
+                        <li><input type="button"  class = "btn fill ranking-btn" value = "클래식"  th:onclick="|javascript:ranking('CLASSIC')|"/></li>
+                        <li><input type="button"  class = "btn fill ranking-btn" value = "전시/행사"  th:onclick="|javascript:ranking('EXHIBITION')|"/></li>
                     </ul>
                 </div>
             </div>
@@ -252,7 +252,6 @@
 </script>
 
 <script src="js/main/tilt.js"></script>
-
 <!-- 랭킹 출력  -->
 <script type="text/javascript">
    $(document).ready( function() {
