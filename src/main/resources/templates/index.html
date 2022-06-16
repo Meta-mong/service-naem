@@ -15,6 +15,9 @@
 <!--          href="css/bootstrap.min.css" rel="stylesheet">-->
     <script src="https://kit.fontawesome.com/f1962dcf03.js" crossorigin="anonymous"></script>
 
+    <!-- js -->
+    <script defer src="/js/main/main.js"></script>
+
 </head>
 <body>
 
@@ -123,73 +126,73 @@
                 </div>
                 <div class="ranking-div-top-right">
                     <ul>
-                        <li><a href="#none">콘서트</a></li>
-                        <li><a href="#none">뮤지컬/연극</a></li>
-                        <li><a href="#none">클래식</a></li>
-                        <li><a href="#none">전시/행사</a></li>
+                        <li><input type="button"  class = "btn" value = "콘서트"  th:onclick="|javascript:ranking('CONCERT')|"/></li>
+                        <li><input type="button"  class = "btn" value = "뮤지컬/연극" th:onclick="|javascript:ranking('MUSICAL_DRAMA')|"/></li>
+                        <li><input type="button"  class = "btn" value = "클래식"  th:onclick="|javascript:ranking('CLASSIC')|"/></li>
+                        <li><input type="button"  class = "btn" value = "전시/행사"  th:onclick="|javascript:ranking('EXHIBITION')|"/></li>
                     </ul>
                 </div>
             </div>
             <div class="ranking-div-main">
-                <div class="ranking-div-main-plus">
-                    <a href="#"><i class="fa-solid fa-plus"></i></a>
-                </div>
+<!--                <div class="ranking-div-main-plus">-->
+<!--                    <a href="#"><i class="fa-solid fa-plus"></i></a>-->
+<!--                </div>-->
 
-                <div>
-                    <div class="ranking1">
-                        <svg height="300" width="400">
-                            <polygon points="0,0 40,0 40,40 20,30 0,40" style="fill:rgb(255, 98, 67);stroke:rgb(255, 98, 67);stroke-width:1" />
-                            Sorry, your browser does not support inline SVG.
-                            <text x="15" y="22" font-family="Verdana" font-size="20" fill="white">1</text>
-                        </svg>
-                    </div>
-                    <img src="img/metamong.png" alt="">
-                    <span>나는 메타몽이다!</span>
-                </div>
-                <div>
-                    <div class="ranking1">
-                        <svg height="300" width="400">
-                            <polygon points="0,0 40,0 40,40 20,30 0,40" style="fill:rgb(137, 137, 137);stroke:rgb(137, 137, 137);stroke-width:1" />
-                            Sorry, your browser does not support inline SVG.
-                            <text x="15" y="22" font-family="Verdana" font-size="20" fill="white">2</text>
-                        </svg>
-                    </div>
-                    <img src="img/metamong.png" alt="">
-                    <span>나는 메타몽이다!</span>
-                </div>
-                <div>
-                    <div class="ranking1">
-                        <svg height="300" width="400">
-                            <polygon points="0,0 40,0 40,40 20,30 0,40" style="fill:rgb(137, 137, 137);stroke:rgb(137, 137, 137);stroke-width:1" />
-                            Sorry, your browser does not support inline SVG.
-                            <text x="15" y="22" font-family="Verdana" font-size="20" fill="white">3</text>
-                        </svg>
-                    </div>
-                    <img src="img/metamong.png" alt="">
-                    <span>나는 메타몽이다!</span>
-                </div>
-                <div>
-                    <div class="ranking1">
-                        <svg height="300" width="400">
-                            <polygon points="0,0 40,0 40,40 20,30 0,40" style="fill:rgb(137, 137, 137);stroke:rgb(137, 137, 137);stroke-width:1" />
-                            Sorry, your browser does not support inline SVG.
-                            <text x="15" y="22" font-family="Verdana" font-size="20" fill="white">4</text>
-                        </svg>
-                    </div>
-                    <img src="img/metamong.png" alt="">
-                    <span>나는 메타몽이다!</span>
-                </div>
-                <div>
-                    <div class="ranking1">
-                        <svg height="300" width="400">
-                            <polygon points="0,0 40,0 40,40 20,30 0,40" style="fill:rgb(137, 137, 137);stroke:rgb(137, 137, 137);stroke-width:1" />
-                            Sorry, your browser does not support inline SVG.
-                            <text x="15" y="22" font-family="Verdana" font-size="20" fill="white">5</text>
-                        </svg>
-                    </div>
-                    <img src="img/metamong.png" alt="">
-                    <span>나는 메타몽이다!</span>
-                </div>
+<!--                <div>-->
+<!--                    <div class="ranking1">-->
+<!--                        <svg height="300" width="400">-->
+<!--                            <polygon points="0,0 40,0 40,40 20,30 0,40" style="fill:rgb(255, 98, 67);stroke:rgb(255, 98, 67);stroke-width:1" />-->
+<!--                            Sorry, your browser does not support inline SVG.-->
+<!--                            <text x="15" y="22" font-family="Verdana" font-size="20" fill="white">1</text>-->
+<!--                        </svg>-->
+<!--                    </div>-->
+<!--                    <img src="img/metamong.png" alt="">-->
+<!--                    <span>나는 메타몽이다!</span>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <div class="ranking1">-->
+<!--                        <svg height="300" width="400">-->
+<!--                            <polygon points="0,0 40,0 40,40 20,30 0,40" style="fill:rgb(137, 137, 137);stroke:rgb(137, 137, 137);stroke-width:1" />-->
+<!--                            Sorry, your browser does not support inline SVG.-->
+<!--                            <text x="15" y="22" font-family="Verdana" font-size="20" fill="white">2</text>-->
+<!--                        </svg>-->
+<!--                    </div>-->
+<!--                    <img src="img/metamong.png" alt="">-->
+<!--                    <span>나는 메타몽이다!</span>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <div class="ranking1">-->
+<!--                        <svg height="300" width="400">-->
+<!--                            <polygon points="0,0 40,0 40,40 20,30 0,40" style="fill:rgb(137, 137, 137);stroke:rgb(137, 137, 137);stroke-width:1" />-->
+<!--                            Sorry, your browser does not support inline SVG.-->
+<!--                            <text x="15" y="22" font-family="Verdana" font-size="20" fill="white">3</text>-->
+<!--                        </svg>-->
+<!--                    </div>-->
+<!--                    <img src="img/metamong.png" alt="">-->
+<!--                    <span>나는 메타몽이다!</span>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <div class="ranking1">-->
+<!--                        <svg height="300" width="400">-->
+<!--                            <polygon points="0,0 40,0 40,40 20,30 0,40" style="fill:rgb(137, 137, 137);stroke:rgb(137, 137, 137);stroke-width:1" />-->
+<!--                            Sorry, your browser does not support inline SVG.-->
+<!--                            <text x="15" y="22" font-family="Verdana" font-size="20" fill="white">4</text>-->
+<!--                        </svg>-->
+<!--                    </div>-->
+<!--                    <img src="img/metamong.png" alt="">-->
+<!--                    <span>나는 메타몽이다!</span>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <div class="ranking1">-->
+<!--                        <svg height="300" width="400">-->
+<!--                            <polygon points="0,0 40,0 40,40 20,30 0,40" style="fill:rgb(137, 137, 137);stroke:rgb(137, 137, 137);stroke-width:1" />-->
+<!--                            Sorry, your browser does not support inline SVG.-->
+<!--                            <text x="15" y="22" font-family="Verdana" font-size="20" fill="white">5</text>-->
+<!--                        </svg>-->
+<!--                    </div>-->
+<!--                    <img src="img/metamong.png" alt="">-->
+<!--                    <span>나는 메타몽이다!</span>-->
+<!--                </div>-->
             </div>
         </div>
 
@@ -290,6 +293,13 @@
 </script>
 
 <script src="js/main/tilt.js"></script>
+
+<!-- 랭킹 출력  -->
+<script type="text/javascript">
+   $(document).ready( function() {
+        ranking("CONCERT")
+  });
+</script>
 
 </body>
 </html>

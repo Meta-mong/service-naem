@@ -5,10 +5,16 @@
 <head>
     <meta charset="UTF-8">
     <title>메인 페이지</title>
-    <link rel="stylesheet" href="css/main/main.css">
-    <link rel="stylesheet" href="css/ranking-page/ranking.css">
+    <link rel="stylesheet" href="/css/main/main.css">
+    <link rel="stylesheet" href="/css/ranking-page/ranking.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/f1962dcf03.js" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+    <!-- js -->
+    <script defer src="/js/ranking/ranking.js"></script>
+
 
 </head>
 <body>
@@ -18,7 +24,7 @@
     <!-- header 시작 -->
     <div th:replace="fragments/header :: headerFragment"></div>
     <!-- header 끝 -->
-    <div class="block">
+    <div class="block" style="min-height: 50vh;">
 
         <div class="ranking-page">
             <div class="ranking-page-div-top">
@@ -28,10 +34,10 @@
                 </div>
                 <div class="ranking-page-div-top-right">
                     <ul>
-                        <li><a href="#none">콘서트</a></li>
-                        <li><a href="#none">뮤지컬/연극</a></li>
-                        <li><a href="#none">클래식</a></li>
-                        <li><a href="#none">전시/행사</a></li>
+                        <li><input type="button"  class = "btn" value = "콘서트"  th:onclick="|javascript:ranking('CONCERT')|"/></li>
+                        <li><input type="button"  class = "btn" value = "뮤지컬/연극" th:onclick="|javascript:ranking('MUSICAL_DRAMA')|"/></li>
+                        <li><input type="button"  class = "btn" value = "클래식"  th:onclick="|javascript:ranking('CLASSIC')|"/></li>
+                        <li><input type="button"  class = "btn" value = "전시/행사"  th:onclick="|javascript:ranking('EXHIBITION')|"/></li>
                     </ul>
                 </div>
             </div>
@@ -45,40 +51,23 @@
                     <div class="last"><span>예매</span></div>
                 </div>
                 <div class="ranking-page-main-div">
-                    <div>
-                        <div class="main-div-ranking-page"><span>1</span></div>
-                        <div class="concert-name">
-                            <img src="img/metamong.png" alt="" style="width: 100px; height: 150px;">
-                            <div>
-                                <span>단독판매</span>
-                                <span>공연명</span>
-                            </div>
-                        </div>
-                        <div class="concert-time">
-                            <p>2022.05.21</p>
-                            <p> ~ </p>
-                            <p>2022.05.22</p>
-                        </div>
-                        <div class="concert-place"><span>노들섬 라이브하우스</span></div>
-                        <div class="reservation"><button>예매하기</button></div>
-                    </div>
-                    <div>
-                        <div class="main-div-ranking-page"><span>1</span></div>
-                        <div class="concert-name">
-                            <img src="img/metamong.png" alt="" style="width: 100px; height: 150px;">
-                            <div>
-                                <span>단독판매</span>
-                                <span>공연명</span>
-                            </div>
-                        </div>
-                        <div class="concert-time">
-                            <p>2022.05.21</p>
-                            <p> ~ </p>
-                            <p>2022.05.22</p>
-                        </div>
-                        <div class="concert-place"><span>노들섬 라이브하우스</span></div>
-                        <div class="reservation"><button>예매하기</button></div>
-                    </div>
+<!--                    <div >-->
+<!--                        <div class="main-div-ranking-page"><span>1</span></div>-->
+<!--                        <div class="concert-name">-->
+<!--                            <img src="img/metamong.png" alt="" style="width: 100px; height: 150px;">-->
+<!--                            <div>-->
+<!--                                <span>단독판매</span>-->
+<!--                                <span>공연명</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="concert-time">-->
+<!--                            <p>2022.05.21</p>-->
+<!--                            <p> ~ </p>-->
+<!--                            <p>2022.05.22</p>-->
+<!--                        </div>-->
+<!--                        <div class="concert-place"><span>노들섬 라이브하우스</span></div>-->
+<!--                        <div class="reservation"><button>예매하기</button></div>-->
+<!--                    </div>-->
                 </div>
             </div>
 
@@ -91,7 +80,13 @@
     <!-- footer 끝 -->
 </div>
 
-<script src="js/backToTop.js"></script>
+<script src="/js/main/backToTop.js"></script>
 
 </body>
+<!-- 리스트 출력  -->
+<script type="text/javascript">
+   $(document).ready( function() {
+        ranking("CONCERT")
+  });
+</script>
 </html>
