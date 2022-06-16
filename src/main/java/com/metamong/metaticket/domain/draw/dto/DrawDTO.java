@@ -10,6 +10,7 @@ public class DrawDTO {
     @Setter
     @Builder
     public static class HISTORY {
+        Long drawId;
         Long concertId; //공연번호
         String concertTitle; //공연명
         int ranking; //대기번호

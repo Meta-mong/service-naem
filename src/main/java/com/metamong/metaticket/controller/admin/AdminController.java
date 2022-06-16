@@ -134,13 +134,10 @@ public class AdminController {
     //회원 정보 수정
     @PostMapping ("/modifyuser")
     @ResponseBody
-    public Map<String, Object> modifyUser(@RequestParam("email") String email, @RequestParam("name") String name,
-                                          @RequestParam("loserCnt") int loserCnt, @RequestParam("cancelCnt") int cancelCnt){
+    public Map<String, Object> modifyUser(@RequestParam("email") String email, @RequestParam("name") String name){
         Map<String, Object> map = new HashMap<>();
         User user = userService.userInfo(email);
         user.setName(name.trim());
-        user.setLoserCnt(loserCnt);
-        user.setCancelCnt(cancelCnt);
         map.put("result", userService.saveUser(user));
 
         return map;
