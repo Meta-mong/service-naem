@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,6 +25,9 @@ class ConcertRepositoryTest {
 
     @Autowired
     FilesRepository filesRepository;
+
+    @Autowired
+    ServletContext context;
 
     @Test
     //@DisplayName("테스트")
@@ -114,4 +118,32 @@ class ConcertRepositoryTest {
         assertThat(concertRepository.findAll().size()).isEqualTo(1);
     }
 
+    @Test
+    public void createBeOpenedTickets(){
+        LocalDateTime local = LocalDateTime.now().plusDays(30);
+        LocalDateTime draw_start = LocalDateTime.now().plusDays(15);
+        Phamplet_File file = Phamplet_File.builder().
+                fileOriname("queueing_first_concert.jpg").
+                filePath(context.getRealPath("/uploadImg\\")). //? \ 확인
+                build();
+        Phamplet_File saved = filesRepository.save(file);
+
+        for(int i=1; i<=8; i++){
+            Concert concert = Concert.builder()
+                    .address("다크필드라디오")
+                    .concertDate(local.plusDays(i))
+                    .description("나는 당신이，당신이 믿을 수 없는 것들의 존재를 믿기를 바랍니다")
+                    .drawStartDate(draw_start.plusDays(i).toLocalDate())
+                    .drawEndDate(draw_start.plusDays(i+2).toLocalDate())
+                    .genre(Genre.MUSICAL_DRAMA)
+                    .host("우란문화재단")
+                    .price(22000)
+                    .ratings(Ratings.ALL)
+                    .seatNum(150)
+                    .title("큐 단독공연")
+                    .phamplet(saved)
+                    .build();
+            concertRepository.save(concert);
+        }
+    }
 }

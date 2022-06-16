@@ -81,11 +81,13 @@ li:last-child{
 }
 
 .open-date {
+  width: 200px;
   text-align: center;
   line-height: 40px;
 }
 
 .open-info {
+  width: 500px;
   margin-left: 100px;
   line-height: 80px;
 }
