@@ -29,7 +29,7 @@ public class QuestionDTO {
         private String quesContent;
         private String classify;
 
-        private String anwser;
+        private String answer;
 
         private LocalDate createDate;
         private LocalDate updateDate;

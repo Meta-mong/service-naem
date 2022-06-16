@@ -334,6 +334,7 @@ body,.header-top-ul {
 .ticket-open {
   width: 1008px;
   margin: 60px auto;
+  margin-top: 0px;
   height: 350px;
   overflow: hidden;
   background-color: rgb(235, 235, 235);
@@ -384,7 +385,7 @@ body,.header-top-ul {
 .ranking{
   width: 1008px;
   margin: 60px auto;
-  height: 350px;
+  height: 442px;
   background-color: rgb(240, 240, 240);
 }
 
@@ -440,7 +441,7 @@ body,.header-top-ul {
 }
 
 .ranking-div-main {
-  height: 210px;
+  height: 281px;
   margin: 50px 40px 30px;
   background-color: white;
   display: flex;
@@ -483,15 +484,20 @@ body,.header-top-ul {
 }
 
 .ranking-div-main > div span {
-  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   text-align: center;
   font-weight: 600;
+  height: 46px;
   font-size: 17px;
+  width: 164px;
 }
 
 .ranking-div-main > div > img {
-  width: 100%;
-  height: auto;
+  width: 163px;
+  height: 220px;
 }
 /* ranking end */
 

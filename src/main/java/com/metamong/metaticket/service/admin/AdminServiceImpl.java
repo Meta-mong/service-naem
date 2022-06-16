@@ -13,10 +13,10 @@ public class AdminServiceImpl implements AdminService{
     private AdminRepository adminRepository;
 
     @Override
-    public boolean adminLogin(String adminId, String password) throws Exception {
+    public boolean adminLogin(String loginId, String password) throws Exception {
         boolean result = false;
         try {
-            Admin admin = adminRepository.findByLoginId(adminId);
+            Admin admin = adminRepository.findByLoginId(loginId);
             if(admin.getPassword().equals(password)){
                 result = true; //로그인 성공
             }
@@ -28,8 +28,8 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public Admin adminInfo(String adminId) {
-        return adminRepository.findByLoginId(adminId);
+    public Admin adminInfo(String loginId) {
+        return adminRepository.findByLoginId(loginId);
     }
 
 

@@ -15,6 +15,7 @@
   <!-- js -->
   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
   <script src="/js/question/userqnadetail.js"></script>
+  <script defer src="/js/admin/admin.js"></script>
 
 
 
@@ -55,14 +56,20 @@
                   <th>내용</th>
                   <td th:text="${question.quesContent}" id="content"></td>
                 </tr>
-              
+                <tr>
+                  <th>관리자 답변 </th>
+                  <td th:text="${question.answer}"></td>
+                </tr>
+
+
               </table>
             </div>
           </form>
         
           <div class="btn">
             <button type="button" class="qnalist" onclick="questionList()">목록</button>
-            <button type="button" class="update" th:onclick="|javascript:qnaupdate('${question.id}')|" >답변 등록</button>
+            <button type="button" class="delete" th:onclick="|javascript:qnadelete('${question.id}')|" id="del-btn"  >삭제</button>
+            <button type="button" class="update" th:onclick="|javascript:qnaupdate('${question.id}')|" >등록/수정</button>
           </div>
         </div>
       </section>
@@ -83,10 +90,13 @@
     var id = id;
     window.location.href = "/admin/qnareply/"+id
   }
+
+    <!--삭제 후 목록으로 가기-->
+  function qnadelete(id) {
+    var id = id;
+    window.location.href = "/admin/replydelete/" +id
+  }
 </script>
 
-<!--function qnadelete(id) {-->
-<!--var id = id;-->
-<!--window.location.href = "/admin/qnadelete/" +id-->
-<!--}-->
+
 </html>
