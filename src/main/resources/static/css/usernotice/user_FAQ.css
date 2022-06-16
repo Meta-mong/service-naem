@@ -1,0 +1,148 @@
+  /* common */
+  a {
+    text-decoration: none;
+  }
+
+  .main {
+    min-width: 1400px;
+  }
+
+  body,.main,
+  .header-top-ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    color: #999;
+    width: 1400px;
+  }
+
+  /* FAQ main */
+  .container .cs{
+    display: flex;
+    justify-content: flex-start;
+    margin: 50px;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+    margin-top: 50px;
+    margin-left: 100px;
+  }
+
+  .container .menuList{
+      display:flex;
+  }
+
+  .container .menuList .btn{
+    font-size: 23px;
+    background-color: white;
+    color: black;
+    width: 400px;
+    border: 1px solid lightgray;
+    /* border: 0; */
+    height: 60px;
+  }
+
+  .container .menuList .btn:first-child{
+    justify-content: flex-start;
+    margin-left: 90px;
+    border-right: 0;
+  }
+
+  .container .menuList .btn:nth-child(2){
+    background-color: rgb(218, 169, 228);
+    border-right: 0;
+  }
+
+
+  .container .menuList .btn:hover{
+    font-size: 23px;
+    background-color: rgb(212, 118, 231);
+    color: white;
+    width: 400px;
+    /* border: 0; */
+    height: 60px;
+  }
+  .container .menuList .btn:active{
+    border-color: lightgray;
+  }
+
+  .container .inner{
+    margin-bottom: 20px;
+  }
+
+  .container .inner .use{
+    height: 300px;
+  }
+
+  .container .inner .use .title,
+  .container .inner .asked .title{
+    display: block;
+    color: black;
+    font-size: 22px;
+    margin-top: 50px;
+    margin-left: 100px;
+    margin-bottom: 20px;
+    float: left;
+  }
+
+  .container .inner .use .content{
+    display: block;
+    width: 1000px;
+  }
+
+  .container .inner .use span{
+    display: block;
+    font-size: 20px;
+    color: black;
+    float: left;
+    margin-left: 140px;
+    margin-bottom: 20px;
+  }
+
+  .container .inner .use li{
+    /* display: block; */
+    float: left;
+    margin-left: 160px;
+    color: black;
+    margin-top: 10px;
+    font-size: 18px;
+  }
+
+  .container .inner .asked .list_FAQ{
+    margin-left: 80px;
+    width: 90%;
+    margin-bottom: 100px;
+  }
+
+  .container .inner .asked .list_FAQ tr{
+    border-bottom: 1px solid lightgray;
+    height: 40px;
+    font-size: 18px;
+    color: black;
+  }
+
+  .container .inner .asked .list_FAQ tr:first-child{
+    border-top: 1px solid lightgray;
+  }
+
+  .container .inner .asked .list_FAQ td{
+    text-align: left;
+    padding-left: 10px;
+    vertical-align :middle;
+  }
+
+  .container .inner .asked .list_FAQ td:first-child{
+    width: 100px;
+    text-align: center;
+  }
+
+  .container .inner .asked .list_FAQ .answer td{
+    text-align: left;
+    padding-left: 150px;
+    background-color: whitesmoke;
+  }
