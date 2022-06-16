@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
   <meta charset="UTF-8">
@@ -16,6 +17,7 @@
   <!-- css -->
   <link rel="stylesheet" href="/css/main/main.css">
   <link rel="stylesheet" href="/css/usernotice/noticelist.css">
+  <link rel="stylesheet" href="/css/main/main.css">
 
   <!-- js -->
   <script defer src="/js/notice/usernoticelist.js"></script>
@@ -36,17 +38,6 @@
         <button type="button" class="btn" th:onclick="|javascript:notice()|">공지사항</button>
         <button type="button" class="btn" th:onclick="|javascript:FAQ()|">이용안내/FAQ</button>
         <button type="button" class="btn" th:onclick="|javascript:QNA()|">QnA</button>
-      </div>
-
-      <div class="dropdown">
-        <select name="dropdown" id="dropdown" class="dropdown-toggle" required="required">
-          <option value="">전체</option>
-          <option value="공연 소식">공연 소식</option>
-          <option value="공연 오픈">공연 오픈</option>
-          <option value="공연 종료">공연 종료</option>
-          <option value="서비스 점검">서비스 점검</option>
-          <option value="기타">기타</option>
-        </select>
       </div>
 
 

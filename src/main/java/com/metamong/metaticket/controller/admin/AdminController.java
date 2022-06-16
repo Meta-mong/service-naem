@@ -64,6 +64,7 @@ public class AdminController {
     @Autowired
     QuestionRepository questionRepository;
 
+
     //로그인 /로그아웃
     @GetMapping
     public String login ()throws Exception{
@@ -161,12 +162,12 @@ public class AdminController {
     }
 
 // 공지사항  상세페이지 조회
-    @GetMapping("/noticedetail/{noticeId}")
-    public String noticedetail (@PathVariable Long noticeId,Model model) throws Exception {
-        NoticeDTO.Notice noticeDto = noticeService.noticedetail(noticeId);
-        model.addAttribute("notice",noticeDto);
-        return "/admin/admin_noticedetail";
-    }
+//    @GetMapping("/noticedetail/{noticeId}")
+//    public String noticedetail (@PathVariable Long noticeId,Model model) throws Exception {
+//        NoticeDTO.Notice noticeDto = noticeService.noticedetail(noticeId);
+//        model.addAttribute("notice",noticeDto);
+//        return "/admin/admin_noticedetail";
+//    }
 
 
     //관리자 공지사항 등록

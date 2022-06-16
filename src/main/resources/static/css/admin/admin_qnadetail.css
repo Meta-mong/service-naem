@@ -1,0 +1,126 @@
+/* button */
+.container .list {
+  display: block;
+  justify-content: left;
+  margin-top: 60px;
+  margin-left: 140px;
+  margin-bottom: -48px;
+}
+
+.container .list .btn {
+  font-size: 23px;
+  /* background-color: rgba(221, 184, 229, 0.964); */
+  margin-left: -6px;
+  background-color: black;
+  color: whitesmoke;
+  border: 0;
+  height: 60px;
+}
+
+.container .list .btn:last-child {
+  background-color: rgb(211, 133, 228);
+}
+
+.container .list .btn:hover {
+  background-color: rgb(215, 158, 228);
+  color: whitesmoke;
+}
+
+/* main */
+.container .innertitle{
+  font-size: 35px;
+  font-weight: bold;
+  margin-top: 40px;
+  color: rgb(108, 102, 102);
+}
+
+.container .inner{
+  width: 800px;
+margin: auto;
+margin-top: 40px;
+margin-bottom: 100px;
+
+}
+
+.container .inner .userQnA .QnA{
+  border-collapse: collapse;
+  text-align: left;
+  line-height: 1.5;
+  margin : 20px 10px;
+}
+table.QnA th {
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  border: 1px solid #ccc;
+}
+table.QnA th {
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  border: 1px solid #ccc;
+}
+table.QnA td {
+  width: 850px;
+  padding: 10px;
+  vertical-align: top;
+  border: 1px solid #ccc;
+}
+
+.container .inner .cont{
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.container .inner .cont .form-control{
+  height: 400px;
+  resize: none;
+}
+
+.container  .btn .qnalist{
+  background-color: rgb(215, 158, 228);
+  width: 200px;
+  padding: 5px 50px;
+  font-size: 23px;
+  font-weight: bold;
+  font-style: italic;
+  border: none;
+  border-radius: 30px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(218, 186, 248);
+  margin-top: 30px;
+  margin-right:150px;
+  float:right;
+}
+
+
+.container  .btn .delete{
+  background-color: rgb(207, 61, 119);
+  width: 200px;
+  padding: 5px 50px;
+  font-size: 23px;
+  font-weight: bold;
+  font-style: italic;
+  border: none;
+  border-radius: 30px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(218, 186, 248);
+  margin-top: 30px;
+  float:left;
+  margin-left:150px;
+}
+.container  .btn .update{
+  background-color: rgb(215, 158, 228);
+  width: 200px;
+  padding: 5px 50px;
+  font-size: 23px;
+  font-weight: bold;
+  font-style: italic;
+  border: none;
+  border-radius: 30px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(218, 186, 248);
+  margin-top: 30px;
+}

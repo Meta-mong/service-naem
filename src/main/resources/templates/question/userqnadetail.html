@@ -64,19 +64,24 @@
               </table>
             </div>
           </form>
-        
-          <div class="btn">
+
+          <div class="list_block">
+            <button type="button" class="qnalist" onclick="questionList()">목록</button>
+          </div>
+
+          <div class="update_block" th:unless="${session.user}==null">
+            <button type="button" class="update" th:if="${session.user.id}==${question.userId}"  th:onclick="|javascript:qnaupdate('${question.id}')|" >수정</button>
+          </div>
 
 
-              <div th:unless="${session.user}==null">
-                <button type="button" class="delete" th:if="${session.user.id}==${question.userId}" th:onclick="|javascript:qnadelete('${question.id}')|">삭제
-                </button>
-              </div>
-                <button type="button" class="qnalist" onclick="questionList()">목록</button>
-              <div th:unless="${session.user}==null">
-                <button type="button" class="update" th:if="${session.user.id}==${question.userId}"  th:onclick="|javascript:qnaupdate('${question.id}')|" >수정</button>
-              </div>
-        </div>
+
+          <div class="delete_block"  th:unless="${session.user}==null">
+            <button type="button" class="delete" th:if="${session.user.id}==${question.userId}" th:onclick="|javascript:qnadelete('${question.id}')|">삭제
+            </button>
+          </div>
+
+
+
         </div>
       </section>
     </div>
