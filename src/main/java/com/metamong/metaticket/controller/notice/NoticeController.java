@@ -38,11 +38,11 @@ public class NoticeController {
     @Autowired
     NoticeRepository noticeRepository;
 
-//    @GetMapping("/")
-//    public String admin(){
-//
-//        return "/admin/addnotice";
-//    }
+    //이용안내/FAQ
+    @GetMapping("/faq")
+    public String faq()throws Exception{
+        return "/notice/user_FAQ";
+    }
 
 
 // 공지사항  상세페이지 조회

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
   <meta charset="UTF-8">
@@ -16,12 +17,14 @@
   <!-- css -->
   <link rel="stylesheet" href="/css/main/main.css">
   <link rel="stylesheet" href="/css/userqna/userqnalist.css">
+  <link rel="stylesheet" href="/css/main/main.css">
 
   <!-- js -->
-  <script defer src="/js/question/userqnaadd.js"></script>
+
   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
   <script defer src="/js/notice/usernoticelist.js"></script>
-
+  <script defer src="/js/question/userqnalist.js"></script>
+  <script defer src="/js/question/userqnaadd.js"></script>
   <title>고객센터 공지사항</title>
 </head>
 
@@ -38,19 +41,19 @@
         <button type="button" class="btn" th:onclick="|javascript:FAQ()|">이용안내/FAQ</button>
         <button type="button" class="btn" th:onclick="|javascript:QNA()|">QnA</button>
       </div>
+
       <div class="dropdown">
         <select name="dropdown" id="dropdown" class="dropdown-toggle" required="required">
           <option value="">전체</option>
-          <option value="공연/티켓">공연/티켓</option>
-          <option value="취소/환불">취소/환불</option>
-          <option value="이벤트">이벤트</option>
-          <option value="회원">회원</option>
-          <option value="기타">기타</option>
+          <option value="concert">공연/티켓</option>
+          <option value="cancel">취소/환불</option>
+          <option value="event">이벤트</option>
+          <option value="member">회원</option>
+          <option value="etc">기타</option>
         </select>
       </div>
 
       <div class="button">
-
         <button type="button" class="btn" id="write">글쓰기</button>
       </div>
 

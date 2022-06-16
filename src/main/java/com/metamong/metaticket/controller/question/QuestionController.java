@@ -22,6 +22,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.server.PathParam;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,11 +46,21 @@ public class QuestionController {
         return "reply";
     }
 
+
+
     //문의사항 리스트 조회
-    @GetMapping("/qlist")
-    public String questionList( Model model, Pageable pageable) throws Exception{
-        Page<QuestionDTO.Quest> questionList = questionService.allQuestionList(pageable);
+    @GetMapping(value = {"/qlist","/qlist/{classify}"})
+    public String questionList(@PathVariable(required = false)String classify, Model model, Pageable pageable) throws Exception{
+        System.out.println("classify : "+ classify);
+        Page<QuestionDTO.Quest> questionList = null;
+        if(classify == null){
+            questionList = questionService.allQuestionList(pageable);
+        }else {
+            questionList = questionService.qnaselet(classify, pageable);
+        }
+
         model.addAttribute("allQuestionList", questionList);
+
 
         log.info("총 element 수 : {}, 전체 page 수 : {}, 페이지에 표시할 element 수 : {}, 현재 페이지 index : {}, 현재 페이지의 element 수 : {}",
                 questionList.getTotalElements(), questionList.getTotalPages(), questionList.getSize(),
@@ -153,24 +164,8 @@ public class QuestionController {
         return  ResponseEntity.ok(ques_id);
     }
 
-    //댓글 여부
-//    @PostMapping(value = "/answer")
-//    public String answer (@ModelAttribute QuestionDTO.Quest dto, Model model,Pageable pageable){
-//
-//        try {
-//            boolean result = questionService.register(dto,session);
-//            if(result == true){
-//                Page<QuestionDTO.Quest> replyanswer  = questionService.allQuestionList(pageable);
-//                model.addAttribute("answer",replyanswer);
-//                return "questionlist";
-//            }
-//            throw new Exception();
-//        } catch (Exception e) {
-//            model.addAttribute("err","등록실패");
-//            return "replyupload"; // jsp
-//
-//        }
-//    }
+
+
 
 
 }

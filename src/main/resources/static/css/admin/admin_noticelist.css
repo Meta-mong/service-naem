@@ -131,6 +131,12 @@
   border-top: solid 1px lightgray;
 }
 
+.container .main .question_list td:nth-child(3){
+    overflow:hidden;
+    white-space : nowrap;
+    text-overflow: ellipsis;
+}
+
 .container .main .question_list td:last-child{
     overflow:hidden;
     white-space : nowrap;

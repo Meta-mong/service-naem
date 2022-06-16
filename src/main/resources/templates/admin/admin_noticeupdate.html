@@ -73,8 +73,9 @@
         </form>
 
         <div class="btn">
-          <button type="button" class="qnalist" onclick="noticeList()">목록</button>
-          <button type="button" class="update" id="noticeupdate" >수정완료</button>
+          <button type="button" class="return" onclick="noticeList()">목록</button>
+          <button type="button" class="delete" th:onclick="|javascript:noticedelete('${notice.id}')|" >삭제</button>
+          <button type="button" class="update" th:onclick="|javascript:noticeupdate('${notice.id}')|" >수정완료</button>
         </div>
       </div>
     </section>
@@ -86,6 +87,20 @@
 <script type="text/javascript">
   function noticeList() {
     location.href = "/admin/anlist";
+  }
+</script>
+
+<!--공지사항 수정  페이지로 가기-->
+<script type="text/javascript">
+  function noticeupdate(id) {
+    var id = id;
+    window.location.href = "/admin/anlist/"+id
+  }
+
+    <!--삭제 후 목록으로 가기-->
+  function noticedelete(id) {
+    var id = id;
+    window.location.href = "/admin/noticedelete/" +id
   }
 </script>
 
