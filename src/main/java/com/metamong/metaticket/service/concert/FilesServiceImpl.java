@@ -20,6 +20,26 @@ public class FilesServiceImpl implements FilesService{
     @Autowired
     FilesRepository filesRepository;
 
+//    @Override
+//    public Phamplet_File saveFile(MultipartFile file) throws IOException {
+//        try {
+//            UUID uuid = UUID.randomUUID();
+//            String fileOriname = uuid + file.getOriginalFilename();
+//            String filePath = servletContext.getRealPath("/uploadImg/");
+//            Phamplet_File files = Phamplet_File.builder()
+//                    .fileOriname(fileOriname)
+//                    .filePath(filePath)
+//                    .build();
+//            File newFile = new File(filePath+fileOriname) ;
+//            file.transferTo(newFile);
+//            Phamplet_File savedFile = filesRepository.save(files);
+//            return savedFile;
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
+
     @Override
     public Phamplet_File saveFile(MultipartFile file) throws IOException {
         try {
@@ -28,7 +48,7 @@ public class FilesServiceImpl implements FilesService{
             String filePath = servletContext.getRealPath("/uploadImg/");
             Phamplet_File files = Phamplet_File.builder()
                     .fileOriname(fileOriname)
-                    .filePath(filePath)
+                    .filePath("/uploadImg/")
                     .build();
             File newFile = new File(filePath+fileOriname) ;
             file.transferTo(newFile);

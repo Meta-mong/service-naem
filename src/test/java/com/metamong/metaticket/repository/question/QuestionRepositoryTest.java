@@ -42,12 +42,12 @@ class QuestionRepositoryTest {
                 .build();
 
         // 객체를 DTO 클래스로 변환
-        dto = QuestionDTO.Quest.builder()
-                .id(1L)
-                .title("제목")
-                .classify("분류")
-                .anwser("s내용")
-                .build();
+//        dto = QuestionDTO.Quest.builder()
+//                .id(1L)
+//                .title("제목")
+//                .classify("분류")
+//                .anwser("s내용")
+//                .build();
 
     }
 

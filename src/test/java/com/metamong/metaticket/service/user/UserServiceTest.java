@@ -1,5 +1,6 @@
 package com.metamong.metaticket.service.user;
 
+import com.metamong.metaticket.domain.concert.Phamplet_File;
 import com.metamong.metaticket.domain.user.User;
 import com.metamong.metaticket.domain.user.dto.UserDTO;
 import com.metamong.metaticket.repository.user.UserRepository;
@@ -10,7 +11,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,6 +34,9 @@ class UserServiceTest {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    ServletContext servletContext;
 
     @Test
     @DisplayName("이메일 중복 체크")
@@ -151,5 +159,13 @@ class UserServiceTest {
     @DisplayName("로그아웃")
     void signOut(){
         service.signOut(session);
+    }
+
+    @Test
+    @DisplayName("경로 테스트")
+    void pathTest() throws IOException {
+        String filePath = servletContext.getRealPath("/uploadImg/1edf622a-9de5-4beb-90c1-5fc11658c90clegend_litte_baseball.jpg");
+        File file = new File(filePath);
+        System.out.println(file.getPath());
     }
 }
