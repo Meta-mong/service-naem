@@ -25,9 +25,6 @@ public class MainController {
     @GetMapping("/")
     public String main(Model model){
         List<ConcertDto> opentickets = concertService.openTickets();
-//        for(ConcertDto dto : opentickets){
-//            System.out.println(dto.toString());
-//        }
         model.addAttribute("opentickets", opentickets);
         return "index";
     }
