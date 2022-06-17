@@ -37,10 +37,11 @@ public class MainController {
         List<ConcertDto> opentickets = concertService.openTickets();
         model.addAttribute("opentickets", opentickets);
         List<ConcertDto> openticketList = null;
-        if(genre==null) {
+        if(genre==null || genre==Genre.TOTAL) {
             openticketList = concertService.allOpenTickets();
         }else{
             openticketList = concertService.openTicketsByGenre(genre);
+            model.addAttribute("genre", genre);
         }
         model.addAttribute("openticketList", openticketList);
         return "/ticketopen/ticket_open";
