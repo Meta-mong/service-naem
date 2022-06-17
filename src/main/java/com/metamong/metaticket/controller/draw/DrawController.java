@@ -37,7 +37,7 @@ public class DrawController {
         if(session.getAttribute("user")==null) return "redirect:/signin";
         UserDTO.SESSION_USER_DATA currentUser = (UserDTO.SESSION_USER_DATA) session.getAttribute("user");
         drawService.applyDraw(currentUser.getId(), concertId);
-        return "/mypage/draw";
+        return "redirect:/mypage/draw";
     }
 
     @PostMapping("/delete/{drawId}")
