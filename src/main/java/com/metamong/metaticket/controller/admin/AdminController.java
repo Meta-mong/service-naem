@@ -1,10 +1,15 @@
 package com.metamong.metaticket.controller.admin;
 
+<<<<<<< Updated upstream
 
 import com.metamong.metaticket.domain.draw.dto.DrawDTO;
 import com.metamong.metaticket.domain.notice.Notice;
 import com.metamong.metaticket.domain.notice.dto.NoticeDTO;
 import com.metamong.metaticket.domain.question.dto.QuestionDTO;
+=======
+import com.metamong.metaticket.domain.draw.Draw;
+import com.metamong.metaticket.domain.draw.dto.DrawDTO;
+>>>>>>> Stashed changes
 import com.metamong.metaticket.domain.user.User;
 import com.metamong.metaticket.domain.user.dto.UserDTO;
 import com.metamong.metaticket.domain.user.dto.UserPage;
@@ -125,10 +130,16 @@ public class AdminController {
         System.out.println("id : "+ id);
         User user = userService.userInfo(id);
         UserDTO.SESSION_USER_DATA dto = User.createUserDTO(user);
+<<<<<<< Updated upstream
         List<DrawDTO.HISTORY> draws = drawService.findByUserId(user.getId());
         model.addAttribute("user", dto);
         model.addAttribute("draws", draws);
         model.addAttribute("page", page);
+=======
+        //List<DrawDTO> draws = drawService.findByUserId(user.getId());
+        model.addAttribute("user", dto);
+        //model.addAttribute("draws", draws);
+>>>>>>> Stashed changes
         return "/admin/admin_user_detail";
     }
 
