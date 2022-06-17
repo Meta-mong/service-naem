@@ -1,15 +1,10 @@
 package com.metamong.metaticket.controller.admin;
 
-<<<<<<< Updated upstream
 
 import com.metamong.metaticket.domain.draw.dto.DrawDTO;
 import com.metamong.metaticket.domain.notice.Notice;
 import com.metamong.metaticket.domain.notice.dto.NoticeDTO;
 import com.metamong.metaticket.domain.question.dto.QuestionDTO;
-=======
-import com.metamong.metaticket.domain.draw.Draw;
-import com.metamong.metaticket.domain.draw.dto.DrawDTO;
->>>>>>> Stashed changes
 import com.metamong.metaticket.domain.user.User;
 import com.metamong.metaticket.domain.user.dto.UserDTO;
 import com.metamong.metaticket.domain.user.dto.UserPage;
@@ -66,8 +61,6 @@ public class AdminController {
     @Autowired
     QuestionService questionService;
 
-    @Autowired
-    QuestionRepository questionRepository;
 
 
     //로그인 /로그아웃
@@ -96,7 +89,7 @@ public class AdminController {
         }catch (Exception e){
             model.addAttribute("err","계정 정보가 없습니다.");
             return "redirect:/admin/login";
-         }
+        }
     }
 
     @GetMapping("/logout")
@@ -130,16 +123,10 @@ public class AdminController {
         System.out.println("id : "+ id);
         User user = userService.userInfo(id);
         UserDTO.SESSION_USER_DATA dto = User.createUserDTO(user);
-<<<<<<< Updated upstream
         List<DrawDTO.HISTORY> draws = drawService.findByUserId(user.getId());
         model.addAttribute("user", dto);
         model.addAttribute("draws", draws);
         model.addAttribute("page", page);
-=======
-        //List<DrawDTO> draws = drawService.findByUserId(user.getId());
-        model.addAttribute("user", dto);
-        //model.addAttribute("draws", draws);
->>>>>>> Stashed changes
         return "/admin/admin_user_detail";
     }
 
@@ -189,7 +176,7 @@ public class AdminController {
     @PostMapping("/noticeadd")
     @ResponseBody
     public Map<String,Object> noticeadd(@RequestParam("title") String title, @RequestParam("classify") String classify,
-                            @RequestParam("content")String content) throws Exception {
+                                        @RequestParam("content")String content) throws Exception {
         Map<String,Object> map = new HashMap<>();
         NoticeDTO.Notice dto = NoticeDTO.Notice.builder()
                 .title(title)
@@ -221,7 +208,7 @@ public class AdminController {
     @PostMapping("/noticeupdate/{noticeId}")
     @ResponseBody
     public Map<String,Object> noticeUpdate(@PathVariable Long noticeId, @RequestParam("title") String title, @RequestParam("classify") String classify,
-                                        @RequestParam("content")String content) throws Exception {
+                                           @RequestParam("content")String content) throws Exception {
         Map<String,Object> map = new HashMap<>();
         NoticeDTO.Notice dto = NoticeDTO.Notice.builder()
                 .id(noticeId)
@@ -248,7 +235,7 @@ public class AdminController {
 
     @GetMapping("/noticedelete/{noticeId}")
     public void noticedelete (@PathVariable Long noticeId, HttpServletRequest request,
-                                HttpServletResponse response) throws Exception {
+                              HttpServletResponse response) throws Exception {
         noticeService.noticeDelete(noticeId);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/anlist");
         dispatcher.forward(request,response);
@@ -265,6 +252,7 @@ public class AdminController {
 
 
     //문의사항 전체 조회
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     @GetMapping("/aqlist")
     public String questionList( Model model, Pageable pageable) throws Exception{
@@ -280,6 +268,16 @@ public class AdminController {
             model.addAttribute("classify", classify);
         }
 >>>>>>> Stashed changes
+=======
+    @GetMapping(value = {"/aqlist","/aqlist/{classify}"})
+    public String questionList( @PathVariable(required = false)String classify,Model model, Pageable pageable) throws Exception{
+        Page<QuestionDTO.Quest> questionList = null;
+        if(classify == null){
+            questionList = questionService.allQuestionList(pageable);
+        }else {
+            questionList = questionService.qnaselet(classify, pageable);
+        }
+>>>>>>> develop
         model.addAttribute("allQuestionList", questionList);
 
         log.info("총 element 수 : {}, 전체 page 수 : {}, 페이지에 표시할 element 수 : {}, 현재 페이지 index : {}, 현재 페이지의 element 수 : {}",
@@ -288,6 +286,8 @@ public class AdminController {
 
         return "admin/admin_qnalist";
     }
+
+
     //문의사항 상세조회
     @GetMapping("/qnadetail/{questionId}")
     public String questiondetail (@PathVariable Long questionId,Model model) throws Exception {
@@ -312,7 +312,7 @@ public class AdminController {
     @PostMapping("/qnareply/{questionId}")
     @ResponseBody
     public Map<String, Object> questionUpdate(@PathVariable Long questionId,
-                                 @RequestParam("admincontent") String admincontent) {
+                                              @RequestParam("admincontent") String admincontent) {
         System.out.println("확인 : "+admincontent);
         Map<String,Object> map = new HashMap<>();
         try {

@@ -51,7 +51,7 @@ public class QuestionController {
     //문의사항 리스트 조회
     @GetMapping(value = {"/qlist","/qlist/{classify}"})
     public String questionList(@PathVariable(required = false)String classify, Model model, Pageable pageable) throws Exception{
-        System.out.println("classify : "+ classify);
+
         Page<QuestionDTO.Quest> questionList = null;
         if(classify == null){
             questionList = questionService.allQuestionList(pageable);

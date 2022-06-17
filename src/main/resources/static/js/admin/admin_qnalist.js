@@ -1,4 +1,5 @@
 window.addEventListener("load", function(){
+<<<<<<< HEAD
     $("#dropdown").on("change", function(){
         location.href="/admin/aqlist/"+$("#dropdown").val();
     });
@@ -12,4 +13,12 @@ function classifyCheck(data){
     }
 }
 
+=======
+    $("#dropdown").change(function(){
+        location.href="/admin/aqlist/"+$("#dropdown").val();
+    });
+
+});
+
+>>>>>>> develop
 

@@ -115,10 +115,17 @@
   float: right;
   color: #fff;
 }
+.container .main .dropdown .dropdown-toggle{
+float:right;
+width:180px;
+height:40px;
+margin-top:20px;
+
+}
 
 /* ticket_list */
 .container .main .inner {
-  min-height: 550px;
+  min-height 550px;
 }
 
 .container .main .notice_list{

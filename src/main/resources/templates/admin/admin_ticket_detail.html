@@ -140,6 +140,7 @@
                     <p>공연 스크립트</p>
                     <textarea class="content" name = "description" id = "description" required="required" th:text="${concert.description}"></textarea>
                 </div>
+
                 <button type="button" class="btn_list" th:onclick="|javascript:move_ticket()|">목록으로</button>
                 <button type="button" class="btn_modify" th:onclick="|javascript:ticket_modify('${concert.id}')|">수정</button>
                 <button type="button" class="btn_delete" th:onclick="|javascript:ticket_delete('${concert.id}')|">삭제</button>

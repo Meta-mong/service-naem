@@ -18,10 +18,11 @@
 
   <!-- css -->
   <link rel="stylesheet" href="/css/admin/admin.css">
-  <link rel="stylesheet" href="/css/admin/admin_noticelist.css">
+  <link rel="stylesheet" href="/css/admin/admin_qnalist.css">
 
   <!-- js -->
   <script defer src="/js/admin/admin.js"></script>
+  <script defer src="/js/admin/admin_qnalist.js"></script>
 
   <title>고객센터 문의사항</title>
 </head>
@@ -35,13 +36,14 @@
     <button type="button" class="btn" th:onclick="|javascript:move_notice()|">게시판관리</button>
   </div>
 
-  <section>
+    <section>
 
-    <div class="main">
+      <div class="main">
 
-      <button type="button" class="btn" onclick="notice_list()" style="background-color: gray;">공지사항</button>
-      <button type="button" class="btn" onclick="qna_list()">QnA</button>
+        <button type="button" class="noticebtn" onclick="notice_list()" >공지사항</button>
+        <button type="button" class="QnAbtn" onclick="qna_list()">QnA</button>
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
       <div class="search">
         <input type="text" placeholder="">
@@ -51,20 +53,28 @@
       <div class="dropdown">
         <select name="dropdown" id="dropdown" class="dropdown-toggle" required="required">
           <option value="total" selected="selected">전체</option>
+=======
+
+      <div class="dropdown">
+        <select name="dropdown" id="dropdown" class="dropdown-toggle" required="required">
+          <option value="">전체</option>
+>>>>>>> develop
           <option value="concert">공연/티켓</option>
           <option value="cancel">취소/환불</option>
           <option value="event">이벤트</option>
           <option value="member">회원</option>
           <option value="etc">기타</option>
         </select>
+<<<<<<< HEAD
         <div id="selectedclassify" th:text="${classify}" hidden></div>
 >>>>>>> Stashed changes
+=======
+>>>>>>> develop
       </div>
 
 
 
-      <table class="question_list">
-
+        <table class="question_list">
             <tr>
               <th>No.</th>
               <th>분류</th>
@@ -76,16 +86,15 @@
           </thead>
 
           <tbody>
-          <tr  th:each="question : ${allQuestionList}" th:onclick="|javascript:adminqnaClick('${question.id}')|">
+            <tr  th:each="question : ${allQuestionList}" th:onclick="|javascript:adminqnaClick('${question.id}')|">
+              <td scope="row" th:text="${question.id}">1</td>
+              <td th:text="${question.classify}"></td>
+              <td th:text="${question.title}"></td>
+              <td th:text="${question.userName}"></td>
+              <td th:text="${question.createDate}"></td>
+              <td th:text="${question.answer}"></td>
 
-            <td scope="row" th:text="${question.id}">1</td>
-            <td th:text="${question.classify}"></td>
-            <td th:text="${question.title}"></td>
-            <td th:text="${question.userName}"></td>
-            <td th:text="${question.createDate}"></td>
-            <td th:text="${question.answer}"></td>
-
-          </tr>
+            </tr>
 
           </tbody>
         </table>
@@ -122,8 +131,8 @@
             </li>
           </ul>
         </nav>
-    </div>
-      </section>
+      </div>
+    </section>
     </div>
 </body>
 
