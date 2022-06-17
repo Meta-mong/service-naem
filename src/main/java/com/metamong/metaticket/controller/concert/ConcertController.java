@@ -60,7 +60,7 @@ public class ConcertController {
     }
 
     // 공연 상세내역 조회
-    @GetMapping("/{id}")
+    @GetMapping("/Contents/{id}")
     public String concertInfo(@PathVariable Long id , Model model){
         ConcertDto concertDto = concertService.concertInfo(id);
         concertDto.setVisitCnt(concertDto.getVisitCnt()+1);
