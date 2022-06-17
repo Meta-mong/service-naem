@@ -241,23 +241,7 @@ public class AdminController {
         dispatcher.forward(request,response);
     }
 
-
-
-
-
-    ///////////////////////////////////////////////////////////////
-
-
-
-
-
     //문의사항 전체 조회
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-    @GetMapping("/aqlist")
-    public String questionList( Model model, Pageable pageable) throws Exception{
-        Page<QuestionDTO.Quest> questionList = questionService.allQuestionList(pageable);
-=======
     @GetMapping(value = {"/aqlist","/aqlist/{classify}"})
     public String questionList( @PathVariable(required = false)String classify,Model model, Pageable pageable) throws Exception{
         Page<QuestionDTO.Quest> questionList = null;
@@ -267,17 +251,6 @@ public class AdminController {
             questionList = questionService.qnaselet(classify, pageable);
             model.addAttribute("classify", classify);
         }
->>>>>>> Stashed changes
-=======
-    @GetMapping(value = {"/aqlist","/aqlist/{classify}"})
-    public String questionList( @PathVariable(required = false)String classify,Model model, Pageable pageable) throws Exception{
-        Page<QuestionDTO.Quest> questionList = null;
-        if(classify == null){
-            questionList = questionService.allQuestionList(pageable);
-        }else {
-            questionList = questionService.qnaselet(classify, pageable);
-        }
->>>>>>> develop
         model.addAttribute("allQuestionList", questionList);
 
         log.info("총 element 수 : {}, 전체 page 수 : {}, 페이지에 표시할 element 수 : {}, 현재 페이지 index : {}, 현재 페이지의 element 수 : {}",
@@ -334,9 +307,6 @@ public class AdminController {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/aqlist");
         dispatcher.forward(request,response);
     }
-
-
-
 
 
 
