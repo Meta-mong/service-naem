@@ -1,6 +1,6 @@
 window.addEventListener("load", function(){
     $("#dropdown").change(function(){
-        location.href="/question/qlist/"+$("#dropdown").val();
+        location.href="/admin/aqlist/"+$("#dropdown").val();
     });
 
 });

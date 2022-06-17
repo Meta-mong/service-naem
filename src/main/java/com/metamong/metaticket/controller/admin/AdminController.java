@@ -61,8 +61,6 @@ public class AdminController {
     @Autowired
     QuestionService questionService;
 
-    @Autowired
-    QuestionRepository questionRepository;
 
 
     //로그인 /로그아웃
@@ -254,9 +252,14 @@ public class AdminController {
 
 
     //문의사항 전체 조회
-    @GetMapping("/aqlist")
-    public String questionList( Model model, Pageable pageable) throws Exception{
-        Page<QuestionDTO.Quest> questionList = questionService.allQuestionList(pageable);
+    @GetMapping(value = {"/aqlist","/aqlist/{classify}"})
+    public String questionList( @PathVariable(required = false)String classify,Model model, Pageable pageable) throws Exception{
+        Page<QuestionDTO.Quest> questionList = null;
+        if(classify == null){
+            questionList = questionService.allQuestionList(pageable);
+        }else {
+            questionList = questionService.qnaselet(classify, pageable);
+        }
         model.addAttribute("allQuestionList", questionList);
 
         log.info("총 element 수 : {}, 전체 page 수 : {}, 페이지에 표시할 element 수 : {}, 현재 페이지 index : {}, 현재 페이지의 element 수 : {}",
@@ -265,6 +268,8 @@ public class AdminController {
 
         return "admin/admin_qnalist";
     }
+
+
     //문의사항 상세조회
     @GetMapping("/qnadetail/{questionId}")
     public String questiondetail (@PathVariable Long questionId,Model model) throws Exception {

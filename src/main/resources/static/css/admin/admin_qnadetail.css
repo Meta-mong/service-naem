@@ -80,47 +80,36 @@ table.QnA td {
 }
 
 .container  .btn .qnalist{
-  background-color: rgb(215, 158, 228);
-  width: 200px;
-  padding: 5px 50px;
-  font-size: 23px;
-  font-weight: bold;
-  font-style: italic;
+  height: 45px;
+  width: 100px;
+  background-color: rgb(186,133,236);
   border: none;
-  border-radius: 30px;
-  color: rgb(255, 255, 255);
-  background-color: rgb(218, 186, 248);
-  margin-top: 30px;
-  margin-right:150px;
-  float:right;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 
 .container  .btn .delete{
-  background-color: rgb(207, 61, 119);
-  width: 200px;
-  padding: 5px 50px;
-  font-size: 23px;
-  font-weight: bold;
-  font-style: italic;
+  height: 45px;
+  width: 100px;
+  margin-top: 20px;
+  background-color: rgb(186,133,236);
   border: none;
-  border-radius: 30px;
-  color: rgb(255, 255, 255);
-  background-color: rgb(218, 186, 248);
-  margin-top: 30px;
-  float:left;
-  margin-left:150px;
+  font-weight: 700;
+  cursor: pointer;
 }
 .container  .btn .update{
-  background-color: rgb(215, 158, 228);
-  width: 200px;
-  padding: 5px 50px;
-  font-size: 23px;
-  font-weight: bold;
-  font-style: italic;
+  height: 45px;
+  width: 100px;
+  margin-top: 20px;
+  background-color: rgb(186,133,236);
   border: none;
-  border-radius: 30px;
-  color: rgb(255, 255, 255);
-  background-color: rgb(218, 186, 248);
-  margin-top: 30px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.container  .btn .delete:hover,
+.container  .btn .qnalist:hover,
+.container  .btn .update:hover{
+  background-color: blueviolet;
 }
