@@ -17,7 +17,6 @@
 
     <!-- js -->
     <script defer src="/js/main/main.js"></script>
-
 </head>
 <body>
 
@@ -32,25 +31,25 @@
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img src="/concert/readImg/1" alt="">
+                    <img src="/concert/readImg/1" alt="" th:onclick="|javascript:moveToDetail(1)|">
                 </div>
                 <div class="swiper-slide">
-                    <img src="/concert/readImg/2" alt="">
+                    <img src="/concert/readImg/2" alt="" th:onclick="|javascript:moveToDetail(2)|">
                 </div>
                 <div class="swiper-slide">
-                    <img src="/concert/readImg/3" alt="">
+                    <img src="/concert/readImg/3" alt="" th:onclick="|javascript:moveToDetail(3)|">
                 </div>
                 <div class="swiper-slide">
-                    <img src="/concert/readImg/4" alt="">
+                    <img src="/concert/readImg/4" alt="" th:onclick="|javascript:moveToDetail(4)|">
                 </div>
                 <div class="swiper-slide">
-                    <img src="/concert/readImg/5" alt="">
+                    <img src="/concert/readImg/5" alt="" th:onclick="|javascript:moveToDetail(5)|">
                 </div>
                 <div class="swiper-slide">
-                    <img src="/concert/readImg/6" alt="">
+                    <img src="/concert/readImg/6" alt="" th:onclick="|javascript:moveToDetail(6)|">
                 </div>
                 <div class="swiper-slide">
-                    <img src="/concert/readImg/7" alt="">
+                    <img src="/concert/readImg/7" alt="" th:onclick="|javascript:moveToDetail(7)|">
                 </div>
 
             </div>
@@ -68,7 +67,7 @@
                 <span class="ticket-open-2"> / 2</span>
             </div>
             <div class="multiple-items">
-                <div th:each="openticket : ${opentickets}">
+                <div th:each="openticket : ${opentickets}" th:onclick="|javascript:moveToDetail(${openticket.id})|">
                     <img src="/concert/readImg/" th:attrappend="src=${openticket.phamplet}" alt="">
                     <span th:text="${openticket.title}"></span>
                     <span th:text="${openticket.drawStartDate}+' ~ '+${openticket.drawEndDate}"></span>
@@ -241,6 +240,7 @@
 <script src="js/main/slider.js"></script>
 <script src="js/main/ticketOpenPage.js"></script>
 <script src="js/main/backToTop.js"></script>
+<script src="js/ticketopen/ticketdetailinfo.js"></script>
 <script>
     $(document).ready(function(){
         $('.multiple-items').slick({

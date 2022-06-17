@@ -32,11 +32,11 @@ public class DrawController {
         return "mypage/draw";
     }
 
-    @PostMapping("/{concertId}")
+    @PostMapping ("/{concertId}")
     public String applyDraw(@PathVariable("concertId") Long concertId) {
+        if(session.getAttribute("user")==null) return "redirect:/signin";
         UserDTO.SESSION_USER_DATA currentUser = (UserDTO.SESSION_USER_DATA) session.getAttribute("user");
         drawService.applyDraw(currentUser.getId(), concertId);
-
         return "/mypage/draw";
     }
 
