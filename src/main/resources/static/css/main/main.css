@@ -686,11 +686,11 @@ body,.header-top-ul {
   flex-wrap: wrap;
 }
 
-.ticket-pick-main-body > div > img, .ticket-pick-main-body > div > span{
+.ticket-pick-main-body > div .move_detail > img, .ticket-pick-main-body > div .move_detail > span{
   display: block;
 }
 
-.ticket-pick-main-body > div > span {
+.ticket-pick-main-body > div .move_detail > span {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -709,7 +709,7 @@ body,.header-top-ul {
   box-shadow: 1px 1px 1px 1px gray;
 } */
 
-.ticket-pick-main-body > div > img{
+.ticket-pick-main-body > div  .move_detail > img{
   width: 100%;
   height: auto;
 }
