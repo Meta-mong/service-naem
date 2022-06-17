@@ -97,6 +97,11 @@
       color: rgb(255, 255, 255);
       background-color: rgb(218, 186, 248);
     }
+
+ .container .button .btn:hover{
+ background-color: rgb(212, 118, 231);
+ }
+
     
  .container .table  {
      width: 1000px;

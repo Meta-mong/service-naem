@@ -449,20 +449,7 @@ margin-bottom: 100px;
   resize: none;
 }
 
-.container .inner .btn .delete{
-  background-color: rgb(207, 61, 119);
-  width: 200px;
-  padding: 5px 50px;
-  font-size: 23px;
-  font-weight: bold;
-  font-style: italic;
-  border: none;
-  border-radius: 30px;
-  color: rgb(255, 255, 255);
-  background-color: rgb(218, 186, 248);
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
+
 .container .inner .btn .update{
   background-color: rgb(215, 158, 228);
   width: 200px;
@@ -478,4 +465,7 @@ margin-bottom: 100px;
   margin-bottom: 50px;
   
 }
+ .container .inner .btn .update:hover{
+ background-color: rgb(212, 118, 231);
+ }
 
