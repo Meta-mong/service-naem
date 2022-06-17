@@ -404,6 +404,7 @@ body,.header-top-ul {
   display: flex;
   justify-content: space-between;
   background-color: white;
+  padding-bottom: 12px;
 }
 
 .ranking-div-top-left {

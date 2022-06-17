@@ -68,14 +68,12 @@
                 <span class="ticket-open-2"> / 2</span>
             </div>
             <div class="multiple-items">
-                <button class="slick-prev slick-arrow" aria-label="Previous" onclick="btn_prev_next();" type="button" style="display: block;">Previous</button>
                 <div th:each="openticket : ${opentickets}" th:onclick="|javascript:moveToDetail(${openticket.id})|">
                     <img src="/concert/readImg/" th:attrappend="src=${openticket.phamplet}" alt="">
                     <span th:text="${openticket.title}"></span>
                     <span th:text="${openticket.drawStartDate}+' ~ '+${openticket.drawEndDate}"></span>
                     <span th:text="${openticket.address}"></span>
                 </div>
-                <button class="slick-next slick-arrow" aria-label="Next" onclick="btn_prev_next();" type="button" style="display: block;">Next</button>
             </div>
         </div>
 

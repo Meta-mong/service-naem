@@ -80,7 +80,7 @@ public class DrawServiceImpl implements DrawService {
             case QUEUE: return "대기순번";
             case CANCEL: return "취소";
             case STANDBY: return "응모 대기중";
-            case PAYMENT_FINISH: return "결제 완료";
+            case PAYMENT_FINISH: return "당첨";
         }
         return null;
     }
