@@ -88,19 +88,27 @@
   margin-bottom: 20px;
 }
 
-.container .like_btn {
+.container .like_btn1,
+ .container .like_btn2{
   margin-left: 120px;
   margin-top: 20px;
 }
 
-.container .like_btn .btn-secondary {
+.container .like_btn1 .btn-secondary,
+.container .like_btn2 .btn-secondary{
   border: 0;
   background-color: white;
 }
 
-.container .like_btn .btn-secondary span {
+.container .like_btn1 .btn-secondary span,
+.container .like_btn2 .btn-secondary span{
   font-size: 35px;
 }
+
+.done {
+    color: red !important;
+    text-shadow: 0;
+ }
 
 .container .btn {
   float: right;

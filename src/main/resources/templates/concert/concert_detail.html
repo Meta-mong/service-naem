@@ -10,15 +10,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
     <!-- css -->
     <link rel="stylesheet" href="/css/main/main.css">
     <link rel="stylesheet" href="/css/concert/concert_detail.css">
 
+    <!-- js -->
+    <script defer src="/js/concert/concert_detail.js"></script>
 
     <title>Concert</title>
 </head>
 
-<body>
+<body th:onload = "|javascript:load_interest(${id})|">
 <div class="main">
     <!-- header 시작 -->
     <div th:replace="fragments/header :: headerFragment"></div>
@@ -26,7 +30,7 @@
     <div class="container" style="min-height: 100vh;">
         <section>
             <div class="title">
-                <h th:text="${concert.title}"></h>
+                <h th:text="${concert.title}" ></h>
             </div>
             <div class="inner">
                 <div class="phamplet">
@@ -71,11 +75,18 @@
                     </div>
                 </div>
             </div>
-            <div class="like_btn">
+            <div class="like_btn1" th:if = "${session.user}" th:onclick="|javascript:like_click(${id})|">
                 <button class="btn-secondary like-review">
-            <span class="material-icons">
-              favorite_border
-            </span>
+                    <span class="material-icons">
+                      favorite_border
+                    </span>
+                </button>
+            </div>
+            <div class="like_btn2" th:unless = "${session.user}" >
+                <button class="btn-secondary like-review">
+                    <span class="material-icons">
+                      favorite_border
+                    </span>
                 </button>
             </div>
         </section>
@@ -87,7 +98,7 @@
             </div>
             <div th:unless="${concert.draw}">
                 <form action="/payment" method="get">
-                    <input type="hidden" name="concert" th:value="${concert.id}" />
+                    <input type="hidden"  name="concert" th:value="${concert.id}" />
                     <button type="submit">결제하기</button>
                 </form>
             </div>
