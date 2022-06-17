@@ -63,17 +63,19 @@
         <div class="ticket-open-issue" style="width: 1008px; margin: 10px auto; font-size: 30px; font-weight: bold;"><i class="fa-solid fa-ticket"></i><span>티켓 오픈 소식</span></div>
         <div class="ticket-open">
             <div class="ticket-open-top">
-<!--                <span class="ticket-open-top-span">티켓 오픈 소식</span>-->
+                <!--                <span class="ticket-open-top-span">티켓 오픈 소식</span>-->
                 <span id="ticket-open-page" class="ticket-open-1">1</span>
                 <span class="ticket-open-2"> / 2</span>
             </div>
             <div class="multiple-items">
+                <button class="slick-prev slick-arrow" aria-label="Previous" onclick="btn_prev_next();" type="button" style="display: block;">Previous</button>
                 <div th:each="openticket : ${opentickets}">
                     <img src="/concert/readImg/" th:attrappend="src=${openticket.phamplet}" alt="">
                     <span th:text="${openticket.title}"></span>
                     <span th:text="${openticket.drawStartDate}+' ~ '+${openticket.drawEndDate}"></span>
                     <span th:text="${openticket.address}"></span>
                 </div>
+                <button class="slick-next slick-arrow" aria-label="Next" onclick="btn_prev_next();" type="button" style="display: block;">Next</button>
             </div>
         </div>
 
@@ -162,12 +164,21 @@
             </div>
 
             <div class="ticket-pick-main">
+                <div class="ticket-pick-main1-div"></div>
+                <div class="ticket-pick-main1"></div>
+                <div class="ticket-pick-main2-div"></div>
+                <div class="ticket-pick-main2"></div>
+                <div class="ticket-pick-main3-div"></div>
+                <div class="ticket-pick-main3"></div>
+                <div class="ticket-pick-main4-div"></div>
+                <div class="ticket-pick-main4"></div>
+
                 <div class="ticket-pick-main-top">
                     <ul>
-                        <li><a href="#none">콘서트</a></li>
-                        <li><a href="#none">뮤지컬/연극</a></li>
-                        <li><a href="#none">클래식</a></li>
-                        <li><a href="#none">전시/행사</a></li>
+                        <li class="ticket-pick-list1"><span>콘서트</span></li>
+                        <li class="ticket-pick-list2"><span>뮤지컬/연극</span></li>
+                        <li class="ticket-pick-list3"><span>클래식</span></li>
+                        <li class="ticket-pick-list4"><span>전시/행사</span></li>
                     </ul>
                 </div>
 
