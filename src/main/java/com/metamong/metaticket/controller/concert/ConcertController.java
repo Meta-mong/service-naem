@@ -60,8 +60,8 @@ public class ConcertController {
     }
 
     // 공연 상세내역 조회
-    @GetMapping("/Contents/{id}")
-    public String concertInfo(@PathVariable Long id , Model model){
+    @GetMapping("/Contents/{genre}/{id}")
+    public String concertInfo(@PathVariable Genre genre, @PathVariable Long id , Model model){
         ConcertDto concertDto = concertService.concertInfo(id);
         concertDto.setVisitCnt(concertDto.getVisitCnt()+1);
         model.addAttribute("concert",concertDto);
