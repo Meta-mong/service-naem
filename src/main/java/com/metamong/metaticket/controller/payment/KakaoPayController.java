@@ -44,7 +44,7 @@ public class KakaoPayController {
         log.info("kakaoPaySuccess pg_token : " + pg_token);
 
         model.addAttribute("info", kakaoPayService.kakaoPayInfo(pg_token, paymentId));
-        return "payment/kakao/success";
+        return "redirect:/mypage/reservation";
     }
 
 }

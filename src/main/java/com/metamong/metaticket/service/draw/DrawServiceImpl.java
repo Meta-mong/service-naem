@@ -41,8 +41,11 @@ public class DrawServiceImpl implements DrawService {
 
         List<DrawDTO.HISTORY> myDraws = findDraws.stream().map(
                 d -> DrawDTO.HISTORY.builder()
+                        .drawId(d.getId())
                         .concertId(d.getConcert().getId())
+                        .concertPhamplet(d.getConcert().getPhamplet().getId())
                         .concertTitle(d.getConcert().getTitle())
+                        .concertAddress(d.getConcert().getAddress())
                         .ranking(d.getRanking() - drawRepository.findLowRankingGroupByConcert(d.getConcert().getId()).orElse(0))
                         .state(getDrawStateForFront(d.getState()))
                         .build()

@@ -1,10 +1,14 @@
 package com.metamong.metaticket.controller.user;
 
+import com.metamong.metaticket.domain.payment.dto.PaymentDTO;
 import com.metamong.metaticket.domain.user.User;
 import com.metamong.metaticket.domain.user.dto.UserDTO;
+import com.metamong.metaticket.service.draw.DrawService;
+import com.metamong.metaticket.service.payment.PaymentService;
 import com.metamong.metaticket.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,12 +18,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
 public class MypageController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    DrawService drawService;
+
+    @Autowired
+    PaymentService paymentService;
 
     @Autowired
     HttpSession session;
@@ -55,15 +66,23 @@ public class MypageController {
 
     //마이페이지 응모내역
     @GetMapping("/mypage/draw")
-    public String myPageDraw(HttpServletRequest request, HttpServletResponse response){
-        if(session.getAttribute("user")==null) return "/user/signin";
+    public String myPageDraw(Model model){
+        UserDTO.SESSION_USER_DATA currentUser = (UserDTO.SESSION_USER_DATA) session.getAttribute("user");
+        if(currentUser==null) return "/user/signin";
+
+        model.addAttribute("myDraws", drawService.findByUserId(currentUser.getId()));
+
         return "/mypage/myPage_draw";
     }
 
     //마이페이지 예매내역
     @GetMapping("/mypage/reservation")
-    public String myPageReservation(HttpServletRequest request, HttpServletResponse response){
-        if(session.getAttribute("user")==null) return "/user/signin";
+    public String myPageReservation(Model model){
+        UserDTO.SESSION_USER_DATA currentUser = (UserDTO.SESSION_USER_DATA) session.getAttribute("user");
+        if (currentUser == null) return "redirect:/signin";
+
+        model.addAttribute("myPayments", paymentService.findByUserId(currentUser.getId()));
+
         return "/mypage/myPage_reservation";
     }
 
