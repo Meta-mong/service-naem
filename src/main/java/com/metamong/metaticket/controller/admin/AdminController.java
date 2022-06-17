@@ -265,9 +265,21 @@ public class AdminController {
 
 
     //문의사항 전체 조회
+<<<<<<< Updated upstream
     @GetMapping("/aqlist")
     public String questionList( Model model, Pageable pageable) throws Exception{
         Page<QuestionDTO.Quest> questionList = questionService.allQuestionList(pageable);
+=======
+    @GetMapping(value = {"/aqlist","/aqlist/{classify}"})
+    public String questionList( @PathVariable(required = false)String classify,Model model, Pageable pageable) throws Exception{
+        Page<QuestionDTO.Quest> questionList = null;
+        if(classify == null || classify.equals("total")){
+            questionList = questionService.allQuestionList(pageable);
+        }else {
+            questionList = questionService.qnaselet(classify, pageable);
+            model.addAttribute("classify", classify);
+        }
+>>>>>>> Stashed changes
         model.addAttribute("allQuestionList", questionList);
 
         log.info("총 element 수 : {}, 전체 page 수 : {}, 페이지에 표시할 element 수 : {}, 현재 페이지 index : {}, 현재 페이지의 element 수 : {}",

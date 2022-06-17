@@ -42,9 +42,23 @@
       <button type="button" class="btn" onclick="notice_list()" style="background-color: gray;">공지사항</button>
       <button type="button" class="btn" onclick="qna_list()">QnA</button>
 
+<<<<<<< Updated upstream
       <div class="search">
         <input type="text" placeholder="">
         <button type="button" class="material-icons">search</button>
+=======
+
+      <div class="dropdown">
+        <select name="dropdown" id="dropdown" class="dropdown-toggle" required="required">
+          <option value="total" selected="selected">전체</option>
+          <option value="concert">공연/티켓</option>
+          <option value="cancel">취소/환불</option>
+          <option value="event">이벤트</option>
+          <option value="member">회원</option>
+          <option value="etc">기타</option>
+        </select>
+        <div id="selectedclassify" th:text="${classify}" hidden></div>
+>>>>>>> Stashed changes
       </div>
 
 
@@ -129,9 +143,6 @@
     var id = id;
     window.location.href = "/admin/aqlist/"
   }
-
-
-
 </script>
 
 </html>
