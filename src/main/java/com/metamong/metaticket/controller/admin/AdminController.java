@@ -241,24 +241,15 @@ public class AdminController {
         dispatcher.forward(request,response);
     }
 
-
-
-
-
-    ///////////////////////////////////////////////////////////////
-
-
-
-
-
     //문의사항 전체 조회
     @GetMapping(value = {"/aqlist","/aqlist/{classify}"})
     public String questionList( @PathVariable(required = false)String classify,Model model, Pageable pageable) throws Exception{
         Page<QuestionDTO.Quest> questionList = null;
-        if(classify == null){
+        if(classify == null || classify.equals("total")){
             questionList = questionService.allQuestionList(pageable);
         }else {
             questionList = questionService.qnaselet(classify, pageable);
+            model.addAttribute("classify", classify);
         }
         model.addAttribute("allQuestionList", questionList);
 
@@ -316,9 +307,6 @@ public class AdminController {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/aqlist");
         dispatcher.forward(request,response);
     }
-
-
-
 
 
 
