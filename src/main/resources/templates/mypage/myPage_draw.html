@@ -75,20 +75,28 @@
                                         </defs>
                                     </svg>
 
-                                    <button class="gooey-button">
+                                    <button class="gooey-button" th:classappend="|${myDraw.state == '대기순번' ? 'waiting-order' : ''}
+                                                                                  ${myDraw.state == '취소' ? 'draw-cancel' : ''}
+                                                                                  ${myDraw.state == '당첨' ? 'winning' : ''}
+                                                                                  ${myDraw.state == '응모 대기중' ? 'waiting-application' : ''}
+                                                                                 |">
                                         <span th:text="${myDraw.state} == '대기순번' ? ${myDraw.state} +': '+${myDraw.ranking} : ${myDraw.state}">응모 대기중</span>
-                                        <span class="bubbles">
-                                    <span class="bubble"></span>
-                                    <span class="bubble"></span>
-                                    <span class="bubble"></span>
-                                    <span class="bubble"></span>
-                                    <span class="bubble"></span>
-                                    <span class="bubble"></span>
-                                    <span class="bubble"></span>
-                                    <span class="bubble"></span>
-                                    <span class="bubble"></span>
-                                    <span class="bubble"></span>
-                                </span>
+                                        <span class="bubbles" th:classappend="|${myDraw.state == '대기순번' ? 'waiting-order-span' : ''}
+                                                                                  ${myDraw.state == '취소' ? 'draw-cancel-span' : ''}
+                                                                                  ${myDraw.state == '당첨' ? 'winning-span' : ''}
+                                                                                  ${myDraw.state == '응모 대기중' ? 'waiting-application-span' : ''}
+                                                                                 |">
+                                            <span class="bubble"></span>
+                                            <span class="bubble"></span>
+                                            <span class="bubble"></span>
+                                            <span class="bubble"></span>
+                                            <span class="bubble"></span>
+                                            <span class="bubble"></span>
+                                            <span class="bubble"></span>
+                                            <span class="bubble"></span>
+                                            <span class="bubble"></span>
+                                            <span class="bubble"></span>
+                                        </span>
                                     </button>
                                 </div>
                             </div>
