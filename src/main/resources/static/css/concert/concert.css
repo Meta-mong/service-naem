@@ -76,6 +76,15 @@
     margin-bottom: 20px;
   }
 
+  .concert .concert-content h5{
+    margin : 7px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+    font-size:17px;
+  }
+
  /*페이징*/
  nav{
     display:block;
