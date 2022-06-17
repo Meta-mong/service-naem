@@ -11,7 +11,7 @@ function ranking(value){
 
         for(i=0; i<data.content.length; i++){
         $('.ranking-page-main-div').append(" <div class = 'concertRanking'><div class='main-div-ranking-page'><span>"+(i+1)+"</span></div><div class='concert-name'><img src='/concert/readImg/"+data.content[i].phamplet+"' alt='' style='width: 100px; height: 150px;'><div><span>단독판매</span><span>"
-                                      + data.content[i].title+"></span></div></div> <div class='concert-time'><p>"+data.content[i].concertDate.substring(0,10)+"</p> </div><div class='concert-place'><span>" +data.content[i].address+"</span></div><div class='reservation'><button>예매하기</button></div></div>");}
+                                      + data.content[i].title+"</span></div></div> <div class='concert-time'><p>"+data.content[i].concertDate.substring(0,10)+"</p> </div><div class='concert-place'><span>" +data.content[i].address+"</span></div><div class='reservation'><button>예매하기</button></div></div>");}
         },
         error: function(data){
         alert("실패")
