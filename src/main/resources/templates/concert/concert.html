@@ -69,7 +69,7 @@
             </div>
             <div class="concert-posting">
                 <div class="inner" th:each = "concert : ${concert}">
-                    <div  class="fnConcertDescription" onclick="">
+                    <div  class="fnConcertDescription" th:onclick="|javascript:move_description('${concert.id}')|">
                         <div class="concert-img">
                             <figure class="image"><img
                                     src="/concert/readImg/"
