@@ -1,3 +1,14 @@
+@font-face {
+    font-family: 'CookieRun-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+	font-family: 'CookieRun-Regular' !important;
+}
+
 html {
   scroll-behavior: auto !important;
 }
@@ -210,7 +221,7 @@ body,.header-top-ul {
     display: flex;
     list-style: none;
     justify-content: center;
-    height: 50px;
+    height: 59px;
     margin: 0;
     padding-inline-start: 0px;
 }
@@ -222,7 +233,7 @@ body,.header-top-ul {
 }
 
 .header-bottom-ul > li > span{
-    line-height: 2;
+    line-height: 1.9;
 }
 
 .header-bottom-ul > li > span > a{
@@ -231,6 +242,7 @@ body,.header-top-ul {
     color: black;
     padding: 15px 30px;
     transition: 0.3s;
+    font-size:21px;
 }
 
 .header-bottom-ul > li > span > a:hover {
