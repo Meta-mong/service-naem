@@ -1,6 +1,7 @@
 package com.metamong.metaticket.controller.admin;
 
 
+import com.metamong.metaticket.domain.concert.Genre;
 import com.metamong.metaticket.domain.draw.dto.DrawDTO;
 import com.metamong.metaticket.domain.notice.Notice;
 import com.metamong.metaticket.domain.notice.dto.NoticeDTO;

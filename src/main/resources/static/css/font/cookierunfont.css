@@ -8,22 +8,3 @@
 body {
 	font-family: 'CookieRun-Regular' !important;
 }
-
-.card {
-    width: 444px;
-    border-radius: 30px !important;
-}
-
-body {
-    background: rgb(255, 213, 255) !important;
-}
-
-button {
-    border-style: none;
-    background: transparent;
-}
-
-.stats>div>span:nth-child(2) {
-    width: 120px;
-    text-align: left;
-}
