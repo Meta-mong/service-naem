@@ -102,7 +102,7 @@
 
 /* ticket_list */
 .container .main .inner {
-  min-height 550px;
+  min-height: 550px;
 }
 
 .container .main .notice_list{
