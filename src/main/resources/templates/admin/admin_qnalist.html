@@ -72,7 +72,11 @@
                 <tbody>
                 <tr  th:each="question : ${allQuestionList}" th:onclick="|javascript:adminqnaClick('${question.id}')|">
                     <td scope="row" th:text="${question.id}">1</td>
-                    <td th:text="${question.classify}"></td>
+                    <td th:if="${question.classify == 'concert'}">공연/티켓</td>
+                    <td th:if="${question.classify == 'cancel'}">취소/환불</td>
+                    <td th:if="${question.classify == 'event'}">이벤트</td>
+                    <td th:if="${question.classify == 'member'}">회원</td>
+                    <td th:if="${question.classify == 'etc'}">기타</td>
                     <td th:text="${question.title}"></td>
                     <td th:text="${question.userName}"></td>
                     <td th:text="${question.createDate}"></td>
