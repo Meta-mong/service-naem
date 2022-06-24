@@ -63,7 +63,6 @@ public class ConcertController {
     @GetMapping("/Contents/{id}/detail")
     public String concertInfo(@PathVariable Long id, Model model){
         ConcertDto concertDto = concertService.concertInfo(id);
-        concertDto.setVisitCnt(concertDto.getVisitCnt()+1);
         model.addAttribute("concert",concertDto);
         return "concert/concert_detail"; // view 이름
     }
@@ -71,7 +70,7 @@ public class ConcertController {
     // 관리자 페이지 공연 상세내역 조회
     @GetMapping("/admin/{id}")
     public String adminConcertInfo(@PathVariable Long id , Model model){
-        ConcertDto concertDto = concertService.concertInfo(id);
+        ConcertDto concertDto = concertService.concertAdmin(id);
         model.addAttribute("concert",concertDto);
         return "/admin/admin_ticket_detail"; // view 이름
     }

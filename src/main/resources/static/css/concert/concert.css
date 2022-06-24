@@ -18,6 +18,12 @@ body {
     width: 1400px;
   }
 
+  .on {
+        background-color: rgb(218, 169, 228);
+        opacity: 0.9;
+        color: white!important;
+  }
+
   /* concert swiper  */
   .concertSwiper {}
 

@@ -40,7 +40,10 @@
                     <table id="vertical-1">
                         <tr>
                             <th>장르</th>
-                            <td th:text="${concert.genre}"></td>
+                            <td th:if="${concert.genre == T(com.metamong.metaticket.domain.concert.Genre).CONCERT}">콘서트</td>
+                            <td th:if="${concert.genre == T(com.metamong.metaticket.domain.concert.Genre).MUSICAL_DRAMA}">뮤지컬/연극</td>
+                            <td th:if="${concert.genre == T(com.metamong.metaticket.domain.concert.Genre).CLASSIC}">클래식</td>
+                            <td th:if="${concert.genre == T(com.metamong.metaticket.domain.concert.Genre).EXHIBITION}">전시/행사</td>
                         </tr>
                         <tr>
                             <th>공연일</th>
@@ -54,7 +57,11 @@
                         </tr>
                         <tr>
                             <th>관람등급</th>
-                            <td th:text="${concert.ratings}"></td>
+                            <td th:if="${concert.ratings == T(com.metamong.metaticket.domain.concert.Ratings).ALL}">전체관람가</td>
+                            <td th:if="${concert.ratings == T(com.metamong.metaticket.domain.concert.Ratings).EIGHT}">8세이상</td>
+                            <td th:if="${concert.ratings == T(com.metamong.metaticket.domain.concert.Ratings).TWELVE}">12세이상</td>
+                            <td th:if="${concert.ratings == T(com.metamong.metaticket.domain.concert.Ratings).FIFTEEN}">15세이상</td>
+                            <td th:if="${concert.ratings == T(com.metamong.metaticket.domain.concert.Ratings).EIGHTEEN}">18세이상</td>
                         </tr>
                         <tr>
                             <th>주최</th>
@@ -66,7 +73,7 @@
                         </tr>
                         <tr>
                             <th>예매방식</th>
-                            <td th:text="${concert.draw ? '응모' : '상시'} "></td>
+                            <td th:text="${concert.draw ? '응모 (' + #temporals.format(concert.drawStartDate, 'yyyy-MM-dd') + ' ~ ' + #temporals.format(concert.drawEndDate, 'yyyy-MM-dd') + ')' : '상시'} "></td>
                         </tr>
                     </table>
                     <div class="script">

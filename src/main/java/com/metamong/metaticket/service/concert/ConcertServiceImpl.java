@@ -39,9 +39,18 @@ public class ConcertServiceImpl implements ConcertService {
 //        return saveConcert;
     }
 
-    // 공연 상세내역 조회
+    // 공연 상세내역 조회 -> user
     @Override
     public ConcertDto concertInfo(Long id) {
+        Concert findConcert = concertRepository.findById(id).orElse(null);
+        findConcert.setVisitCnt(findConcert.getVisitCnt()+1);
+        ConcertDto concertDto = ConcertDto.createDto(findConcert);
+        return concertDto;
+    }
+
+    // 공연 상세조최 내역 -> admin
+    @Override
+    public ConcertDto concertAdmin(Long id) {
         Concert findConcert = concertRepository.findById(id).orElse(null);
         ConcertDto concertDto = ConcertDto.createDto(findConcert);
         return concertDto;

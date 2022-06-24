@@ -15,8 +15,11 @@ public interface ConcertService {
     // 공연 생성
     Long addConcert(Concert concert);
 
-    // 공연 상세내역 조회
+    // 공연 상세내역 조회 -> user
     ConcertDto concertInfo(Long id);
+
+    // 공연 상세내역 조회 -> admin
+    ConcertDto concertAdmin(Long id);
 
     // 공연 수정
     void updateConcert(ConcertDto concertDto, Phamplet_File files);
