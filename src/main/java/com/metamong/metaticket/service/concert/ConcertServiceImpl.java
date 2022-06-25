@@ -4,7 +4,6 @@ import com.metamong.metaticket.domain.concert.Concert;
 import com.metamong.metaticket.domain.concert.Genre;
 import com.metamong.metaticket.domain.concert.Phamplet_File;
 import com.metamong.metaticket.domain.concert.dto.ConcertDto;
-import com.metamong.metaticket.domain.draw.Draw;
 import com.metamong.metaticket.repository.concert.ConcertRepository;
 import com.metamong.metaticket.repository.draw.DrawRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -136,5 +135,16 @@ public class ConcertServiceImpl implements ConcertService {
         return opentickets;
     }
 
+    @Override
+    // 응모 시작 일자 , 응모 종료 일자 비교
+    public void isValidDate(ConcertDto.FromAdminConcert concertDto) throws Exception {
+        LocalDateTime concertDate = LocalDateTime.parse(concertDto.getConcertDate());
+        LocalDate drawStartDate = LocalDate.parse(concertDto.getDrawStartDate());
+        LocalDate drawEndDate = LocalDate.parse(concertDto.getDrawEndDate());
+
+        if(drawEndDate.isBefore(drawStartDate) || concertDate.toLocalDate().isBefore(drawEndDate)){
+            throw new Exception();
+        }
+    }
 
 }

@@ -37,7 +37,7 @@
                                   th:attrappend="src=${concert.phamplet}"
                                   alt="">
                         </div>
-                        <input type="file" cid = "file" name = "file" lass="postImg" style="display: none;">
+                        <input type="file" cid = "file" name = "file" lass="postImg" required="required" style="display: none;">
                         <button class="selectBt">사진 선택</button>
                     </div>
                     <div class="text">
@@ -61,7 +61,7 @@
                             <table id="vertical-1">
                                 <tr>
                                     <th>제목</th>
-                                    <td ><input type="text" name="title" id="title" placeholder="" th:value="${concert.title}"></td>
+                                    <td ><input type="text" name="title" id="title" required="required"  placeholder="" th:value="${concert.title}"></td>
                                 </tr>
                             </table>
                         </div>
@@ -69,11 +69,11 @@
                             <table id="vertical-1">
                                 <tr>
                                     <th>응모시작날짜</th>
-                                    <td><input type="date" name="drawStartDate" id="drawStartDate" placeholder="" th:value="${#temporals.format(concert.drawStartDate, 'yyyy-MM-dd')}"></td>
+                                    <td><input type="date" name="drawStartDate" id="drawStartDate" required="required" placeholder="" th:value="${#temporals.format(concert.drawStartDate, 'yyyy-MM-dd')}"></td>
                                 </tr>
                                 <tr>
                                     <th>응모마감날짜</th>
-                                    <td><input type="date" name="drawEndDate" id="drawEndDate"  placeholder="" th:value="${#temporals.format(concert.drawEndDate, 'yyyy-MM-dd')}"></td>
+                                    <td><input type="date" name="drawEndDate" id="drawEndDate"  required="required" placeholder="" th:value="${#temporals.format(concert.drawEndDate, 'yyyy-MM-dd')}"></td>
                                 </tr>
                             </table>
                         </div>
@@ -81,11 +81,11 @@
                             <table id="vertical-1">
                                 <tr>
                                     <th>공연일시</th>
-                                    <td><input type="datetime-local" name="concertDate" id="concertDate" placeholder="" th:value="${concert.concertDate}"></td>
+                                    <td><input type="datetime-local" name="concertDate" id="concertDate"  required="required"placeholder="" th:value="${concert.concertDate}"></td>
                                 </tr>
                                 <tr>
                                     <th>공연장소</th>
-                                    <td><input type="text" name="address" id="address" placeholder="" th:value="${concert.address}"></td>
+                                    <td><input type="text" name="address" id="address" required="required" placeholder="" th:value="${concert.address}"></td>
                                 </tr>
                             </table>
                         </div>
@@ -118,7 +118,7 @@
                                 </tr>
                                 <tr>
                                     <th>좌석수</th>
-                                    <td><input type="text" name="seatNum" id="seatNum" placeholder="" th:value="${concert.seatNum}"></td>
+                                    <td><input type="text" name="seatNum" id="seatNum"  required="required" placeholder="" th:value="${concert.seatNum}"></td>
                                 </tr>
                             </table>
                         </div>
@@ -126,11 +126,11 @@
                             <table id="vertical-1">
                                 <tr>
                                     <th>주최측</th>
-                                    <td><input type="text" name = "host" id = "host" placeholder="" th:value="${concert.host}"></td>
+                                    <td><input type="text" name = "host" id = "host" required="required" placeholder="" th:value="${concert.host}"></td>
                                 </tr>
                                 <tr>
                                     <th>가격</th>
-                                    <td><input type="text" name = "price" id = "price" placeholder="" th:value="${concert.price}"></td>
+                                    <td><input type="text" name = "price" id = "price" required="required" placeholder="" th:value="${concert.price}"></td>
                                 </tr>
                             </table>
                         </div>

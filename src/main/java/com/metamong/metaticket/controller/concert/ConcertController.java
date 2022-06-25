@@ -4,6 +4,7 @@ import com.metamong.metaticket.domain.concert.Concert;
 import com.metamong.metaticket.domain.concert.Genre;
 import com.metamong.metaticket.domain.concert.Phamplet_File;
 import com.metamong.metaticket.domain.concert.dto.ConcertDto;
+import com.metamong.metaticket.domain.notice.dto.NoticeDTO;
 import com.metamong.metaticket.service.concert.ConcertService;
 import com.metamong.metaticket.service.concert.FilesService;
 import lombok.RequiredArgsConstructor;
@@ -50,13 +51,19 @@ public class ConcertController {
 
     @PostMapping("/adminConcert/upload")
     public String addConcert(@ModelAttribute ConcertDto.FromAdminConcert dto, Model model) throws Exception{
-        Phamplet_File files = filesService.saveFile(dto.getFile());
-        Concert concert = ConcertDto.createConcert(dto,files);
-        concert.setDraw(true);
-        long concertId = concertService.addConcert(concert);
-        ConcertDto concertDto = concertService.concertInfo(concertId);
-        model.addAttribute("concert",concertDto);
-        return "/admin/admin_ticket_detail";
+        try{
+            concertService.isValidDate(dto);
+            Phamplet_File files = filesService.saveFile(dto.getFile());
+            Concert concert = ConcertDto.createConcert(dto,files);
+            concert.setDraw(true);
+            long concertId = concertService.addConcert(concert);
+            ConcertDto concertDto = concertService.concertInfo(concertId);
+            model.addAttribute("concert",concertDto);
+            return "/admin/admin_ticket_detail";
+        }catch (Exception e){
+            model.addAttribute("err","응모일자와 공연일자를 확인해주세요");
+            return "/admin/admin_addticket";
+        }
     }
 
     // 공연 상세내역 조회
@@ -144,5 +151,4 @@ public class ConcertController {
         model.addAttribute("concert",concerts);
         return concerts;
     }
-
 }

@@ -46,4 +46,7 @@ public interface ConcertService {
 
     //장르별 오픈 예정 티켓 목록
     List<ConcertDto> openTicketsByGenre(Genre genre);
+
+    // 응모 시작 일자 , 응모 종료 일자 비교
+    void isValidDate(ConcertDto.FromAdminConcert concertDto) throws Exception;
 }
