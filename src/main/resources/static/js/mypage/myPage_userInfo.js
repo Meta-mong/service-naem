@@ -53,16 +53,16 @@ window.addEventListener("load", function() {
             return;
         }
         $.ajax({
-           url : "/user/modifyPasswd",
+           url : "/user/modifyInfo",
            type : "POST",
-           data : {"email" : $("#email").val(), "passwd" : $("#passwd").val()},
+           data : {"email" : $("#email").val(), "passwd" : $("#passwd").val(), "age" : $("#age").val()},
            dataType : "json",
            success : function (data){
                alert(data.result);
                location.replace("/");
            },
            error : function (data){
-               alert("비밀번호 수정 실패. 다시 시도해주세요.");
+               alert("수정 실패. 다시 시도해주세요.");
            }
        })
     });
