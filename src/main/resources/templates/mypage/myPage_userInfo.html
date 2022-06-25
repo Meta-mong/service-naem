@@ -49,6 +49,11 @@
                         <div class="pageInfo">
                             <article style="display: block;">
                                 <div class="user_info">
+                                    <div th:unless="${session.firstKakaoLogin == null}">
+                                        <script type="text/javascript">
+                                            alert("환영합니다. 비밀번호와 나이를 설정해주세요!");
+                                        </script>
+                                    </div>
                                     <ul class="attr">
                                         <li class="attr_sub">
                                             <div class="attr_key">이메일</div>
@@ -74,7 +79,7 @@
                                         </li>
                                         <li class="attr_sub">
                                             <div class="attr_key">생년월일</div>
-                                            <input class="attr_value" type="text" th:value="${session.user.age}">
+                                            <input class="attr_value" id="age" type="text" th:value="${session.user.age}">
                                         </li>
                                         <li class="attr_sub">
                                             <div class="attr_key">휴대폰</div>

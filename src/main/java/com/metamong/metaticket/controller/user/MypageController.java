@@ -35,20 +35,22 @@ public class MypageController {
     @Autowired
     HttpSession session;
 
-    //비밀번호 변경
-    @PostMapping("/user/modifyPasswd")
+    //비밀번호+age 변경
+    @PostMapping("/user/modifyInfo")
     @ResponseBody
-    public Map<String, Object> modifyInfo(@RequestParam("email") String email, @RequestParam("passwd") String passwd){
+    public Map<String, Object> modifyInfo(@RequestParam("email") String email, @RequestParam("passwd") String passwd, @RequestParam("age") int age){
         Map<String, Object> map = new HashMap<>();
-        boolean result = userService.modifyPasswd(session, passwd);
+        boolean result = userService.modifyInfo(session, passwd, age);
         if(result==false){
-            map.put("result", "비밀번호 변경에 실패하였습니다. 다시 시도해주세요.");
+            map.put("result", "수정 실패. 다시 시도해주세요.");
         }else{
             UserDTO.SESSION_USER_DATA dto = (UserDTO.SESSION_USER_DATA)session.getAttribute("user");
             User user = userService.userInfo(dto.getId());
             dto.setPasswd(user.getPasswd());
+            dto.setAge(age);
             session.setAttribute("user", dto);
-            map.put("result", "비밀번호가 성공적으로 변경되었습니다.");
+            if(session.getAttribute("firstKakaoLogin")!=null) session.removeAttribute("firstKakaoLogin");
+            map.put("result", "변경사항이 성공적으로 반영되었습니다.");
         }
         return map;
     }
