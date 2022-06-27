@@ -27,16 +27,42 @@ body {
 }
 
 /* main */
-.container .title{
+.container .top{
+  display: flex;
   width: 1300px;
   margin: 70px;
   border-bottom: 1px solid lightgray;
   padding-bottom: 20px;
   margin-bottom: 20px;
+}
+
+.container .title{
+  width: 1120px;
   font-size: 30px;
   font-weight: bold;
   color: black;
 }
+
+.container .like_btn1,
+ .container .like_btn2{
+  margin-left: 120px;
+}
+
+.container .like_btn1 .btn-secondary,
+.container .like_btn2 .btn-secondary{
+  border: 0;
+  background-color: white;
+}
+
+.container .like_btn1 .btn-secondary span,
+.container .like_btn2 .btn-secondary span{
+  font-size: 35px;
+}
+
+.done {
+    color: red !important;
+    text-shadow: 0;
+ }
 
 .container .inner {
   display: flex;
@@ -98,28 +124,6 @@ body {
   font-weight: bold;
   margin-bottom: 20px;
 }
-
-.container .like_btn1,
- .container .like_btn2{
-  margin-left: 120px;
-  margin-top: 20px;
-}
-
-.container .like_btn1 .btn-secondary,
-.container .like_btn2 .btn-secondary{
-  border: 0;
-  background-color: white;
-}
-
-.container .like_btn1 .btn-secondary span,
-.container .like_btn2 .btn-secondary span{
-  font-size: 35px;
-}
-
-.done {
-    color: red !important;
-    text-shadow: 0;
- }
 
 .container .btn {
   float: right;

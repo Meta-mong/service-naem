@@ -60,24 +60,24 @@
         <ul class="pagination">
           <li class="page-item">
             <a class="page-link" th:if="${pageInfo.presentPage}<=1" href="#">
-              <span aria-hidden="true">&laquo;</span>
+              <span aria-hidden="true">&lt;</span>
             </a>
             <a class="page-link" th:if="${pageInfo.presentPage}>1" href="/admin/allusers/" th:attrappend="href=${pageInfo.presentPage}-1" >
-              <span aria-hidden="true">&laquo;</span>
+              <span aria-hidden="true">&lt;</span>
 
             </a>
           </li>
 
           <li class="page-item" th:each="num : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
-            <a class="page-link present" href="/admin/allusers/" th:attrappend="href=${num}" th:text="${num}" th:style="${num == pageInfo.presentPage? 'background-color: #A390EE;' : ''}"></a>
+            <a class="page-link present" href="/admin/allusers/" th:attrappend="href=${num}" th:text="${num}" th:style="${num == pageInfo.presentPage? 'background-color: #337ab7; color : #fff' : ''}"></a>
           </li>
 
           <li class="page-item">
             <a class="page-link" th:if="${pageInfo.presentPage} >= ${pageInfo.totalPage}" href="#">
-              <span aria-hidden="true">&raquo;</span>
+              <span aria-hidden="true">&gt;</span>
             </a>
             <a class="page-link" th:if="${pageInfo.presentPage} < ${pageInfo.totalPage}" href="/admin/allusers/" th:attrappend="href=${pageInfo.presentPage}+1" >
-              <span aria-hidden="true">&raquo;</span>
+              <span aria-hidden="true">&gt;</span>
             </a>
           </li>
         </ul>

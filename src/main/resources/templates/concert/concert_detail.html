@@ -29,9 +29,26 @@
     <!-- header 끝 -->
     <div class="container" style="min-height: 100vh;">
         <section>
-            <div class="title">
-                <h th:text="${concert.title}" ></h>
+            <div class="top">
+                <div class="title">
+                    <h th:text="${concert.title}" ></h>
+                </div>
+                <div class="like_btn1" th:if = "${session.user}" th:onclick="|javascript:like_click(${id})|">
+                    <button class="btn-secondary like-review">
+                    <span class="material-icons">
+                      favorite_border
+                    </span>
+                    </button>
+                </div>
+                <div class="like_btn2" th:unless = "${session.user}" >
+                    <button class="btn-secondary like-review">
+                    <span class="material-icons">
+                      favorite_border
+                    </span>
+                    </button>
+                </div>
             </div>
+
             <div class="inner">
                 <div class="phamplet">
                     <img src="/concert/readImg/" th:attrappend="src=${concert.phamplet}" alt="" />
@@ -78,23 +95,9 @@
                     </table>
                     <div class="script">
                         <p>공연 스크립트</p>
-                        <span th:text="${concert.description}"></span>
+                        <span th:text="${concert.description}" style="white-space:pre-wrap;"></span>
                     </div>
                 </div>
-            </div>
-            <div class="like_btn1" th:if = "${session.user}" th:onclick="|javascript:like_click(${id})|">
-                <button class="btn-secondary like-review">
-                    <span class="material-icons">
-                      favorite_border
-                    </span>
-                </button>
-            </div>
-            <div class="like_btn2" th:unless = "${session.user}" >
-                <button class="btn-secondary like-review">
-                    <span class="material-icons">
-                      favorite_border
-                    </span>
-                </button>
             </div>
         </section>
         <div class="btn">

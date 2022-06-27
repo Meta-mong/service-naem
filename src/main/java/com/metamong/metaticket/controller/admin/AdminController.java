@@ -70,7 +70,7 @@ public class AdminController {
         return "/admin/admin_login";
     }
 
-
+    @ResponseBody
     @PostMapping
     public String adminLogin(@RequestParam ("loginId") String loginId,
                              @RequestParam("password") String password, Model model)throws Exception{
@@ -81,10 +81,10 @@ public class AdminController {
             if(result ==true){
                 System.out.println("성공");
                 session.setAttribute("adminlogin",adminService.adminInfo(loginId));
-                return "redirect:/concert/adminConcert";
+                return String.valueOf(result);
             }else {
                 model.addAttribute("err","로그인에 실패했습니다.");
-                return "redirect:/admin/login";
+                return String.valueOf(result);
             }
 
         }catch (Exception e){

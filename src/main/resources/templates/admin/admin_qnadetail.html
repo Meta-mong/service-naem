@@ -75,7 +75,7 @@
             </form>
           </div>
           <div class="btn">
-            <button type="button" class="qnalist" onclick="questionList()">목록</button>
+            <button type="button" class="qnalist" onclick="questionList()">목록으로</button>
             <button type="button" class="delete" th:onclick="|javascript:qnadelete('${question.id}')|" id="del-btn"  >삭제</button>
             <button type="button" class="update" th:onclick="|javascript:qnaupdate('${question.id}')|" >등록/수정</button>
           </div>
