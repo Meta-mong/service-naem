@@ -9,6 +9,10 @@ body {
 	font-family: 'CookieRun-Regular' !important;
 }
 
+.swiper-wrapper{
+    right: 7%;
+}
+
 .swiper-container {
     overflow: hidden;
     margin: 40px 0;

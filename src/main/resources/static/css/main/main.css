@@ -239,7 +239,7 @@ body,.header-top-ul {
 
 .header-bottom-ul > li > span > a{
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 500;
     color: black;
     padding: 15px 30px;
     transition: 0.3s;
@@ -606,7 +606,7 @@ body,.header-top-ul {
 }
 
 .ticket-pick-main1-div:hover ~ .ticket-pick-main1 {
-  background-color: #a1d2ff;
+  background-color: #b1d9ff;
 }
 
 .ticket-pick-main2-div{
@@ -620,7 +620,7 @@ body,.header-top-ul {
 }
 
 .ticket-pick-main2-div:hover ~ .ticket-pick-main2 {
-  background-color: #fff199;
+  background-color: #fff2d6;
 }
 
 .ticket-pick-main3-div{
@@ -634,7 +634,7 @@ body,.header-top-ul {
 }
 
 .ticket-pick-main3-div:hover ~ .ticket-pick-main3 {
-  background-color: #ffb3ec;
+  background-color: #ffdbf6;
 }
 
 .ticket-pick-main4-div{
@@ -648,7 +648,7 @@ body,.header-top-ul {
 }
 
 .ticket-pick-main4-div:hover ~ .ticket-pick-main4 {
-  background-color: #97ff84;
+  background-color: #d8ffd2;
 }
 
 .ticket-pick-top {
