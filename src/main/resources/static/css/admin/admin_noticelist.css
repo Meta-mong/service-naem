@@ -78,17 +78,15 @@ body {
 
 .container .main .btn_submit {
   display: block;
-  justify-content: left;
-  float: left;
+  float: right;
   text-align: center;
   height: 40px;
   width : 104px;
-  font-size: 23px;
+  font-size: 20px;
   background-color: rgb(218,186,248);
   color: whitesmoke;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  margin-left: 20px;
+  margin-top: 40px;
+  margin-right : 20px;
   border: 0;
 }
 

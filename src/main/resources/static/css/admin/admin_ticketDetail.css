@@ -150,13 +150,13 @@ body {
 }
 
 .container .main .title td {
-  width: 580px;
+  width: 578px;
   height: 30px;
   vertical-align: middle;
 }
 
 .container .main .title td input {
-  width: 583px;
+  width: 578px;
   height: 40px;
   border: 0;
   background-color: whitesmoke;
@@ -191,7 +191,7 @@ body {
 .container .main .inner .list5 th {
   border-right: 1px solid lightgray;
   padding: 10px;
-  width: 70px;
+  width: 90px;
   height: 30px;
   vertical-align: middle;
 }
@@ -199,7 +199,7 @@ body {
 .container .main .inner .list2 td,
 .container .main .inner .list3 td,
 .container .main .inner .list5 td {
-  width: 237px;
+  width: 217px;
   height: 30px;
   vertical-align: middle;
 }
@@ -208,7 +208,7 @@ body {
 .container .main .inner .list3 td input,
 .container .main .inner .list5 td input {
   height: 40px;
-  width: 237px;
+  width: 217px;
   border: 0;
   background-color: whitesmoke;
 }
@@ -249,11 +249,12 @@ body {
 }
 
 /* 등록 버튼 */
-.container .main .btn_submit {
+.container .main .btn_submit,
+ .container .main .btn_cancel{
+  font-family: 'CookieRun-Regular' !important;
   height: 45px;
   width: 100px;
-  margin: 20px;
-  margin-right: -800px;
+  margin: 20px 0;
   background-color: rgb(186,133,236);
   border: none;
   font-weight: 700;
@@ -262,6 +263,7 @@ body {
 
 /* 수정 삭제 버튼 */
 .container .main .btn_modify {
+  font-family: 'CookieRun-Regular' !important;
   height: 45px;
   width: 100px;
   margin-top: 20px;
@@ -272,10 +274,10 @@ body {
 }
 
 .container .main .btn_delete {
+  font-family: 'CookieRun-Regular' !important;
   height: 45px;
   width: 100px;
   margin-top: 20px;
-  margin-right: -670px;
   background-color: rgb(186,133,236);
   border: none;
   font-weight: 700;
@@ -284,6 +286,7 @@ body {
 
 /* 목록으로 버튼 */
 .container .main .btn_list{
+  font-family: 'CookieRun-Regular' !important;
   height: 45px;
   width: 100px;
   background-color: rgb(186,133,236);
@@ -293,6 +296,7 @@ body {
 }
 
 .container .main .btn_submit:hover,
+.container .main .btn_cancel:hover,
 .container .main .btn_modify:hover,
 .container .main .btn_delete:hover,
 .container .main .btn_list:hover {
