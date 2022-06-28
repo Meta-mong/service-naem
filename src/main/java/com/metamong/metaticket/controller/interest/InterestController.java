@@ -27,7 +27,7 @@ public class InterestController {
         List<ConcertDto> concertDtoList = interestedConcertList.stream().map(ConcertDto::createDto).collect(Collectors.toList());
         model.addAttribute("concerts", concertDtoList); //concert 사진만으로 바꾸기
 
-        return "/mypage/myPage_like";
+        return "mypage/myPage_like";
     }
 
     @PostMapping("/interests/{concertId}")

@@ -26,7 +26,7 @@ public class OauthController {
             int result = oauthService.kakaoUserAccess(accessToken);
             if(result==0){
                 session.setAttribute("firstKakaoLogin", true);
-                response.sendRedirect("/mypage");
+                response.sendRedirect("mypage");
             }else{
                 response.sendRedirect("/");
             }

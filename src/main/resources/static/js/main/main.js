@@ -20,6 +20,7 @@ function ranking(value){
 
         },
         error: function(data){
+            console.log(data);
         alert("실패");
         }
     });
@@ -56,7 +57,8 @@ function pick(){
 
             },
             error: function(data){
-            alert("실패");
+                console.log(data +  " ###");
+                alert("실패");
             }
         });
     }

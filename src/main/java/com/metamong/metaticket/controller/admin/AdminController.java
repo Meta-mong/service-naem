@@ -67,7 +67,7 @@ public class AdminController {
     //로그인 /로그아웃
     @GetMapping
     public String login ()throws Exception{
-        return "/admin/admin_login";
+        return "admin/admin_login";
     }
 
     @ResponseBody
@@ -89,7 +89,7 @@ public class AdminController {
 
         }catch (Exception e){
             model.addAttribute("err","계정 정보가 없습니다.");
-            return "redirect:/admin/login";
+            return "redirect:admin/login";
         }
     }
 
@@ -97,7 +97,7 @@ public class AdminController {
     public String adminLogout(HttpSession session){
         adminService.adminLogout(session);
 
-        return "redirect:/admin/adminlogin";
+        return "redirect:admin/adminlogin";
     }
 
     //전체 사용자 조회
@@ -115,7 +115,7 @@ public class AdminController {
         model.addAttribute("users", userDtos);
         model.addAttribute("pageInfo", userPage);
 
-        return "/admin/admin_user";
+        return "admin/admin_user";
     }
 
     //회원 정보 상세 조회 페이지
@@ -128,7 +128,7 @@ public class AdminController {
         model.addAttribute("user", dto);
         model.addAttribute("draws", draws);
         model.addAttribute("page", page);
-        return "/admin/admin_user_detail";
+        return "admin/admin_user_detail";
     }
 
     //회원 정보 수정
@@ -171,7 +171,7 @@ public class AdminController {
     @GetMapping("/noticeadd")
     public String questionadd(){
 
-        return "/admin/admin_noticeadd";
+        return "admin/admin_noticeadd";
     }
 
     @PostMapping("/noticeadd")
@@ -201,7 +201,7 @@ public class AdminController {
     public String noticeUpdate(@PathVariable Long noticeId, Model model) throws Exception {
         NoticeDTO.Notice dto = noticeService.noticedetail(noticeId);
         model.addAttribute("notice", dto);
-        return "/admin/admin_noticeupdate";
+        return "admin/admin_noticeupdate";
     }
 
 
@@ -269,7 +269,7 @@ public class AdminController {
         User user = userService.userInfo(questionDto.getUserId());
         model.addAttribute("userName", user.getName());
         model.addAttribute("question",questionDto);
-        return "/admin/admin_qnadetail";
+        return "admin/admin_qnadetail";
     }
 
     //문의사항 답글 등록 페이지 이동
@@ -279,7 +279,7 @@ public class AdminController {
         User user = userService.userInfo(questionDto.getUserId());
         model.addAttribute("userName", user.getName());
         model.addAttribute("question",questionDto);
-        return "/admin/admin_qnareply";
+        return "admin/admin_qnareply";
     }
 
     // 문의사항 답글 등록 처리
@@ -305,7 +305,7 @@ public class AdminController {
     public void questionDelete (@PathVariable Long questionId, HttpServletRequest request,
                                 HttpServletResponse response) throws Exception {
         questionService.questionDelete(questionId);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/aqlist");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/aqlist");
         dispatcher.forward(request,response);
     }
 
