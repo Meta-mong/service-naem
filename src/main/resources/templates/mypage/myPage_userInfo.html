@@ -89,14 +89,26 @@
                                 </div>
                             </article>
 
+
                             <button type="button" class="modify_btn" id="modify_btn">수정하기</button>
                             <button type="button" class="resign_btn" id="resign_btn">탈퇴하기</button>
-
                         </div>
 
                     </div>
                 </section>
+                <div id="modal">
+                    <div class="modal_content">
+                        <h2>탈퇴하시겠습니까? </h2>
+                        <h2>현재 비밀번호를 입력해주세요 </h2>
+                        <input type="password" id="resignPasswd" placeholder="password">
+                        <div class="btn">
+                            <button class="modal_btn" type="button" id="modal_confirm_btn">확인</button>
+                            <button class="modal_btn" type="button" id="modal_cancle_btn">취소</button>
+                        </div>
+                    </div>
+                </div>
             </div>
+
 
             <!-- footer 시작 -->
             <div th:replace="fragments/footer :: footerFragment"></div>
