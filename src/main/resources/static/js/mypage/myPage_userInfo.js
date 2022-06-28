@@ -67,8 +67,19 @@ window.addEventListener("load", function() {
        })
     });
 
-    $("#resign_btn").on("click", function(){
-        var passwd = prompt('현재 비밀번호를 입력해주세요', '');
+    //modal
+    document.getElementById("resign_btn").onclick = function() {
+        document.getElementById("modal").style.display="block";
+    }
+
+    document.getElementById("modal_cancle_btn").onclick = function() {
+        document.getElementById("modal").style.display="none";
+    }
+
+
+    $("#modal_confirm_btn").on("click", function(){
+        //var passwd = prompt('현재 비밀번호를 입력해주세요', '');
+        var passwd = $("#resignPasswd").val();
 
         $.ajax({
             url : "/user/unregister",
@@ -81,11 +92,14 @@ window.addEventListener("load", function() {
                     location.replace("/");
                 }else {
                     alert("비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
+                    $("#resignPasswd").prop("value", "");
                 }
             },
             error : function (data){
                 alert("회원 탈퇴 실패. 다시 시도해주세요.");
+                $("#resignPasswd").prop("value", "");
             }
         });
     });
 });
+
