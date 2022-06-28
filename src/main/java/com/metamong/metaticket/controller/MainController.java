@@ -41,7 +41,7 @@ public class MainController {
             model.addAttribute("genre", genre);
         }
         model.addAttribute("openticketList", openticketList);
-        return "/ticketopen/ticket_open";
+        return "ticketopen/ticket_open";
     }
 
 }

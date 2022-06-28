@@ -70,29 +70,29 @@ public class MypageController {
     @GetMapping("/mypage/draw")
     public String myPageDraw(Model model){
         UserDTO.SESSION_USER_DATA currentUser = (UserDTO.SESSION_USER_DATA) session.getAttribute("user");
-        if(currentUser==null) return "/user/signin";
+        if(currentUser==null) return "user/signin";
 
         model.addAttribute("myDraws", drawService.findByUserId(currentUser.getId()));
 
-        return "/mypage/myPage_draw";
+        return "mypage/myPage_draw";
     }
 
     //마이페이지 예매내역
     @GetMapping("/mypage/reservation")
     public String myPageReservation(Model model){
         UserDTO.SESSION_USER_DATA currentUser = (UserDTO.SESSION_USER_DATA) session.getAttribute("user");
-        if (currentUser == null) return "redirect:/signin";
+        if (currentUser == null) return "redirect:signin";
 
         model.addAttribute("myPayments", paymentService.findByUserId(currentUser.getId()));
 
-        return "/mypage/myPage_reservation";
+        return "mypage/myPage_reservation";
     }
 
     //마이페이지 찜목록
     @GetMapping("/mypage/like")
     public String myPageLike(HttpServletRequest request, HttpServletResponse response){
-        if(session.getAttribute("user")==null) return "/user/signin";
-        return "/mypage/myPage_like";
+        if(session.getAttribute("user")==null) return "user/signin";
+        return "mypage/myPage_like";
     }
 
 }

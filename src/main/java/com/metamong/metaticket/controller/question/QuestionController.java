@@ -76,7 +76,7 @@ public class QuestionController {
         User user = userService.userInfo(questionDto.getUserId());
         model.addAttribute("userName", user.getName());
         model.addAttribute("question",questionDto);
-        return "/question/userqnadetail";
+        return "question/userqnadetail";
     }
 
     //문의사항 등록
@@ -86,7 +86,7 @@ public class QuestionController {
         if (currentUser == null)
             return "redirect:/signin";
         model.addAttribute("userId", currentUser.getName());
-        return "/question/userqnaadd";
+        return "question/userqnaadd";
     }
 
 
@@ -98,13 +98,13 @@ public class QuestionController {
             if(result == true){
                 Page<QuestionDTO.Quest> qup = questionService.allQuestionList(pageable);
                 model.addAttribute("list",qup);
-                return "redirect:/question/qlist";
+                return "redirect:question/qlist";
             }
             throw new Exception();
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("err","등록실패");
-            return "redirect:/question/userqnaadd";
+            return "redirect:question/userqnaadd";
 
         }
     }
@@ -114,7 +114,7 @@ public class QuestionController {
     public void questionDelete (@PathVariable Long questionId, HttpServletRequest request,
                                 HttpServletResponse response) throws Exception {
         questionService.questionDelete(questionId);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/question/qlist");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("question/qlist");
         dispatcher.forward(request,response);
     }
 
@@ -126,7 +126,7 @@ public class QuestionController {
         User user = userService.userInfo(questionDto.getUserId());
         model.addAttribute("userName", user.getName());
         model.addAttribute("question",questionDto);
-        return "/question/userqnaupdate";
+        return "question/userqnaupdate";
     }
 
 

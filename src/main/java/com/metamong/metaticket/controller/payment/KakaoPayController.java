@@ -27,7 +27,7 @@ public class KakaoPayController {
     @GetMapping("/payment")
     public String PaymentPage(@RequestParam("concert") Long concertId, Model model) {
         model.addAttribute( "concertInfo", concertService.concertInfo(concertId));
-        return "/payment/kakao/pay";
+        return "payment/kakao/pay";
     }
 
     @PostMapping("/kakaoPay/{concertId}")
@@ -44,7 +44,7 @@ public class KakaoPayController {
         log.info("kakaoPaySuccess pg_token : " + pg_token);
 
         model.addAttribute("info", kakaoPayService.kakaoPayInfo(pg_token, paymentId));
-        return "redirect:/mypage/reservation";
+        return "redirect:mypage/reservation";
     }
 
 }

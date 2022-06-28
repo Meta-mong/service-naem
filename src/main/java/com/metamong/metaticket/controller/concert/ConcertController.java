@@ -51,9 +51,9 @@ public class ConcertController {
     @GetMapping("/adminConcert/upload")
     public String addConcert(){
         if(session.getAttribute("adminlogin") != null) {
-            return "/admin/admin_addticket";
+            return "admin/admin_addticket";
         }else {
-            return "/admin/admin_login";
+            return "admin/admin_login";
         }
     }
 
@@ -67,10 +67,10 @@ public class ConcertController {
             long concertId = concertService.addConcert(concert);
             ConcertDto concertDto = concertService.concertInfo(concertId);
             model.addAttribute("concert",concertDto);
-            return "/admin/admin_ticket_detail";
+            return "admin/admin_ticket_detail";
         }catch (Exception e){
             model.addAttribute("err","응모일자와 공연일자를 확인해주세요");
-            return "/admin/admin_addticket";
+            return "admin/admin_addticket";
         }
     }
 
@@ -88,16 +88,18 @@ public class ConcertController {
         if(session.getAttribute("adminlogin") != null) {
             ConcertDto concertDto = concertService.concertAdmin(id);
             model.addAttribute("concert",concertDto);
-            return "/admin/admin_ticket_detail"; // view 이름
+            return "admin/admin_ticket_detail"; // view 이름
         }else {
-            return "/admin/admin_login";
+            return "admin/admin_login";
         }
     }
 
     @GetMapping("/readImg/{id}")
     public void concertImg(@PathVariable Long id, HttpServletResponse response){
         Phamplet_File files = filesService.findById(id);
-        File file = new File(context.getRealPath(files.getFilePath())+files.getFileOriname());
+//        File file = new File(context.getRealPath(files.getFilePath())+files.getFileOriname());
+        File file = new File("/tmp/uploadImg/"+files.getFileOriname());
+        log.info(context.getRealPath(files.getFilePath()));
         //File file = new File(files.getFilePath()+files.getFileOriname());
         FileInputStream fis = null;
         try{
@@ -127,10 +129,10 @@ public class ConcertController {
             ConcertDto concertDto = ConcertDto.createConcertDto(dto,files.getId(),concert);
             concertService.updateConcert(concertDto,files);
             model.addAttribute("concert",concertDto);
-            return "/admin/admin_ticket_detail";
+            return "admin/admin_ticket_detail";
         }catch (Exception e){
             model.addAttribute("err","응모일자와 공연일자를 확인해주세요");
-            return "/admin/admin_ticket_detail";
+            return "admin/admin_ticket_detail";
         }
     }
 
@@ -142,7 +144,7 @@ public class ConcertController {
         filesService.deleteFile(fileId);
 
         model.addAttribute("concert",concertService.concertAllInfo(pageable));
-        return "/admin/admin_ticket";
+        return "admin/admin_ticket";
     }
 
 
@@ -151,9 +153,9 @@ public class ConcertController {
     public String concertList(@PageableDefault(size = 10) Pageable pageable,Model model){
         if(session.getAttribute("adminlogin") != null){
             model.addAttribute("concert",concertService.concertAllInfo(pageable));
-            return "/admin/admin_ticket";
+            return "admin/admin_ticket";
         }else {
-            return "/admin/admin_login";
+            return "admin/admin_login";
         }
 
     }
@@ -162,7 +164,7 @@ public class ConcertController {
     @GetMapping("/Contents/{genre}")
     public String concertList_Genre(@PageableDefault(size = 16) Pageable pageable ,@PathVariable Genre genre, Model model){
         model.addAttribute("concert",concertService.concertGenreInfo(pageable,genre));
-        return "/concert/concert";
+        return "concert/concert";
     }
 
     // 메타 pick
