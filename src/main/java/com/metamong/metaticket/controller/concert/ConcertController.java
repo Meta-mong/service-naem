@@ -100,10 +100,10 @@ public class ConcertController {
     @GetMapping("/readImg/{id}")
     public void concertImg(@PathVariable Long id, HttpServletResponse response){
         Phamplet_File files = filesService.findById(id);
-        File file = new File(context.getRealPath(files.getFilePath())+files.getFileOriname());
-//        File file = new File("/tmp/uploadImg/"+files.getFileOriname());
+//        File file = new File(context.getRealPath(files.getFilePath())+files.getFileOriname());
+        File file = new File("/tmp/uploadImg/"+files.getFileOriname());
         log.info(context.getRealPath(files.getFilePath()));
-        //File file = new File(files.getFilePath()+files.getFileOriname());
+//        File file = new File(files.getFilePath()+files.getFileOriname());
         FileInputStream fis = null;
         try{
             OutputStream out = response.getOutputStream();

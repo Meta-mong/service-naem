@@ -98,13 +98,13 @@ public class QuestionController {
             if(result == true){
                 Page<QuestionDTO.Quest> qup = questionService.allQuestionList(pageable);
                 model.addAttribute("list",qup);
-                return "redirect:question/qlist";
+                return "redirect:/question/qlist";
             }
             throw new Exception();
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("err","등록실패");
-            return "redirect:question/userqnaadd";
+            return "redirect:/question/userqnaadd";
 
         }
     }

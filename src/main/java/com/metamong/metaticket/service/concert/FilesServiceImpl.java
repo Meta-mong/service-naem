@@ -45,8 +45,8 @@ public class FilesServiceImpl implements FilesService{
         try {
             UUID uuid = UUID.randomUUID();
             String fileOriname = uuid + file.getOriginalFilename();
-            String filePath = servletContext.getRealPath("/uploadImg/");
-//            String filePath = "/tmp/uploadImg/";
+//            String filePath = servletContext.getRealPath("/uploadImg/");
+            String filePath = "/tmp/uploadImg/";
             Phamplet_File files = Phamplet_File.builder()
                     .fileOriname(fileOriname)
                     .filePath("/uploadImg/")
