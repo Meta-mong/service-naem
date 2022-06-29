@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.time.LocalDate;
 
 
 @Controller
@@ -78,7 +79,9 @@ public class ConcertController {
     @GetMapping("/Contents/{id}/detail")
     public String concertInfo(@PathVariable Long id, Model model){
         ConcertDto concertDto = concertService.concertInfo(id);
+        LocalDate now = LocalDate.now();
         model.addAttribute("concert",concertDto);
+        model.addAttribute("now",now);
         return "concert/concert_detail"; // view 이름
     }
 

@@ -101,7 +101,7 @@
             </div>
         </section>
         <div class="btn">
-            <div th:if="${concert.draw}">
+            <div th:if="${concert.draw and  now ge concert.drawStartDate and now le concert.drawEndDate}" >
                 <form th:action="|/draws/${concert.id}|" method="post">
                     <button type="submit">응모하기</button>
                 </form>
@@ -119,5 +119,4 @@
     <!-- footer 끝 -->
 </div>
 </body>
-
 </html>
