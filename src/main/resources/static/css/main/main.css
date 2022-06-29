@@ -725,7 +725,8 @@ body,.header-top-ul {
 
 .ticket-pick-main-body > div  .move_detail > img{
   width: 100%;
-  height: auto;
+  height:340px;
+ /* height: auto;*/
 }
 
 .card {
